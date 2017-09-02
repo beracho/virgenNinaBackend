@@ -1,0 +1,19 @@
+{
+  "name": "viniepodo-backend",
+  "version": "1.0.0",
+  "description": "Backend del sistema de seguimiento y control documental Virgen Niña",
+  "main": "ap.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@bitbucket.org/mecaloquis/viniepodo-backend.git"
+  },
+  "author": "Adrian Berazain",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/mecaloquis/viniepodo-backend#readme"
+}
