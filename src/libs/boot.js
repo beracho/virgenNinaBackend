@@ -4,7 +4,6 @@ module.exports = app => {
     const config = app.src.config.config;
 
     process.env.TZ = config.timezone;
-
     if (process.env.NODE_ENV !== "test") {
         app.src.db.sequelize.sync().done(() => {
             if (process.env.FORCE || false) {

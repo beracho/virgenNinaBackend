@@ -5,10 +5,10 @@
   "main": "index.js",
   "scripts": {
     "start": "babel-node index.js",
-    "startdev": "nodemon --exec 'babel-node index.js'",
+    "startdev": "nodemon index.js --exec babel-node --presets es2015,stage-2",
     "test": "test.js"
   },
-  "keywords":[
+  "keywords": [
     "node",
     "virgen niña",
     "Flujos Documentales",
@@ -27,8 +27,24 @@
     "express": "^4.14.0",
     "express-fileupload": "^0.1.3",
     "express-http-proxy": "^0.10.1",
+    "moment": "^2.17.1",
     "sequelize": "^3.24.6",
     "sequelize-formly": "^1.0.20",
     "sequelize-handlers": "^0.3.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-plugin-array-includes": "^2.0.3",
+    "babel-polyfill": "^6.22.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "babel-register": "^6.18.0",
+    "chai": "^3.5.0",
+    "database-cleaner": "^1.1.0",
+    "eslint": "^2.7.0",
+    "istanbul": "^1.1.0-alpha.1",
+    "mocha": "^2.4.5",
+    "should": "^11.1.1",
+    "supertest": "^1.2.0"
   }
 }

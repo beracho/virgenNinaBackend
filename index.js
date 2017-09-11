@@ -1,6 +1,3 @@
-// var express = require('express');
-// var app = express();
-
 import express from 'express';
 import consign from 'consign';
 
@@ -10,16 +7,16 @@ const app = express();
 
 consign({verbose:false});
 consign()
-  // //carga las configuraciones de base de datos y otras como el puerto de escucha y la palabra secreta para la encriptacion
-  // .include('src/config/config.js')
-  // // carga las utilidades necesarias
-  // .then('src/libs/util.js')
+  //carga las configuraciones de base de datos y otras como el puerto de escucha y la palabra secreta para la encriptacion
+  .include('src/config/config.js')
+  // carga las utilidades necesarias
+  .then('src/libs/util.js')
   // // carga el módulo de notificaciones
   // .then('src/libs/notificaciones.js')
   // //cargamos los handlers para peticiones personalizado
   // .then('src/libs/handlers.js')
-  // //carga el modulo de sequelize para que tambien cargue los modelos
-  // .then('src/db.js')
+  //carga el modulo de sequelize para que tambien cargue los modelos
+  .then('src/db.js')
   // //carga el modulo de BLS
   // .then('src/bls.js')
   // //carga el modulo de passport con jwt para la autenticacion del apirest
