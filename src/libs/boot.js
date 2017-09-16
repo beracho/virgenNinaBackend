@@ -18,7 +18,7 @@ module.exports = app => {
                     console.log("   ########:.    ##:  :## '###' '#  #:   '##  ##:  :##  ##.######. ,##' '##.");
                     console.log("   ##     '###.  ##    ##  ##    '    ___,##  ##        ###' '###! ##    '##");
                     console.log("   ##        ##  #######:  ##       .#######  ##        ##'   '##  ##     ##");
-                    console.log("   ##        ##  ##'       ##       ##'  '##  ##'       ##     ##  ##     ##");
+                    console.log("   ##        ##  ##'       ##       ##'  '##  ##        ##     ##  ##     ##");
                     console.log("   ##        ##  ##        ##       ##    ##  ##        ##     ##  ##.   ,##");
                     console.log("   ##_______.##  .#:._,##  ##       ##.__:##. .#:._,## ,##.   ,##. :#:._,##'");
                     console.log(" ,:##########'    ######   ##       '#####'##  ######  ####   #### ':#####' ");
@@ -26,7 +26,7 @@ module.exports = app => {
                     console.log("  AUTOR: Adrian Marcelo Berazaín Mallea                                     ");
                     console.log("                                                                            ");
                     console.log("  Servidor funcionando:                                                     ");
-                    console.log("      Host: 127.0.0.1:3000                                                  ");
+                    console.log("      Host: 127.0.0.1:"+app.get("port")+"                                   ");
                 });
             }
         });
