@@ -17,12 +17,12 @@ consign()
   .then('src/libs/handlers.js')
   //carga el modulo de sequelize para que tambien cargue los modelos
   .then('src/db.js')
-  // //carga el modulo de BLS
-  // .then('src/bls.js')
+  //carga el modulo de BLS
+  .then('src/bls.js')
   //carga el modulo de passport con jwt para la autenticacion del apirest
   .then('src/auth.js')
-  // // carga los BLS
-  // .then('src/bls/')
+  // carga los BLS
+  .then('src/bls/')
   //acá se encuentra el midleware por si es necesario cargar algun otro datos
   .then('src/libs/middlewares.js')
   // carga todas las rutas del api rest
