@@ -6,7 +6,8 @@
   "scripts": {
     "start": "babel-node index.js",
     "startdev": "nodemon index.js --exec babel-node --presets es2015,stage-2",
-    "test": "test.js"
+    "test": "test.js",
+    "setup": "FORCE=true babel-node --presets es2015,stage-2 index.js && sequelize db:seed:all --seeders-path src/seeders && sequelize db:migrate:undo:all --migrations-path src/migrations && sequelize db:migrate --migrations-path src/migrations"
   },
   "keywords": [
     "node",

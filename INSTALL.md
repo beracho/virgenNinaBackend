@@ -1,30 +1,32 @@
-# README #
+# Repositorio de backend de la branch de desarrollo #
 
-This README would normally document whatever steps are necessary to get your application up and running.
+Pasos para la instalación del backend del sistema de gestion documental "viniapodo"
 
-### What is this repository for? ###
+### Instalación de GIT y descarga del repositorio ###
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+* Instalar GIT
+
+* Descarga del repositorio
+
 Este repositorio almacena el sistema de control y seguimiento documental virgen niña
 
-### How do I get set up? ###
+### Instalación del sistema ###
 
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
+* npm install
+* crear base de datos
+* npm run setup
+* npm install -g 
+  sequelize-cli
+* npm run startdev
+* Instalación del test
+
+### Cómo contactarme ###
+
+* gmail
+* telf
 
 ### Contribution guidelines ###
 
 * Writing tests
 * Code review
 * Other guidelines
-
-### Who do I talk to? ###
-
-* Repo owner or admin
-* Other community or team contact
