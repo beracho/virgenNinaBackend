@@ -2,8 +2,8 @@ console.log("configuracion de desarrollo activada");
 
 module.exports = {
   database: "viniapododb",
-  username: "viniapodo_user",
-  password: "viniapodo",
+  username: "postgres",
+  password: "postgres",
   timezone: 'America/La_Paz',
   params: {
     dialect: "postgres",
