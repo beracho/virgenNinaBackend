@@ -19,23 +19,23 @@ module.exports = app => {
 
     const dirModels = path.join(__dirname, "models");
     // Obtiene los modelos del directorio "models".
-    fs.readdirSync(dirModels).forEach(dir => {
-      if (fs.statSync(`${dirModels}/${dir}`).isDirectory()) {
-        const subDirModels = path.join(dirModels, dir);
-        if (dir !== "ejemplos") //TODO: commentar si esque se quieren cargar los modelos de ejemplos
-          fs.readdirSync(subDirModels).forEach(file => {
-            const pathFile = path.join(subDirModels, file);
-            const model = sequelize.import(pathFile);
-            // Almacena los objetos modelo en un JSON.
-            db.models[model.name] = model;
-          });
-      } else {
-        const pathFile = path.join(dirModels, dir);
-        const model = sequelize.import(pathFile);
-        // Almacena los objetos modelo en un JSON.
-        db.models[model.name] = model;
-      }
-    });
+    // fs.readdirSync(dirModels).forEach(dir => {
+    //   if (fs.statSync(`${dirModels}/${dir}`).isDirectory()) {
+    //     const subDirModels = path.join(dirModels, dir);
+    //     if (dir !== "ejemplos") //TODO: commentar si esque se quieren cargar los modelos de ejemplos
+    //       fs.readdirSync(subDirModels).forEach(file => {
+    //         const pathFile = path.join(subDirModels, file);
+    //         const model = sequelize.import(pathFile);
+    //         // Almacena los objetos modelo en un JSON.
+    //         db.models[model.name] = model;
+    //       });
+    //   } else {
+    //     const pathFile = path.join(dirModels, dir);
+    //     const model = sequelize.import(pathFile);
+    //     // Almacena los objetos modelo en un JSON.
+    //     db.models[model.name] = model;
+    //   }
+    // });
     console.log("cargando asociaciones....");
     Object.keys(db.models).forEach(key => {
       console.log(`---->${key+db.models[key]}`);

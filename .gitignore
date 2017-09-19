@@ -35,3 +35,5 @@ uploads/**/*.jpeg
 uploads/**/*.csv
 src/routes/promueve/borrar.js
 gitlive.sh
+Thumbs.db
+desktop.ini
