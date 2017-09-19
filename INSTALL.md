@@ -13,10 +13,9 @@ Este repositorio almacena el sistema de control y seguimiento documental virgen 
 ### Instalación del sistema ###
 
 * npm install
-* crear base de datos
 * npm run setup
-* npm install -g 
-  sequelize-cli
+* npm install -g nodemon
+* crear base de datos
 * npm run startdev
 * Instalación del test
 

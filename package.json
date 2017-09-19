@@ -39,11 +39,13 @@
     "passport-jwt": "^2.0.0",
     "passport-ldapauth": "^0.5.0",
     "path": "^0.12.7",
+    "pg": "^4.5.6",
     "q": "^1.4.1",
     "request": "^2.78.0",
     "sequelize": "^3.24.6",
     "sequelize-formly": "^1.0.20",
-    "sequelize-handlers": "^0.3.0"
+    "sequelize-handlers": "^0.3.0",
+    "winston": "^2.2.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
