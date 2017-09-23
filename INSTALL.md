@@ -16,6 +16,13 @@ Este repositorio almacena el sistema de control y seguimiento documental virgen 
 * npm run setup
 * npm install -g nodemon
 * crear base de datos
+sudo su - postgres
+psql postgres 
+
+CREATE ROLE usuario_ninia WITH LOGIN PASSWORD 'micontraseñamuysegura'
+CREATE DATABASE viniadobodb WITH OWNER usuario_ninia;
+
+
 * npm run startdev
 * Instalación del test
 

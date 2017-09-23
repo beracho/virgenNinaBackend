@@ -13,7 +13,7 @@ module.exports = app => {
                     console.log(`
                                                           >*
                                                    #      >*
-  " UDDER FOOLISHNESS "                            #  ###>***~~~~~|
+  Autor: Adrian Marcelo Berazaín Mallea            #  ###>***~~~~~|
                                                    ####  *****^^^#
                                               _____|       *#####
                                              | ^^^#   \/ \/ #
