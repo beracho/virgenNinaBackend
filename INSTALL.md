@@ -19,7 +19,7 @@ Este repositorio almacena el sistema de control y seguimiento documental virgen 
 sudo su - postgres
 psql postgres 
 
-CREATE ROLE usuario_ninia WITH LOGIN PASSWORD 'micontraseñamuysegura'
+CREATE ROLE usuario_ninia WITH LOGIN PASSWORD 'micontraseñamuysegura';
 CREATE DATABASE viniadobodb WITH OWNER usuario_ninia;
 
 
