@@ -27,8 +27,8 @@ consign()
   .then('src/libs/middlewares.js')
   // carga todas las rutas del api rest
   .then('src/routes')
-  // //Declara Variables Globales
-  // .then('src/libs/variables.js')
+  //Declara Variables Globales
+  .then('src/libs/variables.js')
   // levanta todo el sistema
   .then('src/libs/boot.js')
   // finalmente todo lo ingresa a express

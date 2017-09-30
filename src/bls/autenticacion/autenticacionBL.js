@@ -137,8 +137,6 @@ const autenticar = (cuerpoObj, app) => {
   // }
   usuarioBL.verificarExistencia(false, cuerpoObj, app.src.db.models) // verificamos que exista el usuario. El parámetro false indica que sólo verificará y no arrojará un error en caso de encontrar la existencia
   .then(respuestaUsuarioExiste => {
-    console.log("------_______------");
-    console.log(respuestaUsuarioExiste);
     if (respuestaUsuarioExiste) {
       // if (cuerpoObj.nit) {
       //   return serviciosWebBL.verificaIdentidadImpuestos(cuerpoObj.nit, cuerpoObj.usuario, cuerpoObj.contrasena); // Si existe el usuario y tiene NIT verificamos sus credenciales con el servicio de impuestos
@@ -178,9 +176,7 @@ const obtenerDatos = (cuerpoObj, app) => {
 
   const objParametros = {
     where: {
-      $or:{
-        usuario: usuario_p,
-      },
+      usuario: usuario_p,
       contrasena,
     },
     include:[{
@@ -206,12 +202,8 @@ const obtenerDatos = (cuerpoObj, app) => {
   //   },
   //   contrasena,
   // };
-  console.log("_________-----------_______________-");
-  console.log(JSON.stringify(objParametros.where));
   dao.obtenerRegistro(models.usuario, objParametros)
   .then(user => {
-    console.log("_________-----------_______________-");
-    console.log(JSON.stringify(user));
     if (user && user.id_usuario) {
       usuario = user;
       return user;

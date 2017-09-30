@@ -11,7 +11,7 @@ module.exports = {
         _fecha_modificacion: new Date(),
         email: 'admin',
         usuario: 'admin',
-        contrasena: '3fb7b39416f1d067268747fc214494d759d2609f863ace1a8a76705618d5c80b',
+        contrasena: 'Developer',
         fid_persona: 1,
       },
       // 2
@@ -22,7 +22,7 @@ module.exports = {
         _fecha_modificacion: new Date(),
         email: 'director',
         usuario: 'director',
-        contrasena: '3fb7b39416f1d067268747fc214494d759d2609f863ace1a8a76705618d5c80b',
+        contrasena: 'Developer',
         fid_persona: 2,
       },
       // 3
@@ -33,7 +33,7 @@ module.exports = {
         _fecha_modificacion: new Date(),
         email: 'inscripciones1',
         usuario: 'inscripciones1',
-        contrasena: '3fb7b39416f1d067268747fc214494d759d2609f863ace1a8a76705618d5c80b',
+        contrasena: 'Developer',
         fid_persona: 3,
       },
       // 4
@@ -44,7 +44,7 @@ module.exports = {
         _fecha_modificacion: new Date(),
         email: 'psicomotricidad',
         usuario: 'psicomotricidad',
-        contrasena: '3fb7b39416f1d067268747fc214494d759d2609f863ace1a8a76705618d5c80b',
+        contrasena: 'Developer',
         fid_persona: 4,
       },
       // 5
@@ -55,7 +55,7 @@ module.exports = {
         _fecha_modificacion: new Date(),
         email: 'fisioterapia',
         usuario: 'fisioterapia',
-        contrasena: '3fb7b39416f1d067268747fc214494d759d2609f863ace1a8a76705618d5c80b',
+        contrasena: 'Developer',
         fid_persona: 5,
       },
       // 6
@@ -66,7 +66,7 @@ module.exports = {
         _fecha_modificacion: new Date(),
         email: 'fonoaudiologia',
         usuario: 'fonoaudiologia',
-        contrasena: '3fb7b39416f1d067268747fc214494d759d2609f863ace1a8a76705618d5c80b',
+        contrasena: 'Developer',
         fid_persona: 6,
       },
       // 7
@@ -77,7 +77,7 @@ module.exports = {
         _fecha_modificacion: new Date(),
         email: 'nutricion',
         usuario: 'nutricion',
-        contrasena: '3fb7b39416f1d067268747fc214494d759d2609f863ace1a8a76705618d5c80b',
+        contrasena: 'Developer',
         fid_persona: 7,
       },
 
@@ -89,7 +89,7 @@ module.exports = {
         _fecha_modificacion: new Date(),
         email: 'psicologia',
         usuario: 'psicologia',
-        contrasena: '3fb7b39416f1d067268747fc214494d759d2609f863ace1a8a76705618d5c80b',
+        contrasena: 'Developer',
         fid_persona: 8,
       },
       // 9
@@ -100,7 +100,7 @@ module.exports = {
         _fecha_modificacion: new Date(),
         email: 'odontologia',
         usuario: 'odontologia',
-        contrasena: '3fb7b39416f1d067268747fc214494d759d2609f863ace1a8a76705618d5c80b',
+        contrasena: 'Developer',
         fid_persona: 9,
       },
       // 10
@@ -111,7 +111,7 @@ module.exports = {
         _fecha_modificacion: new Date(),
         email: 'psicopedagogia',
         usuario: 'psicopedagogia',
-        contrasena: '3fb7b39416f1d067268747fc214494d759d2609f863ace1a8a76705618d5c80b',
+        contrasena: 'Developer',
         fid_persona: 10,
       },
       // 11
@@ -122,7 +122,7 @@ module.exports = {
         _fecha_modificacion: new Date(),
         email: 'trabajosocial',
         usuario: 'trabajosocial',
-        contrasena: '3fb7b39416f1d067268747fc214494d759d2609f863ace1a8a76705618d5c80b',
+        contrasena: 'Developer',
         fid_persona: 11,
       },
     ], {});
