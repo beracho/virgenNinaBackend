@@ -536,24 +536,81 @@ const verificarExistencia = (paraCrear, body, models) => {
   const deferred = Q.defer();
   const parametros = {};
   if (paraCrear) {
-    parametros.include = [{
-      model: models.usuario_rol, as: 'usuarios_roles',
-      where: {fid_rol: ROL_UNIDAD_PRODUCTIVA},
-    }];
+    //verifica usuario y email
+    //devuelve error o false
+    verificarUsuario(paraCrear, body, models)
+    .then(respuesta => {
+      return verificarEmail(paraCrear, body, models)
+    })
+    .then(respuesta => deferred.resolve(false))
+    .catch(error => deferred.reject(error));
+  } else {
+    //tengo usuario o email
+    //si usuario => verifica usuario
+    //si email => verifica email
+    //Devuelve usuario obtenido o false
+    if (body.usuario) {
+      verificarUsuario(paraCrear, body, models)
+      .then(respuesta => deferred.resolve(respuesta))
+      .catch(error => deferred.reject(error));
+    } else {
+      if (body.email) {
+        verificarEmail(paraCrear, body, models)
+        .then(respuesta => deferred.resolve(respuesta))
+        .catch(error => deferred.reject(error));
+      } else {
+        deferred.reject(new Error('Solicitud incompleta: falta ingresar usuario o correo electronico'));
+        return deferred.promise;
+      }
+    }
   }
-  let mensajeError = '';
+  return deferred.promise;
+};
+
+const verificarUsuario = (paraCrear, body, models) => {
+  const deferred = Q.defer();
+  if (util.isUndefined(body.usuario)) {
+    deferred.reject(new Error('Solicitud incompleta: falta ingresar usuario'));
+    return deferred.promise;
+  }
+  const parametros = {};
   parametros.where = {};
   parametros.where = {usuario: body.usuario};
-  mensajeError = `Ya existe registrado el usuario ${body.usuario}`;
+  const mensajeError = `Ya existe registrado el usuario ${body.usuario}`;
   obtenerUsuario(parametros, models)
   .then(respuesta => {
-    if(respuesta ) {
-      if (paraCrear) {
+    if(respuesta) {
+      if(paraCrear){
         deferred.reject(new Error(mensajeError));
-      }
-      else {
+        return deferred.promise;
+      } else
         deferred.resolve(respuesta);
-      }
+    } else {
+      deferred.resolve(false);
+    }
+  })
+  .catch(error => deferred.reject(error));
+  return deferred.promise;
+};
+
+const verificarEmail = (paraCrear, body, models) => {
+  const deferred = Q.defer();
+  if (util.isUndefined(body.email)) {
+    deferred.reject(new Error('Solicitud incompleta: falta ingresar correo electrónico'));
+    return deferred.promise;
+  }
+  const parametros = {};
+  parametros.where = {};
+  parametros.where = {email: body.email};
+  const mensajeError = `Ya existe registrado el correo ${body.email}`;
+  obtenerUsuario(parametros, models)
+  .then(respuesta => {
+    if(respuesta) {
+      if(paraCrear){
+        deferred.reject(new Error(mensajeError));
+        return deferred.promise;
+      } else
+        deferred.resolve(respuesta);
     } else {
       deferred.resolve(false);
     }
@@ -586,8 +643,12 @@ const crearCargo = (body, app, callback) => {
   const doc_identidad = body.documento_identidad;
   const lug_identidad = body.lugar_documento_identidad;
   let usuarioObj = {};
-  if (util.isUndefined(body.email)) {
+  if (util.isUndefined(body.email) && util.isUndefined(body.usuario)) {
     deferred.reject(new Error('Solicitud incompleta: falta ingresar correo electrónico'));
+    return deferred.promise;
+  }
+  if (util.isUndefined(body.usuario)) {
+    deferred.reject(new Error('Solicitud incompleta: falta ingresar usuario'));
     return deferred.promise;
   }
   if (util.isUndefined(body.contrasena)) {

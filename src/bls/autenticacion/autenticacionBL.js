@@ -120,7 +120,6 @@ const crearCuenta = (body, app) => {
 const autenticar = (cuerpoObj, app) => {
   let crearRegistro = false;
   const deferred = Q.defer();
-  console.log(JSON.stringify(cuerpoObj));
   if (!(cuerpoObj.usuario && cuerpoObj.contrasena)) { // Verficamos que mínimamente tengamos usuario y password
     deferred.reject(new Error('Los datos de Usuario y Contraseña son obligatorios.'));
     return deferred.promise;
