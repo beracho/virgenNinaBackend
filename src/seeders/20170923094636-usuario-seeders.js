@@ -31,8 +31,8 @@ module.exports = {
         _usuario_creacion: 1,
         _fecha_creacion: new Date(),
         _fecha_modificacion: new Date(),
-        email: 'inscripciones1',
-        usuario: 'inscripciones1',
+        email: 'inscripciones',
+        usuario: 'inscripciones',
         contrasena: 'Developer',
         fid_persona: 3,
       },
@@ -124,6 +124,17 @@ module.exports = {
         usuario: 'trabajosocial',
         contrasena: 'Developer',
         fid_persona: 11,
+      },
+      // 12
+      {
+        estado: 'ACTIVO',
+        _usuario_creacion: 1,
+        _fecha_creacion: new Date(),
+        _fecha_modificacion: new Date(),
+        email: 'profesor',
+        usuario: 'profesor',
+        contrasena: 'Developer',
+        fid_persona: 12,
       },
     ], {});
   },

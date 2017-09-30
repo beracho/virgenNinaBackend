@@ -104,20 +104,18 @@ const handlebars = require('handlebars');
 //   return deferred.promise;
 // };
 
-// const crearCuenta = (body, app) => {
-//   const deferred = Q.defer();
-//   const models = app.src.db.models;
-//   body.audit_usuario = {};
-//   body.audit_usuario.id_usuario = USUARIO_ADMIN;
-//   usuarioBL.crearEmpresario(body, app, formarPayload)
-//   .then(respuesta => deferred.resolve(respuesta))
-//   .catch(error => {
-//     deferred.reject(error)
-//   });
-
-//   return deferred.promise;
-
-// };
+const crearCuenta = (body, app) => {
+  const deferred = Q.defer();
+  const models = app.src.db.models;
+  body.audit_usuario = {};
+  body.audit_usuario.id_usuario = USUARIO_ADMIN;
+  usuarioBL.crearCargo(body, app, formarPayload)
+  .then(respuesta => deferred.resolve(respuesta))
+  .catch(error => {
+    deferred.reject(error)
+  });
+  return deferred.promise;
+};
 
 const autenticar = (cuerpoObj, app) => {
   let crearRegistro = false;
@@ -127,40 +125,17 @@ const autenticar = (cuerpoObj, app) => {
     deferred.reject(new Error('Los datos de Usuario y Contraseña son obligatorios.'));
     return deferred.promise;
   }
-  // if (!cuerpoObj.nit) { // Si el usuario no tiene nit entonces encriptamos su password, pues éste es de nuestra BD.
-  //   const password = crypto.createHash("sha256").update(cuerpoObj.contrasena).digest("hex");
-  //   cuerpoObj.contrasena = password;
-  // } else { // Si el usuario tiene NIT entonces, indpendendientemente de lo que puso en usuario, se lo colocamos en lowercase
-  //   if(process.env.NODE_ENV === 'production') { // En producción no hacemos esta validación. Trabajamos con el fake de Fundempresa que SÍ distingue mayúsculas/minúsculas
-  //     cuerpoObj.usuario =  cuerpoObj.usuario.toLowerCase();
-  //   }
-  // }
   usuarioBL.verificarExistencia(false, cuerpoObj, app.src.db.models) // verificamos que exista el usuario. El parámetro false indica que sólo verificará y no arrojará un error en caso de encontrar la existencia
   .then(respuestaUsuarioExiste => {
     if (respuestaUsuarioExiste) {
-      // if (cuerpoObj.nit) {
-      //   return serviciosWebBL.verificaIdentidadImpuestos(cuerpoObj.nit, cuerpoObj.usuario, cuerpoObj.contrasena); // Si existe el usuario y tiene NIT verificamos sus credenciales con el servicio de impuestos
-      // } else {
-        return obtenerDatos(cuerpoObj, app); // Si existe el usuario y no tiene nit, obtenemos su datos de inicio de sesión
-      // }
+      return obtenerDatos(cuerpoObj, app); // Si existe el usuario y no tiene nit, obtenemos su datos de inicio de sesión
     }
     else {
-      // if (cuerpoObj.nit) {
-      //   crearRegistro = true;
-      //   return usuarioBL.crearEmpresarioConNit(cuerpoObj, app, formarPayload); // Si no existe el usuario, lo creamos (sólo para EMPRESARIOS con NIT)
-      // }
-      // else {
-        throw new Error('Credenciales no válidas'); // Si no existe el usuario y no es EMPRESARIO con NIT, entonces ingresó credenciales erróneas.
-      // }
+      throw new Error('Credenciales no válidas'); // Si no existe el usuario y no es EMPRESARIO con NIT, entonces ingresó credenciales erróneas.
     }
   })
   .then(respuesta =>  {
-    // if ((cuerpoObj.nit) && !crearRegistro ) {
-    //   return obtenerDatos(cuerpoObj, app); // Si no ha creado un usuario y éste es con nit (o sea, ha verificado sus datos en impuestos), obtenemos su datos de inicio de sesión
-    // }
-    // else {
-      return respuesta;
-    // }
+    return respuesta;
   })
   .then(respuesta =>  deferred.resolve(respuesta))
   .catch(error => deferred.reject(error));
@@ -196,12 +171,6 @@ const obtenerDatos = (cuerpoObj, app) => {
       }],
     }],
   };
-  // objParametros.where = {
-  //   $or:{
-  //     usuario: usuario_p,
-  //   },
-  //   contrasena,
-  // };
   dao.obtenerRegistro(models.usuario, objParametros)
   .then(user => {
     if (user && user.id_usuario) {
@@ -284,5 +253,5 @@ module.exports = {
   autenticar,
   // validarCorreo,
   obtenerDatos,
-  // crearCuenta,
+  crearCuenta,
 };

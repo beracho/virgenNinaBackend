@@ -17,13 +17,11 @@ module.exports = app => {
     });
   });
 
-  // app.post("/crear_cuenta", (req, res) => {
-  //   autenticacionBL.crearCuenta(req.body, app)
-  //   .then(respuesta => Util.mensajeExito(res, "Obtención de datos exitosa.", 200, respuesta))
-  //   .catch(error => {
-  //     Util.mensajeError(res, error.message || error.mensaje)
-  //   });
-  // });
+  app.post("/crear_cuenta", (req, res) => {
+    autenticacionBL.crearCuenta(req.body, app)
+    .then(respuesta => Util.mensajeExito(res, "Creación de cuenta exitosa.", 200, respuesta))
+    .catch(error => Util.mensajeError(res, error.message || error.mensaje));
+  });
 
   // TODO: eliminar
   // app.post("/api/v1/cambiarRol", (req, res) => {

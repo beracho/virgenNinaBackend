@@ -543,14 +543,8 @@ const verificarExistencia = (paraCrear, body, models) => {
   }
   let mensajeError = '';
   parametros.where = {};
-  // const tieneNit = typeof(body.nit)!== "undefined" && body.nit!==null;
-  // if (tieneNit) {
-  //   parametros.where = {nit: body.nit, usuario: body.usuario};
-  //   mensajeError = `Ya existe registrado un usuario con el NIT ${body.nit}`;
-  // } else {
-  //   parametros.where = {usuario: body.usuario};
-  //   mensajeError = `Ya existe registrado el usuario ${body.usuario}`;
-  // }
+  parametros.where = {usuario: body.usuario};
+  mensajeError = `Ya existe registrado el usuario ${body.usuario}`;
   obtenerUsuario(parametros, models)
   .then(respuesta => {
     if(respuesta ) {
@@ -582,67 +576,84 @@ const verificarExistencia = (paraCrear, body, models) => {
 //   return deferred.promise;
 // };
 
-// const crearEmpresario = (body, app, callback) => {
-//   const nit = body.nit || null;
-//   const usuario = nit ? body.usuario  : body.email;
-//   const contrasena = body.contrasena || null;
-//   const models = app.src.db.models;
-//   const deferred = Q.defer();
-//   const idRol = ROL_UNIDAD_PRODUCTIVA;
-//   const email = body.email;
-//   let usuarioObj = {};
-//   if (!nit) {
-//     if (util.isUndefined(body.email)) {
-//       deferred.reject(new Error('Solicitud incompleta: falta ingresar correo electrónico'));
-//       return deferred.promise;
-//     }
-//     if (util.isUndefined(body.contrasena)) {
-//       deferred.reject(new Error('Solicitud incompleta: falta ingresar contraseña para la cuenta'));
-//       return deferred.promise;
-//     }
-//   }
+const crearCargo = (body, app, callback) => {
+  const usuario = body.usuario;
+  const contrasena = body.contrasena || null;
+  const models = app.src.db.models;
+  const deferred = Q.defer();
+  const idRol = body.id_rol;
+  const email = body.email;
+  const doc_identidad = body.documento_identidad;
+  const lug_identidad = body.lugar_documento_identidad;
+  let usuarioObj = {};
+  if (util.isUndefined(body.email)) {
+    deferred.reject(new Error('Solicitud incompleta: falta ingresar correo electrónico'));
+    return deferred.promise;
+  }
+  if (util.isUndefined(body.contrasena)) {
+    deferred.reject(new Error('Solicitud incompleta: falta ingresar contraseña para la cuenta'));
+    return deferred.promise;
+  }
+  if (util.isUndefined(body.documento_identidad)) {
+    deferred.reject(new Error('Solicitud incompleta: falta ingresar documento de identidad del usuario.'));
+    return deferred.promise;
+  }
+  if (util.isUndefined(body.lugar_documento_identidad)) {
+    deferred.reject(new Error('Solicitud incompleta: falta ingresar lugar del documento del usuario.'));
+    return deferred.promise;
+  }
 
-//   models.sequelize.transaction().then((transaccion) => {
-//     verificarExistencia(true, body, models)
-//     .then(respuesta => {
-//       usuarioObj = {
-//         usuario,
-//         nit,
-//         _usuario_creacion: USUARIO_ADMIN,
-//         contrasena,
-//         email,
-//       };
-//       return dao.crearRegistro(models.usuario, usuarioObj, false, transaccion);
-//     })
-//     .then(respuestaUsuario =>  {
-//       usuarioObj = respuestaUsuario;
-//       const rolObj = {
-//         fid_rol: idRol,
-//         fid_usuario: usuarioObj.id_usuario,
-//         _usuario_creacion: usuarioObj._usuario_creacion,
-//       };
-//       return dao.crearRegistro(models.usuario_rol, rolObj, false, transaccion)
-//     })
-//     .then(respuesta => {
-//       usuarioObj.dataValues.rol = respuesta.dataValues;
-//       usuarioObj.usuarios_roles = [];
-//       usuarioObj.usuarios_roles.push(respuesta.dataValues);
-//       const roles_menus = {
-//         menu: [],
-//         menuEntrar: '',
-//       };
-//       return callback(usuarioObj, roles_menus, app);
-//     })
-//     .then(respuesta => {
-//       transaccion.commit().then(res => deferred.resolve(respuesta));
-//     })
-//     .catch(error => {
-//       transaccion.rollback().then(res => deferred.reject(error))
-//     });
-//   })
-//   .catch(error => deferred.reject(error));
-//   return deferred.promise;
-// };
+  models.sequelize.transaction().then((transaccion) => {
+    verificarExistencia(true, body, models)
+    .then(respuesta =>  {
+      const personaObj = {
+        documento_identidad: doc_identidad,
+        lugar_documento_identidad: lug_identidad,
+        _usuario_creacion: USUARIO_ADMIN,
+        // fid_usuario: usuarioObj.id_usuario,
+        // _usuario_creacion: usuarioObj._usuario_creacion,
+      };
+      return dao.crearRegistro(models.persona, personaObj, false, transaccion)
+    })
+    .then(respuestaPersona => {
+      usuarioObj = {
+        usuario,
+        _usuario_creacion: USUARIO_ADMIN,
+        contrasena,
+        email,
+        fid_persona: respuestaPersona.id_persona,
+      };
+      return dao.crearRegistro(models.usuario, usuarioObj, false, transaccion);
+    })
+    .then(respuestaUsuario =>  {
+      usuarioObj = respuestaUsuario;
+      const rolObj = {
+        fid_rol: idRol,
+        fid_usuario: usuarioObj.id_usuario,
+        _usuario_creacion: usuarioObj._usuario_creacion,
+      };
+      return dao.crearRegistro(models.usuario_rol, rolObj, false, transaccion)
+    })
+    .then(respuesta => {
+      usuarioObj.dataValues.rol = respuesta.dataValues;
+      usuarioObj.usuarios_roles = [];
+      usuarioObj.usuarios_roles.push(respuesta.dataValues);
+      const roles_menus = {
+        menu: [],
+        menuEntrar: '',
+      };
+      return callback(usuarioObj, roles_menus, app);
+    })
+    .then(respuesta => {
+      transaccion.commit().then(res => deferred.resolve(respuesta));
+    })
+    .catch(error => {
+      transaccion.rollback().then(res => deferred.reject(error))
+    });
+  })
+  .catch(error => deferred.reject(error));
+  return deferred.promise;
+};
 
 
 module.exports = {
@@ -659,5 +670,5 @@ module.exports = {
   // obtenerEmpresas,
   verificarExistencia,
   // crearEmpresarioConNit,
-  // crearEmpresario,
+  crearCargo,
 }
