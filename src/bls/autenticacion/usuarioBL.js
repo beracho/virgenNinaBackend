@@ -172,63 +172,63 @@ import crypto from 'crypto';
 //   return deferred.promise;
 // }
 
-// const listarUsuarios = (query, body, models) => {
-//   const deferred = Q.defer();
-//   let parametros = {};
-//   let paginado = false;
-//   query.where = [];
-//   if (Object.keys(query).length != 0) {
-//     if (query.filter) {
-//       query.where.push({
-//         $or: [
-//           models.sequelize.literal(`"usuario" ILIKE '%${query.filter}%'`),
-//           models.sequelize.literal(`"persona"."documento_identidad" ILIKE '${query.filter}%'`),
-//           models.sequelize.literal(`"persona"."nombres" ILIKE '${query.filter}%'`),
-//           models.sequelize.literal(`"persona"."primer_apellido" ILIKE '${query.filter}%'`),
-//           models.sequelize.literal(`"persona"."segundo_apellido" ILIKE '${query.filter}%'`),
-//         ],
-//       });
-//     }
-//     parametros = query;
-//     paginado = true;
-//   }
-//   parametros.attributes = ["id_usuario", "nit", "usuario", "email", "estado", "fid_persona"];
-//   parametros.order = 'usuario';
-//   parametros.distinct = true; // agrega la opción DISTINCT a count
-//   parametros.include = [{
-//     model: models.persona,
-//     as: 'persona',
-//     attributes: ['id_persona', 'documento_identidad', 'nombres', 'primer_apellido', 'segundo_apellido', 'nombre_completo', 'genero', 'direccion'],
-//   },{
-//     model: models.usuario_rol,
-//     as: 'usuarios_roles',
-//     attributes: ['fid_rol', 'fid_usuario'],
-//     required: true,
-//     include: [{
-//       model: models.rol,
-//       as: 'rol',
-//       attributes: ['id_rol', 'nombre'],
-//     }],
-//     where: {fid_rol: {$ne: ROL_UNIDAD_PRODUCTIVA}},
-//   }];
-//   dao.listarRegistros(models.usuario, parametros, paginado)
-//   .then(respuesta => {
-//     const usuarios = respuesta.rows ? respuesta.rows : respuesta;
-//     usuarios.forEach(usuario => {
-//       if (usuario && usuario.usuarios_roles && usuario.usuarios_roles.length > 0) {
-//         usuario.dataValues.fid_rol = usuario.usuarios_roles[0].fid_rol;
-//       }
-//     });
-//     if (respuesta && respuesta.rows) {
-//       respuesta.rows = usuarios;
-//     } else {
-//       respuesta = usuarios;
-//     }
-//     deferred.resolve(respuesta)
-//   })
-//   .catch(error => deferred.reject(error));
-//   return deferred.promise;
-// };
+const listarUsuarios = (query, body, models) => {
+  const deferred = Q.defer();
+  let parametros = {};
+  let paginado = false;
+  query.where = [];
+  if (Object.keys(query).length != 0) {
+    if (query.filter) {
+      query.where.push({
+        $or: [
+          models.sequelize.literal(`"usuario" ILIKE '%${query.filter}%'`),
+          models.sequelize.literal(`"persona"."documento_identidad" ILIKE '${query.filter}%'`),
+          models.sequelize.literal(`"persona"."nombres" ILIKE '${query.filter}%'`),
+          models.sequelize.literal(`"persona"."primer_apellido" ILIKE '${query.filter}%'`),
+          models.sequelize.literal(`"persona"."segundo_apellido" ILIKE '${query.filter}%'`),
+        ],
+      });
+    }
+    parametros = query;
+    paginado = true;
+  }
+  parametros.attributes = ["id_usuario", "usuario", "email", "estado", "fid_persona"];
+  parametros.order = 'usuario';
+  parametros.distinct = true; // agrega la opción DISTINCT a count
+  parametros.include = [{
+    model: models.persona,
+    as: 'persona',
+    attributes: ['id_persona', 'documento_identidad', 'nombres', 'primer_apellido', 'segundo_apellido', 'nombre_completo', 'genero', 'direccion'],
+  },{
+    model: models.usuario_rol,
+    as: 'usuarios_roles',
+    attributes: ['fid_rol', 'fid_usuario'],
+    required: true,
+    include: [{
+      model: models.rol,
+      as: 'rol',
+      attributes: ['id_rol', 'nombre'],
+    }],
+    where: {fid_rol: {$ne: ROL_UNIDAD_PRODUCTIVA}},
+  }];
+  dao.listarRegistros(models.usuario, parametros, paginado)
+  .then(respuesta => {
+    const usuarios = respuesta.rows ? respuesta.rows : respuesta;
+    usuarios.forEach(usuario => {
+      if (usuario && usuario.usuarios_roles && usuario.usuarios_roles.length > 0) {
+        usuario.dataValues.fid_rol = usuario.usuarios_roles[0].fid_rol;
+      }
+    });
+    if (respuesta && respuesta.rows) {
+      respuesta.rows = usuarios;
+    } else {
+      respuesta = usuarios;
+    }
+    deferred.resolve(respuesta)
+  })
+  .catch(error => deferred.reject(error));
+  return deferred.promise;
+};
 
 // const obtenerUsuarioPorId = (id, models, parametros, body) => {
 //   const deferred = Q.defer();
@@ -720,7 +720,7 @@ const crearCargo = (body, app, callback) => {
 module.exports = {
   // crearUsuario,
   // modificarUsuario,
-  // listarUsuarios,
+  listarUsuarios,
   obtenerUsuario,
   // obtenerUsuarioPorId,
   // activarUsuario,
