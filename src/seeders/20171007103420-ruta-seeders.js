@@ -16,19 +16,19 @@ module.exports = {
         _fecha_creacion: new Date(),
         _fecha_modificacion: new Date(),
       },
-      // {
-      //   // 2
-      //   ruta: '/api/v1/roles',
-      //   descripcion: 'Ruta para listar los roles',
-      //   method_get: true,
-      //   method_post: false,
-      //   method_put: false,
-      //   method_delete: false,
-      //   estado: 'ACTIVO',
-      //   _usuario_creacion: 1,
-      //   _fecha_creacion: new Date(),
-      //   _fecha_modificacion: new Date(),
-      // },
+      {
+        // 2
+        ruta: '/api/v1/roles',
+        descripcion: 'Ruta para listar los roles',
+        method_get: true,
+        method_post: false,
+        method_put: false,
+        method_delete: false,
+        estado: 'ACTIVO',
+        _usuario_creacion: 1,
+        _fecha_creacion: new Date(),
+        _fecha_modificacion: new Date(),
+      },
       // {
       //   // 3
       //   ruta: '/api/v1/parametros/',

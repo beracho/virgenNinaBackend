@@ -8,7 +8,7 @@ module.exports = {
     // ADMINISTRADOR
     let obj = [
       { fid_ruta: 1, fid_rol: 1, method_get: true, method_post: true, method_put: true, method_delete: false, estado: 'ACTIVO', _usuario_creacion: 'SISTEMA', _fecha_creacion: new Date(), _fecha_modificacion: new Date() },
-    //   { fid_ruta: 2, fid_rol: 1, method_get: true, method_post: false, method_put: false, method_delete: false, estado: 'ACTIVO', _usuario_creacion: 'SISTEMA', _fecha_creacion: new Date(), _fecha_modificacion: new Date() },
+      { fid_ruta: 2, fid_rol: 1, method_get: true, method_post: false, method_put: false, method_delete: false, estado: 'ACTIVO', _usuario_creacion: 'SISTEMA', _fecha_creacion: new Date(), _fecha_modificacion: new Date() },
     //   { fid_ruta: 3, fid_rol: 1, method_get: true, method_post: true, method_put: true, method_delete: true, estado: 'ACTIVO', _usuario_creacion: 'SISTEMA', _fecha_creacion: new Date(), _fecha_modificacion: new Date() },
     //   { fid_ruta: 4, fid_rol: 1, method_get: true, method_post: true, method_put: true, method_delete: true, estado: 'ACTIVO', _usuario_creacion: 'SISTEMA', _fecha_creacion: new Date(), _fecha_modificacion: new Date() },
     //   { fid_ruta: 5, fid_rol: 1, method_get: true, method_post: true, method_put: true, method_delete: true, estado: 'ACTIVO', _usuario_creacion: 'SISTEMA', _fecha_creacion: new Date(), _fecha_modificacion: new Date() },
