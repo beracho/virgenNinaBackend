@@ -6,7 +6,7 @@ const dao = require('../../dao/dao');
 const Q = require('q');
 // const personaBL = require('./personaBL');
 // const plantillaBL = require('../parametros/plantillaBL');
-// const usuario_rolBL = require('./usuario_rolBL');
+const usuario_rolBL = require('./usuario_rolBL');
 // const serviciosWebBL = require('../serviciosWeb/serviciosWebBL');
 const autenticacionBL = require('./autenticacionBL');
 const handlebars = require('handlebars');
@@ -49,55 +49,58 @@ import crypto from 'crypto';
 //   return deferred.promise;
 // };
 
-// const modificarUsuario = (id, body, models) => {
-//   const deferred = Q.defer();
-//   const personaObj = {};
-//   let modificarObj = {};
-//   if (body.usuario && !util.isDefined(body.usuario.alta)) {
-//     models.sequelize.transaction().then((transaccion) => {
-//       obtenerUsuarioPorId(id, models, null, body)
-//       .then(respuesta => {
-//         const usuarioObj = {
-//           id_usuario: respuesta.id_usuario,
-//           email: body.usuario.email ? body.usuario.email : respuesta.dataValues.email,
-//           fid_rol: body.usuario.fid_rol,
-//           _usuario_modificacion: body.audit_usuario.id_usuario,
-//         }
-//         return validarUsuarioCrear(usuarioObj, body, models)
-//       })
-//       .then(respuesta => dao.modificarRegistro(models.usuario, id, respuesta, transaccion))
-//       .then(respuesta => {
-//         modificarObj = respuesta;
-//         return usuario_rolBL.registrarUsuarioRol(respuesta.id_usuario,  body.usuario.fid_rol, body, models, transaccion)
-//       })
-//       .then(respuesta => {
-//         transaccion.commit();
-//         deferred.resolve(modificarObj)
-//       })
-//       .catch(error => {
-//         transaccion.rollback();
-//         deferred.reject(error)
-//       });
-//     });
-//   } else {
-//     if (body.usuario.alta) {
-//       modificarObj.estado = ESTADO_ACTIVO;
-//     } else {
-//       modificarObj.estado = ESTADO_INACTIVO;
-//     }
-//     obtenerUsuarioPorId(id, models, {}, body)
-//     .then(respuesta => {
-//       if (!respuesta) {
-//         throw new Error("No se ha encontrado al usuario solicitado.");
-//       } else if (respuesta && respuesta.estado == ESTADO_PENDIENTE) {
-//         throw new Error(`No puede realizar acciones sobre un usuario en estado ${ESTADO_PENDIENTE}.`);
-//       }
-//       return dao.modificarRegistro(models.usuario, id, modificarObj)
-//     }).then(respuesta => deferred.resolve(respuesta))
-//     .catch(error => deferred.reject(error));
-//   }
-//   return deferred.promise;
-// };
+const modificarUsuario = (id, body, models) => {
+  const deferred = Q.defer();
+  const personaObj = {};
+  let modificarObj = {};
+  if (body.usuario && !util.isDefined(body.usuario.alta)) {
+    models.sequelize.transaction().then((transaccion) => {
+      obtenerUsuarioPorId(id, models, null, body)
+      .then(respuesta => {
+        const usuarioObj = {
+          id_usuario: respuesta.id_usuario,
+          email: body.usuario.email ? body.usuario.email : respuesta.dataValues.email,
+          fid_rol: body.usuario.fid_rol,
+          _usuario_modificacion: body.audit_usuario.id_usuario,
+        }
+        return validarUsuarioCrear(usuarioObj, body, models)
+      })
+      .then(respuesta => dao.modificarRegistro(models.usuario, id, respuesta, transaccion))
+      .then(respuesta => {
+        modificarObj = respuesta;
+        return usuario_rolBL.eliminarUsuarioRol(modificarObj.id_usuario,  body.usuario.fid_rol, models, transaccion)
+      })
+      .then(respuesta => {
+        return usuario_rolBL.registrarUsuarioRol(modificarObj.id_usuario,  body.usuario.fid_rol, body, models, transaccion)
+      })
+      .then(respuesta => {
+        transaccion.commit();
+        deferred.resolve(modificarObj)
+      })
+      .catch(error => {
+        transaccion.rollback();
+        deferred.reject(error)
+      });
+    });
+  } else {
+    if (body.usuario.alta) {
+      modificarObj.estado = ESTADO_ACTIVO;
+    } else {
+      modificarObj.estado = ESTADO_INACTIVO;
+    }
+    obtenerUsuarioPorId(id, models, {}, body)
+    .then(respuesta => {
+      if (!respuesta) {
+        throw new Error("No se ha encontrado al usuario solicitado.");
+      } else if (respuesta && respuesta.estado == ESTADO_PENDIENTE) {
+        throw new Error(`No puede realizar acciones sobre un usuario en estado ${ESTADO_PENDIENTE}.`);
+      }
+      return dao.modificarRegistro(models.usuario, id, modificarObj)
+    }).then(respuesta => deferred.resolve(respuesta))
+    .catch(error => deferred.reject(error));
+  }
+  return deferred.promise;
+};
 
 // const reenviarActivacion = (body, models) => {
 //   const deferred = Q.defer();
@@ -230,42 +233,42 @@ const listarUsuarios = (query, body, models) => {
   return deferred.promise;
 };
 
-// const obtenerUsuarioPorId = (id, models, parametros, body) => {
-//   const deferred = Q.defer();
-//   if (!parametros) {
-//     parametros = {};
-//     parametros.attributes = ["id_usuario", "nit", "usuario", "email",  "estado", "fid_persona"];
-//     parametros.include = [{
-//       model: models.persona,
-//       as: 'persona',
-//       attributes: ['id_persona', 'documento_identidad', 'nombres', 'primer_apellido', 'segundo_apellido', 'nombre_completo', 'genero', 'direccion'],
-//       required: false,
-//     },{
-//       model: models.usuario_rol,
-//       as: 'usuarios_roles',
-//       attributes: ['fid_rol', 'fid_usuario'],
-//       required: true,
-//       include: [{
-//         model: models.rol,
-//         as: 'rol',
-//         attributes: ['id_rol', 'nombre'],
-//       }],
-//     }];
-//   }
-//   dao.obtenerRegistroPorId(models.usuario, id, parametros)
-//   .then(respuesta => {
-//     if (respuesta && respuesta.usuarios_roles && respuesta.usuarios_roles.length > 0) {
-//       respuesta.dataValues.rol = respuesta.usuarios_roles[0].rol;
-//     }
-//     if (respuesta) {
-//       deferred.resolve(respuesta)
-//     } else {
-//       throw new Error("No existe el usuario solicitado.");
-//     }
-//   })
-//   .catch(error => deferred.reject(error));
-//   return deferred.promise;
-// };
+const obtenerUsuarioPorId = (id, models, parametros, body) => {
+  const deferred = Q.defer();
+  if (!parametros) {
+    parametros = {};
+    parametros.attributes = ["id_usuario", "usuario", "email",  "estado", "fid_persona"];
+    parametros.include = [{
+      model: models.persona,
+      as: 'persona',
+      attributes: ['id_persona', 'documento_identidad', 'nombres', 'primer_apellido', 'segundo_apellido', 'nombre_completo', 'genero', 'direccion'],
+      required: false,
+    },{
+      model: models.usuario_rol,
+      as: 'usuarios_roles',
+      attributes: ['fid_rol', 'fid_usuario'],
+      required: true,
+      include: [{
+        model: models.rol,
+        as: 'rol',
+        attributes: ['id_rol', 'nombre'],
+      }],
+    }];
+  }
+  dao.obtenerRegistroPorId(models.usuario, id, parametros)
+  .then(respuesta => {
+    if (respuesta && respuesta.usuarios_roles && respuesta.usuarios_roles.length > 0) {
+      respuesta.dataValues.rol = respuesta.usuarios_roles[0].rol;
+    }
+    if (respuesta) {
+      deferred.resolve(respuesta)
+    } else {
+      throw new Error("No existe el usuario solicitado.");
+    }
+  })
+  .catch(error => deferred.reject(error));
+  return deferred.promise;
+};
 
 const obtenerUsuario = (parametros, models) => {
   const deferred = Q.defer();
@@ -316,64 +319,64 @@ const obtenerUsuario = (parametros, models) => {
 //   return deferred.promise;
 // };
 
-// const validarUsuarioCrear = (usuarioObj, body, models) => {
-//   const deferred = Q.defer();
-//   if (usuarioObj.fid_rol === ROL_UNIDAD_PRODUCTIVA) {
-//     deferred.reject(new Error("No se puede crear usuarios con rol UNIDAD PRODUCTIVA a través del administrador del sistema."));
-//     return deferred.promise;
-//   }
-//   if (body.audit_usuario.id_rol !== ROL_ADMINISTRADOR) {
-//     deferred.reject(new Error("No tiene privilegios para crear usuarios."));
-//     return deferred.promise;
-//   }
-//   if (!usuarioObj.fid_rol) {
-//     deferred.reject(new Error("Debe seleccionar un rol para el usuario."));
-//     return deferred.promise;
-//   }
-//   const parametros = {
-//     where: {
-//       id_usuario: {
-//         $not: usuarioObj.id_usuario,
-//       },
-//       fid_persona: usuarioObj.fid_persona,
-//       estado: [ESTADO_PENDIENTE, ESTADO_ACTIVO],
-//     },
-//     attributes: ['id_usuario'],
-//   };
+const validarUsuarioCrear = (usuarioObj, body, models) => {
+  const deferred = Q.defer();
+  if (usuarioObj.fid_rol === ROL_UNIDAD_PRODUCTIVA) {
+    deferred.reject(new Error("No se puede crear usuarios con rol UNIDAD PRODUCTIVA a través del administrador del sistema."));
+    return deferred.promise;
+  }
+  if (body.audit_usuario.id_rol !== ROL_ADMINISTRADOR) {
+    deferred.reject(new Error("No tiene privilegios para crear usuarios."));
+    return deferred.promise;
+  }
+  if (!usuarioObj.fid_rol) {
+    deferred.reject(new Error("Debe seleccionar un rol para el usuario."));
+    return deferred.promise;
+  }
+  const parametros = {
+    where: {
+      id_usuario: {
+        $not: usuarioObj.id_usuario,
+      },
+      fid_persona: usuarioObj.fid_persona,
+      estado: [ESTADO_PENDIENTE, ESTADO_ACTIVO],
+    },
+    attributes: ['id_usuario'],
+  };
 
-//   obtenerUsuario(parametros, models)
-//   .then(respuesta => {
-//     if (respuesta && respuesta.id_usuario) {
-//       throw new Error("Ya existe un usuario ACTIVO asociado a la persona seleccionada. Por favor verifique sus datos.");
-//     } else {
-//       const parametrosEmail = {
-//         where: {
-//           id_usuario: { $not: usuarioObj.id_usuario},
-//           email: usuarioObj.email,
-//           estado: [ESTADO_PENDIENTE, ESTADO_ACTIVO],
-//         },
-//         include:[{
-//           required: true,
-//           model: models.usuario_rol, as: 'usuarios_roles',
-//           where: {fid_rol:{$ne: ROL_UNIDAD_PRODUCTIVA}},
-//         }],
-//         attributes: ['id_usuario'],
-//       };
-//       return obtenerUsuario(parametrosEmail, models)
+  obtenerUsuario(parametros, models)
+  .then(respuesta => {
+    if (respuesta && respuesta.id_usuario) {
+      throw new Error("Ya existe un usuario ACTIVO asociado a la persona seleccionada. Por favor verifique sus datos.");
+    } else {
+      const parametrosEmail = {
+        where: {
+          id_usuario: { $not: usuarioObj.id_usuario},
+          email: usuarioObj.email,
+          estado: [ESTADO_PENDIENTE, ESTADO_ACTIVO],
+        },
+        include:[{
+          required: true,
+          model: models.usuario_rol, as: 'usuarios_roles',
+          where: {fid_rol:{$ne: ROL_UNIDAD_PRODUCTIVA}},
+        }],
+        attributes: ['id_usuario'],
+      };
+      return obtenerUsuario(parametrosEmail, models)
 
-//     }
-//   })
-//   .then(respuesta => {
-//     if (respuesta && respuesta.id_usuario) {
-//       throw new Error(`Ya existe un usuario registrado con el correo electrónico ${usuarioObj.email}.`);
-//     } else {
-//       return usuarioObj;
-//     }
-//   })
-//   .then(respuesta => deferred.resolve(respuesta))
-//   .catch(error => deferred.reject(error));
-//   return deferred.promise;
-// }
+    }
+  })
+  .then(respuesta => {
+    if (respuesta && respuesta.id_usuario) {
+      throw new Error(`Ya existe un usuario registrado con el correo electrónico ${usuarioObj.email}.`);
+    } else {
+      return usuarioObj;
+    }
+  })
+  .then(respuesta => deferred.resolve(respuesta))
+  .catch(error => deferred.reject(error));
+  return deferred.promise;
+}
 
 // function notificarEvento(id_usuario, models, body, plantilla, estadoValido, cargarData) {
 //   const nombrePlantilla = plantilla || PLANTILLA_USUARIO_REGISTRO;
@@ -719,7 +722,7 @@ const crearCargo = (body, app, callback) => {
 
 module.exports = {
   // crearUsuario,
-  // modificarUsuario,
+  modificarUsuario,
   listarUsuarios,
   obtenerUsuario,
   // obtenerUsuarioPorId,
