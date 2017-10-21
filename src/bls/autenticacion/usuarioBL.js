@@ -4,7 +4,7 @@
 
 const dao = require('../../dao/dao');
 const Q = require('q');
-// const personaBL = require('./personaBL');
+const personaBL = require('./personaBL');
 // const plantillaBL = require('../parametros/plantillaBL');
 const usuario_rolBL = require('./usuario_rolBL');
 // const serviciosWebBL = require('../serviciosWeb/serviciosWebBL');
@@ -15,39 +15,63 @@ const util = require('../../libs/util');
 import moment from 'moment';
 import crypto from 'crypto';
 
-// const crearUsuario = (body, models) => {
-//   const deferred = Q.defer();
-//   const usuarioObj = body.usuario;
-//   delete usuarioObj.contrasena;
-//   if (!usuarioObj.persona && usuarioObj.fid_persona) {
-//     usuarioObj.persona = {
-//       id_persona: usuarioObj.fid_persona,
-//     }
-//   }
-//   usuarioObj.usuario = usuarioObj.email;
-//   let usuarioGuardado = {};
-//   models.sequelize.transaction().then((transaccion) => {
-//     usuarioObj._usuario_creacion = body.audit_usuario.id_usuario;
-//     personaBL.modificarPersona(usuarioObj.persona.id_persona, usuarioObj.persona, models, body, transaccion)
-//     .then(respuesta => validarUsuarioCrear(usuarioObj, body, models))
-//     .then(respuesta => dao.crearRegistro(models.usuario, respuesta, false, transaccion))
-//     .then(respuesta => {
-//       usuarioGuardado = respuesta;
-//       return usuario_rolBL.registrarUsuarioRol(respuesta.id_usuario, usuarioObj.fid_rol, body, models, transaccion)
-//     })
-//     .then(respuesta => transaccion.commit() )
-//     .then(respuesta => notificarEvento(usuarioGuardado.id_usuario, models, body, PLANTILLA_USUARIO_REGISTRO, ESTADO_PENDIENTE, cargarDataRegistro) )
-//     .then(respuesta => {
-//       delete usuarioGuardado.dataValues.contrasena;
-//       deferred.resolve(usuarioGuardado);
-//     })
-//     .catch(error => {
-//       transaccion.rollback();
-//       deferred.reject(error)
-//     });
-//   });
-//   return deferred.promise;
-// };
+const crearUsuario = (body, models) => {
+  const deferred = Q.defer();
+
+  //forma usuario
+  let nombre_usuario = "";
+  if (body.papellido == undefined){
+    nombre_usuario = toLowerCase(body.nombres.trim().charAt(0)+body.sapellido);
+  } else {
+    nombre_usuario = body.nombres.trim().charAt(0)+body.papellido;
+  }
+  //Crea objetos
+  const usuarioObj = {
+    usuario: nombre_usuario,
+    email: body.email,
+    fid_rol: body.fid_rol,
+  };
+  const personaObj = {
+    documento_identidad: body.ndoc,
+    lugar_documento_identidad: body.lugar,
+    fecha_nacimiento: body.fecha,
+    genero: body.genero,
+    primer_apellido: body.papellido,
+    segundo_apellido: body.sapellido,
+    capellido: body.capellido,
+    nombres: body.nombres,
+    direccion: body.direccion,
+    telf: body.telf,
+    _usuario_creacion: body.audit_usuario.id_usuario,
+  }
+
+  let usuarioGuardado = {};
+  models.sequelize.transaction().then((transaccion) => {
+    usuarioObj._usuario_creacion = body.audit_usuario.id_usuario;
+
+    personaBL.crearPersona(personaObj, body, models, transaccion)
+    .then(respuesta => {
+      usuarioObj.fid_persona = respuesta.id_persona;
+      return validarUsuarioCrear(usuarioObj, body, models)
+    })
+    .then(respuesta => dao.crearRegistro(models.usuario, respuesta, false, transaccion))
+    .then(respuesta => {
+      usuarioGuardado = respuesta;
+      return usuario_rolBL.registrarUsuarioRol(respuesta.id_usuario, usuarioObj.fid_rol, body, models, transaccion)
+    })
+    .then(respuesta => transaccion.commit() )
+    // .then(respuesta => notificarEvento(usuarioGuardado.id_usuario, models, body, PLANTILLA_USUARIO_REGISTRO, ESTADO_PENDIENTE, cargarDataRegistro) )
+    .then(respuesta => {
+      delete usuarioGuardado.dataValues.contrasena;
+      deferred.resolve(usuarioGuardado);
+    })
+    .catch(error => {
+      transaccion.rollback();
+      deferred.reject(error)
+    });
+  });
+  return deferred.promise;
+};
 
 const modificarUsuario = (id, body, models) => {
   const deferred = Q.defer();
@@ -321,10 +345,10 @@ const obtenerUsuario = (parametros, models) => {
 
 const validarUsuarioCrear = (usuarioObj, body, models) => {
   const deferred = Q.defer();
-  if (usuarioObj.fid_rol === ROL_UNIDAD_PRODUCTIVA) {
-    deferred.reject(new Error("No se puede crear usuarios con rol UNIDAD PRODUCTIVA a través del administrador del sistema."));
-    return deferred.promise;
-  }
+  // if (usuarioObj.fid_rol === ROL_UNIDAD_PRODUCTIVA) {
+  //   deferred.reject(new Error("No se puede crear usuarios con rol UNIDAD PRODUCTIVA a través del administrador del sistema."));
+  //   return deferred.promise;
+  // }
   if (body.audit_usuario.id_rol !== ROL_ADMINISTRADOR) {
     deferred.reject(new Error("No tiene privilegios para crear usuarios."));
     return deferred.promise;
@@ -378,80 +402,81 @@ const validarUsuarioCrear = (usuarioObj, body, models) => {
   return deferred.promise;
 }
 
-// function notificarEvento(id_usuario, models, body, plantilla, estadoValido, cargarData) {
-//   const nombrePlantilla = plantilla || PLANTILLA_USUARIO_REGISTRO;
-//   const deferred = Q.defer();
-//   let usuarioAEnviar = {};
-//   const parametrosUsuario = {
-//     attributes: ["id_usuario", "usuario", "contrasena", "email", "codigo_contrasena", "estado", [models.sequelize.literal(`to_char(fecha_expiracion, 'DD "DE" TMMONTH "DEL" YYYY')`), 'fecha_expiracion']],
-//     include: [{
-//       model: models.persona,
-//       as: 'persona',
-//       attributes: ["nombres", "primer_apellido", "segundo_apellido", "genero"],
-//     }],
-//   };
+function notificarEvento(id_usuario, models, body, plantilla, estadoValido, cargarData) {
+  const nombrePlantilla = plantilla || PLANTILLA_USUARIO_REGISTRO;
+  const deferred = Q.defer();
+  let usuarioAEnviar = {};
+  const parametrosUsuario = {
+    attributes: ["id_usuario", "usuario", "contrasena", "email", "codigo_contrasena", "estado", [models.sequelize.literal(`to_char(fecha_expiracion, 'DD "DE" TMMONTH "DEL" YYYY')`), 'fecha_expiracion']],
+    include: [{
+      model: models.persona,
+      as: 'persona',
+      attributes: ["nombres", "primer_apellido", "segundo_apellido", "genero"],
+    }],
+  };
 
-//   const contrasenaEnviar = `${Math.trunc(Math.random() * 99999999).toString()}${moment(new Date())}`;
-//   const usuarioModificar = {};
-//   usuarioModificar.codigo_contrasena = contrasenaEnviar;
-//   const fecha = new Date();
-//   fecha.setDate(fecha.getDate() + 1);
-//   usuarioModificar.fecha_expiracion = fecha;
-//   if (body && body.audit_usuario) {
-//     usuarioModificar._usuario_modificacion = body.audit_usuario.id_usuario;
-//   }
-//   dao.modificarRegistro(models.usuario, id_usuario, usuarioModificar)
-//   .then(respuesta => obtenerUsuarioPorId(id_usuario, models, parametrosUsuario, body))
-//   .then(respuesta => {
-//     if (respuesta && respuesta.estado === estadoValido) {
-//       usuarioAEnviar = respuesta;
-//       return respuesta;
-//     } else {
-//       return null;
-//     }
-//   }).then(respuesta => {
-//     if (respuesta) {
-//       const parametros = {
-//         where: {
-//           nombre: nombrePlantilla,
-//           estado: ESTADO_ACTIVO,
-//         },
-//         attributes: ['remitente', 'origen', 'asunto', ['contenido', 'mensaje']],
-//       };
-//       return plantillaBL.obtenerPlantilla(parametros, models)
-//     } else {
-//       return null;
-//     }
-//   }).then(respuesta => {
-//     if (respuesta) {
-//       respuesta.dataValues.modo = 'html';
-//       respuesta.dataValues.correos = [usuarioAEnviar.email];
-//       const template = handlebars.compile(respuesta.dataValues.mensaje);
-//       const data = cargarData(usuarioAEnviar, contrasenaEnviar);
-//       respuesta.dataValues.mensaje = template(data);
-//       models.notificaciones(respuesta.dataValues);
-//       return respuesta;
-//     } else {
-//       throw new Error(`No se encuentra la plantilla de Registro de Usuarios`);
-//     }
-//   })
-//   .then(respuesta => {
-//     deferred.resolve(respuesta);
-//   }).catch(error => deferred.reject(error));
+  const contrasenaEnviar = `${Math.trunc(Math.random() * 99999999).toString()}${moment(new Date())}`;
+  const usuarioModificar = {};
+  usuarioModificar.codigo_contrasena = contrasenaEnviar;
+  const fecha = new Date();
+  fecha.setDate(fecha.getDate() + 1);
+  usuarioModificar.fecha_expiracion = fecha;
+  if (body && body.audit_usuario) {
+    usuarioModificar._usuario_modificacion = body.audit_usuario.id_usuario;
+  }
+  dao.modificarRegistro(models.usuario, id_usuario, usuarioModificar)
+  .then(respuesta => obtenerUsuarioPorId(id_usuario, models, parametrosUsuario, body))
+  .then(respuesta => {
+    if (respuesta && respuesta.estado === estadoValido) {
+      usuarioAEnviar = respuesta;
+      return respuesta;
+    } else {
+      return null;
+    }
+  }).then(respuesta => {
+    if (respuesta) {
+      const parametros = {
+        where: {
+          nombre: nombrePlantilla,
+          estado: ESTADO_ACTIVO,
+        },
+        attributes: ['remitente', 'origen', 'asunto', ['contenido', 'mensaje']],
+      };
+      return plantillaBL.obtenerPlantilla(parametros, models)
+    } else {
+      return null;
+    }
+  }).then(respuesta => {
+    if (respuesta) {
+      respuesta.dataValues.modo = 'html';
+      respuesta.dataValues.correos = [usuarioAEnviar.email];
+      const data = cargarData(usuarioAEnviar, contrasenaEnviar);
+      console.log("ENTRA!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+      const template = handlebars.compile(respuesta.dataValues.mensaje);
+      respuesta.dataValues.mensaje = template(data);
+      models.notificaciones(respuesta.dataValues);
+      return respuesta;
+    } else {
+      throw new Error(`No se encuentra la plantilla de Registro de Usuarios`);
+    }
+  })
+  .then(respuesta => {
+    deferred.resolve(respuesta);
+  }).catch(error => deferred.reject(error));
 
-//   return deferred.promise;
-// }
+  return deferred.promise;
+}
 
-// const cargarDataRegistro = function (usuarioAEnviar, contrasenaEnviar) {
-//   const data = {
-//     nombre: (`${usuarioAEnviar.persona.nombres} ${usuarioAEnviar.persona.primer_apellido} ${usuarioAEnviar.persona.segundo_apellido}`).trim(),
-//     usuario: usuarioAEnviar.usuario,
-//     contrasena: contrasenaEnviar,
-//     urlSistemaActivacion: `${config.app.urlActivacion}?codigo=${contrasenaEnviar}&usuario=${usuarioAEnviar.usuario}`,
-//     urlSistema: `${config.app.urlLoginAdmin}`,
-//   };
-//   return data;
-// }
+const cargarDataRegistro = function (usuarioAEnviar, contrasenaEnviar) {
+  const data = {
+    nombre: (`${usuarioAEnviar.persona.nombres} ${usuarioAEnviar.persona.primer_apellido} ${usuarioAEnviar.persona.segundo_apellido}`).trim(),
+    usuario: usuarioAEnviar.usuario,
+    contrasena: contrasenaEnviar,
+    urlSistemaActivacion: `${config.app.urlActivacion}?codigo=${contrasenaEnviar}&usuario=${usuarioAEnviar.usuario}`,
+    urlSistema: `${config.app.urlLoginAdmin}`,
+  };
+  return data;
+}
 
 // const cargarDataRecuperar = function (usuarioAEnviar, contrasenaEnviar) {
 //   const data = {
@@ -721,7 +746,7 @@ const crearCargo = (body, app, callback) => {
 
 
 module.exports = {
-  // crearUsuario,
+  crearUsuario,
   modificarUsuario,
   listarUsuarios,
   obtenerUsuario,
