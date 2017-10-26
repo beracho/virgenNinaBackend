@@ -1,0 +1,146 @@
+{
+  "development": {
+    "urlNotificacionCorreo": "",
+    "urlNotificacionSms": "",
+    "urlSistema": "http://localhost:8080",
+    "urlLoginAdmin": "http://localhost:8080/#!/loginAdmin",
+    "urlActivacion": "http://localhost:8080/#!/confirmarCuenta",
+    "urlRecuperar": "http://localhost:8080/#!/restaurar",
+    "rutaInscripcion": "/inscripcion",
+    "urlLogoMinisterio": "http://localhost:4000/assets/logo_mincom.png",
+    "rutaCertficado": "http://localhost:8080/#!/verificacion?codigo=",
+    "mapboxToken": "pk.eyJ1Ijoicm95MjM0IiwiYSI6ImNqNDVtY25hdjFyZG8zM3BhMnBwaDhkOHQifQ.0wfGth4IjfCtnwE1X1_t9w",
+    "correo": {
+      "origen": "virgenniña@epdb.edu.bo",
+      "host": "localhost",
+      "port": 25,
+      "tls": {
+          "rejectUnauthorized": false
+      }
+    },
+    "hosts":
+    {
+        "ruta_rest_backend":"http://[host rest backend]"
+    },
+    "directorios": {
+      "ruta_probolivia": "[ruta_raiz]/uploads/probolivia/",
+      "ruta_csv": "[ruta_raiz]/uploads/probolivia/csv/"
+    },
+    "servicio_segip": {
+      "host": "http://test.local.agetic.gob.bo/kong/fake",
+      "token": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiI1NTg0NWE1Y2YxYWU0NjI3OTY4ZGI4YTU0ZWQ5MTJjOCJ9.N0Gj22UUh-G8YXPbOtw0kGDkwbWRDw2WjiD3uCL_ek4",
+      "endpoint_estado": "/segip/v2/status/",
+      "endpoint_consumo": "/segip/v2/personas/",
+      "timeout": 10000
+    },
+    "sin":
+    {
+        "jwt": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJjZTY5Y2IyYWIyN2I0ODE1OGU1MWQwYTI3Y2ZmMzA3NCJ9.JfWaFKU4SmsI7aSFIA9UsXdiRyLDphE6p5vMWgfbGUs",
+        "url_status": "http://test.local.agetic.gob.bo/kong/fake/impuestos/v1/status",
+        "url": "http://test.local.agetic.gob.bo/kong/fake/impuestos/v1/login",
+        "timeout": 10000
+    },
+    "fundempresa": {
+        "jwt": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJjZTY5Y2IyYWIyN2I0ODE1OGU1MWQwYTI3Y2ZmMzA3NCJ9.JfWaFKU4SmsI7aSFIA9UsXdiRyLDphE6p5vMWgfbGUs",
+        "url_status": "http://test.local.agetic.gob.bo/kong/fake/fundempresa/v1/status",
+        "timeout": 10000,
+        "servicios": {
+            "obtener_matriculas": "http://test.local.agetic.gob.bo/kong/fake/fundempresa/v1/nit/",
+            "info_matricula": "http://test.local.agetic.gob.bo/kong/fake/fundempresa/v1/matriculas/",
+            "buscar_representante": "http://test.local.agetic.gob.bo/kong/fake/fundempresa/v1/matriculas/{num_matricula}/representantes/"
+        }
+    }
+  },
+
+  "test": {
+    "urlNotificacionCorreo": "",
+    "urlNotificacionSms": "",
+    "urlSistema": "http://localhost:8080",
+    "urlLoginAdmin": "http://localhost:8080/#!/loginAdmin",
+    "urlActivacion": "http://localhost:8080/#!/confirmarCuenta",
+    "urlRecuperar": "http://localhost:8080/#!/restaurar",
+    "rutaInscripcion": "/inscripcion",
+    "urlLogoMinisterio": "http://localhost:4000/assets/logo_mincom.png",
+    "rutaCertficado": "http://localhost:8080/#!/verificacion?codigo=",
+    "mapboxToken": "pk.eyJ1Ijoicm95MjM0IiwiYSI6ImNqNDVtY25hdjFyZG8zM3BhMnBwaDhkOHQifQ.0wfGth4IjfCtnwE1X1_t9w",
+    "hosts":
+    {
+        "ruta_rest_backend":"http://[host rest backend]"
+    },
+    "directorios": {
+      "ruta_probolivia": "[ruta_raiz]/uploads/probolivia/",
+      "ruta_csv": "[ruta_raiz]/uploads/probolivia/csv/"
+
+    },
+    "servicio_segip": {
+      "host": "http://test.local.agetic.gob.bo/kong/fake",
+      "token": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiI1NTg0NWE1Y2YxYWU0NjI3OTY4ZGI4YTU0ZWQ5MTJjOCJ9.N0Gj22UUh-G8YXPbOtw0kGDkwbWRDw2WjiD3uCL_ek4",
+      "endpoint_estado": "/segip/v2/status",
+      "endpoint_consumo": "/segip/v2/personas/",
+      "timeout": 10000
+    },
+    "sin":
+    {
+      "jwt": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJjZTY5Y2IyYWIyN2I0ODE1OGU1MWQwYTI3Y2ZmMzA3NCJ9.JfWaFKU4SmsI7aSFIA9UsXdiRyLDphE6p5vMWgfbGUs",
+      "url_status": "http://test.local.agetic.gob.bo/kong/fake/impuestos/v1/status",
+      "url": "http://test.local.agetic.gob.bo/kong/fake/impuestos/v1/login",
+      "timeout": 10000
+    },
+    "fundempresa": {
+      "jwt": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJjZTY5Y2IyYWIyN2I0ODE1OGU1MWQwYTI3Y2ZmMzA3NCJ9.JfWaFKU4SmsI7aSFIA9UsXdiRyLDphE6p5vMWgfbGUs",
+      "url_status": "http://test.local.agetic.gob.bo/kong/fake/fundempresa/v1/status",
+      "timeout": 10000,
+      "servicios": {
+        "obtener_matriculas": "http://test.local.agetic.gob.bo/kong/fake/fundempresa/v1/nit/",
+        "info_matricula": "http://test.local.agetic.gob.bo/kong/fake/fundempresa/v1/matriculas/",
+        "buscar_representante": "http://test.local.agetic.gob.bo/kong/fake/fundempresa/v1/matriculas/{num_matricula}/representantes/"
+      }
+    }
+  },
+
+  "production": {
+    "urlNotificacionCorreo": "",
+    "urlNotificacionSms": "",
+    "urlSistema": "http://localhost:8080",
+    "urlLoginAdmin": "http://localhost:8080/#!/loginAdmin",
+    "urlActivacion": "http://localhost:8080/#!/confirmarCuenta",
+    "urlRecuperar": "http://localhost:8080/#!/restaurar",
+    "rutaInscripcion": "/inscripcion",
+    "urlLogoMinisterio": "http://localhost:4000/assets/logo_mincom.png",
+    "rutaCertficado": "http://localhost:8080/#!/verificacion?codigo=",
+    "mapboxToken": "pk.eyJ1Ijoicm95MjM0IiwiYSI6ImNqNDVtY25hdjFyZG8zM3BhMnBwaDhkOHQifQ.0wfGth4IjfCtnwE1X1_t9w",
+    "hosts":
+    {
+        "ruta_rest_backend":"http://[host rest backend]"
+    },
+    "directorios": {
+      "ruta_probolivia": "[ruta_raiz]/uploads/probolivia/",
+      "ruta_csv": "[ruta_raiz]/uploads/probolivia/csv/"
+
+    },
+    "servicio_segip": {
+      "host": "http://test.local.agetic.gob.bo/kong/fake",
+      "token": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiI1NTg0NWE1Y2YxYWU0NjI3OTY4ZGI4YTU0ZWQ5MTJjOCJ9.N0Gj22UUh-G8YXPbOtw0kGDkwbWRDw2WjiD3uCL_ek4",
+      "endpoint_estado": "/segip/v2/status",
+      "endpoint_consumo": "/segip/v2/personas/",
+      "timeout": 10000
+    },
+        "sin":
+    {
+      "jwt": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJjZTY5Y2IyYWIyN2I0ODE1OGU1MWQwYTI3Y2ZmMzA3NCJ9.JfWaFKU4SmsI7aSFIA9UsXdiRyLDphE6p5vMWgfbGUs",
+      "url_status": "http://test.local.agetic.gob.bo/kong/fake/impuestos/v1/status",
+      "url": "http://test.local.agetic.gob.bo/kong/fake/impuestos/v1/login",
+      "timeout": 10000
+    },
+    "fundempresa": {
+      "jwt": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJjZTY5Y2IyYWIyN2I0ODE1OGU1MWQwYTI3Y2ZmMzA3NCJ9.JfWaFKU4SmsI7aSFIA9UsXdiRyLDphE6p5vMWgfbGUs",
+      "url_status": "http://test.local.agetic.gob.bo/kong/fake/fundempresa/v1/status",
+      "timeout": 10000,
+      "servicios": {
+        "obtener_matriculas": "http://test.local.agetic.gob.bo/kong/fake/fundempresa/v1/nit/",
+        "info_matricula": "http://test.local.agetic.gob.bo/kong/fake/fundempresa/v1/matriculas/",
+        "buscar_representante": "http://test.local.agetic.gob.bo/kong/fake/fundempresa/v1/matriculas/{num_matricula}/representantes/"
+      }
+    }
+  }
+}

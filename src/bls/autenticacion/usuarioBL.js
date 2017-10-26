@@ -5,12 +5,12 @@
 const dao = require('../../dao/dao');
 const Q = require('q');
 const personaBL = require('./personaBL');
-// const plantillaBL = require('../parametros/plantillaBL');
+const plantillaBL = require('../parametros/plantillaBL');
 const usuario_rolBL = require('./usuario_rolBL');
 // const serviciosWebBL = require('../serviciosWeb/serviciosWebBL');
 const autenticacionBL = require('./autenticacionBL');
 const handlebars = require('handlebars');
-// const config = require('konfig')();
+const config = require('konfig')();
 const util = require('../../libs/util');
 import moment from 'moment';
 import crypto from 'crypto';
@@ -21,10 +21,11 @@ const crearUsuario = (body, models) => {
   //forma usuario
   let nombre_usuario = "";
   if (body.papellido == undefined){
-    nombre_usuario = toLowerCase(body.nombres.trim().charAt(0)+body.sapellido);
+    nombre_usuario = body.nombres.trim().charAt(0)+body.sapellido;
   } else {
     nombre_usuario = body.nombres.trim().charAt(0)+body.papellido;
   }
+  nombre_usuario = nombre_usuario.toLowerCase();
   //Crea objetos
   const usuarioObj = {
     usuario: nombre_usuario,
@@ -60,7 +61,7 @@ const crearUsuario = (body, models) => {
       return usuario_rolBL.registrarUsuarioRol(respuesta.id_usuario, usuarioObj.fid_rol, body, models, transaccion)
     })
     .then(respuesta => transaccion.commit() )
-    // .then(respuesta => notificarEvento(usuarioGuardado.id_usuario, models, body, PLANTILLA_USUARIO_REGISTRO, ESTADO_PENDIENTE, cargarDataRegistro) )
+    .then(respuesta => notificarEvento(usuarioGuardado.id_usuario, models, body, PLANTILLA_USUARIO_REGISTRO, ESTADO_PENDIENTE, cargarDataRegistro) )
     .then(respuesta => {
       delete usuarioGuardado.dataValues.contrasena;
       deferred.resolve(usuarioGuardado);
@@ -451,7 +452,7 @@ function notificarEvento(id_usuario, models, body, plantilla, estadoValido, carg
       respuesta.dataValues.modo = 'html';
       respuesta.dataValues.correos = [usuarioAEnviar.email];
       const data = cargarData(usuarioAEnviar, contrasenaEnviar);
-      console.log("ENTRA!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+      console.log(data);
       const template = handlebars.compile(respuesta.dataValues.mensaje);
       respuesta.dataValues.mensaje = template(data);
       models.notificaciones(respuesta.dataValues);

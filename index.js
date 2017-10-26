@@ -11,8 +11,8 @@ consign()
   .include('src/config/config.js')
   // carga las utilidades necesarias
   .then('src/libs/util.js')
-  // // carga el módulo de notificaciones
-  // .then('src/libs/notificaciones.js')
+  // carga el módulo de notificaciones
+  .then('src/libs/notificaciones.js')
   //cargamos los handlers para peticiones personalizado
   .then('src/libs/handlers.js')
   //carga el modulo de sequelize para que tambien cargue los modelos
