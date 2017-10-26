@@ -27,10 +27,6 @@ module.exports = app => {
         html: cuerpoPeticion.modo==='html'||cuerpoPeticion.modo===null||cuerpoPeticion.modo===undefined? cuerpoPeticion.mensaje:undefined,
         attachments: cuerpoPeticion.adjuntos?cuerpoPeticion.adjuntos:null
     };
-    console.log("111111111111111111111111111111111111111111");
-    console.log(opciones);
-    console.log("222222222222222222222222222222222222222222");
-    console.log(transporter);
     transporter.sendMail(opciones, function (error, info) {
       if(error === null)
       {
@@ -38,8 +34,6 @@ module.exports = app => {
       }
       else
       {
-        console.log("--------_______________----------------");
-        console.log(error);
         if(error.code === "UNABLE_TO_VERIFY_LEAF_SIGNATURE")
           resolve(error);
         else

@@ -20,11 +20,13 @@ module.exports = (sequelize, DataType) => {
       type: DataType.STRING(100),
       xlabel: 'Nombre de usuario',
       allowNull: false,
+      unique: true,
     },
     email: {
       type: DataType.STRING(100),
       xlabel: 'Correo electrónico',
       allowNull: true,
+      unique: true,
       validate: {
         isEmail: {args: true, msg: "El campo 'Correo Electrónico' no tiene el formato correcto"},
         len: {args: [3, 100], msg: "El campo 'Correo Electrónico' permite un mínimo de 3 caracteres y un máximo de 100 caracteres"},

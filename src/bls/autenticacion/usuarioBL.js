@@ -17,7 +17,7 @@ import crypto from 'crypto';
 
 const crearUsuario = (body, models) => {
   const deferred = Q.defer();
-
+  
   //forma usuario
   let nombre_usuario = "";
   if (body.papellido == undefined){
@@ -55,7 +55,10 @@ const crearUsuario = (body, models) => {
       usuarioObj.fid_persona = respuesta.id_persona;
       return validarUsuarioCrear(usuarioObj, body, models)
     })
-    .then(respuesta => dao.crearRegistro(models.usuario, respuesta, false, transaccion))
+    .then(respuesta => {
+      respuesta.estado = "PENDIENTE";
+      return dao.crearRegistro(models.usuario, respuesta, false, transaccion)
+    })
     .then(respuesta => {
       usuarioGuardado = respuesta;
       return usuario_rolBL.registrarUsuarioRol(respuesta.id_usuario, usuarioObj.fid_rol, body, models, transaccion)
@@ -305,44 +308,44 @@ const obtenerUsuario = (parametros, models) => {
   return deferred.promise;
 };
 
-// const activarUsuario = (body, models) => {
-//   const deferred = Q.defer();
-//   const fecha = new Date();
-//   const parametros = {
-//     where: {
-//       usuario: body.usuario,
-//       codigo_contrasena: body.codigo,
-//       $or: [{
-//         fecha_expiracion: {
-//           $gt: fecha,
-//         },
-//       }, {
-//         estado: {
-//           $eq: 'PENDIENTE',
-//         },
-//       },
-//     ],
-//     },
-//   };
-//   obtenerUsuario(parametros, models)
-//   .then(result => {
-//     if (result) {
-//       if (body.contrasena.length < 8) {
-//         throw new Error('La contraseña debe contar con al menos 8 caracteres.');
-//       }
-//       const usuario = JSON.parse(JSON.stringify(result.dataValues));
-//       usuario.estado = ESTADO_ACTIVO;
-//       usuario.contrasena = body.contrasena;
-//       usuario.codigo_contrasena = null;
-//       usuario.fecha_expiracion = null;
-//       return result.updateAttributes(usuario).then((usuario));
-//     } else {
-//       throw new Error("No se ha encontrado el usuario enviado. Es posible que el Código sea incorrecto o haya expirado.");
-//     }
-//   }).then(result => deferred.resolve({email: result.email})
-//   ).catch(error => deferred.reject(error));
-//   return deferred.promise;
-// };
+const activarUsuario = (body, models) => {
+  const deferred = Q.defer();
+  const fecha = new Date();
+  const parametros = {
+    where: {
+      usuario: body.usuario,
+      codigo_contrasena: body.codigo,
+      $or: [{
+        fecha_expiracion: {
+          $gt: fecha,
+        },
+      }, {
+        estado: {
+          $eq: 'PENDIENTE',
+        },
+      },
+    ],
+    },
+  };
+  obtenerUsuario(parametros, models)
+  .then(result => {
+    if (result) {
+      if (body.contrasena.length < 8) {
+        throw new Error('La contraseña debe contar con al menos 8 caracteres.');
+      }
+      const usuario = JSON.parse(JSON.stringify(result.dataValues));
+      usuario.estado = ESTADO_ACTIVO;
+      usuario.contrasena = body.contrasena;
+      usuario.codigo_contrasena = null;
+      usuario.fecha_expiracion = null;
+      return result.updateAttributes(usuario).then((usuario));
+    } else {
+      throw new Error("No se ha encontrado el usuario enviado. Es posible que el Código sea incorrecto o haya expirado.");
+    }
+  }).then(result => deferred.resolve({email: result.email})
+  ).catch(error => deferred.reject(error));
+  return deferred.promise;
+};
 
 const validarUsuarioCrear = (usuarioObj, body, models) => {
   const deferred = Q.defer();
@@ -752,7 +755,7 @@ module.exports = {
   listarUsuarios,
   obtenerUsuario,
   // obtenerUsuarioPorId,
-  // activarUsuario,
+  activarUsuario,
   // reenviarActivacion,
   // cambiarContrasena,
   // recuperarCuenta,

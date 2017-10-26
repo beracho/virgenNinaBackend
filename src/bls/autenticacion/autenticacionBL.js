@@ -147,6 +147,8 @@ const obtenerDatos = (cuerpoObj, app) => {
   const contrasena = cuerpoObj.contrasena;
   const usuario_p = cuerpoObj.usuario;
   let usuario = {};
+  console.log("------____________-------------");
+  console.log(cuerpoObj);
 
   const objParametros = {
     where: {
@@ -172,6 +174,8 @@ const obtenerDatos = (cuerpoObj, app) => {
   };
   dao.obtenerRegistro(models.usuario, objParametros)
   .then(user => {
+    console.log("------____________-------------");
+    console.log(user);
     if (user && user.id_usuario) {
       usuario = user;
       return user;

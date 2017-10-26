@@ -11,11 +11,16 @@
     "rutaCertficado": "http://localhost:8080/#!/verificacion?codigo=",
     "mapboxToken": "pk.eyJ1Ijoicm95MjM0IiwiYSI6ImNqNDVtY25hdjFyZG8zM3BhMnBwaDhkOHQifQ.0wfGth4IjfCtnwE1X1_t9w",
     "correo": {
-      "origen": "virgenniña@epdb.edu.bo",
-      "host": "localhost",
-      "port": 25,
+      "origen": "MinisterioComunicacion@agetic.gob.bo",
+      "host": "smtp.agetic.gob.bo",
+      "port": 587,
+      "secure": false,
       "tls": {
-          "rejectUnauthorized": false
+        "rejectUnauthorized": false
+      },
+      "auth": {
+        "user": "[correoBuenaOnda@niñamail.com]",
+        "pass": "[contraseñaMuySegura]"
       }
     },
     "hosts":
