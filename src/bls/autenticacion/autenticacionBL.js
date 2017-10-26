@@ -124,6 +124,8 @@ const autenticar = (cuerpoObj, app) => {
     deferred.reject(new Error('Los datos de Usuario y Contraseña son obligatorios.'));
     return deferred.promise;
   }
+  const password = crypto.createHash("sha256").update(cuerpoObj.contrasena).digest("hex");
+  cuerpoObj.contrasena = password;
   usuarioBL.verificarExistencia(false, cuerpoObj, app.src.db.models) // verificamos que exista el usuario. El parámetro false indica que sólo verificará y no arrojará un error en caso de encontrar la existencia
   .then(respuestaUsuarioExiste => {
     if (respuestaUsuarioExiste) {
@@ -147,8 +149,6 @@ const obtenerDatos = (cuerpoObj, app) => {
   const contrasena = cuerpoObj.contrasena;
   const usuario_p = cuerpoObj.usuario;
   let usuario = {};
-  console.log("------____________-------------");
-  console.log(cuerpoObj);
 
   const objParametros = {
     where: {
@@ -174,8 +174,6 @@ const obtenerDatos = (cuerpoObj, app) => {
   };
   dao.obtenerRegistro(models.usuario, objParametros)
   .then(user => {
-    console.log("------____________-------------");
-    console.log(user);
     if (user && user.id_usuario) {
       usuario = user;
       return user;
