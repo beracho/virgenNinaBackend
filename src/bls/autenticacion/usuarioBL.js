@@ -130,19 +130,19 @@ const modificarUsuario = (id, body, models) => {
   return deferred.promise;
 };
 
-// const reenviarActivacion = (body, models) => {
-//   const deferred = Q.defer();
-//   const usuario = body.usuario;
-//   if (usuario && usuario.id_usuario) {
-//     const contrasenaEnviar = `${Math.trunc(Math.random() * 99999999).toString()}${moment(new Date())}`;
-//     notificarEvento(usuario.id_usuario, models, body, PLANTILLA_USUARIO_REGISTRO, ESTADO_PENDIENTE, cargarDataRegistro)
-//     .then(respuesta => deferred.resolve(respuesta))
-//     .catch(error => deferred.reject(error));
-//   } else {
-//     deferred.reject(new Error("No se ha encontrado el usuario correspondiente."));
-//   }
-//   return deferred.promise;
-// }
+const reenviarActivacion = (body, models) => {
+  const deferred = Q.defer();
+  const usuario = body.usuario;
+  if (usuario && usuario.id_usuario) {
+    const contrasenaEnviar = `${Math.trunc(Math.random() * 99999999).toString()}${moment(new Date())}`;
+    notificarEvento(usuario.id_usuario, models, body, PLANTILLA_USUARIO_REGISTRO, ESTADO_PENDIENTE, cargarDataRegistro)
+    .then(respuesta => deferred.resolve(respuesta))
+    .catch(error => deferred.reject(error));
+  } else {
+    deferred.reject(new Error("No se ha encontrado el usuario correspondiente."));
+  }
+  return deferred.promise;
+}
 
 // const cambiarContrasena = (body, models) => {
 //   const deferred = Q.defer();
@@ -756,7 +756,7 @@ module.exports = {
   obtenerUsuario,
   // obtenerUsuarioPorId,
   activarUsuario,
-  // reenviarActivacion,
+  reenviarActivacion,
   // cambiarContrasena,
   // recuperarCuenta,
   // confirmarUsuario,

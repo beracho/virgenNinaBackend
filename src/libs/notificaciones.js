@@ -34,6 +34,8 @@ module.exports = app => {
       }
       else
       {
+        console.log("------____________-------------");
+        console.log(error);
         if(error.code === "UNABLE_TO_VERIFY_LEAF_SIGNATURE")
           resolve(error);
         else
