@@ -34,10 +34,10 @@ module.exports = {
     // ];
     // roles_menus_array = roles_menus_array.concat(obj);
 
-    // // UNIDAD PRODUCTIVA
-    // obj = [
-    //   { fid_menu: 6, fid_rol: 4, method_get: true, method_post: true, method_put: true, method_delete: false, estado: 'ACTIVO', _usuario_creacion:1, _fecha_creacion: new Date(), _fecha_modificacion: new Date() },
-    //   { fid_menu: 7, fid_rol: 4, method_get: true, method_post: true, method_put: true, method_delete: false, estado: 'ACTIVO', _usuario_creacion:1, _fecha_creacion: new Date(), _fecha_modificacion: new Date() },
+    // // INSCRIPCIONES
+    obj = [
+      { fid_menu: 6, fid_rol: 3, method_get: true, method_post: true, method_put: true, method_delete: false, estado: 'ACTIVO', _usuario_creacion:1, _fecha_creacion: new Date(), _fecha_modificacion: new Date() },
+      { fid_menu: 7, fid_rol: 3, method_get: true, method_post: true, method_put: true, method_delete: false, estado: 'ACTIVO', _usuario_creacion:1, _fecha_creacion: new Date(), _fecha_modificacion: new Date() },
     //   { fid_menu: 11, fid_rol: 4, method_get: true, method_post: true, method_put: true, method_delete: false, estado: 'ACTIVO', _usuario_creacion:1, _fecha_creacion: new Date(), _fecha_modificacion: new Date() },
     //   { fid_menu: 12, fid_rol: 4, method_get: true, method_post: true, method_put: true, method_delete: false, estado: 'ACTIVO', _usuario_creacion:1, _fecha_creacion: new Date(), _fecha_modificacion: new Date() },
     //   { fid_menu: 18, fid_rol: 4, method_get: true, method_post: true, method_put: true, method_delete: true, estado: 'ACTIVO', _usuario_creacion:1, _fecha_creacion: new Date(), _fecha_modificacion: new Date() },
@@ -45,8 +45,8 @@ module.exports = {
       
     //   { fid_menu: 23, fid_rol: 4, method_get: true, method_post: true, method_put: true, method_delete: true, estado: 'ACTIVO', _usuario_creacion:1, _fecha_creacion: new Date(), _fecha_modificacion: new Date() },
     //   { fid_menu: 24, fid_rol: 4, method_get: true, method_post: true, method_put: true, method_delete: true, estado: 'ACTIVO', _usuario_creacion:1, _fecha_creacion: new Date(), _fecha_modificacion: new Date() },
-    // ];
-    // roles_menus_array = roles_menus_array.concat(obj);
+    ];
+    roles_menus_array = roles_menus_array.concat(obj);
 
     // // TECNICO REGIONAL
     // obj = [
