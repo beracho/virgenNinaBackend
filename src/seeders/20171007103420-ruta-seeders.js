@@ -69,8 +69,8 @@ module.exports = {
         _fecha_modificacion: new Date(),
       }, {
         //6
-        ruta: '/api/v1/persona/servicio/segip',
-        descripcion: 'Servicio para buscar una persona en SEGIP.',
+        ruta: '/api/v1/codigoDeptos',
+        descripcion: 'Devuelve abreviaturas de departamentos.',
         method_get: true,
         method_post: false,
         method_put: false,

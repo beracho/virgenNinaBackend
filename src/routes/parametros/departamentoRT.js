@@ -7,7 +7,7 @@ module.exports = app => {
   models.sequelize = app.src.db.sequelize;
   models.notificaciones = app.src.libs.notificaciones;
 
-  app.route("/codigoDeptos")
+  app.route("/api/v1/codigoDeptos")
     .get((req, res) => {
       departamentoBL.listarDepartamentos(req.query, req.body, models)
         .then(respuesta => Util.mensajeExito(res, "Obtención de datos exitosa.", 200, respuesta))
