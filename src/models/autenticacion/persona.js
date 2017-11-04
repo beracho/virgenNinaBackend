@@ -46,15 +46,6 @@ module.exports = (sequelize, DataType) => {
         len: {args: [0, 20], msg: "El campo 'Complemento del documento' permite un mínimo de 0 caracteres y un máximo de 20 caracteres"},
       },
     },
-    rude: {
-      type: DataType.STRING(20),
-      xlabel: 'RUDE',
-      allowNull: true,
-      validate: {
-        len: {args: [3, 25], msg: "El campo 'Documento de identidad' permite un mínimo de 3 caracteres y un máximo de 25 caracteres"},
-        is: {args: /^[0-9]+$/i, msg: "El campo 'Documento de identidad' permite sólo números."},
-      },
-    },
     carnet_discapacidad: {
       type: DataType.STRING(20),
       xlabel: 'Carnet de discapacidad',
@@ -128,15 +119,6 @@ module.exports = (sequelize, DataType) => {
         isInt: {args: [true], msg: "El campo 'Teléfono' sólo permite valores numéricos."},
       },
     },
-    estado: {
-      type: DataType.STRING(30),
-      xlabel: 'Estado',
-      allowNull: false,
-      defaultValue: 'ACTIVO',
-      validate: {
-        isIn: {args: [['ACTIVO', 'INACTIVO']], msg: "El campo estado sólo permite valores: ACTIVO o INACTIVO."},
-      },
-    },
     tipo_documento: {
       type: DataType.ENUM,
       xlabel: 'Tipo de Documento',
@@ -180,6 +162,7 @@ module.exports = (sequelize, DataType) => {
       // Creando asociaciones para la entidad
       associate: (models) => {
         persona.hasMany(models.usuario, {as: 'usuarios', foreignKey: {name: 'fid_persona', allowNull: true}});
+        // persona.hasMany(models.persona, {as: 'persona', foreignKey: {name: 'fid_persona', allowNull: true}});
       },
     },
     tableName: 'persona',

@@ -156,7 +156,7 @@ module.exports = {
         _fecha_modificacion: new Date(),
       }, {
         //13
-        ruta: '/api/v1/certificaciones/:id/actividades_economicas',
+        ruta: '/api/v1/registros/:id/actividades_economicas',
         descripcion: 'Acciones sobre actividades económicas.',
         method_get: true,
         method_post: true,
@@ -168,7 +168,7 @@ module.exports = {
         _fecha_modificacion: new Date(),
       }, {
         //14
-        ruta: '/api/v1/certificaciones/:id/actividades_economicas/:id',
+        ruta: '/api/v1/registros/:id/actividades_economicas/:id',
         descripcion: 'Acciones sobre una determinada actividad económica.',
         method_get: true,
         method_post: false,
@@ -180,7 +180,7 @@ module.exports = {
         _fecha_modificacion: new Date(),
       }, {
         //15
-        ruta: '/api/v1/certificaciones/:id/actividades_economicas/:id/caeb',
+        ruta: '/api/v1/registros/:id/actividades_economicas/:id/caeb',
         descripcion: 'Servicio para elegir el identificador de un caeb de una determinada actividad económica.',
         method_get: false,
         method_post: false,
@@ -192,7 +192,7 @@ module.exports = {
         _fecha_modificacion: new Date(),
       }, {
         //16
-        ruta: '/api/v1/certificaciones/:id/activos_productivos',
+        ruta: '/api/v1/registros/:id/activos_productivos',
         descripcion: 'Acciones sobre activos productivos.',
         method_get: true,
         method_post: true,
@@ -204,7 +204,7 @@ module.exports = {
         _fecha_modificacion: new Date(),
       }, {
         //17
-        ruta: '/api/v1/certificaciones/:id/activos_productivos/:id',
+        ruta: '/api/v1/registros/:id/activos_productivos/:id',
         descripcion: 'Acciones sobre un determinado activo productivo.',
         method_get: true,
         method_post: false,
@@ -216,7 +216,7 @@ module.exports = {
         _fecha_modificacion: new Date(),
       }, {
         //18
-        ruta: '/api/v1/certificaciones',
+        ruta: '/api/v1/registros',
         descripcion: 'Acciones sobre las declaraciones juradas.',
         method_get: true,
         method_post: true,
@@ -228,7 +228,7 @@ module.exports = {
         _fecha_modificacion: new Date(),
       }, {
         //19
-        ruta: '/api/v1/certificaciones/:id',
+        ruta: '/api/v1/registros/:id',
         descripcion: 'Acciones sobre una determinada certificación.',
         method_get: true,
         method_post: false,
@@ -240,7 +240,7 @@ module.exports = {
         _fecha_modificacion: new Date(),
       }, {
         //20
-        ruta: '/api/v1/certificaciones/:id/enviar',
+        ruta: '/api/v1/registros/:id/enviar',
         descripcion: 'Servicio para enviar un certificado.',
         method_get: false,
         method_post: false,
@@ -252,7 +252,7 @@ module.exports = {
         _fecha_modificacion: new Date(),
       }, {
         //21
-        ruta: '/api/v1/certificaciones/:id/observar',
+        ruta: '/api/v1/registros/:id/observar',
         descripcion: 'Servicio para observar un certificado.',
         method_get: false,
         method_post: false,
@@ -264,7 +264,7 @@ module.exports = {
         _fecha_modificacion: new Date(),
       }, {
         //22
-        ruta: '/api/v1/certificaciones/:id/aprobar',
+        ruta: '/api/v1/registros/:id/aprobar',
         descripcion: 'Servicio para aprobar un certificado.',
         method_get: false,
         method_post: false,
@@ -276,7 +276,7 @@ module.exports = {
         _fecha_modificacion: new Date(),
       }, {
         //23
-        ruta: '/api/v1/certificaciones/generar_certificado/:id',
+        ruta: '/api/v1/registros/generar_certificado/:id',
         descripcion: 'Servicio para obtener un certificado.',
         method_get: false,
         method_post: true,
@@ -288,7 +288,7 @@ module.exports = {
         _fecha_modificacion: new Date(),
       }, {
         //24
-        ruta: '/api/v1/certificaciones/:id/reporte',
+        ruta: '/api/v1/registros/:id/reporte',
         descripcion: 'Servicio para obtener el reporte de una determinada certificación.',
         method_get: false,
         method_post: true,
@@ -300,7 +300,7 @@ module.exports = {
         _fecha_modificacion: new Date(),
       }, {
         //25
-        ruta: '/certificaciones/generar_certificado',
+        ruta: '/registros/generar_certificado',
         descripcion: 'Servicio para generar un certificado QR.',
         method_get: true,
         method_post: false,
@@ -336,7 +336,7 @@ module.exports = {
         _fecha_modificacion: new Date(),
       }, {
         //28
-        ruta: '/api/v1/certificaciones/:id/pagos',
+        ruta: '/api/v1/registros/:id/pagos',
         descripcion: 'Acciones sobre pagos.',
         method_get: true,
         method_post: true,
@@ -348,7 +348,7 @@ module.exports = {
         _fecha_modificacion: new Date(),
       }, {
         //29
-        ruta: '/api/v1/certificaciones/:id/pagos/:id',
+        ruta: '/api/v1/registros/:id/pagos/:id',
         descripcion: 'Acciones sobre un determinado pago.',
         method_get: true,
         method_post: false,
@@ -360,7 +360,7 @@ module.exports = {
         _fecha_modificacion: new Date(),
       }, {
         //30
-        ruta: '/api/v1/certificaciones/:id/ubicaciones',
+        ruta: '/api/v1/registros/:id/ubicaciones',
         descripcion: 'Acciones sobre ubicaciones.',
         method_get: true,
         method_post: true,
@@ -372,7 +372,7 @@ module.exports = {
         _fecha_modificacion: new Date(),
       }, {
         //31
-        ruta: '/api/v1/certificaciones/:id/ubicaciones/:id',
+        ruta: '/api/v1/registros/:id/ubicaciones/:id',
         descripcion: 'Acciones sobre una determinada ubicación.',
         method_get: true,
         method_post: false,
@@ -611,7 +611,7 @@ module.exports = {
         _fecha_creacion: new Date(),
         _fecha_modificacion: new Date(),
       }, {// PROM 51 up
-        ruta: '/api/v1/certificacion_promueve/up_certificadas/:id',
+        ruta: '/api/v1/registro_promueve/up_certificadas/:id',
         descripcion: 'Crear un route para seleccionar todas las unidades productivas con certificación proBolivia y estado de certificado vigente.',
         method_get: true,
         method_post: false,
@@ -622,7 +622,7 @@ module.exports = {
         _fecha_creacion: new Date(),
         _fecha_modificacion: new Date(),
       }, {// PROM 52 up
-        ruta: '/api/v1/certificacion_promueve/:id/producto',
+        ruta: '/api/v1/registro_promueve/:id/producto',
         descripcion: 'crear un producto de acuerdo al tipo de trámite Bien productivo o Producto de costo bruto',
         method_get: false,
         method_post: true,
@@ -634,7 +634,7 @@ module.exports = {
         _fecha_modificacion: new Date(),
       },
       {// PROM 53 up
-        ruta: '/api/v1/certificacion_promueve/:id/producto/:id',
+        ruta: '/api/v1/registro_promueve/:id/producto/:id',
         descripcion: 'obtener un producto con sus bienes y depósitos más la información de la unida productiva.',
         method_get: true,
         method_post: false,
@@ -645,7 +645,7 @@ module.exports = {
         _fecha_creacion: new Date(),
         _fecha_modificacion: new Date(),
       }, {// PROM 54 up
-        ruta: '/api/v1/certificacion_promueve/:id/producto/:id/guardar-foto',
+        ruta: '/api/v1/registro_promueve/:id/producto/:id/guardar-foto',
         descripcion: 'Guardar o actualizar la imagen de un producto',
         method_get: false,
         method_post: true,
@@ -656,7 +656,7 @@ module.exports = {
         _fecha_creacion: new Date(),
         _fecha_modificacion: new Date(),
       }, {// PROM 55 up
-        ruta: '/api/v1/certificacion_promueve/:id/productos',
+        ruta: '/api/v1/registro_promueve/:id/productos',
         descripcion: 'obtener todos los productos registrados en una unidad productiva',
         method_get: true,
         method_post: false,
@@ -667,8 +667,8 @@ module.exports = {
         _fecha_creacion: new Date(),
         _fecha_modificacion: new Date(),
       }, {// PROM 56 tp
-        ruta: '/api/v1/certificacion_promueve/certificaciones/solicitudes',
-        descripcion: 'Obtener todas las solicitudes de producto para su certificacion',
+        ruta: '/api/v1/registro_promueve/registros/solicitudes',
+        descripcion: 'Obtener todas las solicitudes de producto para su registro',
         method_get: true,
         method_post: false,
         method_put: false,
@@ -678,7 +678,7 @@ module.exports = {
         _fecha_creacion: new Date(),
         _fecha_modificacion: new Date(),
       }, {// PROM 57 tp
-        ruta: '/api/v1/certificacion_promueve/:id/producto/evaluacion_solicitud',
+        ruta: '/api/v1/registro_promueve/:id/producto/evaluacion_solicitud',
         descripcion: 'Procesar una solicitud de aprobación y tomar en cuenta los siguientes casos',
         method_get: false,
         method_post: true,
@@ -701,8 +701,8 @@ module.exports = {
         _fecha_modificacion: new Date(),
       },
       {// PROM 59 tp
-        ruta: '/api/v1/certificacion_promueve/:id/certificacion/:id/ddjj_pdf',
-        descripcion: 'Obtener el PDF de la declaracion jurada del formulario del producto para la certificacion',
+        ruta: '/api/v1/registro_promueve/:id/registro/:id/ddjj_pdf',
+        descripcion: 'Obtener el PDF de la declaracion jurada del formulario del producto para la registro',
         method_get: false,
         method_post: true,
         method_put: false,
@@ -712,8 +712,8 @@ module.exports = {
         _fecha_creacion: new Date(),
         _fecha_modificacion: new Date(),
       }, {// PROM 60 tp
-        ruta: '/api/v1/certificacion_promueve/:id/producto/:id/enviar',
-        descripcion: 'Enviar una solitud de certificacion',
+        ruta: '/api/v1/registro_promueve/:id/producto/:id/enviar',
+        descripcion: 'Enviar una solitud de registro',
         method_get: false,
         method_post: false,
         method_put: true,
@@ -723,7 +723,7 @@ module.exports = {
         _fecha_creacion: new Date(),
         _fecha_modificacion: new Date(),
       }, {// PROM 61 up //aqui estaba como tp
-        ruta: '/api/v1/certificacion_promueve/:id/producto/:id/insumos',
+        ruta: '/api/v1/registro_promueve/:id/producto/:id/insumos',
         descripcion: 'guardar datos de insumos del producto',
         method_get: false,
         method_post: false,
@@ -734,7 +734,7 @@ module.exports = {
         _fecha_creacion: new Date(),
         _fecha_modificacion: new Date(),
       }, {// PROM 62 up
-        ruta: '/api/v1/certificacion_promueve/:id/producto/:id/pagos',
+        ruta: '/api/v1/registro_promueve/:id/producto/:id/pagos',
         descripcion: '',
         method_get: false,
         method_post: false,
@@ -745,8 +745,8 @@ module.exports = {
         _fecha_creacion: new Date(),
         _fecha_modificacion: new Date(),
       }, {// PROM 63 tp
-        ruta: '/api/v1/certificacion_promueve/:id/certificacion/:id/pdf',
-        descripcion: 'Obtener el certiticado en formato PDF del producto para la certificacion',
+        ruta: '/api/v1/registro_promueve/:id/registro/:id/pdf',
+        descripcion: 'Obtener el certiticado en formato PDF del producto para la registro',
         method_get: false,
         method_post: true,
         method_put: false,
@@ -759,7 +759,7 @@ module.exports = {
 
       {
         // 64
-        ruta: '/api/v1/certificaciones/:id/validar',
+        ruta: '/api/v1/registros/:id/validar',
         descripcion: 'Para validar la declaración jurada de PROBOLIVIA',
         method_get: false,
         method_post: true,
@@ -785,7 +785,7 @@ module.exports = {
       },
       {
         // 66
-        ruta: '/api/v1/certificaciones/:id/ddjj_servicios',
+        ruta: '/api/v1/registros/:id/ddjj_servicios',
         descripcion: 'Para obtener guardar servicios',
         method_get: true,
         method_post: true,
@@ -798,7 +798,7 @@ module.exports = {
       },
       {
         // 67
-        ruta: '/api/v1/certificaciones/:id/ddjj_servicios/:id',
+        ruta: '/api/v1/registros/:id/ddjj_servicios/:id',
         descripcion: 'Para obtener guardar servicios',
         method_get: false,
         method_post: false,
@@ -811,7 +811,7 @@ module.exports = {
       },
       {
         // 68 promueve ROL: unidad productiva
-        ruta: '/api/v1/certificacion_promueve/:id/certificacion/aprobados/:id',
+        ruta: '/api/v1/registro_promueve/:id/registro/aprobados/:id',
         descripcion: 'Para obtener guardar servicios',
         method_get: true,
         method_post: false,
@@ -824,8 +824,8 @@ module.exports = {
       },
       {
         // 69 promueve ROL: tecnico_promueve
-        ruta: '/api/v1/certificacion_promueve/:id/producto/:id/previsualizar_solicitud',
-        descripcion: 'Generar una vista de la certificacion',
+        ruta: '/api/v1/registro_promueve/:id/producto/:id/previsualizar_solicitud',
+        descripcion: 'Generar una vista de la registro',
         method_get: false,
         method_post: true,
         method_put: false,
@@ -837,7 +837,7 @@ module.exports = {
       },
       {
         // 70 promueve ROL: unidad productiva
-        ruta: '/api/v1/certificacion_promueve/tarifas',
+        ruta: '/api/v1/registro_promueve/tarifas',
         descripcion: 'Listar tarifas promueve',
         method_get: true,
         method_post: false,
@@ -850,8 +850,8 @@ module.exports = {
       },
       {
         // 71
-        ruta: '/api/v1/certificaciones/:id/notificar',
-        descripcion: 'Notificar las certificaciones',
+        ruta: '/api/v1/registros/:id/notificar',
+        descripcion: 'Notificar las registros',
         method_get: false,
         method_post: false,
         method_put: true,
@@ -863,8 +863,8 @@ module.exports = {
       },
       {
         // 72
-        ruta: '/api/v1/certificaciones/:id/pagar',
-        descripcion: 'Pagas las certificaciones',
+        ruta: '/api/v1/registros/:id/pagar',
+        descripcion: 'Pagas las registros',
         method_get: false,
         method_post: false,
         method_put: true,
@@ -875,7 +875,7 @@ module.exports = {
         _fecha_modificacion: new Date(),
       },{
         // 73 PROBOLIVIA
-        ruta: '/api/v1/certificaciones/:id/activos_productivos/importar',
+        ruta: '/api/v1/registros/:id/activos_productivos/importar',
         descripcion: 'Importar activos productivos',
         method_get: false,
         method_post: true,
@@ -899,7 +899,7 @@ module.exports = {
         _fecha_modificacion: new Date(),
       },{
         // 75 unidad productiva
-        ruta: '/api/v1/certificacion_promueve/:id/productos_aprobados',
+        ruta: '/api/v1/registro_promueve/:id/productos_aprobados',
         descripcion: 'Obtener todos los productos aprobados y vigentes. Retornar tambien el costo del tramite para la certificación',
         method_get: true,
         method_post: false,
@@ -911,8 +911,8 @@ module.exports = {
         _fecha_modificacion: new Date(),
       },{
         // 76 unidad productiva
-        ruta: '/api/v1/certificacion_promueve/:id/certificacion/enviar',
-        descripcion: 'Envia un lote de solitud de certificaciones',
+        ruta: '/api/v1/registro_promueve/:id/registro/enviar',
+        descripcion: 'Envia un lote de solitud de registros',
         method_get: false,
         method_post: true,
         method_put: false,
@@ -923,7 +923,7 @@ module.exports = {
         _fecha_modificacion: new Date(),
       },{
         // 77 tecnico promueve
-        ruta: '/api/v1/certificacion_promueve/certificaciones/impresiones',
+        ruta: '/api/v1/registro_promueve/registros/impresiones',
         descripcion: 'Obtener todas las solicitudes de impresion de certificados por unidad productiva',
         method_get: true,
         method_post: false,
@@ -935,7 +935,7 @@ module.exports = {
         _fecha_modificacion: new Date(),
       },{
         // 78
-        ruta: '/api/v1/certificaciones/mostrar_certificado/:id',
+        ruta: '/api/v1/registros/mostrar_certificado/:id',
         descripcion: 'Leer certificado',
         method_get: false,
         method_post: true,
@@ -947,7 +947,7 @@ module.exports = {
         _fecha_modificacion: new Date(),
       },{
         // 79
-        ruta: '/api/v1/certificaciones/mostrar_reporte/:id',
+        ruta: '/api/v1/registros/mostrar_reporte/:id',
         descripcion: 'Leer reporte',
         method_get: false,
         method_post: true,
@@ -959,7 +959,7 @@ module.exports = {
         _fecha_modificacion: new Date(),
       },{
         // 80 Promueve TECNICO_PROMUEVE
-        ruta: '/api/v1/certificacion_promueve/:id/producto/imprimir_certificado',
+        ruta: '/api/v1/registro_promueve/:id/producto/imprimir_certificado',
         descripcion: 'Genera el certificado para un producto',
         method_get: false,
         method_post: false,
@@ -971,7 +971,7 @@ module.exports = {
         _fecha_modificacion: new Date(),
       },{
         // 81 Promueve TECNICO_PROMUEVE
-        ruta: '/api/v1/certificacion_promueve/certificaciones/observados',
+        ruta: '/api/v1/registro_promueve/registros/observados',
         descripcion: 'Genera el certificado para un producto',
         method_get: true,
         method_post: false,
@@ -983,8 +983,8 @@ module.exports = {
         _fecha_modificacion: new Date(),
       },{
         // 82
-        ruta: '/api/v1/certificaciones/:id/duplicar',
-        descripcion: 'Duplicar certificacion',
+        ruta: '/api/v1/registros/:id/duplicar',
+        descripcion: 'Duplicar registro',
         method_get: false,
         method_post: true,
         method_put: false,
@@ -996,8 +996,8 @@ module.exports = {
       },
       {
         // 83
-        ruta: '/api/v1/certificaciones/:id/escala',
-        descripcion: 'Obtener escala certificacion',
+        ruta: '/api/v1/registros/:id/escala',
+        descripcion: 'Obtener escala registro',
         method_get: true,
         method_post: false,
         method_put: false,
@@ -1009,7 +1009,7 @@ module.exports = {
       },
       {
         // 84
-        ruta: '/api/v1/certificaciones/:id/duplicados',
+        ruta: '/api/v1/registros/:id/duplicados',
         descripcion: 'Aprobar duplicación',
         method_get: false,
         method_post: false,
@@ -1022,7 +1022,7 @@ module.exports = {
       },
       {
         // 85
-        ruta: '/api/v1/certificaciones/:id/duplicados/:id',
+        ruta: '/api/v1/registros/:id/duplicados/:id',
         descripcion: 'Obtener lote duplicación',
         method_get: true,
         method_post: false,
@@ -1035,7 +1035,7 @@ module.exports = {
       },
       {
         // 86 PROMUEVE
-        ruta: '/api/v1/certificacion_promueve/pagos/finalizar',
+        ruta: '/api/v1/registro_promueve/pagos/finalizar',
         descripcion: 'Registra y finaliza la facturación de un pago',
         method_get: false,
         method_post: false,
@@ -1178,7 +1178,7 @@ module.exports = {
       },
       {
         // 97 SELLO HECHO EN BOLIVIA - Unidad productiva
-        ruta: '/api/v1/certificacion_promueve/producto/:id',
+        ruta: '/api/v1/registro_promueve/producto/:id',
         descripcion: 'Eliminar una solicitud de producto de PROMUEVE',
         method_get: false,
         method_post: false,
@@ -1230,7 +1230,7 @@ module.exports = {
       },
       {
         // 101 unidad productiva, tecnico y director
-        ruta: '/api/v1/certificaciones/documento/:id',
+        ruta: '/api/v1/registros/documento/:id',
         descripcion: 'Obtiene el documento PDF',
         method_get: false,
         method_post: true,
@@ -1243,7 +1243,7 @@ module.exports = {
       },
       {
         // 102 PROMUEVE - Director
-        ruta: '/api/v1/certificacion_promueve/shb/firma/solicitudes',
+        ruta: '/api/v1/registro_promueve/shb/firma/solicitudes',
         descripcion: 'Listado de solicitudes pendientes para firma',
         method_get: true,
         method_post: false,
@@ -1256,7 +1256,7 @@ module.exports = {
       },
       {
         // 103 PROMUEVE - Director
-        ruta: '/api/v1/certificacion_promueve/shb/firma/documento/:id',
+        ruta: '/api/v1/registro_promueve/shb/firma/documento/:id',
         descripcion: 'Obtiene el documento a firmar en PDF',
         method_get: false,
         method_post: true,
@@ -1269,7 +1269,7 @@ module.exports = {
       },
       {
         // 104 PROMUEVE - Director
-        ruta: '/api/v1/certificacion_promueve/shb/firma/actualizar',
+        ruta: '/api/v1/registro_promueve/shb/firma/actualizar',
         descripcion: 'Actualiza el documento PDF con la firma contenida',
         method_get: false,
         method_post: true,
@@ -1321,7 +1321,7 @@ module.exports = {
       },
       {
         // 108 PROBOLIVIA - TODOS
-        ruta: '/api/v1/certificaciones/firma/:id',
+        ruta: '/api/v1/registros/firma/:id',
         descripcion: 'Obtiene los certificados de un PDF',
         method_get: true,
         method_post: false,
@@ -1334,7 +1334,7 @@ module.exports = {
       },
       {
         // 109 PROBOLIVIA - TODOS
-        ruta: '/api/v1/certificacion_promueve/producto/unidades_peso',
+        ruta: '/api/v1/registro_promueve/producto/unidades_peso',
         descripcion: 'Lista las unidades de peso',
         method_get: true,
         method_post: false,

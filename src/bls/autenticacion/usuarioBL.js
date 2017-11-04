@@ -240,7 +240,7 @@ const listarUsuarios = (query, body, models) => {
       as: 'rol',
       attributes: ['id_rol', 'nombre'],
     }],
-    where: {fid_rol: {$ne: ROL_UNIDAD_PRODUCTIVA}},
+    where: {fid_rol: {$ne: ROL_INSCRIPCION}},
   }];
   dao.listarRegistros(models.usuario, parametros, paginado)
   .then(respuesta => {
@@ -349,7 +349,7 @@ const activarUsuario = (body, models) => {
 
 const validarUsuarioCrear = (usuarioObj, body, models) => {
   const deferred = Q.defer();
-  // if (usuarioObj.fid_rol === ROL_UNIDAD_PRODUCTIVA) {
+  // if (usuarioObj.fid_rol === ROL_INSCRIPCION) {
   //   deferred.reject(new Error("No se puede crear usuarios con rol UNIDAD PRODUCTIVA a través del administrador del sistema."));
   //   return deferred.promise;
   // }
@@ -386,7 +386,7 @@ const validarUsuarioCrear = (usuarioObj, body, models) => {
         include:[{
           required: true,
           model: models.usuario_rol, as: 'usuarios_roles',
-          where: {fid_rol:{$ne: ROL_UNIDAD_PRODUCTIVA}},
+          where: {fid_rol:{$ne: ROL_INSCRIPCION}},
         }],
         attributes: ['id_usuario'],
       };
@@ -601,13 +601,31 @@ const verificarExistencia = (paraCrear, body, models) => {
 
 const verificarUsuario = (paraCrear, body, models) => {
   const deferred = Q.defer();
+  const Op = models.sequelize.options;
   if (util.isUndefined(body.usuario)) {
     deferred.reject(new Error('Solicitud incompleta: falta ingresar usuario'));
     return deferred.promise;
   }
   const parametros = {};
   parametros.where = {};
-  parametros.where = {usuario: body.usuario};
+  if (paraCrear) {
+    parametros.where = { usuario: body.usuario };
+  } else {
+    parametros.where = {
+      $or: [
+        {
+          usuario: {
+            $like: body.usuario
+          }
+        },
+        {
+          email: {
+            $like: body.usuario
+          }
+        }
+      ]
+    }
+  }
   const mensajeError = `Ya existe registrado el usuario ${body.usuario}`;
   obtenerUsuario(parametros, models)
   .then(respuesta => {
@@ -615,8 +633,8 @@ const verificarUsuario = (paraCrear, body, models) => {
       if(paraCrear){
         deferred.reject(new Error(mensajeError));
         return deferred.promise;
-      } else
-        deferred.resolve(respuesta);
+      } else{
+        deferred.resolve(respuesta);}
     } else {
       deferred.resolve(false);
     }

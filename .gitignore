@@ -8,13 +8,11 @@ logs/*
 .jshintrc
 /nbproject/private/
 npm-debug.log*
-**/*.log
 /coverage
 /public/images/
 /public/1/
 /nbproject/
 /node_modules_ant/
-*.log
 public/proyectos/*
 config/config.js
 src/libs/config.development.js

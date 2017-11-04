@@ -17,7 +17,7 @@ module.exports = app => {
       },
     };
     parametros.attributes = ['id_formulario', 'tipo', 'nombre', 'descripcion', 'duracion', 'secciones', 'fecha_inicio', 'estado'];
-    if ((body.audit_usuario.id_rol === ROL_UNIDAD_PRODUCTIVA && !body.audit_usuario.nit) || body.audit_usuario.id_rol === ROL_TECNICO || body.audit_usuario.id_rol === ROL_TECNICO_REGIONAL) {
+    if ((body.audit_usuario.id_rol === ROL_INSCRIPCION && !body.audit_usuario.nit) || body.audit_usuario.id_rol === ROL_TECNICO || body.audit_usuario.id_rol === ROL_TECNICO_REGIONAL) {
       parametros.where.tipo = {
         $in: [FORMULARIO_TIPO_UNIDAD_PRODUCTIVA, FORMULARIO_TIPO_ARTESANO],
       };
@@ -39,7 +39,7 @@ module.exports = app => {
   //     },
   //   };
   //   parametros.attributes = ['id_formulario', 'ambito', 'tipo', 'nombre', 'descripcion', 'duracion', 'secciones'];
-  //   if (body.audit_usuario.id_rol === ROL_UNIDAD_PRODUCTIVA && !body.audit_usuario.nit) {
+  //   if (body.audit_usuario.id_rol === ROL_INSCRIPCION && !body.audit_usuario.nit) {
   //     parametros.where.tipo = {
   //       $in: [FORMULARIO_TIPO_UNIDAD_PRODUCTIVA, FORMULARIO_TIPO_ARTESANO, FORMULARIO_TIPO_SELLO_HECHO_BOLIVIA],
   //     };
@@ -65,7 +65,7 @@ module.exports = app => {
   //     },
   //   };
   //   parametros.attributes = ['id_formulario', 'ambito', 'tipo', 'nombre', 'descripcion', 'duracion', 'secciones'];
-  //   if (body.audit_usuario.id_rol === ROL_UNIDAD_PRODUCTIVA && !body.audit_usuario.nit) {
+  //   if (body.audit_usuario.id_rol === ROL_INSCRIPCION && !body.audit_usuario.nit) {
   //     parametros.where.tipo = {
   //       $in: [FORMULARIO_TIPO_UNIDAD_PRODUCTIVA, FORMULARIO_TIPO_ARTESANO],
   //     };

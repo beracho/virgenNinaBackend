@@ -9,7 +9,7 @@ const listarRoles = (query, body, models) => {
   const deferred = Q.defer();
   const parametros = {};
   parametros.where = {
-    id_rol: {$ne: ROL_UNIDAD_PRODUCTIVA},
+    id_rol: {$ne: ROL_INSCRIPCION},
   };
   parametros.attributes = ["id_rol", "nombre", "peso"];
   parametros.order = 'peso';

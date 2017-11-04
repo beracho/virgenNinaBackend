@@ -22,17 +22,4 @@ module.exports = app => {
     .then(respuesta => Util.mensajeExito(res, "Creación de cuenta exitosa.", 200, respuesta))
     .catch(error => Util.mensajeError(res, error.message || error.mensaje));
   });
-
-  // TODO: eliminar
-  // app.post("/api/v1/cambiarRol", (req, res) => {
-  //   if (req.body.rolCambio) {
-  //     const audit_usuario = req.body.audit_usuario;
-  //     const rolCambio = req.body.rolCambio;
-  //     obtenerDatos(null, null, audit_usuario, rolCambio)
-  //     .then(respuesta => res.json(respuesta))
-  //     .catch(_error => res.status(412).json({error: _error}));
-  //   } else {
-  //     res.status(412).json({error: "Debe indicar el rol al que desea cambiar."});
-  //   }
-  // });
 };

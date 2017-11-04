@@ -126,7 +126,9 @@ const autenticar = (cuerpoObj, app) => {
   }
   const password = crypto.createHash("sha256").update(cuerpoObj.contrasena).digest("hex");
   cuerpoObj.contrasena = password;
-  usuarioBL.verificarExistencia(false, cuerpoObj, app.src.db.models) // verificamos que exista el usuario. El parámetro false indica que sólo verificará y no arrojará un error en caso de encontrar la existencia
+  const models = app.src.db.models;
+  models.sequelize = app.src.db.sequelize;
+  usuarioBL.verificarExistencia(false, cuerpoObj, models) // verificamos que exista el usuario. El parámetro false indica que sólo verificará y no arrojará un error en caso de encontrar la existencia
   .then(respuestaUsuarioExiste => {
     if (respuestaUsuarioExiste) {
       return obtenerDatos(cuerpoObj, app); // Si existe el usuario y no tiene nit, obtenemos su datos de inicio de sesión
@@ -149,10 +151,21 @@ const obtenerDatos = (cuerpoObj, app) => {
   const contrasena = cuerpoObj.contrasena;
   const usuario_p = cuerpoObj.usuario;
   let usuario = {};
-
   const objParametros = {
     where: {
-      usuario: usuario_p,
+      $or: [
+        {
+          usuario: {
+            $like: usuario_p
+          }
+        },
+        {
+          email: {
+            $like: usuario_p
+          }
+        }
+      ],
+      // usuario: usuario_p,
       contrasena,
     },
     include:[{
@@ -191,7 +204,11 @@ const obtenerDatos = (cuerpoObj, app) => {
     }
   })
   .then(respuesta => formarPayload(usuario.dataValues, respuesta, app))
-  .then(respuesta => deferred.resolve(respuesta))
+  .then(respuesta => {
+    console.log("-------------_____________________-----------------------");
+    console.log(respuesta);
+    deferred.resolve(respuesta)
+  })
   .catch(error => deferred.reject(error));
   return deferred.promise;
 };

@@ -97,7 +97,7 @@ module.exports = {
     // ];
     // roles_rutas_array = roles_rutas_array.concat(obj);
 
-    // // ESPECIALISTA
+    // // INSCRIPCIONEs
     // obj = [
     //   { fid_ruta: 3, fid_rol: 3, method_get: true, method_post: false, method_put: false, method_delete: false, estado: 'ACTIVO', _usuario_creacion: 'SISTEMA', _fecha_creacion: new Date(), _fecha_modificacion: new Date() },
     //   { fid_ruta: 5, fid_rol: 3, method_get: true, method_post: true, method_put: true, method_delete: true, estado: 'ACTIVO', _usuario_creacion: 'SISTEMA', _fecha_creacion: new Date(), _fecha_modificacion: new Date() },
@@ -111,7 +111,7 @@ module.exports = {
     //   { fid_ruta: 14, fid_rol: 3, method_get: true, method_post: true, method_put: true, method_delete: true, estado: 'ACTIVO', _usuario_creacion: 'SISTEMA', _fecha_creacion: new Date(), _fecha_modificacion: new Date() },
     //   { fid_ruta: 16, fid_rol: 3, method_get: true, method_post: true, method_put: true, method_delete: true, estado: 'ACTIVO', _usuario_creacion: 'SISTEMA', _fecha_creacion: new Date(), _fecha_modificacion: new Date() },
     //   { fid_ruta: 17, fid_rol: 3, method_get: true, method_post: true, method_put: true, method_delete: true, estado: 'ACTIVO', _usuario_creacion: 'SISTEMA', _fecha_creacion: new Date(), _fecha_modificacion: new Date() },
-    //   { fid_ruta: 18, fid_rol: 3, method_get: true, method_post: true, method_put: true, method_delete: true, estado: 'ACTIVO', _usuario_creacion: 'SISTEMA', _fecha_creacion: new Date(), _fecha_modificacion: new Date() },
+      { fid_ruta: 18, fid_rol: 3, method_get: true, method_post: true, method_put: true, method_delete: true, estado: 'ACTIVO', _usuario_creacion: 'SISTEMA', _fecha_creacion: new Date(), _fecha_modificacion: new Date() },
     //   { fid_ruta: 19, fid_rol: 3, method_get: true, method_post: true, method_put: true, method_delete: true, estado: 'ACTIVO', _usuario_creacion: 'SISTEMA', _fecha_creacion: new Date(), _fecha_modificacion: new Date() },
     //   { fid_ruta: 20, fid_rol: 3, method_get: true, method_post: true, method_put: true, method_delete: true, estado: 'ACTIVO', _usuario_creacion: 'SISTEMA', _fecha_creacion: new Date(), _fecha_modificacion: new Date() },
     //   { fid_ruta: 23, fid_rol: 3, method_get: true, method_post: true, method_put: true, method_delete: true, estado: 'ACTIVO', _usuario_creacion: 'SISTEMA', _fecha_creacion: new Date(), _fecha_modificacion: new Date() },
@@ -170,16 +170,16 @@ module.exports = {
     //   { fid_ruta: 59, fid_rol: 3, method_get: false, method_post: true, method_put: false, method_delete: false, estado: 'ACTIVO', _usuario_creacion: 'SISTEMA', _fecha_creacion: new Date(), _fecha_modificacion: new Date() },
       
     //   // SELLO HECHO EN BOLIVIA
-    //   { fid_ruta: 87, fid_rol: ROL_UNIDAD_PRODUCTIVA, method_get: false, method_post: true, method_put: false, method_delete: false, estado: 'ACTIVO', _usuario_creacion: 'SISTEMA', _fecha_creacion: new Date(), _fecha_modificacion: new Date() },
-    //   { fid_ruta: 89, fid_rol: ROL_UNIDAD_PRODUCTIVA, method_get: true, method_post: false, method_put: false, method_delete: false, estado: 'ACTIVO', _usuario_creacion: 'SISTEMA', _fecha_creacion: new Date(), _fecha_modificacion: new Date() },
-    //   { fid_ruta: 90, fid_rol: ROL_UNIDAD_PRODUCTIVA, method_get: true, method_post: false, method_put: false, method_delete: false, estado: 'ACTIVO', _usuario_creacion: 'SISTEMA', _fecha_creacion: new Date(), _fecha_modificacion: new Date() },
-    //   { fid_ruta: 92, fid_rol: ROL_UNIDAD_PRODUCTIVA, method_get: true, method_post: false, method_put: false, method_delete: false, estado: 'ACTIVO', _usuario_creacion: 'SISTEMA', _fecha_creacion: new Date(), _fecha_modificacion: new Date() },
-    //   { fid_ruta: 93, fid_rol: ROL_UNIDAD_PRODUCTIVA, method_get: false, method_post: true, method_put: false, method_delete: false, estado: 'ACTIVO', _usuario_creacion: 'SISTEMA', _fecha_creacion: new Date(), _fecha_modificacion: new Date() },
-    //   { fid_ruta: 94, fid_rol: ROL_UNIDAD_PRODUCTIVA, method_get: true, method_post: false, method_put: false, method_delete: false, estado: 'ACTIVO', _usuario_creacion: 'SISTEMA', _fecha_creacion: new Date(), _fecha_modificacion: new Date() },
-    //   { fid_ruta: 95, fid_rol: ROL_UNIDAD_PRODUCTIVA, method_get: true, method_post: false, method_put: false, method_delete: false, estado: 'ACTIVO', _usuario_creacion: 'SISTEMA', _fecha_creacion: new Date(), _fecha_modificacion: new Date() },
-    //   { fid_ruta: 96, fid_rol: ROL_UNIDAD_PRODUCTIVA, method_get: false, method_post: false, method_put: false, method_delete: true, estado: 'ACTIVO', _usuario_creacion: 'SISTEMA', _fecha_creacion: new Date(), _fecha_modificacion: new Date() },
-    //   { fid_ruta: 97, fid_rol: ROL_UNIDAD_PRODUCTIVA, method_get: false, method_post: false, method_put: false, method_delete: true, estado: 'ACTIVO', _usuario_creacion: 'SISTEMA', _fecha_creacion: new Date(), _fecha_modificacion: new Date() },
-    //   { fid_ruta: 101, fid_rol: ROL_UNIDAD_PRODUCTIVA, method_get: false, method_post: true, method_put: false, method_delete: false, estado: 'ACTIVO', _usuario_creacion: 'SISTEMA', _fecha_creacion: new Date(), _fecha_modificacion: new Date() },      
+    //   { fid_ruta: 87, fid_rol: 4, method_get: false, method_post: true, method_put: false, method_delete: false, estado: 'ACTIVO', _usuario_creacion: 'SISTEMA', _fecha_creacion: new Date(), _fecha_modificacion: new Date() },
+    //   { fid_ruta: 89, fid_rol: 4, method_get: true, method_post: false, method_put: false, method_delete: false, estado: 'ACTIVO', _usuario_creacion: 'SISTEMA', _fecha_creacion: new Date(), _fecha_modificacion: new Date() },
+    //   { fid_ruta: 90, fid_rol: 4, method_get: true, method_post: false, method_put: false, method_delete: false, estado: 'ACTIVO', _usuario_creacion: 'SISTEMA', _fecha_creacion: new Date(), _fecha_modificacion: new Date() },
+    //   { fid_ruta: 92, fid_rol: 4, method_get: true, method_post: false, method_put: false, method_delete: false, estado: 'ACTIVO', _usuario_creacion: 'SISTEMA', _fecha_creacion: new Date(), _fecha_modificacion: new Date() },
+    //   { fid_ruta: 93, fid_rol: 4, method_get: false, method_post: true, method_put: false, method_delete: false, estado: 'ACTIVO', _usuario_creacion: 'SISTEMA', _fecha_creacion: new Date(), _fecha_modificacion: new Date() },
+    //   { fid_ruta: 94, fid_rol: 4, method_get: true, method_post: false, method_put: false, method_delete: false, estado: 'ACTIVO', _usuario_creacion: 'SISTEMA', _fecha_creacion: new Date(), _fecha_modificacion: new Date() },
+    //   { fid_ruta: 95, fid_rol: 4, method_get: true, method_post: false, method_put: false, method_delete: false, estado: 'ACTIVO', _usuario_creacion: 'SISTEMA', _fecha_creacion: new Date(), _fecha_modificacion: new Date() },
+    //   { fid_ruta: 96, fid_rol: 4, method_get: false, method_post: false, method_put: false, method_delete: true, estado: 'ACTIVO', _usuario_creacion: 'SISTEMA', _fecha_creacion: new Date(), _fecha_modificacion: new Date() },
+    //   { fid_ruta: 97, fid_rol: 4, method_get: false, method_post: false, method_put: false, method_delete: true, estado: 'ACTIVO', _usuario_creacion: 'SISTEMA', _fecha_creacion: new Date(), _fecha_modificacion: new Date() },
+    //   { fid_ruta: 101, fid_rol: 4, method_get: false, method_post: true, method_put: false, method_delete: false, estado: 'ACTIVO', _usuario_creacion: 'SISTEMA', _fecha_creacion: new Date(), _fecha_modificacion: new Date() },      
     // ];
     // roles_rutas_array = roles_rutas_array.concat(obj);
 
