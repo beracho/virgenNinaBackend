@@ -17,32 +17,40 @@ import crypto from 'crypto';
 
 const crearUsuario = (body, models) => {
   const deferred = Q.defer();
-  
-  //forma usuario
+  const persona = body.persona;
+  const usuario = body.usuario;
+  // Validaciones
+  if (!persona) {
+    throw new Error("Debe agregar datos de persona.");
+  }
+  if (!usuario) {
+    throw new Error("Debe agregar datos de usuario.");
+  }
+  // Forma usuario
   let nombre_usuario = "";
-  if (body.papellido == undefined){
-    nombre_usuario = body.nombres.trim().charAt(0)+body.sapellido;
+  if (persona.primer_apellido == undefined){
+    nombre_usuario = persona.nombres.trim().charAt(0)+persona.segundo_apellido;
   } else {
-    nombre_usuario = body.nombres.trim().charAt(0)+body.papellido;
+    nombre_usuario = persona.nombres.trim().charAt(0)+persona.primer_apellido;
   }
   nombre_usuario = nombre_usuario.toLowerCase();
   //Crea objetos
   const usuarioObj = {
     usuario: nombre_usuario,
-    email: body.email,
-    fid_rol: body.fid_rol,
+    email: usuario.email,
+    fid_rol: usuario.fid_rol,
   };
   const personaObj = {
-    documento_identidad: body.ndoc,
-    lugar_documento_identidad: body.lugar,
-    fecha_nacimiento: body.fecha,
-    genero: body.genero,
-    primer_apellido: body.papellido,
-    segundo_apellido: body.sapellido,
-    capellido: body.capellido,
-    nombres: body.nombres,
-    direccion: body.direccion,
-    telf: body.telf,
+    documento_identidad: persona.ci,
+    lugar_documento_identidad: persona.lugar + '',
+    fecha_nacimiento: persona.fecha_nacimiento,
+    genero: persona.genero,
+    primer_apellido: persona.primer_apellido,
+    segundo_apellido: persona.segundo_apellido,
+    capellido: persona.capellido,
+    nombres: persona.nombres,
+    direccion: persona.direccion,
+    telf: persona.telf,
     _usuario_creacion: body.audit_usuario.id_usuario,
   }
 

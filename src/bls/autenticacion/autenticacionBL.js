@@ -205,8 +205,6 @@ const obtenerDatos = (cuerpoObj, app) => {
   })
   .then(respuesta => formarPayload(usuario.dataValues, respuesta, app))
   .then(respuesta => {
-    console.log("-------------_____________________-----------------------");
-    console.log(respuesta);
     deferred.resolve(respuesta)
   })
   .catch(error => deferred.reject(error));

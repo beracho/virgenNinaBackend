@@ -16,6 +16,16 @@ module.exports = (sequelize, DataType) => {
       autoIncrement: true,
       xlabel: 'Id de la persona',
     },
+    tipo_documento: {
+      type: DataType.ENUM,
+      xlabel: 'Tipo de Documento',
+      allowNull: false,
+      values: ['CARNET_IDENTIDAD', 'PASAPORTE'],
+      defaultValue: 'CARNET_IDENTIDAD',
+      validate: {
+        isIn: {args: [['CARNET_IDENTIDAD', 'PASAPORTE']], msg: "El campo estado sólo permite valores: 'CARNET_IDENTIDAD' o 'PASAPORTE'"},
+      },
+    },
     documento_identidad: {
       type: DataType.STRING(25),
       xlabel: 'Documento de identidad',
@@ -51,8 +61,8 @@ module.exports = (sequelize, DataType) => {
       xlabel: 'Carnet de discapacidad',
       allowNull: true,
       validate: {
-        len: {args: [3, 25], msg: "El campo 'Documento de identidad' permite un mínimo de 3 caracteres y un máximo de 25 caracteres"},
-        is: {args: /^[0-9]+$/i, msg: "El campo 'Documento de identidad' permite sólo números."},
+        len: {args: [3, 25], msg: "El campo 'Documento de discapacidad' permite un mínimo de 3 caracteres y un máximo de 25 caracteres"},
+        is: {args: /^[0-9]+$/i, msg: "El campo 'Documento de discapacidad' permite sólo números."},
       },
     },
     fecha_nacimiento: {
@@ -105,30 +115,6 @@ module.exports = (sequelize, DataType) => {
         isIn: {args: [['M', 'F']], msg: "El campo Género sólo permite valores F(Femenino) y M(Masculino)."},
       },
     },
-    direccion: {
-      type: DataType.STRING(1000),
-      xlabel: 'Dirección',
-      allowNull: true,
-    },
-    telefono: {
-      type: DataType.STRING(25),
-      xlabel: 'Teléfono',
-      allowNull: true,
-      validate: {
-        len: {args: [5, 25], msg: "El campo 'Teléfono' permite un mínimo de 5 caracteres y un máximo de 25 caracteres"},
-        isInt: {args: [true], msg: "El campo 'Teléfono' sólo permite valores numéricos."},
-      },
-    },
-    tipo_documento: {
-      type: DataType.ENUM,
-      xlabel: 'Tipo de Documento',
-      allowNull: false,
-      values: ['CARNET_IDENTIDAD', 'PASAPORTE'],
-      defaultValue: 'CARNET_IDENTIDAD',
-      validate: {
-        isIn: {args: [['CARNET_IDENTIDAD', 'PASAPORTE']], msg: "El campo estado sólo permite valores: 'CARNET_IDENTIDAD' o 'PASAPORTE'"},
-      },
-    },
     nombre_completo: {
       type: DataType.STRING(400),
       xlabel: 'Nombre Completo',
@@ -137,6 +123,46 @@ module.exports = (sequelize, DataType) => {
       validate: {
         len: {args: [0, 100], msg: "El campo 'Nombre completo' permite un mínimo de 1 caracter y un máximo de 100 caracteres"},
         is: {args: /^([A-Z|Á|É|Í|Ó|Ú|À|È|Ì|Ò|Ù|Ä|Ë|Ï|Ö|Ü|Â|Ê|Î|Ô|Û|Ñ|'|´| ]|)+$/i, msg: "El campo 'Primer apellido' permite sólo letras"},
+      },
+    },
+    idioma_materno: {
+      type: DataType.STRING(20),
+      xlabel: 'Idioma materno',
+      allowNull: true,
+      validate: {
+        len: {args: [0, 20], msg: "El campo 'Idioma Materno' permite un máximo de 20 caracteres"},
+      },
+    },
+    idiomas: {
+      type: DataType.STRING(100),
+      xlabel: 'Idiomas',
+      allowNull: true,
+      validate: {
+        len: {args: [0, 100], msg: "El campo 'Idiomas' permite un máximo de 100 caracteres"},
+      },
+    },
+    ocupacion_actual: {
+      type: DataType.STRING(50),
+      xlabel: 'Ocupación actual',
+      allowNull: true,
+      validate: {
+        len: {args: [0, 50], msg: "El campo 'Ocupación actual' permite un máximo de 50 caracteres"},
+      },
+    },
+    grado_instruccion: {
+      type: DataType.STRING(50),
+      xlabel: 'Grado de Instrucción',
+      allowNull: true,
+      validate: {
+        len: {args: [0, 50], msg: "El campo 'Grado de Instrucción' permite un máximo de 50 caracteres"},
+      },
+    },
+    parentezco: {
+      type: DataType.STRING(30),
+      xlabel: 'Parentezco',
+      allowNull: true,
+      validate: {
+        len: {args: [0, 30], msg: "El campo 'Parentezco' permite un máximo de 30 caracteres"},
       },
     },
     discapacidad: {
@@ -162,7 +188,11 @@ module.exports = (sequelize, DataType) => {
       // Creando asociaciones para la entidad
       associate: (models) => {
         persona.hasMany(models.usuario, {as: 'usuarios', foreignKey: {name: 'fid_persona', allowNull: true}});
-        // persona.hasMany(models.persona, {as: 'persona', foreignKey: {name: 'fid_persona', allowNull: true}});
+        persona.belongsTo(models.ubicacion, {as: 'lugar_nacimiento', foreignKey: {name: 'fid_lugar_nacimiento'}});
+        persona.belongsTo(models.ubicacion, {as: 'direccion', foreignKey: {name: 'fid_direccion'}});
+        persona.belongsTo(models.estudiante, {as: 'estudiante', foreignKey: {name: 'fid_estudiante'}});
+        persona.hasMany(models.persona, {as: 'pariente', foreignKey: {name: 'fid_pariente', allowNull: true}});
+        persona.belongsTo(models.persona, {as: 'pariente', foreignKey: {name: 'fid_pariente', allowNull: true}});
       },
     },
     tableName: 'persona',

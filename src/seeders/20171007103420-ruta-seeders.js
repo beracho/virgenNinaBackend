@@ -155,6 +155,8 @@ module.exports = {
         _fecha_creacion: new Date(),
         _fecha_modificacion: new Date(),
       }, {
+
+        
         //13
         ruta: '/api/v1/registros/:id/actividades_economicas',
         descripcion: 'Acciones sobre actividades económicas.',
