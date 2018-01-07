@@ -14,6 +14,47 @@ module.exports = (sequelize, DataType) => {
       autoIncrement: true,
       xlabel: 'ID',
     },
+    nivel: {
+      type: DataType.ENUM,
+      xlabel: 'Nivel',
+      allowNull: false,
+      values: ['INICIAL', 'PRIMARIA', 'SECUNDARIA'],
+      defaultValue: 'PRIMARIA',
+      validate: {
+        isIn: {args: [['INICIAL', 'PRIMARIA', 'SECUNDARIA']], msg: "El campo estado sólo permite valores: 'INICIAL', 'PRIMARIA' o 'SECUNDARIA'"},
+      },
+    },
+    grado: {
+      type: DataType.CHAR(1),
+      xlabel: 'Grado',
+      allowNull: true,
+      validate: {
+        is: {args: /^[0-9]+$/i, msg: "El campo 'Grado' permite sólo números."},
+      },
+    },
+    gestion: {
+      type: DataType.DATE,
+      xlabel: 'Gestión',
+      allowNull: true,
+    },
+    paralelo: {
+      type: DataType.CHAR(1),
+      xlabel: 'Paralelo',
+      allowNull: true,
+      validate: {
+        is: {args: /^[A-Z|-|-|.]+$/i, msg: "El campo 'Paralelo' permite sólo letras."},
+      },
+    },
+    turno: {
+      type: DataType.ENUM,
+      xlabel: 'Turno',
+      allowNull: false,
+      values: ['MAÑANA', 'TARDE', 'NOCHE'],
+      defaultValue: 'MAÑANA',
+      validate: {
+        isIn: {args: [['MAÑANA', 'TARDE', 'NOCHE']], msg: "El campo estado sólo permite valores: 'MAÑANA', 'TARDE' o 'NOCHE'"},
+      },
+    },
   }, {
       createdAt: '_fecha_creacion',
       updatedAt: '_fecha_modificacion',

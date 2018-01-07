@@ -74,6 +74,7 @@ module.exports = (sequelize, DataType) => {
       // Creando asociaciones para la entidad
       associate: (models) => {
         estudiante.belongsToMany(models.unidad_educativa, { through: models.unidad_educativa_estudiante });
+        estudiante.belongsTo(models.registro_inscripcion, {as: 'registro', foreignKey: {name: 'fid_registro', allowNull: false}});
       },
     },
     tableName: 'estudiante',
