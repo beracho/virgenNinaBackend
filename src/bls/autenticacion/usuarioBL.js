@@ -237,7 +237,7 @@ const listarUsuarios = (query, body, models) => {
   parametros.include = [{
     model: models.persona,
     as: 'persona',
-    attributes: ['id_persona', 'documento_identidad', 'nombres', 'primer_apellido', 'segundo_apellido', 'nombre_completo', 'genero', 'direccion'],
+    attributes: ['id_persona', 'documento_identidad', 'nombres', 'primer_apellido', 'segundo_apellido', 'nombre_completo', 'genero'],
   },{
     model: models.usuario_rol,
     as: 'usuarios_roles',
@@ -277,7 +277,7 @@ const obtenerUsuarioPorId = (id, models, parametros, body) => {
     parametros.include = [{
       model: models.persona,
       as: 'persona',
-      attributes: ['id_persona', 'documento_identidad', 'nombres', 'primer_apellido', 'segundo_apellido', 'nombre_completo', 'genero', 'direccion'],
+      attributes: ['id_persona', 'documento_identidad', 'nombres', 'primer_apellido', 'segundo_apellido', 'nombre_completo', 'genero'],
       required: false,
     },{
       model: models.usuario_rol,

@@ -1,5 +1,5 @@
 import sequelizeFormly from "sequelize-formly";
-const departamentoBL = require('../../bls/parametros/departamentoBL');
+const dpaBL = require('../../bls/parametros/dpaBL');
 const Util = require('../../utils/util');
 
 module.exports = app => {
@@ -9,7 +9,7 @@ module.exports = app => {
 
   app.route("/api/v1/codigoDeptos")
     .get((req, res) => {
-      departamentoBL.listarDepartamentos(req.query, req.body, models)
+      dpaBL.listarDepartamentos(req.query, req.body, models)
         .then(respuesta => Util.mensajeExito(res, "Obtención de datos exitosa.", 200, respuesta))
         .catch(error => Util.mensajeError(res, error.message));
     });
