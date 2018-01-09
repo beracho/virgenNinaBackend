@@ -12,75 +12,120 @@ const autenticacionBL = require('./autenticacionBL');
 const handlebars = require('handlebars');
 const config = require('konfig')();
 const util = require('../../libs/util');
-import moment from 'moment';
-import crypto from 'crypto';
+const moment = require('moment');
+const crypto = require('crypto');
 
 const crearUsuario = (body, models) => {
   const deferred = Q.defer();
   const persona = body.persona;
   const usuario = body.usuario;
-  // Validaciones
-  if (!persona) {
-    throw new Error("Debe agregar datos de persona.");
-  }
-  if (!usuario) {
-    throw new Error("Debe agregar datos de usuario.");
-  }
-  // Forma usuario
-  let nombre_usuario = "";
-  if (persona.primer_apellido == undefined){
-    nombre_usuario = persona.nombres.trim().charAt(0)+persona.segundo_apellido;
-  } else {
-    nombre_usuario = persona.nombres.trim().charAt(0)+persona.primer_apellido;
-  }
-  nombre_usuario = nombre_usuario.toLowerCase();
-  //Crea objetos
-  const usuarioObj = {
-    usuario: nombre_usuario,
-    email: usuario.email,
-    fid_rol: usuario.fid_rol,
-  };
-  const personaObj = {
-    documento_identidad: persona.ci,
-    lugar_documento_identidad: persona.lugar + '',
-    fecha_nacimiento: persona.fecha_nacimiento,
-    genero: persona.genero,
-    primer_apellido: persona.primer_apellido,
-    segundo_apellido: persona.segundo_apellido,
-    capellido: persona.capellido,
-    nombres: persona.nombres,
-    direccion: persona.direccion,
-    telf: persona.telf,
-    _usuario_creacion: body.audit_usuario.id_usuario,
-  }
-
-  let usuarioGuardado = {};
-  models.sequelize.transaction().then((transaccion) => {
-    usuarioObj._usuario_creacion = body.audit_usuario.id_usuario;
-
-    personaBL.crearPersona(personaObj, body, models, transaccion)
-    .then(respuesta => {
-      usuarioObj.fid_persona = respuesta.id_persona;
-      return validarUsuarioCrear(usuarioObj, body, models)
-    })
-    .then(respuesta => {
-      respuesta.estado = "PENDIENTE";
-      return dao.crearRegistro(models.usuario, respuesta, false, transaccion)
-    })
-    .then(respuesta => {
-      usuarioGuardado = respuesta;
-      return usuario_rolBL.registrarUsuarioRol(respuesta.id_usuario, usuarioObj.fid_rol, body, models, transaccion)
-    })
-    .then(respuesta => transaccion.commit() )
-    .then(respuesta => notificarEvento(usuarioGuardado.id_usuario, models, body, PLANTILLA_USUARIO_REGISTRO, ESTADO_PENDIENTE, cargarDataRegistro) )
-    .then(respuesta => {
-      delete usuarioGuardado.dataValues.contrasena;
-      deferred.resolve(usuarioGuardado);
-    })
-    .catch(error => {
-      transaccion.rollback();
-      deferred.reject(error)
+  dao.listarRegistros(models.usuario, {attributes: ['usuario'], })
+  .then(respuesta => {
+    // Validaciones
+    if (!persona) {
+      throw new Error("Debe agregar datos de persona.");
+    }
+    if (!usuario) {
+      throw new Error("Debe agregar datos de usuario.");
+    }
+    const today = new Date();
+    const birthday = new Date(persona.fecha_nacimiento);
+    let age = today.getFullYear() - birthday.getFullYear();
+    const m = today.getMonth() - birthday.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthday.getDate())) {
+        age--;
+    }
+    if (age < 18) {
+      throw new Error("El usuario ingresado es menor de edad.");
+    }
+    // Genera usuario
+    let valido = false;
+    let nombre_usuario='';
+    let existe;
+    const alphabet = "abcdefghijklmnopqrstuvwxyz";
+    let pos = 0;
+    while (!valido){
+      // Forma usuario
+      nombre_usuario = "";
+      if (pos === 0) {
+        if (persona.primer_apellido == undefined){
+          nombre_usuario = persona.nombres.trim().charAt(0)+persona.segundo_apellido;
+        } else {
+          nombre_usuario = persona.nombres.trim().charAt(0)+persona.primer_apellido;
+        }
+      } else {
+        if (persona.primer_apellido == undefined){
+          nombre_usuario = alphabet.trim().charAt(pos-1)+persona.segundo_apellido;
+        } else {
+          nombre_usuario = alphabet.trim().charAt(pos-1)+persona.primer_apellido;
+        }
+      }
+      nombre_usuario = nombre_usuario.toLowerCase();
+      existe = false;
+      if (respuesta){
+        respuesta.forEach(function(user) {
+          if (user.usuario === nombre_usuario) {
+            existe = true;
+          }
+        }, this);
+        if (existe) {
+          pos ++;          
+        } else {
+          valido = true;
+        }
+      }
+    }
+    //Crea objetos
+    const usuarioObj = {
+      usuario: nombre_usuario,
+      email: usuario.email,
+      fid_rol: usuario.fid_rol,
+    };
+    const personaObj = {
+      documento_identidad: persona.ci,
+      lugar_documento_identidad: persona.lugar + '',
+      fecha_nacimiento: persona.fecha_nacimiento,
+      genero: persona.genero,
+      primer_apellido: persona.primer_apellido,
+      segundo_apellido: persona.segundo_apellido,
+      capellido: persona.capellido,
+      nombres: persona.nombres,
+      direccion: persona.direccion,
+      telf: persona.telf,
+      _usuario_creacion: body.audit_usuario.id_usuario,
+    }
+  
+    let usuarioGuardado = {};
+    models.sequelize.transaction().then((transaccion) => {
+      usuarioObj._usuario_creacion = body.audit_usuario.id_usuario;
+  
+      personaBL.crearPersona(personaObj, body, models, transaccion)
+      .then(respuesta => {
+        usuarioObj.fid_persona = respuesta.id_persona;
+        return validarUsuarioCrear(usuarioObj, body, models)
+      })
+      .then(respuesta => {
+        respuesta.estado = "PENDIENTE";
+        return dao.crearRegistro(models.usuario, respuesta, false, transaccion)
+      })
+      .then(respuesta => {
+        usuarioGuardado = respuesta;
+        return usuario_rolBL.registrarUsuarioRol(respuesta.id_usuario, usuarioObj.fid_rol, body, models, transaccion)
+      })
+      .then(respuesta => transaccion.commit() )
+      .then(respuesta => notificarEvento(usuarioGuardado.id_usuario, models, body, PLANTILLA_USUARIO_REGISTRO, ESTADO_PENDIENTE, cargarDataRegistro) )
+      .then(respuesta => {
+        delete usuarioGuardado.dataValues.contrasena;
+        deferred.resolve(usuarioGuardado);
+      })
+      .catch(error => {
+        transaccion.rollback();
+        deferred.reject(error)
+      });
     });
+  })
+  .catch(error => {
+    deferred.reject(error)
   });
   return deferred.promise;
 };
@@ -142,7 +187,7 @@ const reenviarActivacion = (body, models) => {
   const deferred = Q.defer();
   const usuario = body.usuario;
   if (usuario && usuario.id_usuario) {
-    const contrasenaEnviar = `${Math.trunc(Math.random() * 99999999).toString()}${moment(new Date())}`;
+    // const contrasenaEnviar = `${Math.trunc(Math.random() * 99999999).toString()}`;
     notificarEvento(usuario.id_usuario, models, body, PLANTILLA_USUARIO_REGISTRO, ESTADO_PENDIENTE, cargarDataRegistro)
     .then(respuesta => deferred.resolve(respuesta))
     .catch(error => deferred.reject(error));
@@ -427,7 +472,7 @@ function notificarEvento(id_usuario, models, body, plantilla, estadoValido, carg
     }],
   };
 
-  const contrasenaEnviar = `${Math.trunc(Math.random() * 99999999).toString()}${moment(new Date())}`;
+  const contrasenaEnviar = `${Math.trunc(Math.random() * 99999999).toString()}`;
   const usuarioModificar = {};
   usuarioModificar.codigo_contrasena = contrasenaEnviar;
   const fecha = new Date();
@@ -439,6 +484,7 @@ function notificarEvento(id_usuario, models, body, plantilla, estadoValido, carg
   dao.modificarRegistro(models.usuario, id_usuario, usuarioModificar)
   .then(respuesta => obtenerUsuarioPorId(id_usuario, models, parametrosUsuario, body))
   .then(respuesta => {
+    console.log(JSON.stringify(respuesta));
     if (respuesta && respuesta.estado === estadoValido) {
       usuarioAEnviar = respuesta;
       return respuesta;

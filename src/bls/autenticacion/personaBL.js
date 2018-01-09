@@ -1,7 +1,7 @@
 /**
  * Lógica del Negocio -> plantilla
  */
-import moment from 'moment';
+const moment = require('moment');
 
 // const servicios = require('../../servicios_web/servicio_segip');
 const dao = require('../../dao/dao');

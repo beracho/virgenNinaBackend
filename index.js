@@ -1,7 +1,6 @@
-import express from 'express';
-import consign from 'consign';
-
-import path from 'path';
+const express = require('express');
+const consign = require('consign');
+const path = require('path');
 global.appRoot = path.resolve(__dirname);
 const app = express();
 

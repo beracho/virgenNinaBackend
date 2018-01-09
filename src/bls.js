@@ -1,6 +1,6 @@
-import fs from "fs";
-import path from "path";
-import consign from 'consign';
+const fs = require("fs");
+const path = require("path");
+const consign = require('consign');
 
 console.log("Cargando archivos BLS");
 const bls = {};

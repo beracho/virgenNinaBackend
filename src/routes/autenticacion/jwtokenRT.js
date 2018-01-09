@@ -1,8 +1,8 @@
-import jwt from "jwt-simple";
-import LdapStrategy from "passport-ldapauth";
-import passport from "passport";
-import crypto from "crypto";
-import Q from 'q';
+const jwt = require("jwt-simple");
+const LdapStrategy = require("passport-ldapauth");
+const passport = require("passport");
+const crypto = require("crypto");
+const Q = require('q');
 const autenticacionBL = require('../../bls/autenticacion/autenticacionBL');
 const Util = require('../../utils/util');
 

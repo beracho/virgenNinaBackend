@@ -1,4 +1,4 @@
-import sequelizeFormly from "sequelize-formly";
+const sequelizeFormly = require("sequelize-formly");
 const rolBL = require('../../bls/autenticacion/rolBL');
 const Util = require('../../utils/util');
 

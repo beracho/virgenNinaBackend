@@ -1,4 +1,4 @@
-import sequelizeFormly from "sequelize-formly";
+const sequelizeFormly = require("sequelize-formly");
 const Util = require('../../utils/util');
 // const jsreport = require('jsreport');
 

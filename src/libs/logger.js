@@ -1,5 +1,5 @@
-import winston from "winston";
-import fs from "fs";
+const winston = require("winston");
+const fs = require("fs");
 winston.emitErrs = true;
 
 if (!fs.existsSync("logs")) {

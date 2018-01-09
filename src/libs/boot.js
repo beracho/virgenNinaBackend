@@ -1,4 +1,4 @@
-import http from "http";
+const http = require("http");
 
 module.exports = app => {
     const config = app.src.config.config;

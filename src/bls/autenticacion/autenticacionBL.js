@@ -1,9 +1,9 @@
 /**
  * Lógica del Negocio -> autenticación
  */
-import crypto from 'crypto';
-import jwt from 'jwt-simple';
-import moment from 'moment';
+const crypto = require('crypto');
+const jwt = require('jwt-simple');
+const moment = require('moment');
 const dao = require('../../dao/dao');
 const util = require('../../libs/util');
 const menuBL = require('../../bls/autenticacion/menuBL');

@@ -6,7 +6,7 @@
  */
 'use strict';
 
-import crypto from 'crypto';
+const crypto = require('crypto');
 
 module.exports = (sequelize, DataType) => {
   const usuario = sequelize.define('usuario', {

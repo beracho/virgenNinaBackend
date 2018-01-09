@@ -1,5 +1,5 @@
-import passport2 from "passport";
-import {Strategy, ExtractJwt} from "passport-jwt";
+const passport2 = require("passport");
+const {Strategy, ExtractJwt} = require("passport-jwt");
 module.exports = app => {
   const  cfg = app.src.config.config;
   const params= {

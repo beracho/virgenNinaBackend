@@ -10,8 +10,8 @@ const usuarioBL = require('../autenticacion/usuarioBL');
 const plantillaBL = require('../parametros/plantillaBL');
 // const Hashids = require('hashids');
 const handlebars = require('handlebars');
-import fs from 'fs-extra';
-import moment from 'moment';
+const fs = require('fs-extra');
+const moment = require('moment');
 
 // const hashids = new Hashids("PROBOLIVIA", 15, "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890");
 
