@@ -367,22 +367,30 @@ const activarUsuario = (body, models) => {
   const parametros = {
     where: {
       usuario: body.usuario,
-      codigo_contrasena: body.codigo,
-      $or: [{
-        fecha_expiracion: {
-          $gt: fecha,
-        },
-      }, {
-        estado: {
-          $eq: 'PENDIENTE',
-        },
-      },
-    ],
+      // codigo_contrasena: body.codigo,
+      // $or: [{
+      //   fecha_expiracion: {
+      //     $gt: fecha,
+      //   },
+      // }, {
+      //   estado: {
+      //     $eq: 'PENDIENTE',
+      //   },
+      // }],
     },
   };
   obtenerUsuario(parametros, models)
   .then(result => {
     if (result) {
+      if (result.estado !== ESTADO_PENDIENTE) {
+        throw new Error('El usuario no se encuentra en estado PENDIENTE.');
+      }
+      if (body.codigo !== result.codigo_contrasena) {
+        throw new Error('El código ingresado no es correcto.');
+      }
+      if (result.fecha_expiracion < new Date) {
+        throw new Error('El código de activación ha caducado.');
+      }
       if (body.contrasena.length < 8) {
         throw new Error('La contraseña debe contar con al menos 8 caracteres.');
       }
@@ -393,7 +401,7 @@ const activarUsuario = (body, models) => {
       usuario.fecha_expiracion = null;
       return result.updateAttributes(usuario).then((usuario));
     } else {
-      throw new Error("No se ha encontrado el usuario enviado. Es posible que el Código sea incorrecto o haya expirado.");
+      throw new Error("No se ha encontrado el usuario enviado.");
     }
   }).then(result => deferred.resolve({email: result.email})
   ).catch(error => deferred.reject(error));
@@ -484,12 +492,11 @@ function notificarEvento(id_usuario, models, body, plantilla, estadoValido, carg
   dao.modificarRegistro(models.usuario, id_usuario, usuarioModificar)
   .then(respuesta => obtenerUsuarioPorId(id_usuario, models, parametrosUsuario, body))
   .then(respuesta => {
-    console.log(JSON.stringify(respuesta));
     if (respuesta && respuesta.estado === estadoValido) {
       usuarioAEnviar = respuesta;
       return respuesta;
     } else {
-      return null;
+      throw new Error(`El usuario no se encuentra en estado ${estadoValido}.`);
     }
   }).then(respuesta => {
     if (respuesta) {

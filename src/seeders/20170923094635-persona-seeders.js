@@ -196,6 +196,22 @@ module.exports = {
         _fecha_modificacion: new Date(),
         tipo_documento: 'CARNET_IDENTIDAD',
       },
+      // 13
+      {
+        documento_identidad: '0000013',
+        lugar_documento_identidad: 'LP',
+        complemento_documento: '00',
+        fecha_nacimiento: '1975-11-10T11:29:18.496-04:00',
+        nombres: 'profesor1',
+        primer_apellido: 'profesor1',
+        segundo_apellido: 'profesor1',
+        nombre_completo: 'profesor1 profesor1 profesor1',
+        genero: 'M',
+        _usuario_creacion: 1,
+        _fecha_creacion: new Date(),
+        _fecha_modificacion: new Date(),
+        tipo_documento: 'CARNET_IDENTIDAD',
+      },
     ], {});
   },
 
