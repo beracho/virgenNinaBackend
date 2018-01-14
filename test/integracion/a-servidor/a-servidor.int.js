@@ -9,8 +9,6 @@
 const request = require('supertest');
 const should = require('should');
 global.server = {};
-// require('../../registrarBabel');
-require('babel-polyfill');
 
 describe('Empezando a ejecutar los test, prueba del entorno de test... ', () => {
   before((done) => {

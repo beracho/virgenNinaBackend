@@ -6,7 +6,6 @@ const request = require('supertest');
 const should = require('should');
 const sequelize = require('sequelize');
 
-require('../../registrarBabel');
 let token = '';
 let usuarioCreado = {};
 const user = { usuario: "admin", contrasena: "Developer"};
