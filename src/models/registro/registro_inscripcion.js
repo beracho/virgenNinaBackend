@@ -189,17 +189,7 @@ module.exports = (sequelize, DataType) => {
         return this.get("ruta_certificado") !== null;
       },
       xlabel: "¿Certificado impreso?"
-    },
-    // codigo_archivo: {
-    //   type: new DataType.VIRTUAL(DataType.TEXT),
-    //   get: function () {
-    //     const Hashids = require('hashids');
-    //     const hashids = new Hashids("VIRGEN_NIÑA", 15, "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890");
-    //     const id = hashids.encode(this.get("id_registro_inscripcion"));
-    //     return id;
-    //   },
-    //   xlabel: "Código de archivo"
-    // },
+    }
   },{
     createdAt: '_fecha_creacion',
     updatedAt: '_fecha_modificacion',

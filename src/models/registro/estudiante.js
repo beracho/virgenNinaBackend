@@ -20,7 +20,7 @@ module.exports = (sequelize, DataType) => {
       type: DataType.STRING(25),
       xlabel: 'RUDE',
       allowNull: false,
-      unique: 'uniqueSelectedItem',
+      unique: true,
       validate: {
         len: {args: [5, 25], msg: "El campo 'RUDE' permite un mínimo de 5 caracteres y un máximo de 25 caracteres"},
         notEmpty: {args: [true], msg: 'El campo RUDE es obligatorio.'},
@@ -41,20 +41,20 @@ module.exports = (sequelize, DataType) => {
       xlabel: 'Discapacidad mental',
       defaultValue: false,
     },
-    discapacidad_origen: {
-      type: DataType.STRING(30),
-      xlabel: 'Discapacidad origen',
-      validate: {
-        isIn: {args: [['NACIMIENTO', 'ADQUIRIDO', 'HEREDADO']], msg: "El campo 'Discapacidad origen' sólo permite valores: 'NACIMIENTO', 'ADQUIRIDO' o 'HEREDADO'."},
-        len: {args: [0, 30], msg: "El campo 'Grupo' permite un máximo de 30 caracteres."},
-      },
-    },
     discapacidad_otra: {
       type: DataType.STRING(25),
       xlabel: 'Otra discapacidad',
       validate: {
         len: {args: [1, 5], msg: "El campo 'Otra discapacidad' permite un mínimo de 1 caracter y un máximo de 25 caracteres"},
         is: {args: /^[A-Z|-|-|.]+$/i, msg: "El campo 'Otra discapacidad' permite sólo letras."},
+      },
+    },
+    discapacidad_origen: {
+      type: DataType.STRING(30),
+      xlabel: 'Discapacidad origen',
+      validate: {
+        isIn: {args: [['NACIMIENTO', 'ADQUIRIDO', 'HEREDADO']], msg: "El campo 'Discapacidad origen' sólo permite valores: 'NACIMIENTO', 'ADQUIRIDO' o 'HEREDADO'."},
+        len: {args: [0, 30], msg: "El campo 'Grupo' permite un máximo de 30 caracteres."},
       },
     },
     _usuario_creacion: {

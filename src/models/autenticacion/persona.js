@@ -20,6 +20,7 @@ module.exports = (sequelize, DataType) => {
       type: DataType.ENUM,
       xlabel: 'Tipo de Documento',
       allowNull: false,
+      unique: 'uniqueSelectedItem',
       values: ['CARNET_IDENTIDAD', 'PASAPORTE'],
       defaultValue: 'CARNET_IDENTIDAD',
       validate: {
@@ -68,7 +69,6 @@ module.exports = (sequelize, DataType) => {
     fecha_nacimiento: {
       type: DataType.DATE,
       xlabel: 'Fecha de nacimiento',
-      unique: 'uniqueSelectedItem',
       allowNull: true,
     },
     nombres: {

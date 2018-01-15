@@ -19,8 +19,8 @@ module.exports = (sequelize, DataType) => {
     sie: {
       type: DataType.STRING(25),
       xlabel: 'SIE',
-      allowNull: false,
-      unique: 'uniqueSelectedItem',
+      allowNull: true,
+      unique: true,
       validate: {
         len: {args: [5, 25], msg: "El campo 'SIE' permite un mínimo de 5 caracteres y un máximo de 25 caracteres"},
         notEmpty: {args: [true], msg: 'El campo SIE es obligatorio.'},
@@ -41,6 +41,14 @@ module.exports = (sequelize, DataType) => {
       validate: {
         len: {args: [1, 5], msg: "El campo 'Dependencia' permite un mínimo de 1 caracter y un máximo de 25 caracteres"},
         is: {args: /^[A-Z|-|-|.]+$/i, msg: "El campo 'Dependencia' permite sólo letras."},
+      },
+    },
+    distrito: {
+      type: DataType.STRING(25),
+      xlabel: 'Distrito',
+      validate: {
+        len: {args: [1, 5], msg: "El campo 'Distrito' permite un mínimo de 1 caracter y un máximo de 25 caracteres"},
+        is: {args: /^[A-Z|-|-|.]+$/i, msg: "El campo 'Distrito' permite sólo letras."},
       },
     },
     _usuario_creacion: {
