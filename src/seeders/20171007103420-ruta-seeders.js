@@ -179,21 +179,21 @@ module.exports = {
         _fecha_creacion: new Date(),
         _fecha_modificacion: new Date(),
       }, {
-        
-        
-                
         //15
-        ruta: '/api/v1/registros/:id/actividades_economicas/:id/caeb',
-        descripcion: 'Servicio para elegir el identificador de un caeb de una determinada actividad económica.',
-        method_get: false,
+        ruta: '/api/v1/piocs',
+        descripcion: 'Devuelve lista de todos los Pueblos Indigenas Originario Campesinos.',
+        method_get: true,
         method_post: false,
-        method_put: true,
+        method_put: false,
         method_delete: false,
         estado: 'ACTIVO',
         _usuario_creacion: 1,
         _fecha_creacion: new Date(),
         _fecha_modificacion: new Date(),
       }, {
+        
+        
+                
         //16
         ruta: '/api/v1/registros/:id/activos_productivos',
         descripcion: 'Acciones sobre activos productivos.',
