@@ -57,10 +57,22 @@ module.exports = (sequelize, DataType) => {
         len: {args: [0, 20], msg: "El campo 'Complemento del documento' permite un mínimo de 0 caracteres y un máximo de 20 caracteres"},
       },
     },
+    tipo_documento_discapacidad: {
+      type: DataType.ENUM,
+      xlabel: 'Tipo de Documento Discapacidad',
+      allowNull: true,
+      values: ['CODEPEDIS', 'IBC'],
+      unique: 'uniqueDiscapacidad',
+      defaultValue: 'CODEPEDIS',
+      validate: {
+        isIn: {args: [['CODEPEDIS', 'IBC']], msg: "El campo estado sólo permite valores: 'CODEPEDIS' o 'IBC'"},
+      },
+    },
     carnet_discapacidad: {
       type: DataType.STRING(20),
       xlabel: 'Carnet de discapacidad',
       allowNull: true,
+      unique: 'uniqueDiscapacidad',
       validate: {
         len: {args: [3, 25], msg: "El campo 'Documento de discapacidad' permite un mínimo de 3 caracteres y un máximo de 25 caracteres"},
         is: {args: /^[0-9]+$/i, msg: "El campo 'Documento de discapacidad' permite sólo números."},

@@ -5,7 +5,7 @@ module.exports = {
     return queryInterface.bulkInsert('parentezco', [
       // 1
       {
-        relacion: 'tio',
+        relacion: 'tutor',
         fid_persona_es: 16,
         fid_persona_de: 14,
         _usuario_creacion: 1,

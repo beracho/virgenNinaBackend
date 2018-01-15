@@ -16,6 +16,11 @@ module.exports = (sequelize, DataType) => {
       autoIncrement: true,
       xlabel: 'Id de la ubicacion',
     },
+    comunidad: {
+      type: DataType.STRING(30),
+      xlabel: 'comunidad',
+      allowNull: true,
+    },
     zona: {
       type: DataType.STRING(25),
       xlabel: 'zona',
@@ -42,6 +47,15 @@ module.exports = (sequelize, DataType) => {
       validate: {
         len: {args: [5, 35], msg: "El campo 'Teléfono' permite un mínimo de 5 caracteres y un máximo de 35 caracteres"},
         isInt: {args: [true], msg: "El campo 'Teléfono' sólo permite valores numéricos."},
+      },
+    },
+    celular: {
+      type: DataType.STRING(35),
+      xlabel: 'Celular',
+      allowNull: true,
+      validate: {
+        len: {args: [5, 35], msg: "El campo 'Celular' permite un mínimo de 5 caracteres y un máximo de 35 caracteres"},
+        isInt: {args: [true], msg: "El campo 'Celular' sólo permite valores numéricos."},
       },
     },
     _usuario_creacion: {
