@@ -144,8 +144,8 @@ module.exports = {
         _fecha_modificacion: new Date(),
       }, {
         //12
-        ruta: '/api/v1/usuarios/:id/matriculas',
-        descripcion: 'Servicio para obtener matriculas de un usuario.',
+        ruta: '/api/v1/unidadEducativa/:id',
+        descripcion: 'Servicio para obtener datos de una unidad productiva a partir del SIE.',
         method_get: true,
         method_post: false,
         method_put: false,
@@ -155,13 +155,11 @@ module.exports = {
         _fecha_creacion: new Date(),
         _fecha_modificacion: new Date(),
       }, {
-
-        
         //13
-        ruta: '/api/v1/registros/:id/actividades_economicas',
-        descripcion: 'Acciones sobre actividades económicas.',
+        ruta: '/api/v1/unidadesEducativas',
+        descripcion: 'Devuelve todas las unidades educativas.',
         method_get: true,
-        method_post: true,
+        method_post: false,
         method_put: false,
         method_delete: false,
         estado: 'ACTIVO',
@@ -170,17 +168,20 @@ module.exports = {
         _fecha_modificacion: new Date(),
       }, {
         //14
-        ruta: '/api/v1/registros/:id/actividades_economicas/:id',
-        descripcion: 'Acciones sobre una determinada actividad económica.',
+        ruta: '/api/v1/estudiantes',
+        descripcion: 'Obtiene la lista de estudiantes.',
         method_get: true,
         method_post: false,
-        method_put: true,
-        method_delete: true,
+        method_put: false,
+        method_delete: false,
         estado: 'ACTIVO',
         _usuario_creacion: 1,
         _fecha_creacion: new Date(),
         _fecha_modificacion: new Date(),
       }, {
+        
+        
+                
         //15
         ruta: '/api/v1/registros/:id/actividades_economicas/:id/caeb',
         descripcion: 'Servicio para elegir el identificador de un caeb de una determinada actividad económica.',
