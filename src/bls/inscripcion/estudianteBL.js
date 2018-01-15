@@ -7,7 +7,8 @@ const Q = require('q');
 const util = require('../../libs/util');
 const general = require('../../utils/util');
 const usuarioBL = require('../autenticacion/usuarioBL');
-const plantillaBL = require('../parametros/plantillaBL');
+const plantillaBL = require('../parametros/plantillaBL')
+const dpaBL = require('../parametros/dpaBL');;
 // const Hashids = require('hashids');
 const handlebars = require('handlebars');
 const fs = require('fs-extra');
@@ -18,7 +19,7 @@ const moment = require('moment');
 module.exports = app => {
   const models = app.src.db.models;
   const sequelize = app.src.db.sequelize;
-
+  let respuestaTotal = {};
   const obtenerRegistros = (req, body) => {
     const deferred = Q.defer();
     params = {
@@ -54,7 +55,27 @@ module.exports = app => {
     };
     dao.listarRegistros(models.persona, params)
     .then(respuesta => {
-      deferred.resolve(respuesta);
+      respuestaTotal = respuesta;
+      if (respuestaTotal.length === 1) {
+        return dpaBL.obtenerELemento(respuestaTotal[0].direccion.fid_dpa, models)
+      } 
+      else {
+        deferred.resolve(respuestaTotal);
+      } 
+    })
+    .then(respuesta => {
+      respuestaTotal[0].dataValues.direccion.dataValues.pais = respuesta.pais ;
+      respuestaTotal[0].dataValues.direccion.dataValues.departamento = respuesta.departamento ;
+      respuestaTotal[0].dataValues.direccion.dataValues.provincia = respuesta.provincia ;
+      respuestaTotal[0].dataValues.direccion.dataValues.municipio = respuesta.municipio ;
+      return dpaBL.obtenerELemento(respuestaTotal[0].lugar_nacimiento.fid_dpa, models)
+    })
+    .then(respuesta => {
+      respuestaTotal[0].dataValues.lugar_nacimiento.dataValues.pais = respuesta.pais ;
+      respuestaTotal[0].dataValues.lugar_nacimiento.dataValues.departamento = respuesta.departamento ;
+      respuestaTotal[0].dataValues.lugar_nacimiento.dataValues.provincia = respuesta.provincia ;
+      respuestaTotal[0].dataValues.lugar_nacimiento.dataValues.municipio = respuesta.municipio ;
+      deferred.resolve(respuestaTotal);
     })
     .catch(error => {
       deferred.reject(error)
