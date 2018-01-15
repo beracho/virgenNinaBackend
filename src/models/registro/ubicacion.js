@@ -19,12 +19,12 @@ module.exports = (sequelize, DataType) => {
     zona: {
       type: DataType.STRING(25),
       xlabel: 'zona',
-      allowNull: false,
+      allowNull: true,
     },
     calle: {
       type: DataType.STRING(25),
       xlabel: 'calle',
-      allowNull: false,
+      allowNull: true,
     },
     numero: {
       type: DataType.STRING(5),

@@ -44,8 +44,12 @@ module.exports = app => {
         model: models.ubicacion,
         as: 'lugar_nacimiento'
       }, {
-        model: models.persona,
-        as: 'pariente'
+        model: models.parentezco,
+        as: 'persona_de',
+        include: [{
+          model: models.persona,
+          as: 'persona_es'
+        }]
       }]
     };
     dao.listarRegistros(models.persona, params)

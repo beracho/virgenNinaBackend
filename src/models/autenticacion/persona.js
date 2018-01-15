@@ -157,14 +157,6 @@ module.exports = (sequelize, DataType) => {
         len: {args: [0, 50], msg: "El campo 'Grado de Instrucción' permite un máximo de 50 caracteres"},
       },
     },
-    parentezco: {
-      type: DataType.STRING(30),
-      xlabel: 'Parentezco',
-      allowNull: true,
-      validate: {
-        len: {args: [0, 30], msg: "El campo 'Parentezco' permite un máximo de 30 caracteres"},
-      },
-    },
     discapacidad: {
       type: DataType.BOOLEAN,
       xlabel: 'Discapacidad',
@@ -191,8 +183,8 @@ module.exports = (sequelize, DataType) => {
         persona.belongsTo(models.ubicacion, {as: 'lugar_nacimiento', foreignKey: {name: 'fid_lugar_nacimiento'}});
         persona.belongsTo(models.ubicacion, {as: 'direccion', foreignKey: {name: 'fid_direccion'}});
         persona.belongsTo(models.estudiante, {as: 'estudiante', foreignKey: {name: 'fid_estudiante'}});
-        persona.hasMany(models.persona, {as: 'pariente', foreignKey: {name: 'fid_pariente', allowNull: true}});
-        persona.belongsTo(models.persona, {as: 'pariente', foreignKey: {name: 'fid_pariente', allowNull: true}});
+        persona.hasMany(models.parentezco, {as: 'persona_es', foreignKey: {name: 'fid_persona_es', allowNull: true}});
+        persona.hasMany(models.parentezco, {as: 'persona_de', foreignKey: {name: 'fid_persona_de', allowNull: true}});
       },
     },
     tableName: 'persona',
