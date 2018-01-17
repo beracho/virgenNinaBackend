@@ -7,7 +7,7 @@
     "urlActivacion": "http://localhost:8080/#!/confirmarCuenta",
     "urlRecuperar": "http://localhost:8080/#!/restaurar",
     "rutaInscripcion": "/inscripcion",
-    "urlLogoMinisterio": "http://localhost:4000/assets/logo_mincom.png",
+    "urlLogoVirgenNina": "http://localhost:4000/assets/logo_mincom.png",
     "rutaCertficado": "http://localhost:8080/#!/verificacion?codigo=",
     "mapboxToken": "pk.eyJ1Ijoicm95MjM0IiwiYSI6ImNqNDVtY25hdjFyZG8zM3BhMnBwaDhkOHQifQ.0wfGth4IjfCtnwE1X1_t9w",
     "correo": {
@@ -44,6 +44,19 @@
     "urlLogoMinisterio": "http://localhost:4000/assets/logo_mincom.png",
     "rutaCertficado": "http://localhost:8080/#!/verificacion?codigo=",
     "mapboxToken": "pk.eyJ1Ijoicm95MjM0IiwiYSI6ImNqNDVtY25hdjFyZG8zM3BhMnBwaDhkOHQifQ.0wfGth4IjfCtnwE1X1_t9w",
+    "correo": {
+      "origen": "virgenNiña@virgennina.com",
+      "host": "smtp.virgennina.com",
+      "port": 587,
+      "secure": false,
+      "tls": {
+        "rejectUnauthorized": false
+      },
+      "auth": {
+        "user": "[correoBuenaOnda@niñamail.com]",
+        "pass": "[contraseñaMuySegura]"
+      }
+    },
     "hosts":
     {
         "ruta_rest_backend":"http://[host rest backend]"
@@ -66,6 +79,13 @@
     "urlLogoMinisterio": "http://localhost:4000/assets/logo_mincom.png",
     "rutaCertficado": "http://localhost:8080/#!/verificacion?codigo=",
     "mapboxToken": "pk.eyJ1Ijoicm95MjM0IiwiYSI6ImNqNDVtY25hdjFyZG8zM3BhMnBwaDhkOHQifQ.0wfGth4IjfCtnwE1X1_t9w",
+    "correo": {
+      "service": "Gmail",
+      "auth": {
+        "user": "miCuenta@gmail.com",
+        "pass": "miContrasenaGmail"
+      }
+    },
     "hosts":
     {
         "ruta_rest_backend":"http://[host rest backend]"
