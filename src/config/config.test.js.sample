@@ -1,7 +1,7 @@
 console.log("configuracion de desarrollo activada");
 
 module.exports = {
-  database: "virgendb",
+  database: "virgendb_test",
   username: "postgres",
   password: "postgres",
   timezone: 'America/La_Paz',

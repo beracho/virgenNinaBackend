@@ -2,7 +2,7 @@ module.exports = {
   "development": {
     "username": "postgres",
     "password": "postgres",
-    "database": "virgenniniadb",
+    "database": "virgendb",
     "host": "127.0.0.1",
     "dialect": "postgres",
     "pool": {
@@ -12,9 +12,9 @@ module.exports = {
     },
   },
   "test": {
-    "username": "usuariodb",
-    "password": "usuariopassdb",
-    "database": "virgenniniadb_test",
+    "username": "postgres",
+    "password": "postgres",
+    "database": "virgendb_test",
     "host": "localhost",
     "dialect": "postgres",
     "pool": {
@@ -24,9 +24,9 @@ module.exports = {
     },
   },
   "production": {
-    "username": "usuariodb",
-    "password": "usuariopassdb",
-    "database": "virgenniniadb_db",
+    "username": "postgres",
+    "password": "postgres",
+    "database": "virgendb_prod",
     "host": "localhost",
     "dialect": "postgres",
     "pool": {
