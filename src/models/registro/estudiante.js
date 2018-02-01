@@ -20,10 +20,32 @@ module.exports = (sequelize, DataType) => {
       type: DataType.STRING(25),
       xlabel: 'RUDE',
       allowNull: false,
-      unique: true,
+      unique: {
+        args: true,
+        msg: 'rudeInUse'
+      },
       validate: {
         len: {args: [5, 25], msg: "El campo 'RUDE' permite un mínimo de 5 caracteres y un máximo de 25 caracteres"},
-        notEmpty: {args: [true], msg: 'El campo RUDE es obligatorio.'},
+        notEmpty: { args: [true], msg: 'El campo RUDE es obligatorio.' },
+      }
+    },
+    codigo: {
+      type: DataType.STRING(25),
+      xlabel: 'Código',
+      allowNull: true,
+      unique: true,
+      validate: {
+        len: {args: [5, 25], msg: "El campo 'Código' permite un mínimo de 5 caracteres y un máximo de 25 caracteres"},
+        notEmpty: {args: [true], msg: 'El campo Código es obligatorio.'},
+      },
+    },
+    estado: {
+      type: DataType.STRING(30),
+      xlabel: 'Estado',
+      allowNull: false,
+      defaultValue: 'PREINSCRITO',
+      validate: {
+        isIn: {args: [['PREINSCRITO', 'EN ESPERA', 'INSCRITO']], msg: "El campo estado sólo permite valores: PREINSCRITO, EN ESPERA o INSCRITO."},
       },
     },
     discapacidad_comunicacion: {
@@ -52,9 +74,10 @@ module.exports = (sequelize, DataType) => {
     discapacidad_origen: {
       type: DataType.STRING(30),
       xlabel: 'Discapacidad origen',
+      defaultValue: 'NINGUNA',
       validate: {
-        isIn: {args: [['NACIMIENTO', 'ADQUIRIDO', 'HEREDADO']], msg: "El campo 'Discapacidad origen' sólo permite valores: 'NACIMIENTO', 'ADQUIRIDO' o 'HEREDADO'."},
-        len: {args: [0, 30], msg: "El campo 'Grupo' permite un máximo de 30 caracteres."},
+        isIn: {args: [['BORN', 'ADQUIRED', 'INHERITED', 'NONE']], msg: "El campo 'Discapacidad origen' sólo permite valores: 'BORN', 'ADQUIRED', 'INHERITED' o 'NONE'."},
+        len: {args: [0, 30], msg: "El campo 'Discapacidad origen' permite un máximo de 30 caracteres."},
       },
     },
     _usuario_creacion: {

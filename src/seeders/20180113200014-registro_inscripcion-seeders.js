@@ -6,9 +6,9 @@ module.exports = {
       // 1
       {
         oficialia: 'ofi_14',
-        libro: 'lib_14',
-        partida: 'par_14',
-        folio: 'fol_14',
+        libro: 14,
+        partida: 14,
+        folio: 14,
         centro_salud: true,
         frecuencia_medica: 4,
         origen_agua: 'well',
@@ -22,7 +22,6 @@ module.exports = {
         medio_transporte: 'pie',
         duracion_transporte: 'una a dos horas',
         vigente: true,
-        estado: 'ACTIVO',
         ruta_reporte: '/home/Downloads/elSuperReporte.pdf',
         lugar_envio: 'La Paz',
         _fecha_envio: new Date(),
@@ -35,9 +34,9 @@ module.exports = {
       // 2
       {
         oficialia: 'ofi_15',
-        libro: 'lib_15',
-        partida: 'par_15',
-        folio: 'fol_15',
+        libro: 15,
+        partida: 15,
+        folio: 15,
         centro_salud: true,
         frecuencia_medica: 6,
         origen_agua: 'netConexion',
@@ -51,7 +50,6 @@ module.exports = {
         medio_transporte: 'helicoptero',
         duracion_transporte: 'menos de media hora',
         vigente: true,
-        estado: 'ACTIVO',
         ruta_reporte: '/home/Downloads/elSuperReporte.pdf',
         lugar_envio: 'La Paz',
         _fecha_envio: new Date(),

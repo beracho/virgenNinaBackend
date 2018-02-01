@@ -46,7 +46,7 @@ const modificarRegistro = (model, id, parametrosModificar, transaccion) => {
   if (transaccion) {
     options.transaction = transaccion
   }
-  obtenerRegistroPorId(model, id)
+  obtenerRegistroPorId(model, id, options)
   .then(objetoRes => {
     if (objetoRes) {
       return objetoRes;

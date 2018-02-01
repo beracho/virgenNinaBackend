@@ -461,6 +461,11 @@ module.exports = {
       {nivel_dpa:4,nombre:'Alto Beni',fid_dpa_superior:48,codigo_ine:'22002'},
       {nivel_dpa:4,nombre:'Chúa Cocani',fid_dpa_superior:24,codigo_ine:'20203'},
       {nivel_dpa:4,nombre:'Huatajata',fid_dpa_superior:24,codigo_ine:'20206'},
+      {nivel_dpa:1,nombre:'Argentina',codigo_ine:''},
+      {nivel_dpa:1,nombre:'Chile',codigo_ine:''},
+      {nivel_dpa:1,nombre:'Peru',codigo_ine:''},
+      {nivel_dpa:1,nombre:'Brasil',codigo_ine:''},
+      {nivel_dpa:1,nombre:'Colombia',codigo_ine:''},
   ], {});
 },
 

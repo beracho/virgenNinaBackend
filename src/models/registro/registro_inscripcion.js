@@ -14,45 +14,44 @@ module.exports = (sequelize, DataType) => {
       xlabel: 'ID',
     },
     oficialia: {
-      type: DataType.STRING(30),
+      type: DataType.STRING(10),
       xlabel: 'Oficialia',
       allowNull: true,
       validate: {
-        len: {args: [3, 30], msg: "El campo 'Oficialia' permite un mínimo de 3 caracteres y un máximo de 30 caracteres"},
+        len: {args: [1, 10], msg: "El campo 'Oficialia' permite un mínimo de 1 caracteres y un máximo de 10 caracteres"},
       },
     },
     libro: {
-      type: DataType.STRING(30),
+      type: DataType.STRING(10),
       xlabel: 'Libro',
       allowNull: true,
       validate: {
-        len: {args: [3, 30], msg: "El campo 'Libro' permite un mínimo de 3 caracteres y un máximo de 30 caracteres"},
+        len: {args: [1, 10], msg: "El campo 'Libro' permite un mínimo de 1 caracteres y un máximo de 10 caracteres"},
         is: {args: /^[0-9]+$/i, msg: "El campo 'Libro' permite sólo números."},
       },
     },
     partida: {
-      type: DataType.STRING(30),
+      type: DataType.STRING(10),
       xlabel: 'Partida',
       allowNull: true,
       validate: {
-        len: {args: [3, 30], msg: "El campo 'Partida' permite un mínimo de 3 caracteres y un máximo de 30 caracteres"},
+        len: {args: [1, 10], msg: "El campo 'Partida' permite un mínimo de 1 caracteres y un máximo de 10 caracteres"},
         is: {args: /^[0-9]+$/i, msg: "El campo 'Partida' permite sólo números."},
       },
     },
     folio: {
-      type: DataType.STRING(30),
+      type: DataType.STRING(10),
       xlabel: 'Folio',
       allowNull: true,
       validate: {
-        len: {args: [3, 30], msg: "El campo 'Folio' permite un mínimo de 3 caracteres y un máximo de 30 caracteres"},
+        len: {args: [1, 10], msg: "El campo 'Folio' permite un mínimo de 1 caracteres y un máximo de 10 caracteres"},
         is: {args: /^[0-9]+$/i, msg: "El campo 'Folio' permite sólo números."},
       },
     },
     centro_salud: {
       type: DataType.BOOLEAN,
       xlabel: 'Centro salud',
-      allowNull: false,
-      defaultValue: false,
+      allowNull: true,
     },
     frecuencia_medica: {
       type: DataType.INTEGER,
@@ -73,8 +72,7 @@ module.exports = (sequelize, DataType) => {
     acceso_electricidad: {
       type: DataType.BOOLEAN,
       xlabel: 'Acceso electricidad',
-      allowNull: false,
-      defaultValue: false,
+      allowNull: true,
     },
     destino_agua: {
       type: DataType.STRING(30),
@@ -103,8 +101,7 @@ module.exports = (sequelize, DataType) => {
     salario: {
       type: DataType.BOOLEAN,
       xlabel: 'Salario',
-      allowNull: false,
-      defaultValue: false,
+      allowNull: true,
     },
     acceso_internet: {
       type: DataType.STRING(30),
@@ -141,18 +138,17 @@ module.exports = (sequelize, DataType) => {
     vigente: {
       type: DataType.BOOLEAN,
       xlabel: 'Vigente',
-      allowNull: false,
-      defaultValue: false,
+      allowNull: true,
     },
-    estado: {
-      type: DataType.STRING(30),
-      xlabel: 'Estado',
-      allowNull: false,
-      defaultValue: 'ACTIVO',
-      validate: {
-        isIn: {args: [['ACTIVO', 'INACTIVO']], msg: "El campo estado sólo permite valores: ACTIVO o INACTIVO."},
-      },
-    },
+    // estado: {
+    //   type: DataType.STRING(30),
+    //   xlabel: 'Estado',
+    //   allowNull: false,
+    //   defaultValue: 'ACTIVO',
+    //   validate: {
+    //     isIn: {args: [['ACTIVO', 'INACTIVO']], msg: "El campo estado sólo permite valores: ACTIVO o INACTIVO."},
+    //   },
+    // },
     ruta_reporte: {
       type: DataType.STRING(500),
       xlabel: 'Ruta Reporte',
@@ -188,7 +184,7 @@ module.exports = (sequelize, DataType) => {
       get: function () {
         return this.get("ruta_certificado") !== null;
       },
-      xlabel: "¿Certificado impreso?"
+      xlabel: "¿RUDE impreso?"
     }
   },{
     createdAt: '_fecha_creacion',

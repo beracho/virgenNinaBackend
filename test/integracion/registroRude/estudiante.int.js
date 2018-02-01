@@ -38,6 +38,7 @@ describe('====================== APIREST ESTUDIANTE ======================', () 
         res.body.finalizado.should.be.equal(true);
         res.body.datos.should.not.be.equal(null);
         res.body.datos.should.not.be.equal(undefined);
+        res.body.datos.count.should.be.equal(2);
         done();
       });
   });
@@ -64,24 +65,20 @@ describe('====================== APIREST ESTUDIANTE ======================', () 
       });
   });
 
-  it('>>> Deberia devolver un array vacío por no ser estudiante', (done) => {
+  it('>>> Deberia devolver error de estudiante no existente', (done) => {
     request(server)
       .get(`/api/v1/estudiantes?tipo_documento=CARNET_IDENTIDAD&documento_identidad=0000004&lugar_documento_identidad=LP`)
       .set('Authorization', `Bearer ${token}`)
-      .expect(200)
+      .expect(412)
       .end((err, res) => {
         if (err) {
           return done(err);
         }
         should(res.body.finalizado).be.ok;
         should(res.body.mensaje).be.ok;
-        should(res.body.datos).be.ok;
-        res.body.finalizado.should.be.equal(true);
-        res.body.datos.should.not.be.equal(null);
-        res.body.datos.should.not.be.equal(undefined);
-        if (res.body.datos) {
-          res.body.datos.length.should.be.equal(0);
-        }
+        should(res.body.datos).be.not.ok;
+        res.body.finalizado.should.be.equal(false);
+        res.body.mensaje.should.be.equal('noData');
         done();
       });
   });

@@ -191,15 +191,12 @@ module.exports = {
         _fecha_creacion: new Date(),
         _fecha_modificacion: new Date(),
       }, {
-        
-        
-                
         //16
-        ruta: '/api/v1/registros/:id/activos_productivos',
-        descripcion: 'Acciones sobre activos productivos.',
-        method_get: true,
-        method_post: true,
-        method_put: false,
+        ruta: '/api/v1/registroRude',
+        descripcion: 'Actualización de datos en registro RUDE.',
+        method_get: false,
+        method_post: false,
+        method_put: true,
         method_delete: false,
         estado: 'ACTIVO',
         _usuario_creacion: 1,
@@ -207,22 +204,22 @@ module.exports = {
         _fecha_modificacion: new Date(),
       }, {
         //17
-        ruta: '/api/v1/registros/:id/activos_productivos/:id',
-        descripcion: 'Acciones sobre un determinado activo productivo.',
+        ruta: '/api/v1/dpaHijos',
+        descripcion: 'Devuelve hijos de el DPA enviado.',
         method_get: true,
         method_post: false,
-        method_put: true,
-        method_delete: true,
+        method_put: false,
+        method_delete: false,
         estado: 'ACTIVO',
         _usuario_creacion: 1,
         _fecha_creacion: new Date(),
         _fecha_modificacion: new Date(),
       }, {
         //18
-        ruta: '/api/v1/registros',
-        descripcion: 'Acciones sobre las declaraciones juradas.',
+        ruta: '/api/v1/dpaPadre',
+        descripcion: 'Devuelve el padre del DPA enviado.',
         method_get: true,
-        method_post: true,
+        method_post: false,
         method_put: false,
         method_delete: false,
         estado: 'ACTIVO',
@@ -231,17 +228,20 @@ module.exports = {
         _fecha_modificacion: new Date(),
       }, {
         //19
-        ruta: '/api/v1/registros/:id',
-        descripcion: 'Acciones sobre una determinada certificación.',
+        ruta: '/api/v1/dpaNivel',
+        descripcion: 'Devuelve todos los DPA de un mismo nivel.',
         method_get: true,
         method_post: false,
-        method_put: true,
-        method_delete: true,
+        method_put: false,
+        method_delete: false,
         estado: 'ACTIVO',
         _usuario_creacion: 1,
         _fecha_creacion: new Date(),
         _fecha_modificacion: new Date(),
       }, {
+        
+        
+                
         //20
         ruta: '/api/v1/registros/:id/enviar',
         descripcion: 'Servicio para enviar un certificado.',

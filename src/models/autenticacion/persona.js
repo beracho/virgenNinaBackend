@@ -44,7 +44,7 @@ module.exports = (sequelize, DataType) => {
       allowNull: false,
       unique: 'uniqueSelectedItem',
       validate: {
-        len: {args: [1, 5], msg: "El campo 'lugar documento de identidad' permite un mínimo de 1 caracter y un máximo de 5 caracteres"},
+        len: {args: [1, 25], msg: "El campo 'lugar documento de identidad' permite un mínimo de 1 caracter y un máximo de 25 caracteres"},
         is: {args: /^[A-Z|-|-|.]+$/i, msg: "El campo 'Lugar de lugar documento de identidad' permite sólo letras."},
         notEmpty: {args: [true], msg: 'El campo lugar documento de Identidad es obligatorio.'},
       },
