@@ -134,6 +134,11 @@ const listarRegistros = (model, parametros) => {
       deferred.reject(new Error(error.message));
     });
   } else {
+    if (parametros.order) {
+      if (parametros.order.charAt(0) == '-') {
+        parametros.order = `${parametros.order.substring(1, parametros.order.length)} DESC`;
+      }
+    }
     model.findAll(parametros)
     .then(result => {
       deferred.resolve(result);

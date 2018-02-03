@@ -57,7 +57,9 @@ module.exports = app => {
       params.limit = req.limit,
       params.page = req.page
     };
-    if (req.order) { params.order = req.order };
+    if (req.order) { 
+      params.order = req.order;
+    };
     dao.listarRegistros(models.persona, params)
     .then(respuesta => {
       respuestaTotal = respuesta;
@@ -73,6 +75,9 @@ module.exports = app => {
         respuestaRows.forEach(function(student) {
           packageStudent = {
             id_persona: student.id_persona,
+            tipo_documento:student.tipo_documento,
+            documento_identidad: student.documento_identidad,
+            lugar_documento_identidad: student.lugar_documento_identidad,
             nombres: student.nombres,
             primer_apellido: student.primer_apellido,
             segundo_apellido: student.segundo_apellido,
