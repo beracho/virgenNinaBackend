@@ -185,10 +185,8 @@ module.exports = app => {
             const parametrosEstudiante = {};
             if (body.persona.codrude !== '') { parametrosEstudiante.rude = body.persona.codrude };
             if (body.salud.discapacidad_comunicacion !== '') { parametrosEstudiante.discapacidad_comunicacion = body.salud.discapacidad_comunicacion };
-            if (body.salud.discapacidad_motriz !== '') { parametrosEstudiante.discapacidad_motriz = body.salud.discapacidad_motriz };
-            if (body.salud.discapacidad_mental !== '') { parametrosEstudiante.discapacidad_mental = body.salud.discapacidad_mental };
-            if (body.salud.discapacidad_otra !== '') { parametrosEstudiante.discapacidad_otra = body.salud.discapacidad_otra };
-            if (body.salud.discapacidad_origen !== '') { parametrosEstudiante.discapacidad_origen = body.salud.discapacidad_origen };
+            if (body.salud.tipo_discapacidad !== '') { parametrosEstudiante.fid_discapacidad = body.salud.tipo_discapacidad };
+            if (body.salud.subtipo_discapacidad !== '') { parametrosEstudiante.fid_discapacidad = body.salud.subtipo_discapacidad };
             if (personaCreada) {
               // Crea estudiante
               parametrosEstudiante.fid_registro = respuesta.id_registro_inscripcion;

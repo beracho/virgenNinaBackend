@@ -406,6 +406,351 @@ module.exports = {
         _fecha_creacion: new Date(),
         _fecha_modificacion: new Date()
       },
+      // 70
+      {
+        id_parametro: 70,
+        grupo: 'disability',
+        sigla: '',
+        nombre: 'visual',
+        descripcion: '',
+        orden: 1,
+        _usuario_creacion: 1,
+        _usuario_modificacion: 1,
+        _fecha_creacion: new Date(),
+        _fecha_modificacion: new Date()
+      },
+      // 71
+      {
+        id_parametro: 71,
+        grupo: 'disability',
+        sigla: '',
+        nombre: 'auditory',
+        descripcion: '',
+        orden: 1,
+        _usuario_creacion: 1,
+        _usuario_modificacion: 1,
+        _fecha_creacion: new Date(),
+        _fecha_modificacion: new Date()
+      },
+      // 72
+      {
+        id_parametro: 72,
+        grupo: 'disability',
+        sigla: '',
+        nombre: 'intellectual',
+        descripcion: '',
+        orden: 1,
+        _usuario_creacion: 1,
+        _usuario_modificacion: 1,
+        _fecha_creacion: new Date(),
+        _fecha_modificacion: new Date()
+      },
+      // 73
+      {
+        id_parametro: 73,
+        grupo: 'disability',
+        sigla: '',
+        nombre: 'phisic',
+        descripcion: '',
+        orden: 1,
+        _usuario_creacion: 1,
+        _usuario_modificacion: 1,
+        _fecha_creacion: new Date(),
+        _fecha_modificacion: new Date()
+      },
+      // 74
+      {
+        id_parametro: 74,
+        grupo: 'disability',
+        sigla: '',
+        nombre: 'multiple',
+        descripcion: '',
+        orden: 1,
+        _usuario_creacion: 1,
+        _usuario_modificacion: 1,
+        _fecha_creacion: new Date(),
+        _fecha_modificacion: new Date()
+      },
+      // 75
+      {
+        id_parametro: 75,
+        grupo: 'disability',
+        sigla: '',
+        nombre: 'auditoryLow',
+        descripcion: '',
+        orden: 2,
+        fid_parametro_padre: 71,
+        _usuario_creacion: 1,
+        _usuario_modificacion: 1,
+        _fecha_creacion: new Date(),
+        _fecha_modificacion: new Date()
+      },
+      // 76
+      {
+        id_parametro: 76,
+        grupo: 'disability',
+        sigla: '',
+        nombre: 'auditoryMedium',
+        descripcion: '',
+        orden: 2,
+        fid_parametro_padre: 71,
+        _usuario_creacion: 1,
+        _usuario_modificacion: 1,
+        _fecha_creacion: new Date(),
+        _fecha_modificacion: new Date()
+      },
+      // 77
+      {
+        id_parametro: 77,
+        grupo: 'disability',
+        sigla: '',
+        nombre: 'auditoryHigh',
+        descripcion: '',
+        orden: 2,
+        fid_parametro_padre: 71,
+        _usuario_creacion: 1,
+        _usuario_modificacion: 1,
+        _fecha_creacion: new Date(),
+        _fecha_modificacion: new Date()
+      },
+      // 78
+      {
+        id_parametro: 78,
+        grupo: 'disability',
+        sigla: '',
+        nombre: 'auditoryDeep',
+        descripcion: '',
+        orden: 2,
+        fid_parametro_padre: 71,
+        _usuario_creacion: 1,
+        _usuario_modificacion: 1,
+        _fecha_creacion: new Date(),
+        _fecha_modificacion: new Date()
+      },
+      // 79
+      {
+        id_parametro: 79,
+        grupo: 'disability',
+        sigla: '',
+        nombre: 'blind',
+        descripcion: '',
+        orden: 2,
+        fid_parametro_padre: 70,
+        _usuario_creacion: 1,
+        _usuario_modificacion: 1,
+        _fecha_creacion: new Date(),
+        _fecha_modificacion: new Date()
+      },
+      // 80
+      {
+        id_parametro: 80,
+        grupo: 'disability',
+        sigla: '',
+        nombre: 'lowVision',
+        descripcion: '',
+        orden: 2,
+        fid_parametro_padre: 70,
+        _usuario_creacion: 1,
+        _usuario_modificacion: 1,
+        _fecha_creacion: new Date(),
+        _fecha_modificacion: new Date()
+      },
+      // 81
+      {
+        id_parametro: 81,
+        grupo: 'disability',
+        sigla: '',
+        nombre: 'intellectual',
+        descripcion: '',
+        orden: 2,
+        fid_parametro_padre: 72,
+        _usuario_creacion: 1,
+        _usuario_modificacion: 1,
+        _fecha_creacion: new Date(),
+        _fecha_modificacion: new Date()
+      },
+      // 82
+      {
+        id_parametro: 82,
+        grupo: 'disability',
+        sigla: '',
+        nombre: 'downSyndrome',
+        descripcion: '',
+        orden: 2,
+        fid_parametro_padre: 72,
+        _usuario_creacion: 1,
+        _usuario_modificacion: 1,
+        _fecha_creacion: new Date(),
+        _fecha_modificacion: new Date()
+      },
+      // 83
+      {
+        id_parametro: 83,
+        grupo: 'disability',
+        sigla: '',
+        nombre: 'autism',
+        descripcion: '',
+        orden: 2,
+        fid_parametro_padre: 72,
+        _usuario_creacion: 1,
+        _usuario_modificacion: 1,
+        _fecha_creacion: new Date(),
+        _fecha_modificacion: new Date()
+      },
+      // 84
+      {
+        id_parametro: 84,
+        grupo: 'disability',
+        sigla: '',
+        nombre: 'cerebralParalysis',
+        descripcion: '',
+        orden: 2,
+        fid_parametro_padre: 73,
+        _usuario_creacion: 1,
+        _usuario_modificacion: 1,
+        _fecha_creacion: new Date(),
+        _fecha_modificacion: new Date()
+      },
+      // 85
+      {
+        id_parametro: 85,
+        grupo: 'disability',
+        sigla: '',
+        nombre: 'traumatism',
+        descripcion: '',
+        orden: 2,
+        fid_parametro_padre: 73,
+        _usuario_creacion: 1,
+        _usuario_modificacion: 1,
+        _fecha_creacion: new Date(),
+        _fecha_modificacion: new Date()
+      },
+      // 86
+      {
+        id_parametro: 86,
+        grupo: 'disability',
+        sigla: '',
+        nombre: 'congenitalMalformation',
+        descripcion: '',
+        orden: 2,
+        fid_parametro_padre: 73,
+        _usuario_creacion: 1,
+        _usuario_modificacion: 1,
+        _fecha_creacion: new Date(),
+        _fecha_modificacion: new Date()
+      },
+      // 87
+      {
+        id_parametro: 87,
+        grupo: 'disability',
+        sigla: '',
+        nombre: 'other',
+        descripcion: '',
+        orden: 2,
+        fid_parametro_padre: 73,
+        _usuario_creacion: 1,
+        _usuario_modificacion: 1,
+        _fecha_creacion: new Date(),
+        _fecha_modificacion: new Date()
+      },
+      // 88
+      {
+        id_parametro: 88,
+        grupo: 'disability',
+        sigla: '',
+        nombre: 'deafblindness',
+        descripcion: '',
+        orden: 2,
+        fid_parametro_padre: 74,
+        _usuario_creacion: 1,
+        _usuario_modificacion: 1,
+        _fecha_creacion: new Date(),
+        _fecha_modificacion: new Date()
+      },
+      // 89
+      {
+        id_parametro: 89,
+        grupo: 'disability',
+        sigla: '',
+        nombre: 'physicalIntellectual',
+        descripcion: '',
+        orden: 2,
+        fid_parametro_padre: 74,
+        _usuario_creacion: 1,
+        _usuario_modificacion: 1,
+        _fecha_creacion: new Date(),
+        _fecha_modificacion: new Date()
+      },
+      // 90
+      {
+        id_parametro: 90,
+        grupo: 'disability',
+        sigla: '',
+        nombre: 'visualPhysics',
+        descripcion: '',
+        orden: 2,
+        fid_parametro_padre: 74,
+        _usuario_creacion: 1,
+        _usuario_modificacion: 1,
+        _fecha_creacion: new Date(),
+        _fecha_modificacion: new Date()
+      },
+      // 91
+      {
+        id_parametro: 91,
+        grupo: 'disability',
+        sigla: '',
+        nombre: 'auditoryPhysique',
+        descripcion: '',
+        orden: 2,
+        fid_parametro_padre: 74,
+        _usuario_creacion: 1,
+        _usuario_modificacion: 1,
+        _fecha_creacion: new Date(),
+        _fecha_modificacion: new Date()
+      },
+      // 92
+      {
+        id_parametro: 92,
+        grupo: 'disability',
+        sigla: '',
+        nombre: 'auditoryIntellectual',
+        descripcion: '',
+        orden: 2,
+        fid_parametro_padre: 74,
+        _usuario_creacion: 1,
+        _usuario_modificacion: 1,
+        _fecha_creacion: new Date(),
+        _fecha_modificacion: new Date()
+      },
+      // 93
+      {
+        id_parametro: 93,
+        grupo: 'disability',
+        sigla: '',
+        nombre: 'visualIntellectual',
+        descripcion: '',
+        orden: 2,
+        fid_parametro_padre: 74,
+        _usuario_creacion: 1,
+        _usuario_modificacion: 1,
+        _fecha_creacion: new Date(),
+        _fecha_modificacion: new Date()
+      },
+      // 94
+      {
+        id_parametro: 94,
+        grupo: 'disability',
+        sigla: '',
+        nombre: 'other',
+        descripcion: '',
+        orden: 2,
+        fid_parametro_padre: 74,
+        _usuario_creacion: 1,
+        _usuario_modificacion: 1,
+        _fecha_creacion: new Date(),
+        _fecha_modificacion: new Date()
+      },
     ], {});
   },
 

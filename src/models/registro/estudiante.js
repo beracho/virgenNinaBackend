@@ -48,29 +48,6 @@ module.exports = (sequelize, DataType) => {
         isIn: {args: [['PREINSCRITO', 'EN ESPERA', 'INSCRITO']], msg: "El campo estado sólo permite valores: PREINSCRITO, EN ESPERA o INSCRITO."},
       },
     },
-    discapacidad_comunicacion: {
-      type: DataType.BOOLEAN,
-      xlabel: 'Discapacidad de comunicación',
-      defaultValue: false,
-    },
-    discapacidad_motriz: {
-      type: DataType.BOOLEAN,
-      xlabel: 'Discapacidad motriz',
-      defaultValue: false,
-    },
-    discapacidad_mental: {
-      type: DataType.BOOLEAN,
-      xlabel: 'Discapacidad mental',
-      defaultValue: false,
-    },
-    discapacidad_otra: {
-      type: DataType.STRING(25),
-      xlabel: 'Otra discapacidad',
-      validate: {
-        len: {args: [1, 5], msg: "El campo 'Otra discapacidad' permite un mínimo de 1 caracter y un máximo de 25 caracteres"},
-        is: {args: /^[A-Z|-|-|.]+$/i, msg: "El campo 'Otra discapacidad' permite sólo letras."},
-      },
-    },
     discapacidad_origen: {
       type: DataType.STRING(30),
       xlabel: 'Discapacidad origen',
@@ -98,6 +75,7 @@ module.exports = (sequelize, DataType) => {
       associate: (models) => {
         estudiante.belongsToMany(models.unidad_educativa, { through: models.unidad_educativa_estudiante });
         estudiante.belongsTo(models.registro_inscripcion, {as: 'registro', foreignKey: {name: 'fid_registro', allowNull: false}});
+        estudiante.belongsTo(models.parametro, {as: 'discapacidad', foreignKey: {name: 'fid_discapacidad'}});
       },
     },
     tableName: 'estudiante',
