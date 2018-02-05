@@ -137,7 +137,7 @@ const parametrosRude = (models) => {
   parametros = {
     where: {
       estado: 'ACTIVO',
-      grupo: ['water_origin', 'water_destiny', 'activity_rude']
+      grupo: ['water_origin', 'water_destiny', 'activity_rude', 'transport', 'internet_frecuency', 'transport_time']
     }
   }
   dao.listarRegistros(models.parametro, parametros)

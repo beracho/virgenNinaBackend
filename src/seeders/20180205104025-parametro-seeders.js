@@ -263,6 +263,149 @@ module.exports = {
         _fecha_creacion: new Date(),
         _fecha_modificacion: new Date()
       },
+      // 40
+      {
+        id_parametro: 40,
+        grupo: 'transport',
+        sigla: '',
+        nombre: 'foot',
+        descripcion: '',
+        orden: 1,
+        _usuario_creacion: 1,
+        _usuario_modificacion: 1,
+        _fecha_creacion: new Date(),
+        _fecha_modificacion: new Date()
+      },
+      // 41
+      {
+        id_parametro: 41,
+        grupo: 'transport',
+        sigla: '',
+        nombre: 'car',
+        descripcion: '',
+        orden: 1,
+        _usuario_creacion: 1,
+        _usuario_modificacion: 1,
+        _fecha_creacion: new Date(),
+        _fecha_modificacion: new Date()
+      },
+      // 42
+      {
+        id_parametro: 42,
+        grupo: 'transport',
+        sigla: '',
+        nombre: 'bicycle',
+        descripcion: '',
+        orden: 1,
+        _usuario_creacion: 1,
+        _usuario_modificacion: 1,
+        _fecha_creacion: new Date(),
+        _fecha_modificacion: new Date()
+      },
+      // 43
+      {
+        id_parametro: 43,
+        grupo: 'transport',
+        sigla: '',
+        nombre: 'train',
+        descripcion: '',
+        orden: 1,
+        _usuario_creacion: 1,
+        _usuario_modificacion: 1,
+        _fecha_creacion: new Date(),
+        _fecha_modificacion: new Date()
+      },
+      // 50
+      {
+        id_parametro: 50,
+        grupo: 'internet_frecuency',
+        sigla: '',
+        nombre: 'daily',
+        descripcion: '',
+        orden: 1,
+        _usuario_creacion: 1,
+        _usuario_modificacion: 1,
+        _fecha_creacion: new Date(),
+        _fecha_modificacion: new Date()
+      },
+      // 51
+      {
+        id_parametro: 51,
+        grupo: 'internet_frecuency',
+        sigla: '',
+        nombre: 'onceAWeek',
+        descripcion: '',
+        orden: 1,
+        _usuario_creacion: 1,
+        _usuario_modificacion: 1,
+        _fecha_creacion: new Date(),
+        _fecha_modificacion: new Date()
+      },
+      // 52
+      {
+        id_parametro: 52,
+        grupo: 'internet_frecuency',
+        sigla: '',
+        nombre: 'onceAMonth',
+        descripcion: '',
+        orden: 1,
+        _usuario_creacion: 1,
+        _usuario_modificacion: 1,
+        _fecha_creacion: new Date(),
+        _fecha_modificacion: new Date()
+      },
+      // 60
+      {
+        id_parametro: 60,
+        grupo: 'transport_time',
+        sigla: '',
+        nombre: 'halfHour',
+        descripcion: '',
+        orden: 1,
+        _usuario_creacion: 1,
+        _usuario_modificacion: 1,
+        _fecha_creacion: new Date(),
+        _fecha_modificacion: new Date()
+      },
+      // 61
+      {
+        id_parametro: 61,
+        grupo: 'transport_time',
+        sigla: '',
+        nombre: 'oneHour',
+        descripcion: '',
+        orden: 1,
+        _usuario_creacion: 1,
+        _usuario_modificacion: 1,
+        _fecha_creacion: new Date(),
+        _fecha_modificacion: new Date()
+      },
+      // 62
+      {
+        id_parametro: 62,
+        grupo: 'transport_time',
+        sigla: '',
+        nombre: 'twoHours',
+        descripcion: '',
+        orden: 1,
+        _usuario_creacion: 1,
+        _usuario_modificacion: 1,
+        _fecha_creacion: new Date(),
+        _fecha_modificacion: new Date()
+      },
+      // 63
+      {
+        id_parametro: 63,
+        grupo: 'transport_time',
+        sigla: '',
+        nombre: 'twoOrMore',
+        descripcion: '',
+        orden: 1,
+        _usuario_creacion: 1,
+        _usuario_modificacion: 1,
+        _fecha_creacion: new Date(),
+        _fecha_modificacion: new Date()
+      },
     ], {});
   },
 
