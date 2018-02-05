@@ -18,10 +18,10 @@ module.exports = (sequelize, DataType) => {
       type: DataType.ENUM,
       xlabel: 'Nivel',
       allowNull: false,
-      values: ['INICIAL', 'PRIMARIA', 'SECUNDARIA'],
+      values: ['INICIAL', 'PRIMARIA', 'SECUNDARIA', 'REZAGO'],
       defaultValue: 'PRIMARIA',
       validate: {
-        isIn: {args: [['INICIAL', 'PRIMARIA', 'SECUNDARIA']], msg: "El campo estado sólo permite valores: 'INICIAL', 'PRIMARIA' o 'SECUNDARIA'"},
+        isIn: {args: [['INICIAL', 'PRIMARIA', 'SECUNDARIA', 'REZAGO']], msg: "El campo estado sólo permite valores: 'INICIAL', 'PRIMARIA', 'SECUNDARIA' o 'REZAGO'"},
       },
     },
     grado: {
@@ -29,7 +29,7 @@ module.exports = (sequelize, DataType) => {
       xlabel: 'Grado',
       allowNull: true,
       validate: {
-        is: {args: /^[0-9]+$/i, msg: "El campo 'Grado' permite sólo números."},
+        is: {args: /^[0-6]+$/i, msg: "El campo 'Grado' permite sólo números."},
       },
     },
     gestion: {
