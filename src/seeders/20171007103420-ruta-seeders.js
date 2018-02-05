@@ -239,21 +239,21 @@ module.exports = {
         _fecha_creacion: new Date(),
         _fecha_modificacion: new Date(),
       }, {
-        
-        
-                
         //20
-        ruta: '/api/v1/registros/:id/enviar',
-        descripcion: 'Servicio para enviar un certificado.',
-        method_get: false,
+        ruta: '/api/v1/parametrosRude',
+        descripcion: 'Parametros para el registro Rude.',
+        method_get: true,
         method_post: false,
-        method_put: true,
+        method_put: false,
         method_delete: false,
         estado: 'ACTIVO',
         _usuario_creacion: 1,
         _fecha_creacion: new Date(),
         _fecha_modificacion: new Date(),
       }, {
+        
+        
+                
         //21
         ruta: '/api/v1/registros/:id/observar',
         descripcion: 'Servicio para observar un certificado.',

@@ -132,6 +132,20 @@ const obtenerParametro = (parametros, models) => {
   return deferred.promise;
 };
 
+const parametrosRude = (models) => {
+  const deferred = Q.defer();
+  parametros = {
+    where: {
+      estado: 'ACTIVO',
+      grupo: ['water_origin', 'water_destiny']
+    }
+  }
+  dao.listarRegistros(models.parametro, parametros)
+  .then(respuesta => deferred.resolve(respuesta))
+  .catch(error => deferred.reject(error));
+  return deferred.promise;
+};
+
 module.exports = {
   registrarParametro,
   modificarParametro,
@@ -139,4 +153,5 @@ module.exports = {
   obtenerParametro,
   obtenerParametroPorId,
   eliminarParametro,
+  parametrosRude
 }
