@@ -146,6 +146,123 @@ module.exports = {
         _fecha_creacion: new Date(),
         _fecha_modificacion: new Date()
       },
+      // 21
+      {
+        id_parametro: 21,
+        grupo: 'activity_rude',
+        sigla: '',
+        nombre: 'agricultureIndustry',
+        descripcion: '',
+        orden: 1,
+        _usuario_creacion: 1,
+        _usuario_modificacion: 1,
+        _fecha_creacion: new Date(),
+        _fecha_modificacion: new Date()
+      },
+      // 22
+      {
+        id_parametro: 22,
+        grupo: 'activity_rude',
+        sigla: '',
+        nombre: 'familyAgriculture',
+        descripcion: '',
+        orden: 1,
+        _usuario_creacion: 1,
+        _usuario_modificacion: 1,
+        _fecha_creacion: new Date(),
+        _fecha_modificacion: new Date()
+      },
+      // 23
+      {
+        id_parametro: 23,
+        grupo: 'activity_rude',
+        sigla: '',
+        nombre: 'domesticAid',
+        descripcion: '',
+        orden: 1,
+        _usuario_creacion: 1,
+        _usuario_modificacion: 1,
+        _fecha_creacion: new Date(),
+        _fecha_modificacion: new Date()
+      },
+      // 24
+      {
+        id_parametro: 24,
+        grupo: 'activity_rude',
+        sigla: '',
+        nombre: 'babySister',
+        descripcion: '',
+        orden: 1,
+        _usuario_creacion: 1,
+        _usuario_modificacion: 1,
+        _fecha_creacion: new Date(),
+        _fecha_modificacion: new Date()
+      },
+      // 25
+      {
+        id_parametro: 25,
+        grupo: 'activity_rude',
+        sigla: '',
+        nombre: 'minery',
+        descripcion: '',
+        orden: 1,
+        _usuario_creacion: 1,
+        _usuario_modificacion: 1,
+        _fecha_creacion: new Date(),
+        _fecha_modificacion: new Date()
+      },
+      // 26
+      {
+        id_parametro: 26,
+        grupo: 'activity_rude',
+        sigla: '',
+        nombre: 'construction',
+        descripcion: '',
+        orden: 1,
+        _usuario_creacion: 1,
+        _usuario_modificacion: 1,
+        _fecha_creacion: new Date(),
+        _fecha_modificacion: new Date()
+      },
+      // 27
+      {
+        id_parametro: 27,
+        grupo: 'activity_rude',
+        sigla: '',
+        nombre: 'publicTransport',
+        descripcion: '',
+        orden: 1,
+        _usuario_creacion: 1,
+        _usuario_modificacion: 1,
+        _fecha_creacion: new Date(),
+        _fecha_modificacion: new Date()
+      },
+      // 28
+      {
+        id_parametro: 28,
+        grupo: 'activity_rude',
+        sigla: '',
+        nombre: 'other',
+        descripcion: '',
+        orden: 1,
+        _usuario_creacion: 1,
+        _usuario_modificacion: 1,
+        _fecha_creacion: new Date(),
+        _fecha_modificacion: new Date()
+      },
+      // 29
+      {
+        id_parametro: 29,
+        grupo: 'activity_rude',
+        sigla: '',
+        nombre: 'none',
+        descripcion: '',
+        orden: 1,
+        _usuario_creacion: 1,
+        _usuario_modificacion: 1,
+        _fecha_creacion: new Date(),
+        _fecha_modificacion: new Date()
+      },
     ], {});
   },
 
