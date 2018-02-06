@@ -105,10 +105,8 @@ describe('====================== APIREST REGISTRO INSCRIPCION ==================
       "salud": {
         "centro_salud": true,
         "frecuencia_medica": 6,
-        "discapacidad_comunicacion": false,
-        "discapacidad_motriz": true,
-        "discapacidad_mental": false,
-        "discapacidad_otra": "",
+        "tipo_discapacidad": 71,
+        "subtipo_discapacidad": 76,
         "discapacidad_origen": "INHERITED"
       },
       "servicios_basicos": {

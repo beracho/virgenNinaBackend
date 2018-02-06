@@ -184,7 +184,7 @@ module.exports = app => {
           .then(respuesta => {
             const parametrosEstudiante = {};
             if (body.persona.codrude !== '') { parametrosEstudiante.rude = body.persona.codrude };
-            if (body.salud.discapacidad_comunicacion !== '') { parametrosEstudiante.discapacidad_comunicacion = body.salud.discapacidad_comunicacion };
+            if (body.salud.discapacidad_origen !== '') { parametrosEstudiante.discapacidad_origen = body.salud.discapacidad_origen };
             if (body.salud.tipo_discapacidad !== '') { parametrosEstudiante.fid_discapacidad = body.salud.tipo_discapacidad };
             if (body.salud.subtipo_discapacidad !== '') { parametrosEstudiante.fid_discapacidad = body.salud.subtipo_discapacidad };
             if (personaCreada) {
