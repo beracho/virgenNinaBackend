@@ -57,7 +57,7 @@ module.exports = app => {
       params.limit = req.limit,
       params.page = req.page
     };
-    if (req.order) { 
+    if (req.order) {
       params.order = req.order;
     };
     dao.listarRegistros(models.persona, params)
@@ -120,9 +120,23 @@ module.exports = app => {
     })
     .then(respuesta => {
       respuestaTotal[0].dataValues.persona_de = respuesta[0].persona_de ;
-      deferred.resolve(respuestaTotal);
+      params = {
+        where: {
+          fid_estudiante: respuestaTotal[0].dataValues.fid_estudiante
+        },
+        include: [{
+          model: models.unidad_educativa,
+          as: 'unidad_educativa'
+        }]
+      };
+      return dao.listarRegistros(models.unidad_educativa_estudiante, params);
+    })
+    .then(respuesta => {
+      respuestaTotal[0].dataValues.unidades_educativas = respuesta;
+      deferred.resolve(respuestaTotal)
     })
     .catch(error => {
+      console.log(error);
       deferred.reject(error)
     });
     return deferred.promise;

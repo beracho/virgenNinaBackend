@@ -17,7 +17,7 @@ module.exports = (sequelize, DataType) => {
     nivel: {
       type: DataType.ENUM,
       xlabel: 'Nivel',
-      allowNull: false,
+      allowNull: true,
       values: ['INICIAL', 'PRIMARIA', 'SECUNDARIA', 'REZAGO'],
       defaultValue: 'PRIMARIA',
       validate: {
@@ -33,7 +33,7 @@ module.exports = (sequelize, DataType) => {
       },
     },
     gestion: {
-      type: DataType.DATE,
+      type: DataType.STRING(4),
       xlabel: 'Gestión',
       allowNull: true,
     },
@@ -48,12 +48,21 @@ module.exports = (sequelize, DataType) => {
     turno: {
       type: DataType.ENUM,
       xlabel: 'Turno',
-      allowNull: false,
+      allowNull: true,
       values: ['MAÑANA', 'TARDE', 'NOCHE'],
       defaultValue: 'MAÑANA',
       validate: {
         isIn: {args: [['MAÑANA', 'TARDE', 'NOCHE']], msg: "El campo estado sólo permite valores: 'MAÑANA', 'TARDE' o 'NOCHE'"},
       },
+    },
+    _usuario_creacion: {
+      type: DataType.INTEGER,
+      xlabel: 'Usuario de creación',
+      allowNull: false,
+    },
+    _usuario_modificacion: {
+      type: DataType.INTEGER,
+      xlabel: 'Usuario de modificación',
     },
   }, {
       createdAt: '_fecha_creacion',
@@ -61,9 +70,10 @@ module.exports = (sequelize, DataType) => {
       deletedAt: '_fecha_eliminacion',
       paranoid: true,
       classMethods: {
-        // associate: (models) => {
-        //   unidad_educativa_estudiante.belongsTo(models.nim, { as: 'nim', foreignKey: { name: 'fid_nim', allowNull: false } });
-        // },
+        associate: (models) => {
+          unidad_educativa_estudiante.belongsTo(models.estudiante, { as: 'estudiantes', foreignKey: { name: 'fid_estudiante', allowNull: true } });
+          unidad_educativa_estudiante.belongsTo(models.unidad_educativa, {as: 'unidad_educativa', foreignKey: {name: 'fid_unidad_educativa', allowNull: true}});
+        },
         tableName: 'unidad_educativa_estudiante',
         comment: 'Tabla para almacenar las asociaciones de unidad_educativa_estudiantees por departamento de una API.',
       }

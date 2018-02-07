@@ -233,8 +233,62 @@ module.exports = app => {
             }
           })
           .then(respuesta => {
+            const parametrosUniEduEstu = {};
+            if (body.registroInscripcion.nivel !== '') { parametrosUniEduEstu.nivel = body.registroInscripcion.nivel };
+            if (body.registroInscripcion.grado !== '') { parametrosUniEduEstu.grado = body.registroInscripcion.grado };
+            if (body.registroInscripcion.paralelo !== '') { parametrosUniEduEstu.paralelo = body.registroInscripcion.paralelo };
+            if (body.registroInscripcion.turno !== '') { parametrosUniEduEstu.turno = body.registroInscripcion.turno };
+            if (body.registroInscripcion.gestion !== '') { parametrosUniEduEstu.gestion = body.registroInscripcion.gestion };
+            if (body.unidadEducativa.sie !== '') { parametrosUniEduEstu.fid_unidad_educativa = body.unidadEducativa.nombre };
+            parametrosUniEduEstu.fid_estudiante = personaModificar.fid_estudiante;
+            let idUniEduEstu = -1;
             if (personaCreada) {
+              // Crea unidad educativa en la gestion actual
+              parametrosUniEduEstu._usuario_creacion = body.audit_usuario.id_usuario;
               clavesForaneas.fid_lugar_nacimiento = respuesta.id_ubicacion;
+              return dao.crearRegistro(models.unidad_educativa_estudiante, parametrosUniEduEstu, false, transaccion)
+            } else {
+              // Modifica unidad educativa en la gestion actual
+              parametrosUniEduEstu._usuario_modificacion = body.audit_usuario.id_usuario;
+              personaModificar.dataValues.unidades_educativas.forEach(function (element) {
+                if (element.gestion == '2018') {
+                  idUniEduEstu = element.id_unidad_educativa_estudiante;
+                }
+              }, this);
+              if (idUniEduEstu !== -1){
+                return dao.modificarRegistro(models.unidad_educativa_estudiante, idUniEduEstu, parametrosUniEduEstu, transaccion);
+              } else {
+                return 'No se encontró el elemento';
+              }
+            }
+          })
+          .then(respuesta => {
+            const parametrosUniEduEstu = {};
+            if (body.unidadEducativa.id !== '') { parametrosUniEduEstu.fid_unidad_educativa = body.unidadEducativa.id };
+            parametrosUniEduEstu.fid_estudiante = personaModificar.fid_estudiante;
+            let idUniEduEstu = -1;
+            if (personaCreada) {
+              // Crea unidad educativa en la gestion pasada
+              parametrosUniEduEstu._usuario_creacion = body.audit_usuario.id_usuario;
+              clavesForaneas.fid_lugar_nacimiento = respuesta.id_ubicacion;
+              return dao.crearRegistro(models.unidad_educativa_estudiante, parametrosUniEduEstu, false, transaccion)
+            } else {
+              // Modifica unidad educativa en la gestion pasada
+              parametrosUniEduEstu._usuario_modificacion = body.audit_usuario.id_usuario;
+              personaModificar.dataValues.unidades_educativas.forEach(function (element) {
+                if (element.gestion == '2017') {
+                  idUniEduEstu = element.id_unidad_educativa_estudiante;
+                }
+              }, this);
+              if (idUniEduEstu !== -1){
+                return dao.modificarRegistro(models.unidad_educativa_estudiante, idUniEduEstu, parametrosUniEduEstu, transaccion);
+              } else {
+                return 'No se encontró el elemento';
+              }
+            }
+          })
+          .then(respuesta => {
+            if (personaCreada) {
               return dao.modificarRegistro(models.persona, personaModificar.id_persona, clavesForaneas, transaccion);
             } else {
               return personaModificar;

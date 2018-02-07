@@ -73,7 +73,7 @@ module.exports = (sequelize, DataType) => {
     classMethods: {
       // Creando asociaciones para la entidad
       associate: (models) => {
-        estudiante.belongsToMany(models.unidad_educativa, { through: models.unidad_educativa_estudiante });
+        estudiante.hasMany(models.unidad_educativa_estudiante, {as: 'estudiantes', foreignKey: {name: 'fid_estudiante', allowNull: true}});
         estudiante.belongsTo(models.registro_inscripcion, {as: 'registro', foreignKey: {name: 'fid_registro', allowNull: false}});
         estudiante.belongsTo(models.parametro, {as: 'discapacidad', foreignKey: {name: 'fid_discapacidad'}});
       },

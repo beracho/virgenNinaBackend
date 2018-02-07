@@ -46,7 +46,7 @@ describe('====================== APIREST REGISTRO INSCRIPCION ==================
   // });
   
   // Ruta: /api/v1/registroRude
-  it('>>> Deberia crear o actualizar el registro RUDE de un estudiante inscrito', (done) => {
+  it('>>> Deberia actualizar el registro RUDE de un estudiante inscrito', (done) => {
     const datos = {
       "unidadEducativa": {
         "dependencia": "public",
@@ -55,6 +55,7 @@ describe('====================== APIREST REGISTRO INSCRIPCION ==================
         "sie": "111"
       },
       "unidadEducativaAnterior": {
+        "id": 1,
         "codSie": "",
         "nombreUnidad": ""
       },
@@ -187,7 +188,7 @@ describe('====================== APIREST REGISTRO INSCRIPCION ==================
       });
   });
 
-  it('>>> Deberia crear o actualizar el registro RUDE de un estudiante inscrito', (done) => {
+  it('>>> Deberia dar error de rude en eso', (done) => {
     const datos = {
       "unidadEducativa": {
         "dependencia": "public",
@@ -331,7 +332,7 @@ describe('====================== APIREST REGISTRO INSCRIPCION ==================
   });
 
 
-  it('>>> Deberia crear o actualizar el registro RUDE de un estudiante inscrito', (done) => {
+  it('>>> Deberia crear un registro RUDE de un estudiante', (done) => {
     const datos = {
       "unidadEducativa": {
         "dependencia": "public",
@@ -340,6 +341,7 @@ describe('====================== APIREST REGISTRO INSCRIPCION ==================
         "sie": "111"
       },
       "unidadEducativaAnterior": {
+        "id": 1,
         "codSie": "",
         "nombreUnidad": ""
       },
