@@ -45,8 +45,57 @@ module.exports = app => {
     return deferred.promise;
   }
 
+  const validaDatos = (params) => {
+    const deferred = Q.defer();
+    let valida = {
+      value: true,
+      error: '',
+    };
+    if (!(params.sie && params.nombre && params.dependencia && params.distrito)) {
+      valida.value = false;
+      valida.error = `incompleteData`;
+      deferred.resolve(valida);
+      return deferred.promise;
+    }
+    if (!(params.dependencia == "public" || params.dependencia == "comunitary" || params.dependencia == "convein" || params.dependencia == "private")) {
+      valida.value = false;
+      valida.error = `notAllowedDependency`;
+      deferred.resolve(valida);
+      return deferred.promise;
+    }
+    deferred.resolve(valida);
+    return deferred.promise;
+  }
+
+  const crearUnidadEducativa = (models, body) => {
+    const deferred = Q.defer();
+    const params = {
+      sie: body.sie,
+      nombre: body.nombre,
+      dependencia: body.dependencia,
+      distrito: body.distrito,
+      _usuario_creacion: body.audit_usuario.id_usuario,
+    }
+    validaDatos(params)
+    .then(respuesta => {
+      if (!respuesta.value) {
+        throw new Error(respuesta.error);
+      }
+      return dao.crearRegistro(models.unidad_educativa, params);
+    })
+    .then(respuesta => {
+      deferred.resolve(respuesta);
+    })
+    .catch(error => {
+      console.log(error);
+      deferred.reject(error)
+    });
+    return deferred.promise;
+  }
+
   const unidad_educativaBL = {
-    obtenerRegistros
+    obtenerRegistros,
+    crearUnidadEducativa
   };
 
   return unidad_educativaBL;

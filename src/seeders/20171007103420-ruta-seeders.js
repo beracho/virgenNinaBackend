@@ -251,21 +251,21 @@ module.exports = {
         _fecha_creacion: new Date(),
         _fecha_modificacion: new Date(),
       }, {
-        
-        
-                
         //21
-        ruta: '/api/v1/registros/:id/observar',
-        descripcion: 'Servicio para observar un certificado.',
+        ruta: '/api/v1/unidadEducativa',
+        descripcion: 'Crea una unidad educativa.',
         method_get: false,
-        method_post: false,
-        method_put: true,
+        method_post: true,
+        method_put: false,
         method_delete: false,
         estado: 'ACTIVO',
         _usuario_creacion: 1,
         _fecha_creacion: new Date(),
         _fecha_modificacion: new Date(),
       }, {
+        
+        
+                
         //22
         ruta: '/api/v1/registros/:id/aprobar',
         descripcion: 'Servicio para aprobar un certificado.',

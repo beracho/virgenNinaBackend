@@ -16,6 +16,13 @@ module.exports = app => {
     .catch(error => Util.mensajeError(res, error.message));
   });
 
+  app.route("/api/v1/unidadEducativa")
+  .post((req, res) => {
+    unidadEducativaBL.crearUnidadEducativa(models, req.body)
+    .then(respuesta => Util.mensajeExito(res, "Obtención de datos exitosa.", 200, respuesta))
+    .catch(error => Util.mensajeError(res, error.message));
+  });
+
   app.route("/api/v1/unidadesEducativas")
   .get((req, res) => {
     unidadEducativaBL.obtenerRegistros(req.params, req.body)

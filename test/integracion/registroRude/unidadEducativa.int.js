@@ -55,34 +55,82 @@ describe('====================== APIREST UNIDAD EDUCATIVA ======================
         should(res.body.mensaje).be.ok;
         should(res.body.datos).be.ok;
         res.body.finalizado.should.be.equal(true);
-        res.body.datos.should.not.be.equal(null);
-        res.body.datos.should.not.be.equal(undefined);
         done();
       });
   });
-  // it('>>> Debería autenticarse con un usuario común (rol Inscripciones) a través de un usuario y contraseña ', (done) => {
-  //   const objSend = {
-  //     usuario: "inscripciones",
-  //     contrasena: "Developer",
-  //     pathLogin: "login",
-  //   };
-  //   request(server)
-  //     .post(`/autenticar`)
-  //     .send(objSend)
-  //     .set('Authorization', `Bearer ${token}`)
-  //     .expect(200)
-  //     .end((err, res) => {
-  //       if (err) {
-  //         return done(err);
-  //       }
-  //       res.body.should.be.an.Object();
-  //       should(res.body.payload).be.ok;
-  //       // res.body.payload.should.be.an.Object();
-  //       // should(res.body.payload.usuario).be.ok;
-  //       // res.body.payload.usuario.should.be.equal(objSend.usuario);
-  //       // should(res.body.token).be.ok;
-  //       // res.body.user.id_rol.should.be.equal(ROL_TECNICO);
-  //       done();
-  //     });
-  // });
+  
+    // Ruta: /unidadEducativa
+    it('>>> Deberia crear una unidad educativa nueva', (done) => {
+      const datos = {
+        sie: '541',
+        nombre: 'Colegio Boliviano Escoces',
+        dependencia: 'convein',
+        distrito: 'oruro'
+      };
+      request(server)
+        .post(`/api/v1/unidadEducativa`)
+        .send(datos)
+        .set('Authorization', `Bearer ${token}`)
+        .expect(200)
+        .end((err, res) => {
+          if (err) {
+            return done(err);
+          }
+          should(res.body.finalizado).be.ok;
+          should(res.body.mensaje).be.ok;
+          should(res.body.datos).be.ok;
+          res.body.finalizado.should.be.equal(true);
+          done();
+        });
+    });
+
+    it('>>> Deberia dar error por dependencia incorrecta', (done) => {
+      const datos = {
+        sie: '251',
+        nombre: 'Colegio Boliviano Escoces',
+        dependencia: 'convenio',
+        distrito: 'oruro'
+      };
+      request(server)
+        .post(`/api/v1/unidadEducativa`)
+        .send(datos)
+        .set('Authorization', `Bearer ${token}`)
+        .expect(412)
+        .end((err, res) => {
+          if (err) {
+            return done(err);
+          }
+          should(res.body.finalizado).be.ok;
+          should(res.body.mensaje).be.ok;
+          should(res.body.datos).be.ok;
+          res.body.finalizado.should.be.equal(false);
+          res.body.mensaje.should.be.equal('notAllowedDependency');
+          done();
+        });
+    });
+    
+    // it('>>> Deberia dar error por sie repetido', (done) => {
+    //   const datos = {
+    //     sie: '541',
+    //     nombre: 'Colegio Boliviano Escoces',
+    //     dependencia: 'public',
+    //     distrito: 'oruro'
+    //   };
+    //   request(server)
+    //     .post(`/api/v1/unidadEducativa`)
+    //     .send(datos)
+    //     .set('Authorization', `Bearer ${token}`)
+    //     .expect(412)
+    //     .end((err, res) => {
+    //       if (err) {
+    //         return done(err);
+    //       }
+    //       should(res.body.finalizado).be.ok;
+    //       should(res.body.mensaje).be.ok;
+    //       should(res.body.datos).be.ok;
+    //       res.body.finalizado.should.be.equal(false);
+    //       res.body.mensaje.should.be.equal('sieInUse');
+    //       done();
+    //     });
+    // });
 });
