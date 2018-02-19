@@ -123,11 +123,14 @@ module.exports = app => {
           documento_identidad: body.persona.documento_identidad,
           lugar_documento_identidad: body.persona.lugar_documento_identidad
         }
+        if (body.salud.discapacidad_origen !== '') { personaObj.discapacidad_origen = body.salud.discapacidad_origen };
         if (body.persona.carnet_discapacidad !== '') { personaObj.carnet_discapacidad = body.persona.carnet_discapacidad };
         if (body.persona.pioc !== '') { personaObj.pioc = body.persona.pioc };
         if (body.persona.discapacidad !== '') { personaObj.discapacidad = body.persona.discapacidad };
         if (body.registroInscripcion.idioma !== '') { personaObj.idioma_materno = body.registroInscripcion.idioma };
         if (body.registroInscripcion.idiomas !== '') { personaObj.idiomas = body.registroInscripcion.idiomas };
+        if (body.salud.tipo_discapacidad !== '') { personaObj.fid_discapacidad = body.salud.tipo_discapacidad };
+        if (body.salud.subtipo_discapacidad !== '') { personaObj.fid_discapacidad = body.salud.subtipo_discapacidad };
         return models.sequelize.transaction()
       })
       .then((transaccion) => {
@@ -184,9 +187,6 @@ module.exports = app => {
           .then(respuesta => {
             const parametrosEstudiante = {};
             if (body.persona.codrude !== '') { parametrosEstudiante.rude = body.persona.codrude };
-            if (body.salud.discapacidad_origen !== '') { parametrosEstudiante.discapacidad_origen = body.salud.discapacidad_origen };
-            if (body.salud.tipo_discapacidad !== '') { parametrosEstudiante.fid_discapacidad = body.salud.tipo_discapacidad };
-            if (body.salud.subtipo_discapacidad !== '') { parametrosEstudiante.fid_discapacidad = body.salud.subtipo_discapacidad };
             if (personaCreada) {
               // Crea estudiante
               parametrosEstudiante.fid_registro = respuesta.id_registro_inscripcion;

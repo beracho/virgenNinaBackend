@@ -152,6 +152,15 @@ module.exports = (sequelize, DataType) => {
         len: {args: [0, 100], msg: "El campo 'Idiomas' permite un máximo de 100 caracteres"},
       },
     },
+    discapacidad_origen: {
+      type: DataType.STRING(30),
+      xlabel: 'Discapacidad origen',
+      defaultValue: 'NONE',
+      validate: {
+        isIn: {args: [['BORN', 'ADQUIRED', 'INHERITED', 'NONE']], msg: "El campo 'Discapacidad origen' sólo permite valores: 'BORN', 'ADQUIRED', 'INHERITED' o 'NONE'."},
+        len: {args: [0, 30], msg: "El campo 'Discapacidad origen' permite un máximo de 30 caracteres."},
+      },
+    },
     ocupacion_actual: {
       type: DataType.STRING(50),
       xlabel: 'Ocupación actual',
@@ -168,7 +177,7 @@ module.exports = (sequelize, DataType) => {
         len: {args: [0, 50], msg: "El campo 'Grado de Instrucción' permite un máximo de 50 caracteres"},
       },
     },
-    discapacidad: {
+    tiene_discapacidad: {
       type: DataType.BOOLEAN,
       xlabel: 'Discapacidad',
       allowNull: false,
@@ -196,6 +205,7 @@ module.exports = (sequelize, DataType) => {
         persona.belongsTo(models.estudiante, {as: 'estudiante', foreignKey: {name: 'fid_estudiante'}});
         persona.hasMany(models.parentezco, {as: 'persona_es', foreignKey: {name: 'fid_persona_es', allowNull: true}});
         persona.hasMany(models.parentezco, {as: 'persona_de', foreignKey: {name: 'fid_persona_de', allowNull: true}});
+        persona.belongsTo(models.parametro, {as: 'discapacidad', foreignKey: {name: 'fid_discapacidad'}});
       },
     },
     tableName: 'persona',

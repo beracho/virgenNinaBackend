@@ -88,7 +88,6 @@ module.exports = (sequelize, DataType) => {
       associate: (models) => {
         parametro.belongsTo(models.parametro, {as: 'parametro_padre', foreignKey: {name: 'fid_parametro_padre', allowNull: true}});
         parametro.hasMany(models.parametro, {as: 'parametros', foreignKey: {name:'fid_parametro_padre', allowNull: false}});
-        // parametro.hasMany(models.parametro_formulario, {as: 'parametros_formulario', foreignKey: {name: 'fid_parametro', allowNull: false}});
       },
     },
     tableName: 'parametro',

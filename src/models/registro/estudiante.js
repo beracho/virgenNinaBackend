@@ -48,15 +48,6 @@ module.exports = (sequelize, DataType) => {
         isIn: {args: [['PREINSCRITO', 'EN ESPERA', 'INSCRITO']], msg: "El campo estado sólo permite valores: PREINSCRITO, EN ESPERA o INSCRITO."},
       },
     },
-    discapacidad_origen: {
-      type: DataType.STRING(30),
-      xlabel: 'Discapacidad origen',
-      defaultValue: 'NINGUNA',
-      validate: {
-        isIn: {args: [['BORN', 'ADQUIRED', 'INHERITED', 'NONE']], msg: "El campo 'Discapacidad origen' sólo permite valores: 'BORN', 'ADQUIRED', 'INHERITED' o 'NONE'."},
-        len: {args: [0, 30], msg: "El campo 'Discapacidad origen' permite un máximo de 30 caracteres."},
-      },
-    },
     _usuario_creacion: {
       type: DataType.INTEGER,
       xlabel: 'Usuario de creación',
@@ -75,7 +66,6 @@ module.exports = (sequelize, DataType) => {
       associate: (models) => {
         estudiante.hasMany(models.unidad_educativa_estudiante, {as: 'estudiantes', foreignKey: {name: 'fid_estudiante', allowNull: true}});
         estudiante.belongsTo(models.registro_inscripcion, {as: 'registro', foreignKey: {name: 'fid_registro', allowNull: false}});
-        estudiante.belongsTo(models.parametro, {as: 'discapacidad', foreignKey: {name: 'fid_discapacidad'}});
       },
     },
     tableName: 'estudiante',
