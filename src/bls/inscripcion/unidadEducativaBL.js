@@ -66,7 +66,7 @@ module.exports = app => {
     deferred.resolve(valida);
     return deferred.promise;
   }
-
+  
   const crearUnidadEducativa = (models, body) => {
     const deferred = Q.defer();
     const params = {

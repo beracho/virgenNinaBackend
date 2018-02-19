@@ -63,7 +63,6 @@ module.exports = (sequelize, DataType) => {
       allowNull: true,
       values: ['CODEPEDIS', 'IBC'],
       unique: 'uniqueDiscapacidad',
-      defaultValue: 'CODEPEDIS',
       validate: {
         isIn: {args: [['CODEPEDIS', 'IBC']], msg: "El campo estado sólo permite valores: 'CODEPEDIS' o 'IBC'"},
       },

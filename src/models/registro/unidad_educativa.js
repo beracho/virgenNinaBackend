@@ -48,7 +48,7 @@ module.exports = (sequelize, DataType) => {
       xlabel: 'Distrito',
       validate: {
         len: {args: [1, 25], msg: "El campo 'Distrito' permite un mínimo de 1 caracter y un máximo de 25 caracteres"},
-        is: {args: /^[A-Z|-|-|.]+$/i, msg: "El campo 'Distrito' permite sólo letras."},
+        is: {args: /^[A-Z|-| |.]+$/i, msg: "El campo 'Distrito' permite sólo letras."},
       },
     },
     _usuario_creacion: {

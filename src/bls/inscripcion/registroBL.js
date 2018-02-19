@@ -287,7 +287,52 @@ module.exports = app => {
               }
             }
           })
-          .then(respuesta => {
+          .then(() => {
+            // Crea personas apoderadas nuevas
+            apoderadosNuevosPersona = [];
+            apoderadosNuevosRelacion = [];
+            body.apoderados.forEach(function (element) {
+              if (!element.cargado && element.cargado !== undefined) {
+                if (element.nombres && (element.primer_apellido || element.segundo_apellido || element.casada_apellido)) {
+                  element.nombre_completo = `${element.primer_apellido ? element.primer_apellido : ''}`;
+                  element.nombre_completo = `${element.nombre_completo} ${element.segundo_apellido ? element.segundo_apellido : ''}`;
+                  element.nombre_completo = `${element.nombre_completo} ${element.casada_apellido ? element.casada_apellido : ''}`;
+                  element.nombre_completo = `${element.nombre_completo} ${element.nombres} `;
+                  element.nombre_completo = element.nombre_completo.replace( /\s\s+/g, ' ' );
+                  element.nombre_completo = element.nombre_completo.trim();
+                }
+                const objPersona = {
+                  tipo_documento: element.persona_es.tipo_documento,
+                  documento_identidad: element.persona_es.documento_identidad,
+                  lugar_documento_identidad: element.persona_es.lugar_documento_identidad,
+                  complemento_documento: element.persona_es.complemento_documento ? element.persona_es.complemento_documento : '00',
+                  fecha_nacimiento: element.persona_es.fecha_nacimiento,
+                  nombres: element.persona_es.nombres,
+                  primer_apellido: element.persona_es.primer_apellido,
+                  segundo_apellido: element.persona_es.segundo_apellido,
+                  genero: element.persona_es.genero,
+                  idioma_materno: element.persona_es.idioma_materno,
+                  ocupacion_actual: element.persona_es.ocupacion_actual,
+                  grado_instruccion: element.persona_es.grado_instruccion,
+                  _usuario_creacion: body.audit_usuario.id_usuario
+                };
+                const objRelacion = {
+                  relacion: element.relation,
+                  _usuario_creacion: body.audit_usuario.id_usuario
+                };
+                apoderadosNuevosPersona.push(objPersona);
+                apoderadosNuevosRelacion.push(objRelacion);
+              }
+            }, this);
+            console.log('-----ENVIA--------');
+            console.log(JSON.stringify(apoderadosNuevosPersona));
+            return dao.crearRegistro(models.persona, apoderadosNuevosPersona, true, transaccion)
+          })
+          // .then(respuesta => {
+          //   console.log('-----------RESPUESTA------------');
+          //   console.log(JSON.stringify(respuesta));
+          // })
+          .then(() => {
             if (personaCreada) {
               return dao.modificarRegistro(models.persona, personaModificar.id_persona, clavesForaneas, transaccion);
             } else {
