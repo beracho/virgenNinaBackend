@@ -30,12 +30,12 @@ module.exports = (sequelize, DataType) => {
       }
     },
     codigo: {
-      type: DataType.STRING(25),
+      type: DataType.STRING(15),
       xlabel: 'Código',
-      allowNull: true,
+      allowNull: false,
       unique: true,
       validate: {
-        len: {args: [5, 25], msg: "El campo 'Código' permite un mínimo de 5 caracteres y un máximo de 25 caracteres"},
+        len: {args: [5, 15], msg: "El campo 'Código' permite un mínimo de 5 caracteres y un máximo de 15 caracteres"},
         notEmpty: {args: [true], msg: 'El campo Código es obligatorio.'},
       },
     },
@@ -66,6 +66,7 @@ module.exports = (sequelize, DataType) => {
       associate: (models) => {
         estudiante.hasMany(models.unidad_educativa_estudiante, {as: 'estudiantes', foreignKey: {name: 'fid_estudiante', allowNull: true}});
         estudiante.belongsTo(models.registro_inscripcion, {as: 'registro', foreignKey: {name: 'fid_registro', allowNull: false}});
+        estudiante.belongsTo(models.curso, {as: 'curso', foreignKey: {name: 'fid_curso', allowNull: true}});
       },
     },
     tableName: 'estudiante',

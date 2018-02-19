@@ -7,6 +7,7 @@ module.exports = {
       {
         rude: '11111014',
         estado: 'INSCRITO',
+        codigo: 'ej-001',
         fid_registro: 1,
         _usuario_creacion: 1,
         _fecha_creacion: new Date(),
@@ -16,6 +17,7 @@ module.exports = {
       {
         rude: '11111015',
         estado: 'PREINSCRITO',
+        codigo: 'ej-002',
         fid_registro: 2,
         _usuario_creacion: 1,
         _fecha_creacion: new Date(),
