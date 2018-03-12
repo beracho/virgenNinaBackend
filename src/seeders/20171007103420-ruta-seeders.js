@@ -263,21 +263,21 @@ module.exports = {
         _fecha_creacion: new Date(),
         _fecha_modificacion: new Date(),
       }, {
-        
-        
-                
         //22
-        ruta: '/api/v1/registros/:id/aprobar',
-        descripcion: 'Servicio para aprobar un certificado.',
+        ruta: '/api/v1/importarEstudiantes',
+        descripcion: 'Servicio para cargar un archivo CSV.',
         method_get: false,
-        method_post: false,
-        method_put: true,
+        method_post: true,
+        method_put: false,
         method_delete: false,
         estado: 'ACTIVO',
         _usuario_creacion: 1,
         _fecha_creacion: new Date(),
         _fecha_modificacion: new Date(),
       }, {
+        
+        
+                
         //23
         ruta: '/api/v1/registros/generar_certificado/:id',
         descripcion: 'Servicio para obtener un certificado.',

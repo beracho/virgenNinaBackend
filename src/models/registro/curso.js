@@ -9,7 +9,12 @@ module.exports = function (sequelize, DataTypes) {
     nombre: {
       type: DataTypes.STRING(50),
       xlabel: 'Nombre',
-      allowNull: true
+      allowNull: false,
+      values: ['AT', 'INI 1', 'INI 2', 'PRI 1', 'PRI 2', 'PRI 3', 'PRI SOC'],
+      unique: 'uniqueCurso',
+      validate: {
+        isIn: {args: [['AT', 'INI 1', 'INI 2', 'PRI 1', 'PRI 2', 'PRI 3', 'PRI SOC']], msg: "El campo estado sólo permite valores: 'AT', 'INI 1', 'INI 2', 'PRI 1', 'PRI 2', 'PRI 3' o 'PRI SOC'"},
+      },
     },
     descripcion: {
       type: DataTypes.TEXT,
@@ -21,23 +26,48 @@ module.exports = function (sequelize, DataTypes) {
       xlabel: 'Tipo de discapacidad',
       allowNull: true
     },
-    nivel: {
+    criterio_edad: {
       type: DataTypes.STRING(50),
-      xlabel: 'Nivel',
+      xlabel: 'Criterio de edad',
+      allowNull: true
+    },
+    maestro: {
+      type: DataTypes.STRING(50),
+      xlabel: 'Nombre del maestro',
       allowNull: true
     },
     grado: {
       type: DataTypes.STRING(50),
       xlabel: 'Grado',
-      allowNull: true
+      allowNull: true,
+      values: ['ATENCION TEMPRANA', 'INDEPENDENCIA PERSONAL', 'INDEPENDENCIA SOCIAL', 'INICIAL', 'PRIMARIA', 'SECUNDARIA'],
+      validate: {
+        isIn: {args: [['ATENCION TEMPRANA', 'INDEPENDENCIA PERSONAL', 'INDEPENDENCIA SOCIAL', 'INICIAL', 'PRIMARIA', 'SECUNDARIA']], msg: "El campo estado sólo permite valores: 'ATENCION TEMPRANA', 'INDEPENDENCIA PERSONAL', 'INDEPENDENCIA SOCIAL', 'INICIAL', 'PRIMARIA' o 'SECUNDARIA'"},
+      },
+    },
+    nivel: {
+      type: DataTypes.INTEGER,
+      xlabel: 'Nivel',
+      allowNull: true,
+      validate: {
+        max: {args: 6, msg: "maxValue6"},
+        min: {args: 0, msg: "minValue0"},
+      }
     },
     paralelo: {
       type: DataTypes.CHAR(1),
       xlabel: 'Paralelo',
-      allowNull: true,
+      allowNull: false,
+      unique: 'uniqueCurso',
       validate: {
-        is: {args: /^[A-Z|-|-|.]+$/i, msg: "El campo 'Paralelo' permite sólo letras."},
+        is: {args: /^[A-Z]+$/i, msg: "El campo 'Paralelo' permite sólo letras."},
       },
+    },
+    gestion: {
+      type: DataTypes.STRING(4),
+      xlabel: 'Gestion',
+      allowNull: false,
+      unique: 'uniqueCurso'
     },
     hora_entrada: {
       type: DataTypes.TIME,
@@ -48,14 +78,24 @@ module.exports = function (sequelize, DataTypes) {
       type: DataTypes.TIME,
       xlabel: 'Hora de salida',
       allowNull: true,
-    }
+    },
+    _usuario_creacion: {
+      type: DataTypes.INTEGER,
+      xlabel: 'Usuario de creación',
+      allowNull: false,
+    },
+    _usuario_modificacion: {
+      type: DataTypes.INTEGER,
+      xlabel: 'Usuario de modificación',
+    },
   }, {
-      timestamps: false,
+      createdAt: '_fecha_creacion',
+      updatedAt: '_fecha_modificacion',
       paranoid: true,
       freezeTableName: true,
       classMethods: {
         associate: (models) => {
-          models.curso.belongsTo(models.aula, {as: 'aula', foreignKey: {name:'fid_aula', allowNull: true}});
+          // models.curso.belongsTo(models.profesor, {as: 'profesor', foreignKey: {name:'fid_profesor', allowNull: true}});
         },
         // filterTo: () => [{ "type": "fk", "field": "curso" }],
       },

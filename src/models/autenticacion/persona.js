@@ -19,7 +19,7 @@ module.exports = (sequelize, DataType) => {
     tipo_documento: {
       type: DataType.ENUM,
       xlabel: 'Tipo de Documento',
-      allowNull: false,
+      allowNull: true,
       unique: 'uniqueSelectedItem',
       values: ['CARNET_IDENTIDAD', 'PASAPORTE'],
       defaultValue: 'CARNET_IDENTIDAD',
@@ -30,7 +30,7 @@ module.exports = (sequelize, DataType) => {
     documento_identidad: {
       type: DataType.STRING(25),
       xlabel: 'Documento de identidad',
-      allowNull: false,
+      allowNull: true,
       unique: 'uniqueSelectedItem',
       validate: {
         len: {args: [5, 25], msg: "El campo 'Documento de identidad' permite un mínimo de 5 caracteres y un máximo de 25 caracteres"},
@@ -41,7 +41,7 @@ module.exports = (sequelize, DataType) => {
     lugar_documento_identidad: {
       type: DataType.STRING(25),
       xlabel: 'Procedencia del documento de identidad',
-      allowNull: false,
+      allowNull: true,
       unique: 'uniqueSelectedItem',
       validate: {
         len: {args: [1, 25], msg: "El campo 'lugar documento de identidad' permite un mínimo de 1 caracter y un máximo de 25 caracteres"},
@@ -136,6 +136,18 @@ module.exports = (sequelize, DataType) => {
         is: {args: /^([A-Z|Á|É|Í|Ó|Ú|À|È|Ì|Ò|Ù|Ä|Ë|Ï|Ö|Ü|Â|Ê|Î|Ô|Û|Ñ|'|´| ]|)+$/i, msg: "El campo 'Primer apellido' permite sólo letras"},
       },
     },
+    telefono: {
+      type: DataType.STRING(35),
+      xlabel: 'Teléfono',
+      allowNull: true,
+      validate: {
+        len: {args: [5, 35], msg: "El campo 'Teléfono' permite un mínimo de 5 caracteres y un máximo de 35 caracteres"},
+        validate: {
+          len: {args: [3, 25], msg: "El campo 'Teléfono' permite un mínimo de 3 caracteres y un máximo de 25 caracteres"},
+          is: {args: /^[0-9]+$/i, msg: "El campo 'Teléfono' permite sólo números."},
+        },
+      },
+    },
     idioma_materno: {
       type: DataType.STRING(20),
       xlabel: 'Idioma materno',
@@ -150,15 +162,6 @@ module.exports = (sequelize, DataType) => {
       allowNull: true,
       validate: {
         len: {args: [0, 100], msg: "El campo 'Idiomas' permite un máximo de 100 caracteres"},
-      },
-    },
-    discapacidad_origen: {
-      type: DataType.STRING(30),
-      xlabel: 'Discapacidad origen',
-      defaultValue: 'NONE',
-      validate: {
-        isIn: {args: [['BORN', 'ADQUIRED', 'INHERITED', 'NONE']], msg: "El campo 'Discapacidad origen' sólo permite valores: 'BORN', 'ADQUIRED', 'INHERITED' o 'NONE'."},
-        len: {args: [0, 30], msg: "El campo 'Discapacidad origen' permite un máximo de 30 caracteres."},
       },
     },
     ocupacion_actual: {
@@ -176,6 +179,24 @@ module.exports = (sequelize, DataType) => {
       validate: {
         len: {args: [0, 50], msg: "El campo 'Grado de Instrucción' permite un máximo de 50 caracteres"},
       },
+    },
+    discapacidad_origen: {
+      type: DataType.STRING(30),
+      xlabel: 'Discapacidad origen',
+      defaultValue: 'NONE',
+      validate: {
+        isIn: {args: [['BORN', 'ADQUIRED', 'INHERITED', 'NONE']], msg: "El campo 'Discapacidad origen' sólo permite valores: 'BORN', 'ADQUIRED', 'INHERITED' o 'NONE'."},
+        len: {args: [0, 30], msg: "El campo 'Discapacidad origen' permite un máximo de 30 caracteres."},
+      },
+    },
+    grado_discapacidad: {
+      type: DataType.INTEGER,
+      xlabel: 'Grado de discapacidad',
+      allowNull: true,
+      validate: {
+        max: {args: 100, msg: "maxValue100"},
+        min: {args: 0, msg: "minValue0"},
+      }
     },
     tiene_discapacidad: {
       type: DataType.BOOLEAN,
