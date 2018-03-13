@@ -61,6 +61,7 @@ module.exports = app => {
     if (req.order) {
       params.order = req.order;
     };
+    let finished = false
     dao.listarRegistros(models.persona, params)
     .then(respuesta => {
       respuestaTotal = respuesta;
@@ -76,6 +77,7 @@ module.exports = app => {
         respuestaRows.forEach(function(student) {
           packageStudent = {
             id_persona: student.id_persona,
+            codigo:student.estudiante.codigo,
             tipo_documento:student.tipo_documento,
             documento_identidad: student.documento_identidad,
             lugar_documento_identidad: student.lugar_documento_identidad,
@@ -90,47 +92,54 @@ module.exports = app => {
           count: respuesta.count ? respuesta.count : studentRows.length,
           rows: studentRows
         }
+        finished = true;
         deferred.resolve(respuestaLista);
       } 
     })
     .then(respuesta => {
-      respuestaTotal[0].dataValues.direccion.dataValues.pais = respuesta.pais ;
-      respuestaTotal[0].dataValues.direccion.dataValues.departamento = respuesta.departamento ;
-      respuestaTotal[0].dataValues.direccion.dataValues.provincia = respuesta.provincia ;
-      respuestaTotal[0].dataValues.direccion.dataValues.municipio = respuesta.municipio ;
-      return dpaBL.obtenerELemento(respuestaTotal[0].lugar_nacimiento.fid_dpa, models)
+      if(!finished){
+        respuestaTotal[0].dataValues.direccion.dataValues.pais = respuesta.pais ;
+        respuestaTotal[0].dataValues.direccion.dataValues.departamento = respuesta.departamento ;
+        respuestaTotal[0].dataValues.direccion.dataValues.provincia = respuesta.provincia ;
+        respuestaTotal[0].dataValues.direccion.dataValues.municipio = respuesta.municipio ;
+        return dpaBL.obtenerELemento(respuestaTotal[0].lugar_nacimiento.fid_dpa, models)
+      }
     })
     .then(respuesta => {
-      respuestaTotal[0].dataValues.lugar_nacimiento.dataValues.pais = respuesta.pais ;
-      respuestaTotal[0].dataValues.lugar_nacimiento.dataValues.departamento = respuesta.departamento ;
-      respuestaTotal[0].dataValues.lugar_nacimiento.dataValues.provincia = respuesta.provincia ;
-      respuestaTotal[0].dataValues.lugar_nacimiento.dataValues.municipio = respuesta.municipio ;
-      params = {
-        where: busqueda,
-        attributes: ['id_persona'],
-        include: [{
-          model: models.parentezco,
-          as: 'persona_de',
+      if(!finished){
+        respuestaTotal[0].dataValues.lugar_nacimiento.dataValues.pais = respuesta.pais ;
+        respuestaTotal[0].dataValues.lugar_nacimiento.dataValues.departamento = respuesta.departamento ;
+        respuestaTotal[0].dataValues.lugar_nacimiento.dataValues.provincia = respuesta.provincia ;
+        respuestaTotal[0].dataValues.lugar_nacimiento.dataValues.municipio = respuesta.municipio ;
+        params = {
+          where: busqueda,
+          attributes: ['id_persona'],
           include: [{
-            model: models.persona,
-            as: 'persona_es'
+            model: models.parentezco,
+            as: 'persona_de',
+            include: [{
+              model: models.persona,
+              as: 'persona_es'
+            }]
           }]
-        }]
-      };
-      return dao.listarRegistros(models.persona, params);
+        };
+        return dao.listarRegistros(models.persona, params);
+      }
     })
     .then(respuesta => {
-      respuestaTotal[0].dataValues.persona_de = respuesta[0].persona_de ;
-      params = {
-        where: {
-          fid_estudiante: respuestaTotal[0].dataValues.fid_estudiante
-        },
-        include: [{
-          model: models.unidad_educativa,
-          as: 'unidad_educativa'
-        }]
-      };
-      return dao.listarRegistros(models.unidad_educativa_estudiante, params);
+      if(!finished){
+        respuestaTotal[0].dataValues.persona_de = respuesta[0].persona_de ;
+        params = {
+          where: {
+            fid_estudiante: respuestaTotal[0].dataValues.fid_estudiante
+          },
+          include: [{
+            model: models.unidad_educativa,
+            as: 'unidad_educativa'
+          }]
+        };
+        return dao.listarRegistros(models.unidad_educativa_estudiante, params);
+      }
     })
     .then(respuesta => {
       respuestaTotal[0].dataValues.unidades_educativas = respuesta;
@@ -212,22 +221,24 @@ module.exports = app => {
           deferred.reject(new Error(`wrongFormat@r:${rowIndex + 1},c:${arrayCols[17]}`));
           return deferred.promise;
         }
-        if (csvRow[arrayCols[18]].length != 0 && (isNaN(csvRow[arrayCols[18]]) || Number(csvRow[arrayCols[18]]) > 2018)) {
+        if (csvRow[arrayCols[18]].length != 0 && (isNaN(csvRow[arrayCols[18]]) || Number(csvRow[arrayCols[18]]) > (new Date()).getFullYear())) {
           deferred.reject(new Error(`wrongFormat@r:${rowIndex + 1},c:${arrayCols[18]}`));
           return deferred.promise;
         }
         // VALIDA CURSO
         let cursoValido = false;
         let cursoKey;
-        cursos.forEach(function(element) {
-          if (element.nombre == csvRow[arrayCols[16]] && element.paralelo == csvRow[arrayCols[17]] && element.gestion == csvRow[arrayCols[18]]) {
-            cursoValido = true;
-            cursoKey = element.id
+        if(csvRow[arrayCols[16]] != '' && csvRow[arrayCols[17]] != '' && csvRow[arrayCols[18]] != ''){
+          cursos.forEach(function(element) {
+            if (element.nombre == csvRow[arrayCols[16]] && element.paralelo == csvRow[arrayCols[17]] && element.gestion == csvRow[arrayCols[18]]) {
+              cursoValido = true;
+              cursoKey = element.id
+            }
+          }, this);
+          if (!cursoValido) {
+            deferred.reject(new Error(`nonExistentCourse@r:${rowIndex + 1}`));
+            return deferred.promise;
           }
-        }, this);
-        if (!cursoValido) {
-          deferred.reject(new Error(`nonExistentCourse@r:${rowIndex + 1}`));
-          return deferred.promise;
         }
         // VALIDA ESTUDIANTE
         estudiantes.forEach(function(element) {
@@ -337,7 +348,7 @@ module.exports = app => {
     const archivo = req.files.file;
     const extension = archivo.name.replace(/^.*\./, '');
     if (!(archivo.mimetype && (archivo.mimetype === MIMETYPE_CSV || extension === 'csv'))) {
-      deferred.reject(new Error(`notACsvFile.`));
+      deferred.reject(new Error(`notACsvFile`));
       return deferred.promise;
     }
     const tmpFile = archivo.name;
@@ -533,7 +544,10 @@ module.exports = app => {
           return respuesta;
         })
         .then(respuesta => deferred.resolve(respuesta))
-        .catch(error => deferred.reject(error));
+        .catch(error => {
+          console.log(error);
+          deferred.reject(error)
+        });
       }
     })
     return deferred.promise;
