@@ -93,10 +93,27 @@ module.exports = {
         _fecha_creacion: new Date(),
         _fecha_modificacion: new Date(),
         visible: true,
-
       },
       {
         // 6
+        nombre: 'CURSOS',
+        descripcion: 'Administración de cursos',
+        orden: 1,
+        ruta: 'cursos',
+        icono: 'group',
+        method_get: true,
+        method_post: true,
+        method_put: true,
+        method_delete: false,
+        estado: 'ACTIVO',
+        _usuario_creacion:1,
+        _fecha_creacion: new Date(),
+        _fecha_modificacion: new Date(),
+        fid_menu_padre: 5,
+        visible: true,
+      },
+      {
+        // 7
         nombre: 'INSCRITOS',
         descripcion: 'INSCRITOS',
         orden: 1,
@@ -114,7 +131,7 @@ module.exports = {
         visible: true,
       },
       {
-        // 7
+        // 8
         nombre: 'NUEVO REGISTRO',
         descripcion: 'NUEVO REGISTRO',
         orden: 2,

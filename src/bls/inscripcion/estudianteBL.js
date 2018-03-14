@@ -142,8 +142,10 @@ module.exports = app => {
       }
     })
     .then(respuesta => {
-      respuestaTotal[0].dataValues.unidades_educativas = respuesta;
-      deferred.resolve(respuestaTotal)
+      if(!finished){
+        respuestaTotal[0].dataValues.unidades_educativas = respuesta;
+        deferred.resolve(respuestaTotal)
+      }
     })
     .catch(error => {
       console.log(error);
