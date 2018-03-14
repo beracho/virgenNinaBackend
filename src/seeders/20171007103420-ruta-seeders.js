@@ -275,14 +275,11 @@ module.exports = {
         _fecha_creacion: new Date(),
         _fecha_modificacion: new Date(),
       }, {
-        
-        
-                
         //23
-        ruta: '/api/v1/registros/generar_certificado/:id',
-        descripcion: 'Servicio para obtener un certificado.',
-        method_get: false,
-        method_post: true,
+        ruta: '/api/v1/cursos/',
+        descripcion: 'Servicio para obtener la lista de cursos.',
+        method_get: true,
+        method_post: false,
         method_put: false,
         method_delete: false,
         estado: 'ACTIVO',
@@ -290,6 +287,9 @@ module.exports = {
         _fecha_creacion: new Date(),
         _fecha_modificacion: new Date(),
       }, {
+        
+        
+                
         //24
         ruta: '/api/v1/registros/:id/reporte',
         descripcion: 'Servicio para obtener el reporte de una determinada certificación.',

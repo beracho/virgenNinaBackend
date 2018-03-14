@@ -31,6 +31,15 @@ module.exports = function (sequelize, DataTypes) {
       xlabel: 'Criterio de edad',
       allowNull: true
     },
+    estado: {
+      type: DataTypes.STRING(30),
+      xlabel: 'Estado',
+      allowNull: false,
+      defaultValue: 'ACTIVO',
+      validate: {
+        isIn: {args: [['ACTIVO', 'INACTIVO']], msg: "El campo estado sólo permite valores: 'ACTIVO' o 'INACTIVO'."},
+      },
+    },
     maestro: {
       type: DataTypes.STRING(50),
       xlabel: 'Nombre del maestro',
