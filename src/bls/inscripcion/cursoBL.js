@@ -18,15 +18,22 @@ module.exports = app => {
 
   const listaCursos = (req, body) => {
     const deferred = Q.defer();
-    dao.listarRegistros(models.curso, {
+    const params = {
       where: {
         estado: 'ACTIVO'
       }
-    })
-    .then(respuesta => {
-      deferred.resolve(respuesta);
-    })
+    };
+    if (req.limit && req.page) {
+      params.limit = req.limit,
+      params.page = req.page
+    };
+    if (req.order) {
+      params.order = req.order;
+    };
+    dao.listarRegistros(models.curso, params)
+    .then(respuesta => deferred.resolve(respuesta))
     .catch(error => {
+      console.log(error);
       deferred.reject(error)
     });
     return deferred.promise;

@@ -11,7 +11,7 @@ module.exports = app => {
 
   app.route("/api/v1/cursos/")
   .get((req, res) => {
-    cursoBL.listaCursos(req.params, req.body)
+    cursoBL.listaCursos(req.query, req.body)
     .then(respuesta => Util.mensajeExito(res, "Obtención de datos exitosa.", 200, respuesta))
     .catch(error => Util.mensajeError(res, error.message));
   });
