@@ -187,6 +187,7 @@ module.exports = app => {
           .then(respuesta => {
             const parametrosEstudiante = {};
             if (body.persona.codrude !== '') { parametrosEstudiante.rude = body.persona.codrude };
+            if (body.persona.codigo !== '') { parametrosEstudiante.codigo = body.persona.codigo };
             if (personaCreada) {
               // Crea estudiante
               parametrosEstudiante.fid_registro = respuesta.id_registro_inscripcion;
