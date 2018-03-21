@@ -13,7 +13,7 @@ module.exports = function (sequelize, DataTypes) {
       values: ['AT', 'INI 1', 'INI 2', 'PRI 1', 'PRI 2', 'PRI 3', 'PRI SOC'],
       unique: 'uniqueCurso',
       validate: {
-        isIn: {args: [['AT', 'INI 1', 'INI 2', 'PRI 1', 'PRI 2', 'PRI 3', 'PRI SOC']], msg: "El campo estado sólo permite valores: 'AT', 'INI 1', 'INI 2', 'PRI 1', 'PRI 2', 'PRI 3' o 'PRI SOC'"},
+        isIn: {args: [['AT', 'INI 1', 'INI 2', 'PRI 1', 'PRI 2', 'PRI 3', 'PRI SOC']], msg: "El campo nombre sólo permite valores: 'AT', 'INI 1', 'INI 2', 'PRI 1', 'PRI 2', 'PRI 3' o 'PRI SOC'"},
       },
     },
     descripcion: {
@@ -51,7 +51,7 @@ module.exports = function (sequelize, DataTypes) {
       allowNull: true,
       values: ['ATENCION TEMPRANA', 'INDEPENDENCIA PERSONAL', 'INDEPENDENCIA SOCIAL', 'INICIAL', 'PRIMARIA', 'SECUNDARIA'],
       validate: {
-        isIn: {args: [['ATENCION TEMPRANA', 'INDEPENDENCIA PERSONAL', 'INDEPENDENCIA SOCIAL', 'INICIAL', 'PRIMARIA', 'SECUNDARIA']], msg: "El campo estado sólo permite valores: 'ATENCION TEMPRANA', 'INDEPENDENCIA PERSONAL', 'INDEPENDENCIA SOCIAL', 'INICIAL', 'PRIMARIA' o 'SECUNDARIA'"},
+        isIn: {args: [['ATENCION TEMPRANA', 'INDEPENDENCIA PERSONAL', 'INDEPENDENCIA SOCIAL', 'INICIAL', 'PRIMARIA', 'SECUNDARIA']], msg: "El campo grado sólo permite valores: 'ATENCION TEMPRANA', 'INDEPENDENCIA PERSONAL', 'INDEPENDENCIA SOCIAL', 'INICIAL', 'PRIMARIA' o 'SECUNDARIA'"},
       },
     },
     nivel: {
