@@ -6,7 +6,7 @@ module.exports = {
       // 1
       {
         nombre: 'AT',
-        descripcion: 'APOYO LIMITADO EXTENSO ',
+        descripcion: 'APOYO LIMITADO EXTENSO',
         tipo_discapacidad: 'DISCAPACIDAD INTELECTUAL',
         criterio_edad: '3-5',
         maestro: 'LIDIA CONDORI',
@@ -23,7 +23,7 @@ module.exports = {
       // 2
       {
         nombre: 'AT',
-        descripcion: 'APOYO LIMITADO INTERMITENTE ',
+        descripcion: 'APOYO LIMITADO INTERMITENTE',
         tipo_discapacidad: 'DISCAPACIDAD INTELECTUAL',
         criterio_edad: '3-5',
         maestro: 'LUCY  OCHOA ',
@@ -40,7 +40,7 @@ module.exports = {
       // 3
       {
         nombre: 'INI 1',
-        descripcion: 'APOYO LIMITADO INTERMITENTE ',
+        descripcion: 'APOYO LIMITADO INTERMITENTE',
         tipo_discapacidad: 'DISCAPACIDAD INTELECTUAL',
         criterio_edad: '4-6',
         maestro: 'MARTHA MAMANI',
@@ -57,7 +57,7 @@ module.exports = {
       // 4
       {
         nombre: 'INI 1',
-        descripcion: 'APOYO EXTENSO Y GENERALIZADO ',
+        descripcion: 'APOYO EXTENSO GENERALIZADO',
         tipo_discapacidad: 'DISCAPACIDAD MULTIPLE',
         criterio_edad: '6-7',
         maestro: 'VERONICA CONTRERAS',
@@ -74,7 +74,7 @@ module.exports = {
       // 5
       {
         nombre: 'INI 1',
-        descripcion: 'APOYO LIMITADO Y EXTENSO ',
+        descripcion: 'APOYO LIMITADO EXTENSO',
         tipo_discapacidad: 'DISCAPACIDAD MULTIPLE',
         criterio_edad: '5-7',
         maestro: 'VERONICA QUISPE',
@@ -108,7 +108,7 @@ module.exports = {
       // 7
       {
         nombre: 'INI 1',
-        descripcion: 'APOYO LIMITADO EXTENSO ',
+        descripcion: 'APOYO LIMITADO EXTENSO',
         tipo_discapacidad: 'DISCAPACIDAD INTELECTUAL',
         criterio_edad: '5-7',
         maestro: 'PATRICIA CHOQUE',
@@ -125,7 +125,7 @@ module.exports = {
       // 8
       {
         nombre: 'INI 2',
-        descripcion: 'APOYO LIMITADO EXTENSO ',
+        descripcion: 'APOYO LIMITADO EXTENSO',
         tipo_discapacidad: 'DISCAPACIDAD MULTIPLE',
         criterio_edad: '2-5',
         maestro: 'EVA CALLISAYA',
@@ -176,7 +176,7 @@ module.exports = {
       // 11
       {
         nombre: 'PRI 1',
-        descripcion: 'APOYO EXTENSO Y GENERALIZADO',
+        descripcion: 'APOYO EXTENSO GENERALIZADO',
         tipo_discapacidad: 'DISCAPACIDAD MULTIPLE',
         criterio_edad: '8-12',
         maestro: 'BASILIA JULI',
@@ -193,7 +193,7 @@ module.exports = {
       // 12
       {
         nombre: 'PRI 1',
-        descripcion: 'APOYO EXTENSO Y GENERALIZADO',
+        descripcion: 'APOYO EXTENSO GENERALIZADO',
         tipo_discapacidad: 'DISCAPACIDAD MULTIPLE',
         criterio_edad: '9-12',
         maestro: 'SAULO ALANOCA',
@@ -210,7 +210,7 @@ module.exports = {
       // 13
       {
         nombre: 'PRI 1',
-        descripcion: 'APOYO EXTENSO Y GENERALIZADO',
+        descripcion: 'APOYO EXTENSO GENERALIZADO',
         tipo_discapacidad: 'DISCAPACIDAD MULTIPLE',
         criterio_edad: '8-12',
         maestro: 'FLORA RUTH',
@@ -227,7 +227,7 @@ module.exports = {
       // 14
       {
         nombre: 'PRI 1',
-        descripcion: 'APOYO EXTENSO Y GENERALIZADO',
+        descripcion: 'APOYO EXTENSO GENERALIZADO',
         tipo_discapacidad: 'DISCAPACIDAD MULTIPLE',
         criterio_edad: '8-10',
         maestro: 'FREDDY SILLERICO',
@@ -295,7 +295,7 @@ module.exports = {
       // 18
       {
         nombre: 'PRI 2',
-        descripcion: 'APOYO LIMITADO E INTERMITENTE',
+        descripcion: 'APOYO LIMITADO INTERMITENTE',
         tipo_discapacidad: 'DISCAPACIDAD MULTIPLE',
         criterio_edad: '8-10',
         maestro: 'ROSSIO REVILLA',
@@ -312,7 +312,7 @@ module.exports = {
       // 19
       {
         nombre: 'PRI 3',
-        descripcion: 'APOYO  LIMITADO INTERMITENTE',
+        descripcion: 'APOYO LIMITADO INTERMITENTE',
         tipo_discapacidad: 'DISCAPACIDAD MULTIPLE',
         criterio_edad: '8-11',
         maestro: 'GABRIELA TERCEROS',
@@ -329,7 +329,7 @@ module.exports = {
       // 20
       {
         nombre: 'PRI 3',
-        descripcion: 'APOYO  LIMITADO INTERMITENTE',
+        descripcion: 'APOYO LIMITADO INTERMITENTE',
         tipo_discapacidad: 'DISCAPACIDAD MULTIPLE',
         criterio_edad: '8-11',
         maestro: 'PAOLA LAURA',
