@@ -100,7 +100,7 @@ module.exports = {
         descripcion: 'Administración de cursos',
         orden: 1,
         ruta: 'cursos',
-        icono: 'group',
+        icono: 'book',
         method_get: true,
         method_post: true,
         method_put: true,
