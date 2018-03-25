@@ -82,4 +82,40 @@ describe('====================== APIREST ESTUDIANTE ======================', () 
         done();
       });
   });
+  
+  it('>>> Deberia listar estudiantes pertenecientes al curso enviado', (done) => {
+    request(server)
+      .get(`/api/v1/estudiantesCurso?idCurso=1`)
+      .set('Authorization', `Bearer ${token}`)
+      .expect(200)
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        should(res.body.finalizado).be.ok;
+        should(res.body.mensaje).be.ok;
+        should(res.body.datos).be.ok;
+        res.body.finalizado.should.be.equal(true);
+        res.body.datos.length.should.be.equal(0);
+        done();
+      });
+  });
+
+  it('>>> Deberia dar error por curso no existente', (done) => {
+    request(server)
+      .get(`/api/v1/estudiantesCurso?idCurso=50`)
+      .set('Authorization', `Bearer ${token}`)
+      .expect(412)
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        should(res.body.finalizado).be.ok;
+        should(res.body.mensaje).be.ok;
+        should(res.body.datos).be.ok;
+        res.body.finalizado.should.be.equal(false);
+        res.body.mensaje.should.be.equal('noCourse');
+        done();
+      });
+  });
 });
