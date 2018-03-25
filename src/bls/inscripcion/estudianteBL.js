@@ -6,16 +6,11 @@ const dao = require('../../dao/dao');
 const Q = require('q');
 const util = require('../../libs/util');
 const general = require('../../utils/util');
-const usuarioBL = require('../autenticacion/usuarioBL');
-const plantillaBL = require('../parametros/plantillaBL')
-const dpaBL = require('../parametros/dpaBL');;
-// const Hashids = require('hashids');
+const dpaBL = require('../parametros/dpaBL');
 const handlebars = require('handlebars');
 const fs = require('fs-extra');
 const moment = require('moment');
 const csv=require('csvtojson')
-
-// const hashids = new Hashids("PROBOLIVIA", 15, "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890");
 
 module.exports = app => {
   const models = app.src.db.models;
@@ -542,9 +537,9 @@ module.exports = app => {
             });
           });
         })
-        .then(respuesta => {
-          return respuesta;
-        })
+        // .then(respuesta => {
+        //   return respuesta;
+        // })
         .then(respuesta => deferred.resolve(respuesta))
         .catch(error => {
           console.log(error);
@@ -554,10 +549,64 @@ module.exports = app => {
     })
     return deferred.promise;
   };
+  
+  const existeCurso = (idCurso) => {
+    const deferred = Q.defer();
+    console.log('----------------entra---------------');
+    dao.obtenerRegistroPorId(models.curso, idCurso, {})
+    .then(respuesta => deferred.resolve(respuesta))
+    .catch(error => {
+      console.log(error);
+      deferred.reject(error)
+    });
+    return deferred.promise;
+  }
+
+  const estudiantesPorCurso = (query) => {
+    const deferred = Q.defer();
+    existeCurso(query.idCurso)
+      .then(respuestaCurso => {
+        if(respuestaCurso != null) {
+          paramsEstudiante = {
+            attributes: ['nombres', 'primer_apellido', 'segundo_apellido'],
+            include: [{
+              attributes: ['fid_curso', 'codigo'],
+              model: models.estudiante,
+              as: 'estudiante',
+              required: true,
+              where: { fid_curso: respuestaCurso.id_curso }
+            }]
+          };
+        } else {
+          throw new Error('noCourse');
+        }
+        return dao.listarRegistros(models.persona, paramsEstudiante)
+      })
+      .then(respuestaEstudiantes => {
+        let estudiantesAEnviar = [];
+        respuestaEstudiantes.forEach(function (element) {
+          let itemEstudiante = {
+            codigo: element.estudiante.codigo,
+            nombres: element.nombres,
+            primer_apellido: element.primer_apellido,
+            segundo_apellido: element.segundo_apellido
+          };
+          estudiantesAEnviar.push(itemEstudiante);
+        }, this);
+        return estudiantesAEnviar;
+      })
+      .then(respuesta => deferred.resolve(respuesta))
+      .catch(error => {
+        console.log(error);
+        deferred.reject(error)
+      });
+    return deferred.promise;
+  };
 
   const estudianteBL = {
     obtenerRegistros,
-    importarCsvDatos
+    importarCsvDatos,
+    estudiantesPorCurso
   };
 
   return estudianteBL;
