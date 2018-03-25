@@ -287,14 +287,11 @@ module.exports = {
         _fecha_creacion: new Date(),
         _fecha_modificacion: new Date(),
       }, {
-        
-        
-                
         //24
-        ruta: '/api/v1/registros/:id/reporte',
-        descripcion: 'Servicio para obtener el reporte de una determinada certificación.',
-        method_get: false,
-        method_post: true,
+        ruta: '/api/v1/estudiantesCurso',
+        descripcion: 'Servicio para listar estudiantes de un curso determinado.',
+        method_get: true,
+        method_post: false,
         method_put: false,
         method_delete: false,
         estado: 'ACTIVO',
@@ -303,6 +300,9 @@ module.exports = {
         _fecha_modificacion: new Date(),
       }, {
         //25
+        
+        
+                
         ruta: '/registros/generar_certificado',
         descripcion: 'Servicio para generar un certificado QR.',
         method_get: true,
