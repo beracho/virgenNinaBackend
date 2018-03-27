@@ -118,4 +118,78 @@ describe('====================== APIREST ESTUDIANTE ======================', () 
         done();
       });
   });
+  
+  it('>>> Deberia editar el curso del estudiante a partir de su id.', (done) => {
+    request(server)
+      .put(`/api/v1/estudiantes`)
+      .send({id_estudiante: 2, fid_curso: 2})
+      .set('Authorization', `Bearer ${token}`)
+      .expect(200)
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        should(res.body.finalizado).be.ok;
+        should(res.body.mensaje).be.ok;
+        should(res.body.datos).be.ok;
+        res.body.finalizado.should.be.equal(true);
+        done();
+      });
+  });
+  
+  it('>>> Deberia editar el curso del estudiante a partir de su código.', (done) => {
+    request(server)
+      .put(`/api/v1/estudiantes`)
+      .send({codigo: 'ej-001', fid_curso: 2})
+      .set('Authorization', `Bearer ${token}`)
+      .expect(200)
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        should(res.body.finalizado).be.ok;
+        should(res.body.mensaje).be.ok;
+        should(res.body.datos).be.ok;
+        res.body.finalizado.should.be.equal(true);
+        done();
+      });
+  });
+
+  it('>>> Deberia devolver error de código de estudiante no existente', (done) => {
+    request(server)
+      .put(`/api/v1/estudiantes`)
+      .send({codigo: 'ej-003', fid_curso: 2})
+      .set('Authorization', `Bearer ${token}`)
+      .expect(412)
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        should(res.body.finalizado).be.ok;
+        should(res.body.mensaje).be.ok;
+        should(res.body.datos).be.not.ok;
+        res.body.finalizado.should.be.equal(false);
+        res.body.mensaje.should.be.equal('invalidData');
+        done();
+      });
+  });
+  
+  it('>>> Deberia devolver error de id de estudiante no existente', (done) => {
+    request(server)
+      .put(`/api/v1/estudiantes`)
+      .send({id_estudiante: 5, fid_curso: 2})
+      .set('Authorization', `Bearer ${token}`)
+      .expect(412)
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        should(res.body.finalizado).be.ok;
+        should(res.body.mensaje).be.ok;
+        should(res.body.datos).be.not.ok;
+        res.body.finalizado.should.be.equal(false);
+        res.body.mensaje.should.be.equal('invalidData');
+        done();
+      });
+  });
 });
