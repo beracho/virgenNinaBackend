@@ -172,7 +172,7 @@ module.exports = {
         descripcion: 'Obtiene la lista de estudiantes.',
         method_get: true,
         method_post: false,
-        method_put: false,
+        method_put: true,
         method_delete: false,
         estado: 'ACTIVO',
         _usuario_creacion: 1,
