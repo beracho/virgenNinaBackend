@@ -79,7 +79,8 @@ module.exports = app => {
             nombres: student.nombres,
             primer_apellido: student.primer_apellido,
             segundo_apellido: student.segundo_apellido,
-            estado: student.estudiante.estado
+            estado: student.estudiante.estado,
+            fid_curso: student.estudiante.fid_curso
           };
           studentRows.push(packageStudent);
         }, this);
@@ -142,6 +143,66 @@ module.exports = app => {
         deferred.resolve(respuestaTotal)
       }
     })
+    .catch(error => {
+      console.log(error);
+      deferred.reject(error)
+    });
+    return deferred.promise;
+  }
+
+  const obtenerIdDelCodigo = (body) => {
+    const deferred = Q.defer();
+    if (body.id_estudiante !== undefined) {
+      dao.obtenerRegistroPorId(models.estudiante, body.id_estudiante)
+      .then(respuesta => {
+        if (respuesta) {
+          deferred.resolve(respuesta.id_estudiante)
+        } else {
+          throw new Error('invalidData');
+        }
+      })
+      .catch(error => {
+        console.log(error);
+        deferred.reject(error)
+      });
+    } else if (body.codigo !== undefined) {
+      const paramsEstudiante = {
+        where: {
+          codigo: body.codigo
+        }
+      }
+      dao.obtenerRegistro(models.estudiante, paramsEstudiante)
+      .then(respuesta => {
+        if (respuesta) {
+          deferred.resolve(respuesta.id_estudiante)
+        } else {
+          throw new Error('invalidData');
+        }
+      })
+      .catch(error => {
+        console.log(error);
+        deferred.reject(error)
+      });
+    } else {
+      throw new Error('invalidData');
+    }
+    return deferred.promise;
+  }
+
+  const editaEstudiante = (body) => {
+    const deferred = Q.defer();
+    obtenerIdDelCodigo(body)
+    .then(idEstudiante => {
+      console.log('----idEstu---');
+      console.log(idEstudiante);
+      const paramsEstudiante = body;
+      paramsEstudiante._usuario_modificacion = body.audit_usuario.id_usuario;
+      delete paramsEstudiante.id_estudiante;
+      delete paramsEstudiante.codigo;
+      delete paramsEstudiante.audit_usuario;
+      dao.modificarRegistro(models.estudiante, idEstudiante, paramsEstudiante)
+    })
+    .then(respuesta => deferred.resolve(respuesta))
     .catch(error => {
       console.log(error);
       deferred.reject(error)
@@ -605,6 +666,7 @@ module.exports = app => {
 
   const estudianteBL = {
     obtenerRegistros,
+    editaEstudiante,
     importarCsvDatos,
     estudiantesPorCurso
   };

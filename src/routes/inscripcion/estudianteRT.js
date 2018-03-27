@@ -11,6 +11,11 @@ module.exports = app => {
     estudianteBL.obtenerRegistros(req.query, req.body)
     .then(respuesta => Util.mensajeExito(res, "Obtención de datos exitosa.", 200, respuesta))
     .catch(error => Util.mensajeError(res, error.message));
+  })
+  .put((req, res) => {
+    estudianteBL.editaEstudiante(req.body)
+    .then(respuesta => Util.mensajeExito(res, "Obtención de datos exitosa.", 200, respuesta))
+    .catch(error => Util.mensajeError(res, error.message));
   });
 
   app.route("/api/v1/importarEstudiantes")
