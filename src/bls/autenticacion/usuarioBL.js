@@ -23,10 +23,10 @@ const crearUsuario = (body, models) => {
   .then(respuesta => {
     // Validaciones
     if (!persona) {
-      throw new Error("Debe agregar datos de persona.");
+      throw new Error("mustAddPersonInformation");
     }
     if (!usuario) {
-      throw new Error("Debe agregar datos de usuario.");
+      throw new Error("mustAddUserInformation");
     }
     const today = new Date();
     const birthday = new Date(persona.fecha_nacimiento);
@@ -36,7 +36,7 @@ const crearUsuario = (body, models) => {
         age--;
     }
     if (age < 18) {
-      throw new Error("El usuario ingresado es menor de edad.");
+      throw new Error("userUnderage");
     }
     // Genera usuario
     let valido = false;
@@ -172,7 +172,7 @@ const modificarUsuario = (id, body, models) => {
     obtenerUsuarioPorId(id, models, {}, body)
     .then(respuesta => {
       if (!respuesta) {
-        throw new Error("No se ha encontrado al usuario solicitado.");
+        throw new Error("userRequiredNotFound");
       } else if (respuesta && respuesta.estado == ESTADO_PENDIENTE) {
         throw new Error(`No puede realizar acciones sobre un usuario en estado ${ESTADO_PENDIENTE}.`);
       }
@@ -344,7 +344,7 @@ const obtenerUsuarioPorId = (id, models, parametros, body) => {
     if (respuesta) {
       deferred.resolve(respuesta)
     } else {
-      throw new Error("No existe el usuario solicitado.");
+      throw new Error("userRequiredNotFound");
     }
   })
   .catch(error => deferred.reject(error));
@@ -386,13 +386,13 @@ const activarUsuario = (body, models) => {
         throw new Error('El usuario no se encuentra en estado PENDIENTE.');
       }
       if (body.codigo !== result.codigo_contrasena) {
-        throw new Error('El código ingresado no es correcto.');
+        throw new Error('incorrectCode');
       }
       if (result.fecha_expiracion < new Date) {
-        throw new Error('El código de activación ha caducado.');
+        throw new Error('codeExpired');
       }
       if (body.contrasena.length < 8) {
-        throw new Error('La contraseña debe contar con al menos 8 caracteres.');
+        throw new Error('passwordMinimunCharacter');
       }
       const usuario = JSON.parse(JSON.stringify(result.dataValues));
       usuario.estado = ESTADO_ACTIVO;
@@ -401,7 +401,7 @@ const activarUsuario = (body, models) => {
       usuario.fecha_expiracion = null;
       return result.updateAttributes(usuario).then((usuario));
     } else {
-      throw new Error("No se ha encontrado el usuario enviado.");
+      throw new Error("userSentNotFound");
     }
   }).then(result => deferred.resolve({email: result.email})
   ).catch(error => deferred.reject(error));
@@ -436,7 +436,7 @@ const validarUsuarioCrear = (usuarioObj, body, models) => {
   obtenerUsuario(parametros, models)
   .then(respuesta => {
     if (respuesta && respuesta.id_usuario) {
-      throw new Error("Ya existe un usuario ACTIVO asociado a la persona seleccionada. Por favor verifique sus datos.");
+      throw new Error("userExistsAlready");
     } else {
       const parametrosEmail = {
         where: {
