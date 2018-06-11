@@ -91,6 +91,14 @@ module.exports = {
         _fecha_creacion: new Date(),
         _fecha_modificacion: new Date(),
       },
+      {
+        fid_usuario: 12,
+        fid_rol: 12,
+        estado: 'ACTIVO',
+        _usuario_creacion: 1,
+        _fecha_creacion: new Date(),
+        _fecha_modificacion: new Date(),
+      },
     ], {});
   },
 

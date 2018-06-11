@@ -115,6 +115,16 @@ module.exports = {
         _fecha_creacion: new Date(),
         _fecha_modificacion: new Date(),
       },
+      {
+        // 12
+        nombre: 'PROF_MEDICINA_GENERAL',
+        descripcion: 'Profesional de Medicina General',
+        peso: 10,
+        estado: 'ACTIVO',
+        _usuario_creacion:1,
+        _fecha_creacion: new Date(),
+        _fecha_modificacion: new Date(),
+      },
     ], {});
   },
 

@@ -133,12 +133,23 @@ module.exports = {
         _usuario_creacion: 1,
         _fecha_creacion: new Date(),
         _fecha_modificacion: new Date(),
+        email: 'medicinaGeneral',
+        usuario: 'medicinaGeneral',
+        contrasena: '3fb7b39416f1d067268747fc214494d759d2609f863ace1a8a76705618d5c80b',
+        fid_persona: 18,
+      },
+      // 13
+      {
+        estado: 'ACTIVO',
+        _usuario_creacion: 1,
+        _fecha_creacion: new Date(),
+        _fecha_modificacion: new Date(),
         email: 'profesor',
         usuario: 'profesor',
         contrasena: '3fb7b39416f1d067268747fc214494d759d2609f863ace1a8a76705618d5c80b',
         fid_persona: 12,
       },
-      // 13
+      // 14
       {
         estado: 'PENDIENTE',
         codigo_contrasena: '123456789123',

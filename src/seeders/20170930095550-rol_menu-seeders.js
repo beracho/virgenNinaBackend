@@ -76,6 +76,12 @@ module.exports = {
       { fid_menu: 10, fid_rol: 11, method_get: true, method_post: true, method_put: true, method_delete: false, estado: 'ACTIVO', _usuario_creacion:1, _fecha_creacion: new Date(), _fecha_modificacion: new Date() }
     ];
     roles_menus_array = roles_menus_array.concat(obj);
+    
+    // MEDICINA GENERAL
+    obj = [
+      { fid_menu: 10, fid_rol: 12, method_get: true, method_post: true, method_put: true, method_delete: false, estado: 'ACTIVO', _usuario_creacion:1, _fecha_creacion: new Date(), _fecha_modificacion: new Date() }
+    ];
+    roles_menus_array = roles_menus_array.concat(obj);
 
     // PROFESOR
     // obj = [

@@ -288,6 +288,22 @@ module.exports = {
         _fecha_modificacion: new Date(),
         tipo_documento: 'CARNET_IDENTIDAD',
       },
+      // 18
+      {
+        documento_identidad: '0000018',
+        lugar_documento_identidad: 'LP',
+        complemento_documento: '00',
+        fecha_nacimiento: '1979-05-01',
+        nombres: 'medicinageneral',
+        primer_apellido: 'medicinageneral',
+        segundo_apellido: 'medicinageneral',
+        nombre_completo: 'medicinageneral medicinageneral medicinageneral',
+        genero: 'M',
+        _usuario_creacion: 1,
+        _fecha_creacion: new Date(),
+        _fecha_modificacion: new Date(),
+        tipo_documento: 'CARNET_IDENTIDAD',
+      },
     ], {});
   },
 
