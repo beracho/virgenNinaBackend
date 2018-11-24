@@ -151,11 +151,11 @@ module.exports = {
       // --------------------- Citas Médicas -------------------------------
       {
         // 9
-        nombre: 'SEGUIMIENTO MEDICO',
-        descripcion: 'SEGUIMIENTO MEDICO',
+        nombre: 'LISTA DE NIÑOS',
+        descripcion: 'Listado de niños',
         orden: 1,
-        ruta: 'seguimientoMedico',
-        icono: 'filter_vintage',
+        ruta: 'kidList',
+        icono: 'format_list_bulleted',
         method_get: false,
         method_post: false,
         method_put: false,
@@ -168,6 +168,41 @@ module.exports = {
       },
       {
         // 10
+        nombre: 'BÚSQUEDA',
+        descripcion: 'Búsqueda de niños',
+        orden: 1,
+        ruta: 'kidSearch',
+        icono: 'search',
+        method_get: true,
+        method_post: true,
+        method_put: true,
+        method_delete: false,
+        estado: 'ACTIVO',
+        _usuario_creacion:1,
+        _fecha_creacion: new Date(),
+        _fecha_modificacion: new Date(),
+        fid_menu_padre: 9,
+        visible: true,
+      },
+      {
+        // 11
+        nombre: 'SEGUIMIENTO MEDICO',
+        descripcion: 'SEGUIMIENTO MEDICO',
+        orden: 1,
+        ruta: 'medicalFollowUp',
+        icono: 'filter_vintage',
+        method_get: false,
+        method_post: false,
+        method_put: false,
+        method_delete: false,
+        estado: 'ACTIVO',
+        _usuario_creacion:1,
+        _fecha_creacion: new Date(),
+        _fecha_modificacion: new Date(),
+        visible: true,
+      },
+      {
+        // 12
         nombre: 'CONTROLES',
         descripcion: 'CONTROLES',
         orden: 1,
@@ -181,7 +216,7 @@ module.exports = {
         _usuario_creacion:1,
         _fecha_creacion: new Date(),
         _fecha_modificacion: new Date(),
-        fid_menu_padre: 9,
+        fid_menu_padre: 11,
         visible: true,
       },
   //     /* ----------- PROMUEVE ---------------------- */
