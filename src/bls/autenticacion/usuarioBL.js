@@ -197,64 +197,65 @@ const reenviarActivacion = (body, models) => {
   return deferred.promise;
 }
 
-// const cambiarContrasena = (body, models) => {
-//   const deferred = Q.defer();
-//   const audit_usuario = body.audit_usuario;
-//   const id_usuario = audit_usuario.id_usuario;
+const cambiarContrasena = (body, models) => {
+  const deferred = Q.defer();
+  const audit_usuario = body.audit_usuario;
+  const id_usuario = audit_usuario.id_usuario;
 
-//   if (audit_usuario.nit) {
-//     deferred.reject(new Error('No se puede cambiar la contraseña de un usuario que tiene acceso por Interoperabilidad.'));
-//     return deferred.promise;
-//   }
-//   if (!body.contrasena || !body.contrasena_nueva) {
-//     deferred.reject(new Error('Debe ingresa su contraseña actual y su contraseña nueva.'));
-//   }
-//   else if (body.contrasena_nueva.length < 8) {
-//     deferred.reject(new Error('La contraseña debe contar con al menos 8 caracteres.'));
-//   } else {
-//     const password = crypto.createHash("sha256").update(body.contrasena).digest("hex");
-//     obtenerUsuario( { where: { id_usuario, contrasena: password } } , models)
-//     .then(usuario => {
-//       if (usuario) {
-//         return usuario;
-//       } else {
-//         throw new Error("Los datos de acceso no coinciden.");
-//       }
-//     })
-//     .then((usuario) => {
-//       const usuarioModificar = {
-//         contrasena: body.contrasena_nueva,
-//         _usuario_modificacion: audit_usuario.id_usuario,
-//       };
-//       return dao.modificarRegistro(models.usuario, usuario.id_usuario, usuarioModificar);
-//     }).then((respuesta) => {
-//       const respuestaUsuario = {
-//         id_usuario: respuesta.id_usuario,
-//         usuario: respuesta.usuario,
-//       };
-//       deferred.resolve(respuestaUsuario);
-//     })
-//     .catch(error => deferred.reject(error));
-//   }
-//   return deferred.promise;
-// }
+  if (audit_usuario.nit) {
+    deferred.reject(new Error('No se puede cambiar la contraseña de un usuario que tiene acceso por Interoperabilidad.'));
+    return deferred.promise;
+  }
+  if (!body.contrasena || !body.contrasena_nueva) {
+    deferred.reject(new Error('Debe ingresa su contraseña actual y su contraseña nueva.'));
+  }
+  else if (body.contrasena_nueva.length < 8) {
+    deferred.reject(new Error('La contraseña debe contar con al menos 8 caracteres.'));
+  } else {
+    const password = crypto.createHash("sha256").update(body.contrasena).digest("hex");
+    obtenerUsuario( { where: { id_usuario, contrasena: password } } , models)
+    .then(usuario => {
+      if (usuario) {
+        return usuario;
+      } else {
+        throw new Error("Los datos de acceso no coinciden.");
+      }
+    })
+    .then((usuario) => {
+      const usuarioModificar = {
+        contrasena: body.contrasena_nueva,
+        _usuario_modificacion: audit_usuario.id_usuario,
+      };
+      return dao.modificarRegistro(models.usuario, usuario.id_usuario, usuarioModificar);
+    }).then((respuesta) => {
+      const respuestaUsuario = {
+        id_usuario: respuesta.id_usuario,
+        usuario: respuesta.usuario,
+      };
+      deferred.resolve(respuestaUsuario);
+    })
+    .catch(error => deferred.reject(error));
+  }
+  return deferred.promise;
+}
 
-// const recuperarCuenta = (body, models) => {
-//   const deferred = Q.defer();
-//   obtenerUsuario({ where: { usuario: body.usuario } }, models)
-//   .then(result => {
-//     if (result && result.estado === ESTADO_ACTIVO) {
-//       return result;
-//     } else if (result) {
-//       deferred.reject(new Error('El usuario enviado no se encuentra ACTIVO, por lo que no puede cambiar la contraseña.'));
-//     } else {
-//       deferred.reject(new Error('Ninguno de los usuarios coincide con los datos enviados.'));
-//     }
-//   }).then(result => notificarEvento(result.dataValues.id_usuario, models, body, PLANTILLA_USUARIO_RECUPERAR, ESTADO_ACTIVO, cargarDataRecuperar))
-//   .then(result => deferred.resolve({ usuario: body.username }))
-//   .catch(error => deferred.reject(error));
-//   return deferred.promise;
-// }
+const recuperarCuenta = (body, models) => {
+  const deferred = Q.defer();
+  obtenerUsuario({ where: { email: body.email } }, models)
+  .then(result => {
+    if (result && result.estado === ESTADO_ACTIVO) {
+      return result;
+    } else if (result) {
+      deferred.reject(new Error('El usuario enviado no se encuentra ACTIVO, por lo que no puede cambiar la contraseña.'));
+    } else {
+      deferred.reject(new Error('Ninguno de los usuarios coincide con los datos enviados.'));
+    }
+  })
+  .then(result => notificarEvento(result.dataValues.id_usuario, models, body, PLANTILLA_USUARIO_RECUPERAR, ESTADO_ACTIVO, cargarDataRecuperar))
+  .then(result => deferred.resolve({ usuario: body.username }))
+  .catch(error => deferred.reject(error));
+  return deferred.promise;
+}
 
 const listarUsuarios = (query, body, models) => {
   const deferred = Q.defer();
@@ -383,16 +384,17 @@ const activarUsuario = (body, models) => {
   .then(result => {
     if (result) {
       if (result.estado !== ESTADO_PENDIENTE) {
-        throw new Error('El usuario no se encuentra en estado PENDIENTE.');
+        // En este caso sólo recupera contraseña olvidada
+        // throw new Error('El usuario no se encuentra en estado PENDIENTE.');
       }
       if (body.codigo !== result.codigo_contrasena) {
-        throw new Error('incorrectCode');
+        throw new Error('Código incorrecto');
       }
       if (result.fecha_expiracion < new Date) {
-        throw new Error('codeExpired');
+        throw new Error('El código expiró');
       }
       if (body.contrasena.length < 8) {
-        throw new Error('passwordMinimunCharacter');
+        throw new Error('La contraseña debe tener al menos 8 caracteres');
       }
       const usuario = JSON.parse(JSON.stringify(result.dataValues));
       usuario.estado = ESTADO_ACTIVO;
@@ -543,15 +545,15 @@ const cargarDataRegistro = function (usuarioAEnviar, contrasenaEnviar) {
   return data;
 }
 
-// const cargarDataRecuperar = function (usuarioAEnviar, contrasenaEnviar) {
-//   const data = {
-//     nombre: (`${usuarioAEnviar.persona.nombres} ${usuarioAEnviar.persona.primer_apellido} ${usuarioAEnviar.persona.segundo_apellido}`).trim(),
-//     contrasena: contrasenaEnviar,
-//     urlSistemaRecuperar: `${config.app.urlRecuperar}?usuario=${usuarioAEnviar.usuario}&codigo=${contrasenaEnviar}`,
-//     urlSistema: `${config.app.urlLoginAdmin}`,
-//   };
-//   return data;
-// }
+const cargarDataRecuperar = function (usuarioAEnviar, contrasenaEnviar) {
+  const data = {
+    nombre: (`${usuarioAEnviar.persona.nombres} ${usuarioAEnviar.persona.primer_apellido} ${usuarioAEnviar.persona.segundo_apellido}`).trim(),
+    contrasena: contrasenaEnviar,
+    urlSistemaRecuperar: `${config.app.urlRecuperar}?usuario=${usuarioAEnviar.usuario}&codigo=${contrasenaEnviar}`,
+    urlSistema: `${config.app.urlLoginAdmin}`,
+  };
+  return data;
+}
 
 // const confirmarUsuario = (id, body) => {
 //   const app = require('../../../index.js');
@@ -601,27 +603,6 @@ const cargarDataRegistro = function (usuarioAEnviar, contrasenaEnviar) {
 //   .catch(error =>  {
 //     deferred.reject(error)
 //   });
-//   return deferred.promise;
-// };
-
-// const obtenerEmpresas = (id, body, models) => {
-//   const deferred = Q.defer();
-//   if (util.isUndefined(id)) {
-//     deferred.reject(new Error('Datos de la solicitud icompletos: falta ingresar el identificador del usuario'));
-//     return deferred.promise;
-//   }
-//   dao.obtenerRegistro(models.usuario, {where: {id_usuario: id, estado: ESTADO_ACTIVO}})
-//   .then(respuestaUsuario => {
-//     if (util.isUndefined(respuestaUsuario)) {
-//       throw new Error('El usuario que solicita las matriculas no existe o se encuentra INACTIVO en el Sistema');
-//     }
-//     const parametros = {
-//       attributes:['id_empresa', 'nit', 'razon_social', 'matricula_comercio', 'fid_usuario'],
-//     };
-//     return respuestaUsuario.getEmpresas(parametros)
-//   })
-//   .then(respuesta => deferred.resolve(respuesta))
-//   .catch(error => deferred.reject(error));
 //   return deferred.promise;
 // };
 
@@ -730,20 +711,6 @@ const verificarEmail = (paraCrear, body, models) => {
   return deferred.promise;
 };
 
-// const crearEmpresarioConNit = (body, app, callback) => {
-//   const deferred = Q.defer();
-//   if(!body.nit) {
-//     deferred.reject(new Error(`No se puede crear un usuario si no se ha indicado el NIT`));
-//     return deferred.promise;
-//   }
-//   const tieneNit = typeof(body.nit)!== "undefined" && body.nit!==null;
-//   serviciosWebBL.verificaIdentidadImpuestos(body.nit, body.usuario, body.contrasena)
-//   .then(respusta => crearEmpresario(body, app, callback))
-//   .then(respuesta => deferred.resolve(respuesta))
-//   .catch(error => deferred.reject(error));
-//   return deferred.promise;
-// };
-
 const crearCargo = (body, app, callback) => {
   const usuario = body.usuario;
   const contrasena = body.contrasena || null;
@@ -841,6 +808,6 @@ module.exports = {
   // confirmarUsuario,
   // obtenerEmpresas,
   verificarExistencia,
-  // crearEmpresarioConNit,
   crearCargo,
+  recuperarCuenta
 }
