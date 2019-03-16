@@ -154,7 +154,7 @@ module.exports = {
         nombre: 'LISTA DE NIÑOS',
         descripcion: 'Listado de niños',
         orden: 1,
-        ruta: 'kidList',
+        ruta: 'listaNinos',
         icono: 'format_list_bulleted',
         method_get: false,
         method_post: false,
@@ -171,7 +171,7 @@ module.exports = {
         nombre: 'BÚSQUEDA',
         descripcion: 'Búsqueda de niños',
         orden: 1,
-        ruta: 'kidSearch',
+        ruta: 'busquedaNino',
         icono: 'search',
         method_get: true,
         method_post: true,
@@ -199,7 +199,7 @@ module.exports = {
         _usuario_creacion:1,
         _fecha_creacion: new Date(),
         _fecha_modificacion: new Date(),
-        visible: true,
+        visible: false,
       },
       {
         // 12
