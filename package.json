@@ -7,7 +7,7 @@
     "start": "node index.js",
     "startdev": "nodemon index.js",
     "test": "NODE_ENV=test FORCE=true node index.js && sequelize db:seed:all --env test --seeders-path src/seeders/ && sequelize db:migrate:undo:all --env test --migrations-path src/migrations && sequelize db:migrate --env test --migrations-path src/migrations && NODE_ENV=test mocha --timeout 30000 test/**/**/*.js",
-    "setup": "FORCE=true node index.js && sequelize db:seed:all --seeders-path src/seeders && sequelize db:migrate:undo:all --migrations-path src/migrations && sequelize db:migrate --migrations-path src/migrations"
+    "setup": "sequelize db:seed:all --seeders-path src/seeders && sequelize db:migrate:undo:all --migrations-path src/migrations && sequelize db:migrate --migrations-path src/migrations"
   },
   "keywords": [
     "node",
