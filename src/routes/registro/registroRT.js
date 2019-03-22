@@ -19,5 +19,10 @@ module.exports = app => {
     .catch(error => Util.mensajeError(res, error.message));
   });
 
-//   app.route("/api/v1/cursos/id_curso")
+  app.route("/api/v1/registros/")
+  .get((req, res) => {
+    registroBL.listaRegistroPorArea(req.query, req.body)
+    .then(respuesta => Util.mensajeExito(res, "Obtención de datos exitosa.", 200, respuesta))
+    .catch(error => Util.mensajeError(res, error.message));
+  })
 };

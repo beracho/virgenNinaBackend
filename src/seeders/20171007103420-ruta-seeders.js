@@ -311,11 +311,8 @@ module.exports = {
         _fecha_creacion: new Date(),
         _fecha_modificacion: new Date(),
       }, {
-        
-        
-                
         //26
-        ruta: '/api/v1/empresas/:id/',
+        ruta: '/api/v1/registros',
         descripcion: 'Acciones sobre una determinada empresa.',
         method_get: false,
         method_post: false,
@@ -325,6 +322,9 @@ module.exports = {
         _usuario_creacion: 1,
         _fecha_creacion: new Date(),
         _fecha_modificacion: new Date(),
+        
+        
+                
       }, {
         //27
         ruta: '/api/v1/empresas/representantes/:id',

@@ -13,11 +13,14 @@ module.exports = app => {
     const deferred = Q.defer();
     const params = {
       where: {
-        estado: 'ACTIVO'
-      }
+        area: query.area
+      },
+      include: [{
+        model: models.registro_simple,
+        as: 'registros_simple',
+        required: true
+      }]
     };
-    if (query.gestion == 'actual')
-      params.where.gestion = (new Date()).getFullYear() + '';
     if (query.limit && query.page) {
       params.limit = query.limit,
       params.page = query.page
@@ -25,8 +28,10 @@ module.exports = app => {
     if (query.order) {
       params.order = query.order;
     };
-    dao.listarRegistros(models.curso, params)
-    .then(respuesta => deferred.resolve(respuesta))
+    dao.listarRegistros(models.registro, params)
+    .then(respuesta => {
+      deferred.resolve(respuesta)
+    })
     .catch(error => {
       console.log(error);
       deferred.reject(error)
