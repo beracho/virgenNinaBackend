@@ -32,7 +32,7 @@ module.exports = function (sequelize, DataTypes) {
           freezeTableName: true,
           classMethods: {
             associate: (models) => {
-              registro_simple.belongsTo(models.registro, { as: 'registros_simple', foreignKey: { name: 'fid_registro', allowNull: true } });
+              registro_simple.hasOne(models.registro, {as: 'registros_simple', foreignKey: {name: 'fid_registro_simple', allowNull: true}});
             },
           },
         });

@@ -664,11 +664,23 @@ module.exports = app => {
     return deferred.promise;
   };
 
+  const estudiantePorCodigo = (codigoEstudiante) => {
+    const deferred = Q.defer();
+    parametrosEstudiante = {
+      codigo: codigoEstudiante
+    };
+    dao.obtenerRegistro(models.estudiante, parametrosEstudiante)
+      .then(respuesta => deferred.resolve(respuesta))
+      .catch(error => deferred.reject(error));
+    return deferred.promise;
+  };
+
   const estudianteBL = {
     obtenerRegistros,
     editaEstudiante,
     importarCsvDatos,
-    estudiantesPorCurso
+    estudiantesPorCurso,
+    estudiantePorCodigo
   };
 
   return estudianteBL;

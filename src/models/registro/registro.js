@@ -40,7 +40,7 @@ module.exports = function (sequelize, DataTypes) {
         freezeTableName: true,
         classMethods: {
           associate: (models) => {
-            registro.hasOne(models.registro_simple, {as: 'registros_simple', foreignKey: {name: 'fid_registro', allowNull: true}});
+            registro.belongsTo(models.registro_simple, { as: 'registros_simple', foreignKey: { name: 'fid_registro_simple', allowNull: true } });
             registro.belongsTo(models.estudiante, { as: 'estudiantes', foreignKey: { name: 'fid_estudiante', allowNull: false } });
           },
         },

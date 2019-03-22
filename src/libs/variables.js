@@ -31,10 +31,8 @@ global.ESTADO_DIFERENTE = 'DIFERENTE';
 
 /* ******* ROLES *************  */
 global.ROL_ADMINISTRADOR = 1;
-global.ROL_TECNICO = 2;
-global.ROL_TECNICO_PROMUEVE = 3;
-global.ROL_INSCRIPCION = 4;
-global.ROL_TECNICO_REGIONAL = 5;
+global.ROL_DIRECTOR = 2;
+global.ROL_INSCRIPCION = 3;
 
 /* ********************** TIPOS DE USUARIO ********************* */
 global.USUARIO_TIPO_EMPRESARIO = 'EMPRESARIO';

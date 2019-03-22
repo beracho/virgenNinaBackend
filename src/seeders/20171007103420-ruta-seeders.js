@@ -300,13 +300,10 @@ module.exports = {
         _fecha_modificacion: new Date(),
       }, {
         //25
-        
-        
-                
-        ruta: '/registros/generar_certificado',
-        descripcion: 'Servicio para generar un certificado QR.',
+        ruta: '/api/v1/registroSimple',
+        descripcion: 'Servicio para crear un nuevo registro simple.',
         method_get: true,
-        method_post: false,
+        method_post: true,
         method_put: false,
         method_delete: false,
         estado: 'ACTIVO',
@@ -314,6 +311,9 @@ module.exports = {
         _fecha_creacion: new Date(),
         _fecha_modificacion: new Date(),
       }, {
+        
+        
+                
         //26
         ruta: '/api/v1/empresas/:id/',
         descripcion: 'Acciones sobre una determinada empresa.',
