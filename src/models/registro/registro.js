@@ -10,9 +10,9 @@ module.exports = function (sequelize, DataTypes) {
         type: DataTypes.STRING(20),
         xlabel: 'Área',
         allowNull: false,
-        values: ['psicomotricidad', 'psicologia', 'trabajo social', 'fisioterapia', 'fonoaudiologia', 'nutricion', 'odontologia', 'psicopedagogia', 'educacion', 'direccion'],
+        values: ['psicomotricidad', 'psicologia', 'trabajo social', 'fisioterapia', 'fonoaudiologia', 'nutricion', 'odontologia', 'psicopedagogia', 'medicina general', 'educacion', 'direccion'],
         validate: {
-          isIn: {args: [['psicomotricidad', 'psicologia', 'trabajo social', 'fisioterapia', 'fonoaudiologia', 'nutricion', 'odontologia', 'psicopedagogia', 'educacion', 'direccion']], msg: "El campo área sólo permite valores: 'psicomotricidad', 'psicologia', 'trabajo social', 'fisioterapia', 'fonoaudiologia', 'nutricion', 'odontologia', 'psicopedagogia', 'educacion' o 'direccion'"},
+          isIn: {args: [['psicomotricidad', 'psicologia', 'trabajo social', 'fisioterapia', 'fonoaudiologia', 'nutricion', 'odontologia', 'psicopedagogia', 'medicina general', 'educacion', 'direccion']], msg: "El campo área sólo permite valores: 'psicomotricidad', 'psicologia', 'trabajo social', 'fisioterapia', 'fonoaudiologia', 'nutricion', 'odontologia', 'psicopedagogia', 'medicina general', 'educacion' o 'direccion'"},
         },
       },
       tipo: {
