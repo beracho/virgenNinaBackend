@@ -21,6 +21,7 @@ module.exports = app => {
         required: true
       }]
     };
+    let usuarios = {};
     if (query.limit && query.page) {
       params.limit = query.limit,
       params.page = query.page
@@ -28,9 +29,35 @@ module.exports = app => {
     if (query.order) {
       params.order = query.order;
     };
-    dao.listarRegistros(models.registro, params)
-    .then(respuesta => {
-      deferred.resolve(respuesta)
+    estudianteBL.estudiantePorCodigo(query.estudiante, models)
+    .then(respuestaEstudiante => {
+      if (respuestaEstudiante && respuestaEstudiante.id_estudiante)
+        params.where.fid_estudiante = respuestaEstudiante.id_estudiante;
+      return dao.listarRegistros(models.usuario, {
+        include: [{
+          model: models.persona,
+          as: 'persona',
+          required: true
+        }]});
+    })
+    .then(respuestaUsuarios => {
+      usuarios = respuestaUsuarios;
+      return dao.listarRegistros(models.registro, params);
+    })
+    .then(respuestaRegistro => {
+      respuestaRegistro.forEach((registroItem, index) => {
+        usuarios.forEach(userItem => {
+          if (registroItem._usuario_creacion === userItem.id_usuario) {
+            respuestaRegistro[index].dataValues.usuario = {
+              nombre: userItem.persona.nombres,
+              primer_apellido: userItem.persona.primer_apellido,
+              segundo_apellido: userItem.persona.segundo_apellido,
+              nombre_completo: userItem.persona.nombre_completo
+            }
+          }
+        });
+      });
+      deferred.resolve(respuestaRegistro)
     })
     .catch(error => {
       console.log(error);

@@ -667,7 +667,9 @@ module.exports = app => {
   const estudiantePorCodigo = (codigoEstudiante) => {
     const deferred = Q.defer();
     parametrosEstudiante = {
-      codigo: codigoEstudiante
+      where:{
+        codigo: codigoEstudiante
+      }
     };
     dao.obtenerRegistro(models.estudiante, parametrosEstudiante)
       .then(respuesta => deferred.resolve(respuesta))
