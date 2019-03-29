@@ -20,19 +20,27 @@ module.exports = app => {
     let respuestaTotal = {};
     const deferred = Q.defer();
     let busqueda = {};
+    let busquedaEstudiante = {};
     if (req.tipo_documento && req.documento_identidad && req.lugar_documento_identidad) {
       busqueda = {
         tipo_documento: req.tipo_documento,
         documento_identidad: req.documento_identidad,
         lugar_documento_identidad: req.lugar_documento_identidad
       }
+    } else {
+      if (req.codigo) {
+        busquedaEstudiante = {
+          codigo: req.codigo
+        }
+      };
     };
     params = {
       where: busqueda,
       include: [{
+        where: busquedaEstudiante,
         model: models.estudiante,
         as: 'estudiante',
-        required: true,
+        // required: true,
         include: [{
           model: models.registro_inscripcion,
           as: 'registro',
@@ -56,12 +64,19 @@ module.exports = app => {
     if (req.order) {
       params.order = req.order;
     };
-    let finished = false
+    let finished = false;
+    let noAddress = false;
+    let noBirthPlace = false;
     dao.listarRegistros(models.persona, params)
     .then(respuesta => {
       respuestaTotal = respuesta;
       if (respuestaTotal.length === 1) {
-        return dpaBL.obtenerELemento(respuestaTotal[0].direccion.fid_dpa, models)
+        if (respuestaTotal[0].direccion) {
+          return dpaBL.obtenerELemento(respuestaTotal[0].direccion.fid_dpa, models);
+        } else {
+          noAddress = true;
+          return 0;
+        }
       } 
       else {
         if (respuestaTotal.length === 0) {
@@ -94,21 +109,32 @@ module.exports = app => {
     })
     .then(respuesta => {
       if(!finished){
-        respuestaTotal[0].dataValues.direccion.dataValues.pais = respuesta.pais ;
-        respuestaTotal[0].dataValues.direccion.dataValues.departamento = respuesta.departamento ;
-        respuestaTotal[0].dataValues.direccion.dataValues.provincia = respuesta.provincia ;
-        respuestaTotal[0].dataValues.direccion.dataValues.municipio = respuesta.municipio ;
-        return dpaBL.obtenerELemento(respuestaTotal[0].lugar_nacimiento.fid_dpa, models)
+        if (!noAddress) {
+          respuestaTotal[0].dataValues.direccion.dataValues.pais = respuesta.pais ;
+          respuestaTotal[0].dataValues.direccion.dataValues.departamento = respuesta.departamento ;
+          respuestaTotal[0].dataValues.direccion.dataValues.provincia = respuesta.provincia ;
+          respuestaTotal[0].dataValues.direccion.dataValues.municipio = respuesta.municipio ;
+        }
+        if (respuestaTotal[0].lugar_nacimiento) {
+          return dpaBL.obtenerELemento(respuestaTotal[0].lugar_nacimiento.fid_dpa, models);
+        } else {
+          noBirthPlace = true;
+          return 0;
+        }
       }
     })
     .then(respuesta => {
       if(!finished){
-        respuestaTotal[0].dataValues.lugar_nacimiento.dataValues.pais = respuesta.pais ;
-        respuestaTotal[0].dataValues.lugar_nacimiento.dataValues.departamento = respuesta.departamento ;
-        respuestaTotal[0].dataValues.lugar_nacimiento.dataValues.provincia = respuesta.provincia ;
-        respuestaTotal[0].dataValues.lugar_nacimiento.dataValues.municipio = respuesta.municipio ;
+        if (!noBirthPlace) {
+          respuestaTotal[0].dataValues.lugar_nacimiento.dataValues.pais = respuesta.pais ;
+          respuestaTotal[0].dataValues.lugar_nacimiento.dataValues.departamento = respuesta.departamento ;
+          respuestaTotal[0].dataValues.lugar_nacimiento.dataValues.provincia = respuesta.provincia ;
+          respuestaTotal[0].dataValues.lugar_nacimiento.dataValues.municipio = respuesta.municipio ;
+        }
         params = {
-          where: busqueda,
+          where: {
+            id_persona: respuestaTotal[0].id_persona
+          },
           attributes: ['id_persona'],
           include: [{
             model: models.parentezco,
@@ -124,7 +150,7 @@ module.exports = app => {
     })
     .then(respuesta => {
       if(!finished){
-        respuestaTotal[0].dataValues.persona_de = respuesta[0].persona_de ;
+        respuestaTotal[0].dataValues.persona_de = respuesta.length == 0 ? [] : respuesta[0].persona_de;
         params = {
           where: {
             fid_estudiante: respuestaTotal[0].dataValues.fid_estudiante
@@ -193,8 +219,6 @@ module.exports = app => {
     const deferred = Q.defer();
     obtenerIdDelCodigo(body)
     .then(idEstudiante => {
-      console.log('----idEstu---');
-      console.log(idEstudiante);
       const paramsEstudiante = body;
       paramsEstudiante._usuario_modificacion = body.audit_usuario.id_usuario;
       delete paramsEstudiante.id_estudiante;
