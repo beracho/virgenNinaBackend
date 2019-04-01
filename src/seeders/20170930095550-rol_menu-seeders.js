@@ -29,14 +29,14 @@ module.exports = {
     ];
     roles_menus_array = roles_menus_array.concat(obj);
 
-    // PSICOMOTRICIDAD
+    // PSICOPEDAGOGIA
     obj = [
       { fid_menu: 10, fid_rol: 4, method_get: true, method_post: true, method_put: true, method_delete: false, estado: 'ACTIVO', _usuario_creacion:1, _fecha_creacion: new Date(), _fecha_modificacion: new Date() },
       { fid_menu: 12, fid_rol: 4, method_get: true, method_post: true, method_put: true, method_delete: false, estado: 'ACTIVO', _usuario_creacion:1, _fecha_creacion: new Date(), _fecha_modificacion: new Date() },
       { fid_menu: 13, fid_rol: 4, method_get: true, method_post: true, method_put: true, method_delete: false, estado: 'ACTIVO', _usuario_creacion:1, _fecha_creacion: new Date(), _fecha_modificacion: new Date() },
       { fid_menu: 14, fid_rol: 4, method_get: true, method_post: true, method_put: true, method_delete: false, estado: 'ACTIVO', _usuario_creacion:1, _fecha_creacion: new Date(), _fecha_modificacion: new Date() },
-      { fid_menu: 15, fid_rol: 4, method_get: true, method_post: true, method_put: true, method_delete: false, estado: 'ACTIVO', _usuario_creacion:1, _fecha_creacion: new Date(), _fecha_modificacion: new Date() },
-      { fid_menu: 16, fid_rol: 4, method_get: true, method_post: true, method_put: true, method_delete: false, estado: 'ACTIVO', _usuario_creacion:1, _fecha_creacion: new Date(), _fecha_modificacion: new Date() }
+      { fid_menu: 23, fid_rol: 4, method_get: true, method_post: true, method_put: true, method_delete: false, estado: 'ACTIVO', _usuario_creacion:1, _fecha_creacion: new Date(), _fecha_modificacion: new Date() },
+      { fid_menu: 26, fid_rol: 4, method_get: true, method_post: true, method_put: true, method_delete: false, estado: 'ACTIVO', _usuario_creacion:1, _fecha_creacion: new Date(), _fecha_modificacion: new Date() }
     ];
     roles_menus_array = roles_menus_array.concat(obj);
     
@@ -46,8 +46,8 @@ module.exports = {
       { fid_menu: 12, fid_rol: 5, method_get: true, method_post: true, method_put: true, method_delete: false, estado: 'ACTIVO', _usuario_creacion:1, _fecha_creacion: new Date(), _fecha_modificacion: new Date() },
       { fid_menu: 13, fid_rol: 5, method_get: true, method_post: true, method_put: true, method_delete: false, estado: 'ACTIVO', _usuario_creacion:1, _fecha_creacion: new Date(), _fecha_modificacion: new Date() },
       { fid_menu: 14, fid_rol: 5, method_get: true, method_post: true, method_put: true, method_delete: false, estado: 'ACTIVO', _usuario_creacion:1, _fecha_creacion: new Date(), _fecha_modificacion: new Date() },
-      { fid_menu: 15, fid_rol: 5, method_get: true, method_post: true, method_put: true, method_delete: false, estado: 'ACTIVO', _usuario_creacion:1, _fecha_creacion: new Date(), _fecha_modificacion: new Date() },
-      { fid_menu: 16, fid_rol: 5, method_get: true, method_post: true, method_put: true, method_delete: false, estado: 'ACTIVO', _usuario_creacion:1, _fecha_creacion: new Date(), _fecha_modificacion: new Date() }
+      { fid_menu: 16, fid_rol: 5, method_get: true, method_post: true, method_put: true, method_delete: false, estado: 'ACTIVO', _usuario_creacion:1, _fecha_creacion: new Date(), _fecha_modificacion: new Date() },
+      { fid_menu: 26, fid_rol: 5, method_get: true, method_post: true, method_put: true, method_delete: false, estado: 'ACTIVO', _usuario_creacion:1, _fecha_creacion: new Date(), _fecha_modificacion: new Date() }
     ];
     roles_menus_array = roles_menus_array.concat(obj);
 
@@ -57,8 +57,8 @@ module.exports = {
       { fid_menu: 12, fid_rol: 6, method_get: true, method_post: true, method_put: true, method_delete: false, estado: 'ACTIVO', _usuario_creacion:1, _fecha_creacion: new Date(), _fecha_modificacion: new Date() },
       { fid_menu: 13, fid_rol: 6, method_get: true, method_post: true, method_put: true, method_delete: false, estado: 'ACTIVO', _usuario_creacion:1, _fecha_creacion: new Date(), _fecha_modificacion: new Date() },
       { fid_menu: 14, fid_rol: 6, method_get: true, method_post: true, method_put: true, method_delete: false, estado: 'ACTIVO', _usuario_creacion:1, _fecha_creacion: new Date(), _fecha_modificacion: new Date() },
-      { fid_menu: 15, fid_rol: 6, method_get: true, method_post: true, method_put: true, method_delete: false, estado: 'ACTIVO', _usuario_creacion:1, _fecha_creacion: new Date(), _fecha_modificacion: new Date() },
-      { fid_menu: 16, fid_rol: 6, method_get: true, method_post: true, method_put: true, method_delete: false, estado: 'ACTIVO', _usuario_creacion:1, _fecha_creacion: new Date(), _fecha_modificacion: new Date() }
+      { fid_menu: 17, fid_rol: 6, method_get: true, method_post: true, method_put: true, method_delete: false, estado: 'ACTIVO', _usuario_creacion:1, _fecha_creacion: new Date(), _fecha_modificacion: new Date() },
+      { fid_menu: 26, fid_rol: 6, method_get: true, method_post: true, method_put: true, method_delete: false, estado: 'ACTIVO', _usuario_creacion:1, _fecha_creacion: new Date(), _fecha_modificacion: new Date() }
     ];
     roles_menus_array = roles_menus_array.concat(obj);
 
@@ -68,8 +68,8 @@ module.exports = {
       { fid_menu: 12, fid_rol: 7, method_get: true, method_post: true, method_put: true, method_delete: false, estado: 'ACTIVO', _usuario_creacion:1, _fecha_creacion: new Date(), _fecha_modificacion: new Date() },
       { fid_menu: 13, fid_rol: 7, method_get: true, method_post: true, method_put: true, method_delete: false, estado: 'ACTIVO', _usuario_creacion:1, _fecha_creacion: new Date(), _fecha_modificacion: new Date() },
       { fid_menu: 14, fid_rol: 7, method_get: true, method_post: true, method_put: true, method_delete: false, estado: 'ACTIVO', _usuario_creacion:1, _fecha_creacion: new Date(), _fecha_modificacion: new Date() },
-      { fid_menu: 15, fid_rol: 7, method_get: true, method_post: true, method_put: true, method_delete: false, estado: 'ACTIVO', _usuario_creacion:1, _fecha_creacion: new Date(), _fecha_modificacion: new Date() },
-      { fid_menu: 16, fid_rol: 7, method_get: true, method_post: true, method_put: true, method_delete: false, estado: 'ACTIVO', _usuario_creacion:1, _fecha_creacion: new Date(), _fecha_modificacion: new Date() }
+      { fid_menu: 19, fid_rol: 7, method_get: true, method_post: true, method_put: true, method_delete: false, estado: 'ACTIVO', _usuario_creacion:1, _fecha_creacion: new Date(), _fecha_modificacion: new Date() },
+      { fid_menu: 26, fid_rol: 7, method_get: true, method_post: true, method_put: true, method_delete: false, estado: 'ACTIVO', _usuario_creacion:1, _fecha_creacion: new Date(), _fecha_modificacion: new Date() }
     ];
     roles_menus_array = roles_menus_array.concat(obj);
 
@@ -79,8 +79,8 @@ module.exports = {
       { fid_menu: 12, fid_rol: 8, method_get: true, method_post: true, method_put: true, method_delete: false, estado: 'ACTIVO', _usuario_creacion:1, _fecha_creacion: new Date(), _fecha_modificacion: new Date() },
       { fid_menu: 13, fid_rol: 8, method_get: true, method_post: true, method_put: true, method_delete: false, estado: 'ACTIVO', _usuario_creacion:1, _fecha_creacion: new Date(), _fecha_modificacion: new Date() },
       { fid_menu: 14, fid_rol: 8, method_get: true, method_post: true, method_put: true, method_delete: false, estado: 'ACTIVO', _usuario_creacion:1, _fecha_creacion: new Date(), _fecha_modificacion: new Date() },
-      { fid_menu: 15, fid_rol: 8, method_get: true, method_post: true, method_put: true, method_delete: false, estado: 'ACTIVO', _usuario_creacion:1, _fecha_creacion: new Date(), _fecha_modificacion: new Date() },
-      { fid_menu: 16, fid_rol: 8, method_get: true, method_post: true, method_put: true, method_delete: false, estado: 'ACTIVO', _usuario_creacion:1, _fecha_creacion: new Date(), _fecha_modificacion: new Date() }
+      { fid_menu: 21, fid_rol: 8, method_get: true, method_post: true, method_put: true, method_delete: false, estado: 'ACTIVO', _usuario_creacion:1, _fecha_creacion: new Date(), _fecha_modificacion: new Date() },
+      { fid_menu: 26, fid_rol: 8, method_get: true, method_post: true, method_put: true, method_delete: false, estado: 'ACTIVO', _usuario_creacion:1, _fecha_creacion: new Date(), _fecha_modificacion: new Date() }
     ];
     roles_menus_array = roles_menus_array.concat(obj);
 
@@ -90,8 +90,8 @@ module.exports = {
       { fid_menu: 12, fid_rol: 9, method_get: true, method_post: true, method_put: true, method_delete: false, estado: 'ACTIVO', _usuario_creacion:1, _fecha_creacion: new Date(), _fecha_modificacion: new Date() },
       { fid_menu: 13, fid_rol: 9, method_get: true, method_post: true, method_put: true, method_delete: false, estado: 'ACTIVO', _usuario_creacion:1, _fecha_creacion: new Date(), _fecha_modificacion: new Date() },
       { fid_menu: 14, fid_rol: 9, method_get: true, method_post: true, method_put: true, method_delete: false, estado: 'ACTIVO', _usuario_creacion:1, _fecha_creacion: new Date(), _fecha_modificacion: new Date() },
-      { fid_menu: 15, fid_rol: 9, method_get: true, method_post: true, method_put: true, method_delete: false, estado: 'ACTIVO', _usuario_creacion:1, _fecha_creacion: new Date(), _fecha_modificacion: new Date() },
-      { fid_menu: 16, fid_rol: 9, method_get: true, method_post: true, method_put: true, method_delete: false, estado: 'ACTIVO', _usuario_creacion:1, _fecha_creacion: new Date(), _fecha_modificacion: new Date() }
+      { fid_menu: 20, fid_rol: 9, method_get: true, method_post: true, method_put: true, method_delete: false, estado: 'ACTIVO', _usuario_creacion:1, _fecha_creacion: new Date(), _fecha_modificacion: new Date() },
+      { fid_menu: 26, fid_rol: 9, method_get: true, method_post: true, method_put: true, method_delete: false, estado: 'ACTIVO', _usuario_creacion:1, _fecha_creacion: new Date(), _fecha_modificacion: new Date() }
     ];
     roles_menus_array = roles_menus_array.concat(obj);
 
@@ -101,8 +101,8 @@ module.exports = {
       { fid_menu: 12, fid_rol: 10, method_get: true, method_post: true, method_put: true, method_delete: false, estado: 'ACTIVO', _usuario_creacion:1, _fecha_creacion: new Date(), _fecha_modificacion: new Date() },
       { fid_menu: 13, fid_rol: 10, method_get: true, method_post: true, method_put: true, method_delete: false, estado: 'ACTIVO', _usuario_creacion:1, _fecha_creacion: new Date(), _fecha_modificacion: new Date() },
       { fid_menu: 14, fid_rol: 10, method_get: true, method_post: true, method_put: true, method_delete: false, estado: 'ACTIVO', _usuario_creacion:1, _fecha_creacion: new Date(), _fecha_modificacion: new Date() },
-      { fid_menu: 15, fid_rol: 10, method_get: true, method_post: true, method_put: true, method_delete: false, estado: 'ACTIVO', _usuario_creacion:1, _fecha_creacion: new Date(), _fecha_modificacion: new Date() },
-      { fid_menu: 16, fid_rol: 10, method_get: true, method_post: true, method_put: true, method_delete: false, estado: 'ACTIVO', _usuario_creacion:1, _fecha_creacion: new Date(), _fecha_modificacion: new Date() }
+      { fid_menu: 22, fid_rol: 10, method_get: true, method_post: true, method_put: true, method_delete: false, estado: 'ACTIVO', _usuario_creacion:1, _fecha_creacion: new Date(), _fecha_modificacion: new Date() },
+      { fid_menu: 26, fid_rol: 10, method_get: true, method_post: true, method_put: true, method_delete: false, estado: 'ACTIVO', _usuario_creacion:1, _fecha_creacion: new Date(), _fecha_modificacion: new Date() }
     ];
     roles_menus_array = roles_menus_array.concat(obj);
 
@@ -112,8 +112,8 @@ module.exports = {
       { fid_menu: 12, fid_rol: 11, method_get: true, method_post: true, method_put: true, method_delete: false, estado: 'ACTIVO', _usuario_creacion:1, _fecha_creacion: new Date(), _fecha_modificacion: new Date() },
       { fid_menu: 13, fid_rol: 11, method_get: true, method_post: true, method_put: true, method_delete: false, estado: 'ACTIVO', _usuario_creacion:1, _fecha_creacion: new Date(), _fecha_modificacion: new Date() },
       { fid_menu: 14, fid_rol: 11, method_get: true, method_post: true, method_put: true, method_delete: false, estado: 'ACTIVO', _usuario_creacion:1, _fecha_creacion: new Date(), _fecha_modificacion: new Date() },
-      { fid_menu: 15, fid_rol: 11, method_get: true, method_post: true, method_put: true, method_delete: false, estado: 'ACTIVO', _usuario_creacion:1, _fecha_creacion: new Date(), _fecha_modificacion: new Date() },
-      { fid_menu: 16, fid_rol: 11, method_get: true, method_post: true, method_put: true, method_delete: false, estado: 'ACTIVO', _usuario_creacion:1, _fecha_creacion: new Date(), _fecha_modificacion: new Date() }
+      { fid_menu: 25, fid_rol: 11, method_get: true, method_post: true, method_put: true, method_delete: false, estado: 'ACTIVO', _usuario_creacion:1, _fecha_creacion: new Date(), _fecha_modificacion: new Date() },
+      { fid_menu: 26, fid_rol: 11, method_get: true, method_post: true, method_put: true, method_delete: false, estado: 'ACTIVO', _usuario_creacion:1, _fecha_creacion: new Date(), _fecha_modificacion: new Date() }
     ];
     roles_menus_array = roles_menus_array.concat(obj);
     
@@ -123,16 +123,32 @@ module.exports = {
       { fid_menu: 12, fid_rol: 12, method_get: true, method_post: true, method_put: true, method_delete: false, estado: 'ACTIVO', _usuario_creacion:1, _fecha_creacion: new Date(), _fecha_modificacion: new Date() },
       { fid_menu: 13, fid_rol: 12, method_get: true, method_post: true, method_put: true, method_delete: false, estado: 'ACTIVO', _usuario_creacion:1, _fecha_creacion: new Date(), _fecha_modificacion: new Date() },
       { fid_menu: 14, fid_rol: 12, method_get: true, method_post: true, method_put: true, method_delete: false, estado: 'ACTIVO', _usuario_creacion:1, _fecha_creacion: new Date(), _fecha_modificacion: new Date() },
-      { fid_menu: 15, fid_rol: 12, method_get: true, method_post: true, method_put: true, method_delete: false, estado: 'ACTIVO', _usuario_creacion:1, _fecha_creacion: new Date(), _fecha_modificacion: new Date() },
-      { fid_menu: 16, fid_rol: 12, method_get: true, method_post: true, method_put: true, method_delete: false, estado: 'ACTIVO', _usuario_creacion:1, _fecha_creacion: new Date(), _fecha_modificacion: new Date() }
+      { fid_menu: 18, fid_rol: 12, method_get: true, method_post: true, method_put: true, method_delete: false, estado: 'ACTIVO', _usuario_creacion:1, _fecha_creacion: new Date(), _fecha_modificacion: new Date() },
+      { fid_menu: 26, fid_rol: 12, method_get: true, method_post: true, method_put: true, method_delete: false, estado: 'ACTIVO', _usuario_creacion:1, _fecha_creacion: new Date(), _fecha_modificacion: new Date() }
     ];
     roles_menus_array = roles_menus_array.concat(obj);
-
-    // PROFESOR
-    // obj = [
-    //   { fid_menu: 10, fid_rol: 12, method_get: true, method_post: true, method_put: true, method_delete: false, estado: 'ACTIVO', _usuario_creacion:1, _fecha_creacion: new Date(), _fecha_modificacion: new Date() }
-    // ];
-    // roles_menus_array = roles_menus_array.concat(obj);
+    
+    // TERAPIA OCUPACIONAL
+    obj = [
+      { fid_menu: 10, fid_rol: 13, method_get: true, method_post: true, method_put: true, method_delete: false, estado: 'ACTIVO', _usuario_creacion:1, _fecha_creacion: new Date(), _fecha_modificacion: new Date() },
+      { fid_menu: 12, fid_rol: 13, method_get: true, method_post: true, method_put: true, method_delete: false, estado: 'ACTIVO', _usuario_creacion:1, _fecha_creacion: new Date(), _fecha_modificacion: new Date() },
+      { fid_menu: 13, fid_rol: 13, method_get: true, method_post: true, method_put: true, method_delete: false, estado: 'ACTIVO', _usuario_creacion:1, _fecha_creacion: new Date(), _fecha_modificacion: new Date() },
+      { fid_menu: 14, fid_rol: 13, method_get: true, method_post: true, method_put: true, method_delete: false, estado: 'ACTIVO', _usuario_creacion:1, _fecha_creacion: new Date(), _fecha_modificacion: new Date() },
+      { fid_menu: 24, fid_rol: 13, method_get: true, method_post: true, method_put: true, method_delete: false, estado: 'ACTIVO', _usuario_creacion:1, _fecha_creacion: new Date(), _fecha_modificacion: new Date() },
+      { fid_menu: 26, fid_rol: 13, method_get: true, method_post: true, method_put: true, method_delete: false, estado: 'ACTIVO', _usuario_creacion:1, _fecha_creacion: new Date(), _fecha_modificacion: new Date() }
+    ];
+    roles_menus_array = roles_menus_array.concat(obj);
+    
+    // EDUCACION
+    obj = [
+      { fid_menu: 10, fid_rol: 14, method_get: true, method_post: true, method_put: true, method_delete: false, estado: 'ACTIVO', _usuario_creacion:1, _fecha_creacion: new Date(), _fecha_modificacion: new Date() },
+      { fid_menu: 12, fid_rol: 14, method_get: true, method_post: true, method_put: true, method_delete: false, estado: 'ACTIVO', _usuario_creacion:1, _fecha_creacion: new Date(), _fecha_modificacion: new Date() },
+      { fid_menu: 13, fid_rol: 14, method_get: true, method_post: true, method_put: true, method_delete: false, estado: 'ACTIVO', _usuario_creacion:1, _fecha_creacion: new Date(), _fecha_modificacion: new Date() },
+      { fid_menu: 14, fid_rol: 14, method_get: true, method_post: true, method_put: true, method_delete: false, estado: 'ACTIVO', _usuario_creacion:1, _fecha_creacion: new Date(), _fecha_modificacion: new Date() },
+      { fid_menu: 15, fid_rol: 14, method_get: true, method_post: true, method_put: true, method_delete: false, estado: 'ACTIVO', _usuario_creacion:1, _fecha_creacion: new Date(), _fecha_modificacion: new Date() },
+      { fid_menu: 26, fid_rol: 14, method_get: true, method_post: true, method_put: true, method_delete: false, estado: 'ACTIVO', _usuario_creacion:1, _fecha_creacion: new Date(), _fecha_modificacion: new Date() }
+    ];
+    roles_menus_array = roles_menus_array.concat(obj);
 
     return queryInterface.bulkInsert('rol_menu', roles_menus_array, {});
   },
