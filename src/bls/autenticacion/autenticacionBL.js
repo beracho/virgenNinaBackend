@@ -179,7 +179,7 @@ const obtenerDatos = (cuerpoObj, app) => {
       as: 'usuarios_roles',
       required: true,
       include: [{
-        attributes: ['id_rol', 'nombre', 'estado'],
+        attributes: ['id_rol', 'nombre', 'estado', 'area'],
         model: models.rol,
         as: 'rol',
       }],

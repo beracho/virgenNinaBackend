@@ -31,6 +31,15 @@ module.exports = (sequelize, DataType) => {
           len: {args: [0, 200], msg: "El campo 'Descripción' permite un máximo de 200 caracteres"},
         },
       },
+      area: {
+        type: DataType.STRING(50),
+        field: 'area',
+        xlabel: 'Área',
+        allowNull: true,
+        validate: {
+          len: {args: [0, 200], msg: "El campo 'Área' permite un máximo de 50 caracteres"},
+        },
+      },
       peso: {
         type: DataType.INTEGER,
         field: 'peso',
