@@ -38,7 +38,18 @@ module.exports = app => {
           model: models.persona,
           as: 'persona',
           required: true
-        }]});
+        },{
+          attributes: ['fid_rol'],
+          model: models.usuario_rol,
+          as: 'usuarios_roles',
+          required: true,
+          include: [{
+            attributes: ['area'],
+            model: models.rol,
+            as: 'rol',
+          }],
+        }]
+      });
     })
     .then(respuestaUsuarios => {
       usuarios = respuestaUsuarios;
@@ -53,7 +64,8 @@ module.exports = app => {
               primer_apellido: userItem.persona.primer_apellido,
               segundo_apellido: userItem.persona.segundo_apellido,
               nombre_completo: userItem.persona.nombre_completo
-            }
+            };
+            respuestaRegistro[index].dataValues.area = userItem.usuarios_roles[0].rol.area;
           }
         });
       });
