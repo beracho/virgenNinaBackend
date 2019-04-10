@@ -322,22 +322,27 @@ module.exports = {
         _usuario_creacion: 1,
         _fecha_creacion: new Date(),
         _fecha_modificacion: new Date(),
-        
-        
-                
       }, {
         //27
-        ruta: '/api/v1/empresas/representantes/:id',
-        descripcion: 'Acciones sobre representantes de una empresa.',
+        ruta: '/api/v1/parentezco',
+        descripcion: 'Acciones sobre parientes de estudiante.',
         method_get: true,
         method_post: false,
-        method_put: false,
+        method_put: true,
         method_delete: false,
         estado: 'ACTIVO',
         _usuario_creacion: 1,
         _fecha_creacion: new Date(),
         _fecha_modificacion: new Date(),
       }, {
+        
+
+
+
+
+        
+        
+                
         //28
         ruta: '/api/v1/registros/:id/pagos',
         descripcion: 'Acciones sobre pagos.',

@@ -82,6 +82,11 @@ module.exports = (sequelize, DataType) => {
       xlabel: 'Fecha de nacimiento',
       allowNull: true,
     },
+    edad: {
+      type: DataType.INTEGER,
+      xlabel: 'Edad',
+      allowNull: true
+    },
     nombres: {
       type: DataType.STRING(100),
       xlabel: 'Nombres',
@@ -156,6 +161,14 @@ module.exports = (sequelize, DataType) => {
         len: {args: [0, 20], msg: "El campo 'Idioma Materno' permite un máximo de 20 caracteres"},
       },
     },
+    estado_civil: {
+      type: DataType.STRING(50),
+      xlabel: 'Estado civil',
+      allowNull: true,
+      validate: {
+        len: {args: [0, 20], msg: "El campo 'Estado civil' permite un máximo de 50 caracteres"},
+      },
+    },
     idiomas: {
       type: DataType.STRING(100),
       xlabel: 'Idiomas',
@@ -188,6 +201,11 @@ module.exports = (sequelize, DataType) => {
         isIn: {args: [['BORN', 'ADQUIRED', 'INHERITED', 'NONE']], msg: "El campo 'Discapacidad origen' sólo permite valores: 'BORN', 'ADQUIRED', 'INHERITED' o 'NONE'."},
         len: {args: [0, 30], msg: "El campo 'Discapacidad origen' permite un máximo de 30 caracteres."},
       },
+    },
+    salario_mensual: {
+      type: DataType.INTEGER,
+      xlabel: 'Ingreso mensual',
+      allowNull: true
     },
     grado_discapacidad: {
       type: DataType.INTEGER,
