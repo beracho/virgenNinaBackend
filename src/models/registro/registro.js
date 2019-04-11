@@ -41,6 +41,7 @@ module.exports = function (sequelize, DataTypes) {
         classMethods: {
           associate: (models) => {
             registro.belongsTo(models.registro_simple, { as: 'registros_simple', foreignKey: { name: 'fid_registro_simple', allowNull: true } });
+            registro.belongsTo(models.registro_eval_trabajo_social, { as: 'registro_eval_trabajo_social', foreignKey: { name: 'fid_registro_eval_trabajo_social', allowNull: true } });
             registro.belongsTo(models.estudiante, { as: 'estudiantes', foreignKey: { name: 'fid_estudiante', allowNull: false } });
           },
         },

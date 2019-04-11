@@ -313,7 +313,7 @@ module.exports = {
       }, {
         //26
         ruta: '/api/v1/registros',
-        descripcion: 'Acciones sobre una determinada empresa.',
+        descripcion: 'Acciones sobre registros.',
         method_get: false,
         method_post: false,
         method_put: true,
@@ -335,17 +335,9 @@ module.exports = {
         _fecha_creacion: new Date(),
         _fecha_modificacion: new Date(),
       }, {
-        
-
-
-
-
-        
-        
-                
         //28
-        ruta: '/api/v1/registros/:id/pagos',
-        descripcion: 'Acciones sobre pagos.',
+        ruta: '/api/v1/registroEvalTrabajoSocial',
+        descripcion: 'Acciones sobre registros de evaluación de trabajo social.',
         method_get: true,
         method_post: true,
         method_put: false,
@@ -355,6 +347,14 @@ module.exports = {
         _fecha_creacion: new Date(),
         _fecha_modificacion: new Date(),
       }, {
+        
+
+
+
+
+        
+        
+                
         //29
         ruta: '/api/v1/registros/:id/pagos/:id',
         descripcion: 'Acciones sobre un determinado pago.',
