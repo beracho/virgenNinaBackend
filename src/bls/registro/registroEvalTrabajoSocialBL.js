@@ -90,9 +90,40 @@ module.exports = app => {
     return deferred.promise;
   }
 
+  const editaRegistroEvalTrabajoSocial = (body) => {
+    const deferred = Q.defer();
+    const parametrosRegistroEvalTrabajoSocial = {
+      tipo_de_familia: body.tipoDeFamilia,
+      observacion_grupo_familiar: body.observacionGrupoFamiliar,
+      dinamica_familiar: body.dinamicaFamiliar,
+      proceso_social: body.procesoSocial,
+      relato_discapacidad: body.relatoDiscapacidad,
+      diagnostico_social: body.diagnosticoSocial,
+      conclusion_sugerencia: body.conclusionSugerencia,
+      _usuario_modificacion: body.audit_usuario.id_usuario
+    };
+    const parametrosRegistro = {
+      _usuario_modificacion: body.audit_usuario.id_usuario
+    }
+    models.sequelize.transaction().then((transaccion) => {
+      dao.modificarRegistro(models.registro_eval_trabajo_social, body.idRegistroTrabajoSocial, parametrosRegistroEvalTrabajoSocial, transaccion)
+      .then(respuestaCreacionRegistroEvalTrabajoSocial => {
+        parametrosRegistro.fid_registro_eval_trabajo_social = respuestaCreacionRegistroEvalTrabajoSocial.id_registro_eval_trabajo_social;
+        return dao.modificarRegistro(models.registro, body.idRegistro, parametrosRegistro, transaccion)
+      })
+      .then(respuestaCreacion => {
+        transaccion.commit().then(res => deferred.resolve(respuestaCreacion))
+      })
+      .catch(error => {
+        transaccion.rollback().then(res => deferred.reject(error))
+      });
+    })
+    .catch(error => deferred.reject(error));
+    return deferred.promise;
+  }
+
   const registroEvalTrabajoSocialBL = {
-    // listaRegistroPorArea,
-    // editaRegistro,
+    editaRegistroEvalTrabajoSocial,
     creaRegistroEvalTrabajoSocial
   };
 
