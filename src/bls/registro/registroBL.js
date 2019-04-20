@@ -94,8 +94,7 @@ module.exports = app => {
     }
     models.sequelize.transaction().then((transaccion) => {
       dao.modificarRegistro(models.registro_simple, body.idRegistroSimple, parametrosRegistroSimple, transaccion)
-      .then(respuestaCreacionRegistroSimple => {
-        parametrosRegistro.fid_registro_simple = respuestaCreacionRegistroSimple.id_registro_simple;
+      .then(() => {
         return dao.modificarRegistro(models.registro, body.idRegistro, parametrosRegistro, transaccion)
       })
       .then(respuestaCreacion => {
@@ -106,6 +105,27 @@ module.exports = app => {
       });
     })
     .catch(error => deferred.reject(error));
+    return deferred.promise;
+  }
+
+  const eliminaRegistroSimple = (body) => {
+    const deferred = Q.defer();
+    models.sequelize.transaction().then((transaccion) => {
+      dao.eliminarRegistro(models.registro_simple, body.registros_simple.id_registro_simple, transaccion)
+      .then(() => {
+        return dao.eliminarRegistro(models.registro, body.id_registro, transaccion);
+      })
+      .then(respuestaCreacion => {
+        transaccion.commit().then(res => deferred.resolve(respuestaCreacion))
+      })
+      .catch(error => {
+        transaccion.rollback().then(res => deferred.reject(error))
+      });
+    })
+    .catch(error => {
+      console.log(error);
+      deferred.reject(error)}
+    );
     return deferred.promise;
   }
 
@@ -188,7 +208,8 @@ module.exports = app => {
   const registroBL = {
     listaRegistroPorArea,
     creaRegistroSimple,
-    editaRegistroSimple
+    editaRegistroSimple,
+    eliminaRegistroSimple
   };
 
   return registroBL;

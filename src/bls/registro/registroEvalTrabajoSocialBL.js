@@ -122,9 +122,28 @@ module.exports = app => {
     return deferred.promise;
   }
 
+  const eliminaRegistroEvalTrabajoSocial = (body) => {
+    const deferred = Q.defer();
+    models.sequelize.transaction().then((transaccion) => {
+      dao.eliminarRegistro(models.registro_eval_trabajo_social, body.registro_eval_trabajo_social.id_registro_eval_trabajo_social, transaccion)
+      .then(() => {
+        return dao.eliminarRegistro(models.registro, body.id_registro, transaccion)
+      })
+      .then(respuestaCreacion => {
+        transaccion.commit().then(res => deferred.resolve(respuestaCreacion))
+      })
+      .catch(error => {
+        transaccion.rollback().then(res => deferred.reject(error))
+      });
+    })
+    .catch(error => deferred.reject(error));
+    return deferred.promise;
+  }
+
   const registroEvalTrabajoSocialBL = {
+    creaRegistroEvalTrabajoSocial,
     editaRegistroEvalTrabajoSocial,
-    creaRegistroEvalTrabajoSocial
+    eliminaRegistroEvalTrabajoSocial
   };
 
   return registroEvalTrabajoSocialBL;

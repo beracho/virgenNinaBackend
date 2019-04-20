@@ -29,10 +29,10 @@ module.exports = app => {
     registroBL.editaRegistroSimple(req.body)
     .then(respuesta => Util.mensajeExito(res, "Edición de datos exitosa.", 200, respuesta))
     .catch(error => Util.mensajeError(res, error.message));
-  // }).delete((req, res) => {
-  //   registroBL.eliminaRegistroSimple(req.body)
-  //   .then(respuesta => Util.mensajeExito(res, "Edición de datos exitosa.", 200, respuesta))
-  //   .catch(error => Util.mensajeError(res, error.message));
+  }).delete((req, res) => {
+    registroBL.eliminaRegistroSimple(req.body)
+    .then(respuesta => Util.mensajeExito(res, "Eliminación de datos exitosa.", 200, respuesta))
+    .catch(error => Util.mensajeError(res, error.message));
   });
 
   app.route("/api/v1/registroEvalTrabajoSocial/")
@@ -43,6 +43,10 @@ module.exports = app => {
   }).put((req, res) => {
     registroEvalTrabajoSocialBL.editaRegistroEvalTrabajoSocial(req.body)
     .then(respuesta => Util.mensajeExito(res, "Edición de datos exitosa.", 200, respuesta))
+    .catch(error => Util.mensajeError(res, error.message));
+  }).delete((req, res) => {
+    registroEvalTrabajoSocialBL.eliminaRegistroEvalTrabajoSocial(req.body)
+    .then(respuesta => Util.mensajeExito(res, "eliminación de datos exitosa.", 200, respuesta))
     .catch(error => Util.mensajeError(res, error.message));
   });
 };
