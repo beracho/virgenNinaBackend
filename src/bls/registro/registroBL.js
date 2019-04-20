@@ -18,7 +18,11 @@ module.exports = app => {
       include: [{
         model: models.registro_simple,
         as: 'registros_simple',
-        required: true
+        required: false
+      }, {
+        model: models.registro_eval_trabajo_social,
+        as: 'registro_eval_trabajo_social',
+        required: false
       }]
     };
     let usuarios = {};
@@ -78,42 +82,30 @@ module.exports = app => {
     return deferred.promise;
   };
 
-  const editaRegistro = (body) => {
+  const editaRegistroSimple = (body) => {
     const deferred = Q.defer();
-    const idCurso = body.id_curso;
-    const parametrosCurso = {
-      nombre: body.nombre,
-      paralelo: body.paralelo,
-      gestion: body.gestion,
-      maestro: body.maestro,
-      descripcion: body.descripcion,
-      criterio_edad: body.criterio_edad,
-      tipo_discapacidad: body.tipo_discapacidad,
-      grado: body.grado,
+    const parametrosRegistroSimple = {
+      observacion: body.observacion,
+      intervencion: body.intervencion,
       _usuario_modificacion: body.audit_usuario.id_usuario
     };
-    dao.obtenerRegistro(models.curso, {
-      where: {
-        nombre:parametrosCurso.nombre,
-        paralelo:parametrosCurso.paralelo,
-        gestion:parametrosCurso.gestion
-      }
+    const parametrosRegistro = {
+      _usuario_modificacion: body.audit_usuario.id_usuario
+    }
+    models.sequelize.transaction().then((transaccion) => {
+      dao.modificarRegistro(models.registro_simple, body.idRegistroSimple, parametrosRegistroSimple, transaccion)
+      .then(respuestaCreacionRegistroSimple => {
+        parametrosRegistro.fid_registro_simple = respuestaCreacionRegistroSimple.id_registro_simple;
+        return dao.modificarRegistro(models.registro, body.idRegistro, parametrosRegistro, transaccion)
+      })
+      .then(respuestaCreacion => {
+        transaccion.commit().then(res => deferred.resolve(respuestaCreacion))
+      })
+      .catch(error => {
+        transaccion.rollback().then(res => deferred.reject(error))
+      });
     })
-    .then(respuestaBusqueda => {
-      if(respuestaBusqueda && respuestaBusqueda.id_curso !== idCurso)
-        throw new Error("courseNameRepeated");
-      else if(parametrosCurso.paralelo.length > 1)
-        throw new Error("invalidParalelFormat");
-      else if(idCurso === undefined)
-        throw new Error("noIdCourseSend");
-      else
-        return dao.modificarRegistro(models.curso, idCurso, parametrosCurso)
-    })
-    .then(respuestaModificacion => deferred.resolve(respuestaModificacion))
-    .catch(error => {
-      console.log(error);
-      deferred.reject(error)
-    });
+    .catch(error => deferred.reject(error));
     return deferred.promise;
   }
 
@@ -195,8 +187,8 @@ module.exports = app => {
 
   const registroBL = {
     listaRegistroPorArea,
-    editaRegistro,
-    creaRegistroSimple
+    creaRegistroSimple,
+    editaRegistroSimple
   };
 
   return registroBL;

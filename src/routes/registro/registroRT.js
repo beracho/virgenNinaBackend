@@ -25,6 +25,14 @@ module.exports = app => {
     registroBL.creaRegistroSimple(req.body)
     .then(respuesta => Util.mensajeExito(res, "Creación de datos exitosa.", 200, respuesta))
     .catch(error => Util.mensajeError(res, error.message));
+  }).put((req, res) => {
+    registroBL.editaRegistroSimple(req.body)
+    .then(respuesta => Util.mensajeExito(res, "Edición de datos exitosa.", 200, respuesta))
+    .catch(error => Util.mensajeError(res, error.message));
+  // }).delete((req, res) => {
+  //   registroBL.eliminaRegistroSimple(req.body)
+  //   .then(respuesta => Util.mensajeExito(res, "Edición de datos exitosa.", 200, respuesta))
+  //   .catch(error => Util.mensajeError(res, error.message));
   });
 
   app.route("/api/v1/registroEvalTrabajoSocial/")
