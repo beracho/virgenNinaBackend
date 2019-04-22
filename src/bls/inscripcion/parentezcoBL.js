@@ -61,8 +61,8 @@ module.exports = app => {
       let idPersonaDeEstudiante;
       dao.listarRegistros(models.persona, params)
       .then(respuestaParientes => {
+        idPersonaDeEstudiante = respuestaParientes[0].id_persona;
         if (body.accion == 'edita') {
-          idPersonaDeEstudiante = respuestaParientes[0].id_persona;
           respuestaParientes[0].persona_de.forEach(pariente => {
               // actualiza datos Relacion
               parentezcoDatos.relacion = body.padre.relation;
@@ -91,7 +91,7 @@ module.exports = app => {
           });
           return dao.modificarRegistro(models.persona, body.padre.id_persona, personaDatos, transaccion)
         } else {
-          parentezcoDatos.relacion = body.padre.relationItems;
+          parentezcoDatos.relacion = body.padre.relation;
           parentezcoDatos._usuario_creacion = body.audit_usuario.id_usuario;
           parentezcoDatos._usuario_modificacion = body.audit_usuario.id_usuario;
           parentezcoDatos._fecha_modificacion = new Date();
@@ -99,6 +99,7 @@ module.exports = app => {
           personaDatos.documento_identidad = body.padre.documento_identidad;
           personaDatos.lugar_documento_identidad = body.padre.lugar_documento_identidad;
           personaDatos.fecha_nacimiento = body.padre.fecha_nacimiento;
+          personaDatos.edad = body.padre.age;
           personaDatos.nombres = body.padre.nombres;
           personaDatos.primer_apellido = body.padre.primer_apellido;
           personaDatos.segundo_apellido = body.padre.segundo_apellido;
