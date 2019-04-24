@@ -34,6 +34,47 @@ module.exports = app => {
         }
       };
     };
+    if (req.tipobusqueda && req.buscar) {
+      switch (req.tipobusqueda) {
+        case '0':
+          busquedaEstudiante = {
+            codigo: {
+              $like: '%' + req.buscar + '%'
+            }
+          }
+          break;
+        case '1':
+          busqueda = {
+            documento_identidad: {
+              $like: '%' + req.buscar + '%'
+            }
+          }
+          break;
+        case '2':
+          busqueda = {
+            $or: [
+              {
+                nombres: {
+                  $like: '%' + req.buscar + '%'
+                }
+              }, 
+              {
+                primer_apellido: {
+                  $like: '%' + req.buscar + '%'
+                }
+              }, 
+              {
+                segundo_apellido: {
+                  $like: '%' + req.buscar + '%'
+                }
+              }
+            ]
+          }
+          break;
+        default:
+          break;
+      }
+    }
     params = {
       where: busqueda,
       include: [{
