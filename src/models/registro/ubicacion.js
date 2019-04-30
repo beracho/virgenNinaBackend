@@ -58,6 +58,11 @@ module.exports = (sequelize, DataType) => {
         isInt: {args: [true], msg: "El campo 'Celular' sólo permite valores numéricos."},
       },
     },
+    referencias: {
+      type: DataType.TEXT,
+      xlabel: 'Referencias',
+      allowNull: true,
+    },
     _usuario_creacion: {
       type: DataType.INTEGER,
       xlabel: 'Usuario de creación',

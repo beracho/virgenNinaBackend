@@ -277,83 +277,196 @@ module.exports = app => {
 
   const validarCsvDatos = (rutaArchivo, cursos, discapacidades, estudiantes) => {
     const deferred = Q.defer();
-    const arrayCols = ['Código', 'Apellido paterno', 'Apellido materno', 'Nombres', 'Fecha de nacimiento', 'Género', 'Rude', 'Carnet de discapacidad', 'Tipo discapacidad', 'Grado de discapacidad', 'Nombre completo padre', 'Documento identidad padre', 'Teléfono padre', 'Nombre completo madre', 'Documento identidad madre', 'Teléfono madre', 'Curso nombre',	'Curso paralelo', 'Curso gestión'];
+    const arrayCols = ['Código', 'Apellido paterno', 'Apellido materno', 'Nombres', 'Fecha de nacimiento', 'Tipo documento', 'Número documento', 'Lugar documento', 'Oficialía', 'Libro', 'Partida', 'Folio', 'Género','Rude', 'Carnet de discapacidad', 'Tipo discapacidad', 'Grado de discapacidad', 'Código DPA', 'Zona', 'Calle/Avenida', 'Número', 'Comunidad', 'Referencias', 'Apellido Paterno Padre', 'Apellido Materno Padre', 'Nombres Padre', 'Documento identidad padre', 'Expedido padre', 'Teléfono padre', 'Apellido Paterno Madre', 'Apellido Materno Madre', 'Nombres Madre', 'Documento identidad madre', 'Expedido madre', 'Teléfono madre', 'Curso nombre', 'Curso paralelo', 'Curso gestion'];
     const arrayCrear = [];
     csv({delimiter: ';', headers:arrayCols})
     .fromFile(rutaArchivo)
     .on('json',(csvRow, rowIndex) => {
       if(Object.keys(csvRow).length == arrayCols.length) {
         // VALIDA CAMPOS INDIVIDUALES
+        // 0 Código
         if (csvRow[arrayCols[0]].length === 0) {
           deferred.reject(new Error(`emptyValue@r:${rowIndex + 1},c:${arrayCols[0]}`));
           return deferred.promise;
         }
+        // 1 2 Apellido paterno y apellido materno
         if (csvRow[arrayCols[1]].length === 0 && csvRow[arrayCols[2]].length === 0) {
           deferred.reject(new Error(`noLastName@r:${rowIndex + 1}`));
           return deferred.promise;
         }
+        // 3 Nombres
         if (csvRow[arrayCols[3]].length === 0) {
           deferred.reject(new Error(`emptyValue@r:${rowIndex + 1},c:${arrayCols[3]}`));
           return deferred.promise;
         }
+        // 4 Fecha de nacimiento
         if (csvRow[arrayCols[4]].length != 0 && csvRow[arrayCols[4]].match(/^\d{1,2}(\/|-)\d{1,2}(\/|-)\d{4}$/) == null) {
           deferred.reject(new Error(`wrongFormat@r:${rowIndex + 1},c:${arrayCols[4]}`));
           return deferred.promise;
         }
-        if (csvRow[arrayCols[5]].length != 0 && !(csvRow[arrayCols[5]] === 'F' || csvRow[arrayCols[5]] === 'M')) {
+        // 5 Tipo documento
+        if (csvRow[arrayCols[5]] != 'CI' && csvRow[arrayCols[5]] != 'PASAPORTE') {
           deferred.reject(new Error(`wrongFormat@r:${rowIndex + 1},c:${arrayCols[5]}`));
           return deferred.promise;
         }
-        if (csvRow[arrayCols[8]].length != 0 && !(csvRow[arrayCols[8]] === 'FISICA' || csvRow[arrayCols[8]] === 'MULTIPLE' || csvRow[arrayCols[8]] === 'INTELECTUAL' || csvRow[arrayCols[8]] === 'VISUAL' || csvRow[arrayCols[8]] === 'AUDITIVA')) {
+        // 6 Número documento
+        if (csvRow[arrayCols[6]].length != 0 && csvRow[arrayCols[6]].match(/^[0-9]+$/) == null) {
+          deferred.reject(new Error(`wrongFormat@r:${rowIndex + 1},c:${arrayCols[6]}`));
+          return deferred.promise;
+        }
+        // 7 Lugar documento
+        if ((csvRow[arrayCols[7]] != 'LP' && csvRow[arrayCols[7]] != 'CBBA' && csvRow[arrayCols[7]] != 'SC' &&
+        csvRow[arrayCols[7]] != 'OR' && csvRow[arrayCols[7]] != 'CH' && csvRow[arrayCols[7]] != 'BE' &&
+        csvRow[arrayCols[7]] != 'PT' && csvRow[arrayCols[7]] != 'TA' && csvRow[arrayCols[7]] != 'PA') || csvRow[arrayCols[5]] != 'CI') {
+          deferred.reject(new Error(`wrongFormat@r:${rowIndex + 1},c:${arrayCols[7]}`));
+          return deferred.promise;
+        }
+        // 8 Oficialía
+        if (csvRow[arrayCols[8]].length != 0 && csvRow[arrayCols[8]].match(/^[0-9]+$/) == null) {
           deferred.reject(new Error(`wrongFormat@r:${rowIndex + 1},c:${arrayCols[8]}`));
           return deferred.promise;
         }
-        if (csvRow[arrayCols[9]].length != 0 && (isNaN(csvRow[arrayCols[9]])) || Number(csvRow[arrayCols[9]]) > 100 || Number(csvRow[arrayCols[9]]) < 0) {
+        // 9 Libro
+        if (csvRow[arrayCols[9]].length != 0 && csvRow[arrayCols[9]].match(/^[0-9]+$/) == null) {
           deferred.reject(new Error(`wrongFormat@r:${rowIndex + 1},c:${arrayCols[9]}`));
           return deferred.promise;
         }
-        if (csvRow[arrayCols[10]].length != 0 && /\d/.test(csvRow[arrayCols[10]])) {
+        // 10 Partida
+        if (csvRow[arrayCols[10]].length != 0 && csvRow[arrayCols[10]].match(/^[0-9]+$/) == null) {
           deferred.reject(new Error(`wrongFormat@r:${rowIndex + 1},c:${arrayCols[10]}`));
           return deferred.promise;
         }
+        // 11 Folio
         if (csvRow[arrayCols[11]].length != 0 && csvRow[arrayCols[11]].match(/^[0-9]+$/) == null) {
           deferred.reject(new Error(`wrongFormat@r:${rowIndex + 1},c:${arrayCols[11]}`));
           return deferred.promise;
         }
-        if (csvRow[arrayCols[12]].length != 0 && csvRow[arrayCols[12]].match(/^[0-9]+$/) == null) {
+        // 12 Género
+        if (csvRow[arrayCols[12]].length != 0 && !(csvRow[arrayCols[12]] === 'F' || csvRow[arrayCols[12]] === 'M')) {
           deferred.reject(new Error(`wrongFormat@r:${rowIndex + 1},c:${arrayCols[12]}`));
           return deferred.promise;
         }
-        if (csvRow[arrayCols[13]].length != 0 && /\d/.test(csvRow[arrayCols[13]])) {
+        // 13 Rude
+        if (csvRow[arrayCols[13]].length != 0 && csvRow[arrayCols[13]].match(/^[0-9]+$/) == null) {
           deferred.reject(new Error(`wrongFormat@r:${rowIndex + 1},c:${arrayCols[13]}`));
           return deferred.promise;
         }
-        if (csvRow[arrayCols[14]].length != 0 && csvRow[arrayCols[14]].match(/^[0-9]+$/) == null) {
-          deferred.reject(new Error(`wrongFormat@r:${rowIndex + 1},c:${arrayCols[14]}`));
-          return deferred.promise;
-        }
-        if (csvRow[arrayCols[15]].length != 0 && csvRow[arrayCols[15]].match(/^[0-9]+$/) == null) {
+        // 14 Carnet de discapacidad
+        // 15 Tipo discapacidad
+        if (csvRow[arrayCols[15]].length != 0 && !(csvRow[arrayCols[15]] === 'FISICA' || csvRow[arrayCols[15]] === 'MULTIPLE' || csvRow[arrayCols[15]] === 'INTELECTUAL' || csvRow[arrayCols[15]] === 'VISUAL' || csvRow[arrayCols[15]] === 'AUDITIVA')) {
           deferred.reject(new Error(`wrongFormat@r:${rowIndex + 1},c:${arrayCols[15]}`));
           return deferred.promise;
         }
-        if (csvRow[arrayCols[16]].length != 0 && !(csvRow[arrayCols[16]] === 'AT' || csvRow[arrayCols[16]] === 'INI 1' || csvRow[arrayCols[16]] === 'INI 2' || csvRow[arrayCols[16]] === 'PRI 1' || csvRow[arrayCols[16]] === 'PRI 2' || csvRow[arrayCols[16]] === 'PRI 3' || csvRow[arrayCols[16]] === 'PRI SOC')) {
+        // 16 Grado de discapacidad
+        if (csvRow[arrayCols[16]].length != 0 && (isNaN(csvRow[arrayCols[16]])) || Number(csvRow[arrayCols[16]]) > 100 || Number(csvRow[arrayCols[16]]) < 0) {
           deferred.reject(new Error(`wrongFormat@r:${rowIndex + 1},c:${arrayCols[16]}`));
           return deferred.promise;
         }
-        if (csvRow[arrayCols[17]].length != 0 && (csvRow[arrayCols[17]].length != 1 || csvRow[arrayCols[17]].replace(/[^A-Z]/g, "").length != 1)) {
+        // 17 Código DPA
+        if (csvRow[arrayCols[17]].length != 0 && (isNaN(csvRow[arrayCols[17]])) || Number(csvRow[arrayCols[17]]) > 465 || Number(csvRow[arrayCols[17]]) < 0) {
           deferred.reject(new Error(`wrongFormat@r:${rowIndex + 1},c:${arrayCols[17]}`));
           return deferred.promise;
         }
-        if (csvRow[arrayCols[18]].length != 0 && (isNaN(csvRow[arrayCols[18]]) || Number(csvRow[arrayCols[18]]) > (new Date()).getFullYear())) {
+        // 18 Zona
+        if (/\d/.test(csvRow[arrayCols[18]])) {
           deferred.reject(new Error(`wrongFormat@r:${rowIndex + 1},c:${arrayCols[18]}`));
+          return deferred.promise;
+        }
+        // 19 Calle/Avenida
+        if (/\d/.test(csvRow[arrayCols[19]])) {
+          deferred.reject(new Error(`wrongFormat@r:${rowIndex + 1},c:${arrayCols[19]}`));
+          return deferred.promise;
+        }
+        // 20 Número
+        if (csvRow[arrayCols[20]].length != 0 && csvRow[arrayCols[20]].match(/^[0-9]+$/) == null) {
+          deferred.reject(new Error(`wrongFormat@r:${rowIndex + 1},c:${arrayCols[20]}`));
+          return deferred.promise;
+        }
+        // 21 Comunidad
+        if (/\d/.test(csvRow[arrayCols[21]])) {
+          deferred.reject(new Error(`wrongFormat@r:${rowIndex + 1},c:${arrayCols[21]}`));
+          return deferred.promise;
+        }
+        // 22 Referencias
+        if (csvRow[arrayCols[23]].length !== 0 || csvRow[arrayCols[24]].length !== 0 ||csvRow[arrayCols[25]].length !== 0 ||csvRow[arrayCols[26]].length !== 0 ||csvRow[arrayCols[27]].length !== 0 ||csvRow[arrayCols[28]].length !== 0) {
+          // 23 24 Apellido Paterno Padre
+          if (csvRow[arrayCols[23]].length === 0 && csvRow[arrayCols[24]].length === 0) {
+            deferred.reject(new Error(`noFatherLastName@r:${rowIndex + 1}`));
+            return deferred.promise;
+          }
+          // 25 Nombres Padre
+          if (csvRow[arrayCols[25]].length === 0) {
+            deferred.reject(new Error(`emptyValue@r:${rowIndex + 1},c:${arrayCols[25]}`));
+            return deferred.promise;
+          }
+          // 26 Documento identidad padre
+          if (csvRow[arrayCols[26]].length != 0 && csvRow[arrayCols[26]].match(/^[0-9]+$/) == null) {
+            deferred.reject(new Error(`wrongFormat@r:${rowIndex + 1},c:${arrayCols[26]}`));
+            return deferred.promise;
+          }
+          // 27 Expedido padre
+          if ((csvRow[arrayCols[27]] != 'LP' && csvRow[arrayCols[27]] != 'CBBA' && csvRow[arrayCols[27]] != 'SC' &&
+          csvRow[arrayCols[27]] != 'OR' && csvRow[arrayCols[27]] != 'CH' && csvRow[arrayCols[27]] != 'BE' &&
+          csvRow[arrayCols[27]] != 'PT' && csvRow[arrayCols[27]] != 'TA' && csvRow[arrayCols[27]] != 'PA')) {
+            deferred.reject(new Error(`wrongFormat@r:${rowIndex + 1},c:${arrayCols[27]}`));
+            return deferred.promise;
+          }
+          // 28 Teléfono padre
+          if (csvRow[arrayCols[28]].length != 0 && csvRow[arrayCols[28]].match(/^[0-9]+$/) == null) {
+            deferred.reject(new Error(`wrongFormat@r:${rowIndex + 1},c:${arrayCols[28]}`));
+            return deferred.promise;
+          }
+        }
+        if (csvRow[arrayCols[29]].length !== 0 || csvRow[arrayCols[30]].length !== 0 ||csvRow[arrayCols[31]].length !== 0 ||csvRow[arrayCols[32]].length !== 0 ||csvRow[arrayCols[33]].length !== 0 ||csvRow[arrayCols[34]].length !== 0) {
+          // 29 30 Apellido Paterno Madre
+          if (csvRow[arrayCols[29]].length === 0 && csvRow[arrayCols[30]].length === 0) {
+            deferred.reject(new Error(`noMotherLastName@r:${rowIndex + 1}`));
+            return deferred.promise;
+          }
+          // 31 Nombres Madre
+          if (csvRow[arrayCols[31]].length === 0) {
+            deferred.reject(new Error(`emptyValue@r:${rowIndex + 1},c:${arrayCols[31]}`));
+            return deferred.promise;
+          }
+          // 32 Documento identidad madre
+          if (csvRow[arrayCols[32]].length != 0 && csvRow[arrayCols[32]].match(/^[0-9]+$/) == null) {
+            deferred.reject(new Error(`wrongFormat@r:${rowIndex + 1},c:${arrayCols[32]}`));
+            return deferred.promise;
+          }
+          // 33 Expedido madre
+          if ((csvRow[arrayCols[33]] != 'LP' && csvRow[arrayCols[33]] != 'CBBA' && csvRow[arrayCols[33]] != 'SC' &&
+          csvRow[arrayCols[33]] != 'OR' && csvRow[arrayCols[33]] != 'CH' && csvRow[arrayCols[33]] != 'BE' &&
+          csvRow[arrayCols[33]] != 'PT' && csvRow[arrayCols[33]] != 'TA' && csvRow[arrayCols[33]] != 'PA')) {
+            deferred.reject(new Error(`wrongFormat@r:${rowIndex + 1},c:${arrayCols[33]}`));
+            return deferred.promise;
+          }
+          // 34 Teléfono madre
+          if (csvRow[arrayCols[34]].length != 0 && csvRow[arrayCols[34]].match(/^[0-9]+$/) == null) {
+            deferred.reject(new Error(`wrongFormat@r:${rowIndex + 1},c:${arrayCols[34]}`));
+            return deferred.promise;
+          }
+        }
+        // 35 Curso nombre
+        if (csvRow[arrayCols[35]].length != 0 && !(csvRow[arrayCols[35]] === 'AT' || csvRow[arrayCols[35]] === 'INI 1' || csvRow[arrayCols[35]] === 'INI 2' || csvRow[arrayCols[35]] === 'PRI 1' || csvRow[arrayCols[35]] === 'PRI 2' || csvRow[arrayCols[35]] === 'PRI 3' || csvRow[arrayCols[35]] === 'PRI SOC')) {
+          deferred.reject(new Error(`wrongFormat@r:${rowIndex + 1},c:${arrayCols[35]}`));
+          return deferred.promise;
+        }
+        // 36 Curso paralelo
+        if (csvRow[arrayCols[36]].length != 0 && (csvRow[arrayCols[36]].length != 1 || csvRow[arrayCols[36]].replace(/[^A-Z]/g, "").length != 1)) {
+          deferred.reject(new Error(`wrongFormat@r:${rowIndex + 1},c:${arrayCols[36]}`));
+          return deferred.promise;
+        }
+        // 37 Curso gestion
+        if (csvRow[arrayCols[37]].length != 0 && (isNaN(csvRow[arrayCols[37]]) || Number(csvRow[arrayCols[37]]) > (new Date()).getFullYear())) {
+          deferred.reject(new Error(`wrongFormat@r:${rowIndex + 1},c:${arrayCols[37]}`));
           return deferred.promise;
         }
         // VALIDA CURSO
         let cursoValido = false;
         let cursoKey;
-        if(csvRow[arrayCols[16]] != '' && csvRow[arrayCols[17]] != '' && csvRow[arrayCols[18]] != ''){
+        if(csvRow[arrayCols[35]] != '' && csvRow[arrayCols[36]] != '' && csvRow[arrayCols[37]] != ''){
           cursos.forEach(function(element) {
-            if (element.nombre == csvRow[arrayCols[16]] && element.paralelo == csvRow[arrayCols[17]] && element.gestion == csvRow[arrayCols[18]]) {
+            if (element.nombre == csvRow[arrayCols[35]] && element.paralelo == csvRow[arrayCols[36]] && element.gestion == csvRow[arrayCols[37]]) {
               cursoValido = true;
               cursoKey = element.id
             }
@@ -376,7 +489,7 @@ module.exports = app => {
         }, this);
         // ENCUENTRA CLAVE FORANEA DE DISCAPACIDAD
         let foraignKey = '';
-        switch (csvRow[arrayCols[8]]) {
+        switch (csvRow[arrayCols[15]]) {
           case 'VISUAL':
           foraignKey = 'visual';
           break;
@@ -393,7 +506,7 @@ module.exports = app => {
           foraignKey = 'multiple';
           break;
           default:
-          if(csvRow[arrayCols[8]] != '') {
+          if(csvRow[arrayCols[15]] != '') {
             deferred.reject(new Error(`wrongFormat@r:${rowIndex + 1},c:${arrayCols[8]}`));
             return deferred.promise;
           }
@@ -407,33 +520,56 @@ module.exports = app => {
         // CREA OBJETO PARA DEVOLVER
         const datosCrear = {
           padre: {
-            nombre_completo: csvRow[arrayCols[10]],
+            // nombre_completo: csvRow[arrayCols[10]].toLowerCase(),
+            primer_apellido: csvRow[arrayCols[23]].toLowerCase(),
+            segundo_apellido: csvRow[arrayCols[24]].toLowerCase(),
+            nombres: csvRow[arrayCols[25]].toLowerCase(),
             tipo_documento: 'CARNET_IDENTIDAD',
-            lugar_documento_identidad: 'LP',
-            documento_identidad: csvRow[arrayCols[11]],
-            telefono: csvRow[arrayCols[12]]
+            lugar_documento_identidad: csvRow[arrayCols[27]],
+            documento_identidad: csvRow[arrayCols[26]],
+            telefono: csvRow[arrayCols[28]]
           },
           madre: {
-            nombre_completo: csvRow[arrayCols[13]],
+            // nombre_completo: csvRow[arrayCols[13]].toLowerCase(),
+            primer_apellido: csvRow[arrayCols[29]].toLowerCase(),
+            segundo_apellido: csvRow[arrayCols[30]].toLowerCase(),
+            nombres: csvRow[arrayCols[31]].toLowerCase(),
             tipo_documento: 'CARNET_IDENTIDAD',
-            lugar_documento_identidad: 'LP',
-            documento_identidad: csvRow[arrayCols[14]],
-            telefono: csvRow[arrayCols[15]]
+            lugar_documento_identidad: csvRow[arrayCols[33]],
+            documento_identidad: csvRow[arrayCols[32]],
+            telefono: csvRow[arrayCols[34]]
           },
           estudiante: {
             codigo: csvRow[arrayCols[0]],
-            rude: csvRow[arrayCols[6]],
-            fid_curso: cursoKey
+            rude: csvRow[arrayCols[13]],
+            fid_curso: cursoKey,
+            registro_inscripcion: {
+              oficialia: csvRow[arrayCols[8]],
+              libro: csvRow[arrayCols[9]],
+              partida: csvRow[arrayCols[10]],
+              folio: csvRow[arrayCols[11]]
+            }
           },
           persona: {
-            primer_apellido: csvRow[arrayCols[1]],
-            segundo_apellido: csvRow[arrayCols[2]],
-            nombres: csvRow[arrayCols[3]],
+            primer_apellido: csvRow[arrayCols[1]].toLowerCase(),
+            segundo_apellido: csvRow[arrayCols[2]].toLowerCase(),
+            nombres: csvRow[arrayCols[3]].toLowerCase(),
             fecha_nacimiento: csvRow[arrayCols[4]],
-            genero: csvRow[arrayCols[5]],
-            carnet_discapacidad: csvRow[arrayCols[7]],
-            grado_discapacidad: csvRow[arrayCols[9]],
+            tipo_documento: csvRow[arrayCols[5]] == 'CI' ? 'CARNET_IDENTIDAD' : csvRow[arrayCols[5]],
+            documento_identidad: csvRow[arrayCols[6]],
+            lugar_documento_identidad: csvRow[arrayCols[7]],
+            genero: csvRow[arrayCols[12]],
+            carnet_discapacidad: csvRow[arrayCols[14]],
+            grado_discapacidad: csvRow[arrayCols[16]],
             fid_tipo_discapacidad: foraignKey != ''? foraignKey : null
+          },
+          ubicacion: {
+            fid_dpa: csvRow[arrayCols[17]],
+            zona: csvRow[arrayCols[18]].toLowerCase(),
+            calle: csvRow[arrayCols[19]].toLowerCase(),
+            numero: csvRow[arrayCols[20]],
+            comunidad: csvRow[arrayCols[21]].toLowerCase(),
+            referencias: csvRow[arrayCols[22]]
           }
         }
         arrayCrear.push(datosCrear);
@@ -533,13 +669,15 @@ module.exports = app => {
           const parentezcoObjeto = [];
           const estudianteObjeto = [];
           const personaObjeto = [];
+          const ubicacionObjeto = [];
+          const registroInscripcionObjeto = [];
           objetosCreacion.forEach(function(element) {
-            if (element.padre.nombre_completo != '' || element.padre.documento_identidad != '' || element.padre.telefono != '') {
+            if ((element.padre.nombres != '' && element.padre.primer_apellido != '' || element.padre.segundo_apellido != '') || element.padre.documento_identidad != '' || element.padre.telefono != '') {
               element.padre._usuario_creacion = audit_usuario.id_usuario;
               element.padre.genero = 'M';
               personasPadresObjeto.push(element.padre);
             }
-            if (element.madre.nombre_completo != '' || element.madre.documento_identidad != '' || element.madre.telefono != '') {
+            if ((element.madre.nombres != '' && element.madre.primer_apellido != '' || element.madre.segundo_apellido != '') || element.madre.documento_identidad != '' || element.madre.telefono != '') {
               element.madre._usuario_creacion = audit_usuario.id_usuario;
               element.madre.genero = 'F';
               personasPadresObjeto.push(element.madre);
@@ -547,6 +685,8 @@ module.exports = app => {
             element.estudiante._usuario_creacion = audit_usuario.id_usuario;
             if(element.estudiante.rude === '')
               delete element.estudiante.rude;
+            if(element.estudiante.fid_curso === undefined)
+              delete element.estudiante.fid_curso;
             estudianteObjeto.push(element.estudiante);
             if(element.persona.fecha_nacimiento === '')
               delete element.persona.fecha_nacimiento;
@@ -559,6 +699,28 @@ module.exports = app => {
             else
               element.persona.grado_discapacidad = Number(element.persona.grado_discapacidad);
             personaObjeto.push(element.persona);
+            element.ubicacion._usuario_creacion = audit_usuario.id_usuario;
+            if(element.ubicacion.fid_dpa === undefined)
+              delete element.ubicacion.fid_dpa;
+            if(element.ubicacion.zona === '')
+              delete element.ubicacion.zona;
+            if(element.ubicacion.calle === '')
+              delete element.ubicacion.calle;
+            if(element.ubicacion.comunidad === '')
+              delete element.ubicacion.comunidad;
+            if(element.ubicacion.referencias === '')
+              delete element.ubicacion.referencias;
+            ubicacionObjeto.push(element.ubicacion);
+            element.estudiante.registro_inscripcion._usuario_creacion = audit_usuario.id_usuario;
+            if(element.estudiante.registro_inscripcion.oficialia === '')
+              delete element.estudiante.registro_inscripcion.oficialia;
+            if(element.estudiante.registro_inscripcion.libro === '')
+              delete element.estudiante.registro_inscripcion.libro;
+            if(element.estudiante.registro_inscripcion.partida === '')
+              delete element.estudiante.registro_inscripcion.partida;
+            if(element.estudiante.registro_inscripcion.folio === '')
+              delete element.estudiante.registro_inscripcion.folio;
+            registroInscripcionObjeto.push(element.estudiante.registro_inscripcion);
           }, this);
           // ENCUENTRA RUDE O CODIGO REPETIDO
           for(let i = 0; i<estudianteObjeto.length-1;i++){
@@ -613,10 +775,17 @@ module.exports = app => {
                   }
                 }, this);
               }, this);
+              return dao.crearRegistro(models.registro_inscripcion, registroInscripcionObjeto, true, transaccion);
+            })
+            .then(respuestaRegistro => {
+              if (estudianteObjeto.length === respuestaRegistro.length) {
+                for (let position = 0; position < estudianteObjeto.length; position++) {
+                  estudianteObjeto[position].fid_registro = respuestaRegistro[position].id_registro_inscripcion;
+                }
+              }
               return dao.crearRegistro(models.estudiante, estudianteObjeto, true, transaccion);
             })
             .then(respuestaCreacion => {
-              let datoPersona = {};
               personaObjeto.forEach(function(persona) {
                 persona._usuario_creacion= audit_usuario.id_usuario;
                 respuestaCreacion.forEach(function(element) {
@@ -625,6 +794,14 @@ module.exports = app => {
                       persona.fid_estudiante= element.id_estudiante;
                   }, this);
                 }, this);
+              }, this);
+              return dao.crearRegistro(models.ubicacion, ubicacionObjeto, true, transaccion);
+            })
+            .then(respuestaUbicacion => {
+              let position = 0;
+              personaObjeto.forEach(function(persona) {
+                persona.fid_direccion= respuestaUbicacion[position].id_ubicacion;
+                position++;
               }, this);
               return dao.crearRegistro(models.persona, personaObjeto, true, transaccion);
             })
@@ -663,9 +840,6 @@ module.exports = app => {
             });
           });
         })
-        // .then(respuesta => {
-        //   return respuesta;
-        // })
         .then(respuesta => deferred.resolve(respuesta))
         .catch(error => {
           console.log(error);
