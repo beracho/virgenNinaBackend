@@ -368,15 +368,7 @@ module.exports = app => {
           return deferred.promise;
         }
         // 18 Zona
-        if (/\d/.test(csvRow[arrayCols[18]])) {
-          deferred.reject(new Error(`wrongFormat@r:${rowIndex + 1},c:${arrayCols[18]}`));
-          return deferred.promise;
-        }
         // 19 Calle/Avenida
-        if (/\d/.test(csvRow[arrayCols[19]])) {
-          deferred.reject(new Error(`wrongFormat@r:${rowIndex + 1},c:${arrayCols[19]}`));
-          return deferred.promise;
-        }
         // 20 Número
         if (csvRow[arrayCols[20]].length != 0 && csvRow[arrayCols[20]].match(/^[0-9]+$/) == null) {
           deferred.reject(new Error(`wrongFormat@r:${rowIndex + 1},c:${arrayCols[20]}`));
