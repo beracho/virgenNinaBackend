@@ -63,7 +63,7 @@ module.exports = app => {
       deferred.resolve(valida);
       return deferred.promise;
     }
-    if (!body.persona.lugar_documento_identidad || body.persona.lugar_documento_identidad == "") {
+    if (body.persona.tipo_documento == 'CARNET_IDENTIDAD' && (!body.persona.lugar_documento_identidad || body.persona.lugar_documento_identidad == "")) {
       valida.value = false;
       valida.error = `noDocumentPlaceValue`;
       deferred.resolve(valida);
@@ -105,21 +105,21 @@ module.exports = app => {
     var personaObj = {};
     var whereObj = {};
     validaFormulario(body, models)
-    .then(respuesta => {
-      const deferred = Q.defer();
-      if (!respuesta.value) {
-        throw new Error(respuesta.error);
-      }
-      personaObj = {
-        nombres: body.persona.nombres,
-        primer_apellido: body.persona.primer_apellido,
+      .then(respuesta => {
+        const deferred = Q.defer();
+        if (!respuesta.value) {
+          throw new Error(respuesta.error);
+        }
+        personaObj = {
+          nombres: body.persona.nombres,
+          primer_apellido: body.persona.primer_apellido,
           segundo_apellido: body.persona.segundo_apellido,
           genero: body.persona.genero,
           fecha_nacimiento: body.nacimiento.fecha_nacimiento,
           _usuario_creacion: body.audit_usuario.id_usuario
         }
         whereObj = {
-          tipo_documento: body.persona.tipo_documento,
+          tipo_documento: body.persona.tipo_documento == 'CODIGO' ? 'CARNET_IDENTIDAD' : body.persona.tipo_documento,
           documento_identidad: body.persona.documento_identidad,
           lugar_documento_identidad: body.persona.lugar_documento_identidad
         }
@@ -143,7 +143,7 @@ module.exports = app => {
             } else {
               // devuelve objeto
               const params = {
-                tipo_documento: body.persona.tipo_documento,
+                tipo_documento: body.persona.tipo_documento == 'CODIGO' ? 'CARNET_IDENTIDAD' : body.persona.tipo_documento,
                 documento_identidad: body.persona.documento_identidad,
                 lugar_documento_identidad: body.persona.lugar_documento_identidad
               }
@@ -222,9 +222,11 @@ module.exports = app => {
           .then(respuesta => {
             const parametrosLugarNacimiento = {};
             if (body.nacimiento.municipio !== '') { parametrosLugarNacimiento.fid_dpa = body.nacimiento.municipio };
-            if (personaCreada) {
+            if (!personaModificar.fid_lugar_nacimiento) {
               // Crea ubicacion nacimiento
-              clavesForaneas.fid_direccion = respuesta.id_ubicacion;
+              if (personaCreada) {
+                clavesForaneas.fid_direccion = respuesta.id_ubicacion;
+              }
               parametrosLugarNacimiento._usuario_creacion = body.audit_usuario.id_usuario;
               return dao.crearRegistro(models.ubicacion, parametrosLugarNacimiento, false, transaccion)
             } else {
@@ -243,6 +245,9 @@ module.exports = app => {
             if (body.unidadEducativa.sie !== '') { parametrosUniEduEstu.fid_unidad_educativa = body.unidadEducativa.nombre };
             parametrosUniEduEstu.fid_estudiante = personaModificar.fid_estudiante;
             let idUniEduEstu = -1;
+            if (!personaModificar.fid_lugar_nacimiento) {
+              clavesForaneas.fid_lugar_nacimiento = respuesta.id_ubicacion;
+            }
             if (personaCreada) {
               // Crea unidad educativa en la gestion actual
               parametrosUniEduEstu._usuario_creacion = body.audit_usuario.id_usuario;
@@ -256,7 +261,7 @@ module.exports = app => {
                   idUniEduEstu = element.id_unidad_educativa_estudiante;
                 }
               }, this);
-              if (idUniEduEstu !== -1){
+              if (idUniEduEstu !== -1) {
                 return dao.modificarRegistro(models.unidad_educativa_estudiante, idUniEduEstu, parametrosUniEduEstu, transaccion);
               } else {
                 return 'No se encontró el elemento';
@@ -281,7 +286,7 @@ module.exports = app => {
                   idUniEduEstu = element.id_unidad_educativa_estudiante;
                 }
               }, this);
-              if (idUniEduEstu !== -1){
+              if (idUniEduEstu !== -1) {
                 return dao.modificarRegistro(models.unidad_educativa_estudiante, idUniEduEstu, parametrosUniEduEstu, transaccion);
               } else {
                 return 'No se encontró el elemento';
@@ -299,7 +304,7 @@ module.exports = app => {
                   element.nombre_completo = `${element.nombre_completo} ${element.segundo_apellido ? element.segundo_apellido : ''}`;
                   element.nombre_completo = `${element.nombre_completo} ${element.casada_apellido ? element.casada_apellido : ''}`;
                   element.nombre_completo = `${element.nombre_completo} ${element.nombres} `;
-                  element.nombre_completo = element.nombre_completo.replace( /\s\s+/g, ' ' );
+                  element.nombre_completo = element.nombre_completo.replace(/\s\s+/g, ' ');
                   element.nombre_completo = element.nombre_completo.trim();
                 }
                 const objPersona = {
@@ -325,20 +330,10 @@ module.exports = app => {
                 apoderadosNuevosRelacion.push(objRelacion);
               }
             }, this);
-            console.log('-----ENVIA--------');
-            console.log(JSON.stringify(apoderadosNuevosPersona));
             return dao.crearRegistro(models.persona, apoderadosNuevosPersona, true, transaccion)
           })
-          // .then(respuesta => {
-          //   console.log('-----------RESPUESTA------------');
-          //   console.log(JSON.stringify(respuesta));
-          // })
           .then(() => {
-            if (personaCreada) {
-              return dao.modificarRegistro(models.persona, personaModificar.id_persona, clavesForaneas, transaccion);
-            } else {
-              return personaModificar;
-            }
+            return dao.modificarRegistro(models.persona, personaModificar.id_persona, clavesForaneas, transaccion);
           })
           .then(respuesta => {
             deferred.resolve('Creado exitosamente');
