@@ -347,6 +347,18 @@ module.exports = {
         _fecha_creacion: new Date(),
         _fecha_modificacion: new Date(),
       }, {
+        //29
+        ruta: '/api/v1/imprimirRegistro',
+        descripcion: 'Crea pdf del registro seleccionado.',
+        method_get: true,
+        method_post: false,
+        method_put: false,
+        method_delete: false,
+        estado: 'ACTIVO',
+        _usuario_creacion: 1,
+        _fecha_creacion: new Date(),
+        _fecha_modificacion: new Date(),
+      }, {
         
 
 
@@ -355,18 +367,6 @@ module.exports = {
         
         
                 
-        //29
-        ruta: '/api/v1/registros/:id/pagos/:id',
-        descripcion: 'Acciones sobre un determinado pago.',
-        method_get: true,
-        method_post: false,
-        method_put: true,
-        method_delete: true,
-        estado: 'ACTIVO',
-        _usuario_creacion: 1,
-        _fecha_creacion: new Date(),
-        _fecha_modificacion: new Date(),
-      }, {
         //30
         ruta: '/api/v1/registros/:id/ubicaciones',
         descripcion: 'Acciones sobre ubicaciones.',

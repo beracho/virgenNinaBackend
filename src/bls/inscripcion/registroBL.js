@@ -372,10 +372,10 @@ module.exports = app => {
     return deferred.promise;
   };
 
-  const declaracion_juradaBL = {
+  const registroBL = {
     listarRegistros,
     llenaRegistro
   };
 
-  return declaracion_juradaBL;
+  return registroBL;
 };
