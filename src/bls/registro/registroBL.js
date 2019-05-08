@@ -82,13 +82,25 @@ module.exports = app => {
     return deferred.promise;
   };
 
-  const convertirRegistroPdf = (query) => {
+  const convertirRegistroPdf = (query, body) => {
     const deferred = Q.defer();
-    obtenerDatosRegistro(query.idRegistro, query.estudiante)
+    obtenerDatosRegistro(query.idRegistro, query.estudiante, body.audit_usuario.id_usuario)
     .then(jsonDatos => {
-      const html = "src/reports/reporte_trabajo_social.html";
+      let html = "";
+      if (jsonDatos.registro.tipo === 'especialidad') {
+        switch (jsonDatos.registro.area) {
+          case 'trabajo social':
+            html = "src/reports/reporte_trabajo_social.html";
+          break;
+          default:
+          break;
+        }
+      }
+      if (jsonDatos.registro.tipo = 'simple') {
+        html = "src/reports/reporte_simple.html";
+      }
       const pdf = require('../../libs/pdf_generator');
-      const ruta = 'src/reports/reporte.pdf';
+      // const ruta = 'src/reports/reporte.pdf';
       const config_pagina = {
         format: 'Letter',
         orientation: 'portrait',
@@ -98,6 +110,15 @@ module.exports = app => {
           left: "1.5cm",
           right: "1.5cm",
           bottom: "1.9cm",
+        },
+        footer: {
+          height: "10mm",
+          contents: {
+            // first: '1',
+            // 2: 'Second page', // Any page number is working. 1-based index
+            default: '<div style="text-align: right;"><span style="color: #444;">{{page}}</span>/<span>{{pages}}</span></div>', // fallback value
+            // last: 'Last Page'
+          }
         },
       };
       pdf.generarPDFaBuffer(html, jsonDatos, config_pagina)
@@ -235,7 +256,7 @@ module.exports = app => {
     return deferred.promise;
   }
 
-  const obtenerDatosRegistro = (idRegistro, codigoEstudiante) => {
+  const obtenerDatosRegistro = (idRegistro, codigoEstudiante, idUsuario) => {
     const deferred = Q.defer();
     const params = {
       where: {
@@ -253,6 +274,7 @@ module.exports = app => {
     };
     let registro = {};
     let estudiante = {};
+    let usuarioCreacion = {};
     estudianteBL.obtenerRegistros({codigo: codigoEstudiante}, models)
     .then(respuestaEstudiante => {
       estudiante = respuestaEstudiante;
@@ -262,7 +284,7 @@ module.exports = app => {
     })
     .then(respuestaRegistro => {
       registro = respuestaRegistro;
-      const paramsUsuario = {
+      const paramsUsuarioCreacion = {
         where: {
           id_usuario: respuestaRegistro[0]._usuario_creacion
         },
@@ -282,10 +304,34 @@ module.exports = app => {
           }],
         }]
       };
-      return dao.listarRegistros(models.usuario, paramsUsuario);
+      return dao.listarRegistros(models.usuario, paramsUsuarioCreacion);
     })
-    .then(respuestaUsuarios => {
-      return ordenaDatos(registro, estudiante, respuestaUsuarios);
+    .then(respuestaUsuarioCreacion => {
+      usuarioCreacion = respuestaUsuarioCreacion;
+      const paramsUsuarioActual = {
+        where: {
+          id_usuario: idUsuario
+        },
+        include: [{
+          model: models.persona,
+          as: 'persona',
+          required: true
+        },{
+          attributes: ['fid_rol'],
+          model: models.usuario_rol,
+          as: 'usuarios_roles',
+          required: true,
+          include: [{
+            attributes: ['area'],
+            model: models.rol,
+            as: 'rol',
+          }],
+        }]
+      };
+      return dao.listarRegistros(models.usuario, paramsUsuarioActual);
+    })
+    .then(respuestaUsuarioActual => {
+      return ordenaDatos(registro, estudiante, usuarioCreacion, respuestaUsuarioActual);
     }).then(datosOrdenados => {
       deferred.resolve(datosOrdenados)
     })
@@ -296,7 +342,7 @@ module.exports = app => {
     return deferred.promise;
   }
 
-  const ordenaDatos = (registro, estudiante, usuario) => {
+  const ordenaDatos = (registro, estudiante, usuarioCreacion, usuarioActual) => {
     const deferred = Q.defer();
     const datosOrdenados = {
       nombreCompleto: estudiante[0].nombre_completo,
@@ -313,40 +359,46 @@ module.exports = app => {
         fechaReingreso: getDate(estudiante[0].estudiante._fecha_modificacion),
       },
       registro: {
+        nroRegistro: registro[0].id_registro,
         area: registro[0].area,
         tipo: registro[0].tipo,
-        fechaCreacion: registro[0]._fecha_creacion,
-        fechaImpresion: new Date(),
-        doctor: usuario[0].persona.nombre_completo
+        fechaCreacion: getDate(registro[0]._fecha_creacion),
+        fechaImpresion: getDate(),
+        doctor: usuarioCreacion[0].persona.nombre_completo,
+        doctorActual: usuarioActual[0].persona.nombre_completo
       }
     }
-    if (registro[0].tipo = 'especialidad') {
+    if (registro[0].tipo === 'especialidad') {
       switch (registro[0].area) {
         case 'trabajo social':
-          datosOrdenados.registro.tipoFamilia= registro[0].registro_eval_trabajo_social.tipo_de_familia;
-          datosOrdenados.registro.observacionGrupoFamiliar= registro[0].registro_eval_trabajo_social.observacion_grupo_familiar;
-          datosOrdenados.registro.dinamicaFamiliar= registro[0].registro_eval_trabajo_social.dinamica_familiar;
-          datosOrdenados.registro.procesoSocial= registro[0].registro_eval_trabajo_social.proceso_social;
-          datosOrdenados.registro.relatoDiscapacidad= registro[0].registro_eval_trabajo_social.relato_discapacidad;
-          datosOrdenados.registro.diagnosticoSocial= registro[0].registro_eval_trabajo_social.diagnostico_social;
-          datosOrdenados.registro.conclusiones= registro[0].registro_eval_trabajo_social.conclusion_sugerencia;
-          break;
+        datosOrdenados.registro.tipoFamilia= registro[0].registro_eval_trabajo_social.tipo_de_familia;
+        datosOrdenados.registro.observacionGrupoFamiliar= registro[0].registro_eval_trabajo_social.observacion_grupo_familiar;
+        datosOrdenados.registro.dinamicaFamiliar= registro[0].registro_eval_trabajo_social.dinamica_familiar;
+        datosOrdenados.registro.procesoSocial= registro[0].registro_eval_trabajo_social.proceso_social;
+        datosOrdenados.registro.relatoDiscapacidad= registro[0].registro_eval_trabajo_social.relato_discapacidad;
+        datosOrdenados.registro.diagnosticoSocial= registro[0].registro_eval_trabajo_social.diagnostico_social;
+        datosOrdenados.registro.conclusiones= registro[0].registro_eval_trabajo_social.conclusion_sugerencia;
+        estudiante[0].dataValues.persona_de.forEach(pariente => {
+          const aux = {
+            nombreCompleto: pariente.persona_es.nombre_completo,
+            relacion: pariente.relacion,
+            edad: pariente.persona_es.edad,
+            estadoCivil: pariente.persona_es.estado_civil,
+            gradoInstuccion: pariente.persona_es.grado_instruccion,
+            ocupacion: pariente.persona_es.ocupacion_actual,
+            ingreso: pariente.persona_es.salario_mensual
+          }
+          datosOrdenados.parientes.push(aux);
+        });
+        break;
         default:
-          break;
+        break;
       }
     }
-    estudiante[0].dataValues.persona_de.forEach(pariente => {
-      const aux = {
-        nombreCompleto: pariente.persona_es.nombre_completo,
-        relacion: pariente.relacion,
-        edad: pariente.persona_es.edad,
-        estadoCivil: pariente.persona_es.estado_civil,
-        gradoInstuccion: pariente.persona_es.grado_instruccion,
-        ocupacion: pariente.persona_es.ocupacion_actual,
-        ingreso: pariente.persona_es.salario_mensual
-      }
-      datosOrdenados.parientes.push(aux);
-    });
+    if (registro[0].tipo = 'simple') {
+      datosOrdenados.registro.observacion = registro[0].registros_simple.observacion;
+      datosOrdenados.registro.intervencion = registro[0].registros_simple.intervencion;
+    }
     deferred.resolve(datosOrdenados)
     return deferred.promise;
   }

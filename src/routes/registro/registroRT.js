@@ -17,7 +17,7 @@ module.exports = app => {
 
   app.route("/api/v1/imprimirRegistro/")
   .get((req, res) => {
-    registroBL.convertirRegistroPdf(req.query)
+    registroBL.convertirRegistroPdf(req.query, req.body)
     .then(respuesta => Util.mensajeExito(res, "Obtención de datos exitosa.", 200, respuesta))
     .catch(error => Util.mensajeError(res, error.message));
   })

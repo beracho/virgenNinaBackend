@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Registro Trabajo Social</title>
+    <title>Registro Simple</title>
     <meta content="text/html" charset="utf-8" http-equiv="Content-Type">    
   </head>
   <style>
@@ -160,7 +160,7 @@
             <div id="encabezado">
               <h4 class="titulo-nombre" style="margin-top:-10px;">Asociación Centro "Virgen Niña - epdb" </h4>
               <h5 class="subtitulo-nombre">AREA: "TRABAJO SOCIAL"</h5>
-              <h5 class="subtitulo-nombre">FICHA SOCIAL</h5>
+              <h5 class="subtitulo-nombre">FICHA DE SEGUIMIENTO</h5>
             </div>
           </td>
           <td class="align-logo" align="right">
@@ -227,70 +227,17 @@
           </tr>
         </table>
       </div>
-      <div class="contenido-seccion">
-        <div class="seccion">2. Grupo Familiar</div>
-        <table class="table-data" width="510" style="margin-top:5px;margin-bottom:5px;">
-          <tr>
-            <th class="dividers">Nombres y Apellidos</th>
-            <th class="dividers">Relación</th>
-            <th class="dividers">Edad</th>
-            <th class="dividers">Estado Civil</th>
-            <th class="dividers">Grado de instrucción</th>
-            <th class="dividers">Ocupación</th>
-            <th class="dividers">Ingreso</th>
-          </tr>
-          <% for(var i = 0; i < parientes.length; i++) { %>
-          <tr>
-            <td class="dividers"><%=parientes[i].nombreCompleto%></td>
-            <td class="dividers"><%=parientes[i].relacion%></td>
-            <td class="dividers"><%=parientes[i].edad%></td>
-            <td class="dividers"><%=parientes[i].estadoCivil%></td>
-            <td class="dividers"><%=parientes[i].gradoInstuccion%></td>
-            <td class="dividers"><%=parientes[i].ocupacion%></td>
-            <td class="dividers"><%=parientes[i].ingreso%></td>
-          </tr>
-          <% } %>
-        </table>
-        <table class="table-data" width="510" style="margin-top:5px;margin-bottom:5px;">
-          <tr>
-            <td class="nombre-dato" width="200">Tipo de familia:<span class="espacio"></span></td>
-            <td class="dato altura-td" width="460"><%=registro.tipoFamilia%></td>
-          </tr>
-          <tr>
-            <td class="nombre-dato" width="200">Observaciones al grupo familiar:<span class="espacio"></span></td>
-            <td class="dato altura-td" width="460"><%=registro.observacionGrupoFamiliar%></td>
-          </tr>
-        </table>
-      </div>
       <div class="contenido-seccion contenido-unico">
-        <div class="seccion">3. Dinámica familiar</div>
+        <div class="seccion">2. Observación</div>
         <div class="dato-unico">
-          <p class="dato"><%=registro.dinamicaFamiliar%></p>
-        </div>
-      </div>
-      <div class="contenido-seccion contenido-unico">
-        <div class="seccion">4. Proceso social</div>
-        <div class="dato-unico">
-          <p class="dato"><%=registro.procesoSocial%></p>
-        </div>
-      </div>
-      <div class="contenido-seccion contenido-unico">
-        <div class="seccion">5. Relato de la discapacidad</div>
-        <div class="dato-unico">
-          <p class="dato"><%=registro.relatoDiscapacidad%></p>
-        </div>
-      </div>
-      <div class="contenido-seccion contenido-unico">
-        <div class="seccion">6. Diagnóstico social</div>
-        <div class="dato-unico">
-          <p class="dato"><%=registro.diagnosticoSocial%></p>
+          <p class="dato"><%=registro.observacion%></p>
         </div>
       </div>
       <div class="contenido-seccion">
         <div class="contenido-unico">
-          <div class="seccion">7. Conclusiones y sugerencias</div>
+          <div class="seccion">3. Intervención</div>
           <div class="dato-unico">
-            <p class="dato"><%=registro.conclusiones%></p>
+            <p class="dato"><%=registro.intervencion%></p>
           </div>
         </div>
         <br>
