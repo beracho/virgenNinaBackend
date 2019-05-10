@@ -161,6 +161,17 @@ module.exports = {
         usuario: 'profesor1',
         fid_persona: 13,
       },
+      // 15
+      {
+        estado: 'ACTIVO',
+        _usuario_creacion: 1,
+        _fecha_creacion: new Date(),
+        _fecha_modificacion: new Date(),
+        email: 'terapiaocupacional',
+        usuario: 'terapiaocupacional',
+        contrasena: '3fb7b39416f1d067268747fc214494d759d2609f863ace1a8a76705618d5c80b',
+        fid_persona: 19,
+      },
     ], {});
   },
 

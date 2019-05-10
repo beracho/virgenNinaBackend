@@ -313,6 +313,22 @@ module.exports = {
         _fecha_modificacion: new Date(),
         tipo_documento: 'CARNET_IDENTIDAD',
       },
+      // 19
+      {
+        documento_identidad: '0000019',
+        lugar_documento_identidad: 'LP',
+        complemento_documento: '00',
+        fecha_nacimiento: '1779-04-02',
+        nombres: 'terapiaocupacional',
+        primer_apellido: 'terapiaocupacional',
+        segundo_apellido: 'terapiaocupacional',
+        nombre_completo: 'terapiaocupacional terapiaocupacional terapiaocupacional',
+        genero: 'F',
+        _usuario_creacion: 1,
+        _fecha_creacion: new Date(),
+        _fecha_modificacion: new Date(),
+        tipo_documento: 'CARNET_IDENTIDAD',
+      },
     ], {});
   },
 

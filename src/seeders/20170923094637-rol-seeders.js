@@ -139,9 +139,9 @@ module.exports = {
       },
       {
         // 13
-        nombre: 'PROF_TRABAJO_OCUPACIONAL',
-        descripcion: 'Profesional de Trabajo Ocupacional',
-        area: 'Trabajo Ocupacional',
+        nombre: 'PROF_TERAPIA_OCUPACIONAL',
+        descripcion: 'Profesional de Terapia Ocupacional',
+        area: 'Terapia Ocupacional',
         peso: 10,
         estado: 'ACTIVO',
         _usuario_creacion:1,

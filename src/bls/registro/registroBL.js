@@ -96,7 +96,7 @@ module.exports = app => {
           break;
         }
       }
-      if (jsonDatos.registro.tipo = 'simple') {
+      if (jsonDatos.registro.tipo === 'simple') {
         html = "src/reports/reporte_simple.html";
       }
       const pdf = require('../../libs/pdf_generator');
@@ -395,7 +395,7 @@ module.exports = app => {
         break;
       }
     }
-    if (registro[0].tipo = 'simple') {
+    if (registro[0].tipo === 'simple') {
       datosOrdenados.registro.observacion = registro[0].registros_simple.observacion;
       datosOrdenados.registro.intervencion = registro[0].registros_simple.intervencion;
     }
