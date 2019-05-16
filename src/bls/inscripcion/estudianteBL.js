@@ -277,7 +277,7 @@ module.exports = app => {
 
   const validarCsvDatos = (rutaArchivo, cursos, discapacidades, estudiantes) => {
     const deferred = Q.defer();
-    const arrayCols = ['Código', 'Apellido paterno', 'Apellido materno', 'Nombres', 'Fecha de nacimiento', 'Tipo documento', 'Número documento', 'Lugar documento', 'Oficialía', 'Libro', 'Partida', 'Folio', 'Género','Rude', 'Carnet de discapacidad', 'Tipo discapacidad', 'Grado de discapacidad', 'Código DPA', 'Zona', 'Calle/Avenida', 'Número', 'Comunidad', 'Referencias', 'Apellido Paterno Padre', 'Apellido Materno Padre', 'Nombres Padre', 'Documento identidad padre', 'Expedido padre', 'Teléfono padre', 'Apellido Paterno Madre', 'Apellido Materno Madre', 'Nombres Madre', 'Documento identidad madre', 'Expedido madre', 'Teléfono madre', 'Curso nombre', 'Curso paralelo', 'Curso gestion'];
+    const arrayCols = ['Código', 'Apellido paterno', 'Apellido materno', 'Nombres', 'Fecha de nacimiento', 'Tipo documento', 'Número documento', 'Lugar documento', 'Oficialía', 'Libro', 'Partida', 'Folio', 'Género','Rude', 'Carnet de discapacidad', 'Tipo discapacidad', 'Grado de discapacidad', 'Código DPA', 'Zona', 'Calle/Avenida', 'Número', 'Comunidad', 'Referencias', 'Teléfono', 'Apellido Paterno Padre', 'Apellido Materno Padre', 'Nombres Padre', 'Documento identidad padre', 'Expedido padre', 'Teléfono padre', 'Apellido Paterno Madre', 'Apellido Materno Madre', 'Nombres Madre', 'Documento identidad madre', 'Expedido madre', 'Teléfono madre', 'Curso nombre', 'Curso paralelo', 'Curso gestion'];
     const arrayCrear = [];
     csv({delimiter: ';', headers:arrayCols})
     .fromFile(rutaArchivo)
@@ -304,22 +304,24 @@ module.exports = app => {
           deferred.reject(new Error(`wrongFormat@r:${rowIndex + 1},c:${arrayCols[4]}`));
           return deferred.promise;
         }
-        // 5 Tipo documento
-        if (csvRow[arrayCols[5]] != 'CI' && csvRow[arrayCols[5]] != 'PASAPORTE') {
-          deferred.reject(new Error(`wrongFormat@r:${rowIndex + 1},c:${arrayCols[5]}`));
-          return deferred.promise;
-        }
-        // 6 Número documento
-        if (csvRow[arrayCols[6]].length != 0 && csvRow[arrayCols[6]].match(/^[0-9]+$/) == null) {
-          deferred.reject(new Error(`wrongFormat@r:${rowIndex + 1},c:${arrayCols[6]}`));
-          return deferred.promise;
-        }
-        // 7 Lugar documento
-        if ((csvRow[arrayCols[7]] != 'LP' && csvRow[arrayCols[7]] != 'CBBA' && csvRow[arrayCols[7]] != 'SC' &&
-        csvRow[arrayCols[7]] != 'OR' && csvRow[arrayCols[7]] != 'CH' && csvRow[arrayCols[7]] != 'BE' &&
-        csvRow[arrayCols[7]] != 'PT' && csvRow[arrayCols[7]] != 'TA' && csvRow[arrayCols[7]] != 'PA') || csvRow[arrayCols[5]] != 'CI') {
-          deferred.reject(new Error(`wrongFormat@r:${rowIndex + 1},c:${arrayCols[7]}`));
-          return deferred.promise;
+        if (csvRow[arrayCols[5]].length !== 0 || csvRow[arrayCols[6]].length !== 0 || csvRow[arrayCols[7]].length !== 0) {
+          // 5 Tipo documento
+          if (csvRow[arrayCols[5]] != 'CI' && csvRow[arrayCols[5]] != 'PASAPORTE') {
+            deferred.reject(new Error(`wrongFormat@r:${rowIndex + 1},c:${arrayCols[5]}`));
+            return deferred.promise;
+          }
+          // 6 Número documento
+          if (csvRow[arrayCols[6]].length != 0 && csvRow[arrayCols[6]].match(/^[0-9]+$/) == null) {
+            deferred.reject(new Error(`wrongFormat@r:${rowIndex + 1},c:${arrayCols[6]}`));
+            return deferred.promise;
+          }
+          // 7 Lugar documento
+          if ((csvRow[arrayCols[7]] != 'LP' && csvRow[arrayCols[7]] != 'CBBA' && csvRow[arrayCols[7]] != 'SC' &&
+          csvRow[arrayCols[7]] != 'OR' && csvRow[arrayCols[7]] != 'CH' && csvRow[arrayCols[7]] != 'BE' &&
+          csvRow[arrayCols[7]] != 'PT' && csvRow[arrayCols[7]] != 'TA' && csvRow[arrayCols[7]] != 'PA') || csvRow[arrayCols[5]] != 'CI') {
+            deferred.reject(new Error(`wrongFormat@r:${rowIndex + 1},c:${arrayCols[7]}`));
+            return deferred.promise;
+          }
         }
         // 8 Oficialía
         if (csvRow[arrayCols[8]].length != 0 && csvRow[arrayCols[8]].match(/^[0-9]+$/) == null) {
@@ -380,85 +382,86 @@ module.exports = app => {
           return deferred.promise;
         }
         // 22 Referencias
-        if (csvRow[arrayCols[23]].length !== 0 || csvRow[arrayCols[24]].length !== 0 ||csvRow[arrayCols[25]].length !== 0 ||csvRow[arrayCols[26]].length !== 0 ||csvRow[arrayCols[27]].length !== 0 ||csvRow[arrayCols[28]].length !== 0) {
-          // 23 24 Apellido Paterno Padre
-          if (csvRow[arrayCols[23]].length === 0 && csvRow[arrayCols[24]].length === 0) {
+        // 23 teléfono
+        if (csvRow[arrayCols[24]].length !== 0 || csvRow[arrayCols[25]].length !== 0 ||csvRow[arrayCols[26]].length !== 0 ||csvRow[arrayCols[27]].length !== 0 ||csvRow[arrayCols[28]].length !== 0 ||csvRow[arrayCols[29]].length !== 0) {
+          // 24 25 Apellido Paterno Padre
+          if (csvRow[arrayCols[24]].length === 0 && csvRow[arrayCols[25]].length === 0) {
             deferred.reject(new Error(`noFatherLastName@r:${rowIndex + 1}`));
             return deferred.promise;
           }
-          // 25 Nombres Padre
-          if (csvRow[arrayCols[25]].length === 0) {
-            deferred.reject(new Error(`emptyValue@r:${rowIndex + 1},c:${arrayCols[25]}`));
+          // 26 Nombres Padre
+          if (csvRow[arrayCols[26]].length === 0) {
+            deferred.reject(new Error(`emptyValue@r:${rowIndex + 1},c:${arrayCols[26]}`));
             return deferred.promise;
           }
-          // 26 Documento identidad padre
-          if (csvRow[arrayCols[26]].length != 0 && csvRow[arrayCols[26]].match(/^[0-9]+$/) == null) {
-            deferred.reject(new Error(`wrongFormat@r:${rowIndex + 1},c:${arrayCols[26]}`));
-            return deferred.promise;
-          }
-          // 27 Expedido padre
-          if ((csvRow[arrayCols[27]] != 'LP' && csvRow[arrayCols[27]] != 'CBBA' && csvRow[arrayCols[27]] != 'SC' &&
-          csvRow[arrayCols[27]] != 'OR' && csvRow[arrayCols[27]] != 'CH' && csvRow[arrayCols[27]] != 'BE' &&
-          csvRow[arrayCols[27]] != 'PT' && csvRow[arrayCols[27]] != 'TA' && csvRow[arrayCols[27]] != 'PA')) {
+          // 27 Documento identidad padre
+          if (csvRow[arrayCols[27]].length != 0 && csvRow[arrayCols[27]].match(/^[0-9]+$/) == null) {
             deferred.reject(new Error(`wrongFormat@r:${rowIndex + 1},c:${arrayCols[27]}`));
             return deferred.promise;
           }
-          // 28 Teléfono padre
-          if (csvRow[arrayCols[28]].length != 0 && csvRow[arrayCols[28]].match(/^[0-9]+$/) == null) {
+          // 28 Expedido padre
+          if ((csvRow[arrayCols[28]] != 'LP' && csvRow[arrayCols[28]] != 'CBBA' && csvRow[arrayCols[28]] != 'SC' &&
+          csvRow[arrayCols[28]] != 'OR' && csvRow[arrayCols[28]] != 'CH' && csvRow[arrayCols[28]] != 'BE' &&
+          csvRow[arrayCols[28]] != 'PT' && csvRow[arrayCols[28]] != 'TA' && csvRow[arrayCols[28]] != 'PA')) {
             deferred.reject(new Error(`wrongFormat@r:${rowIndex + 1},c:${arrayCols[28]}`));
             return deferred.promise;
           }
+          // 29 Teléfono padre
+          if (csvRow[arrayCols[29]].length != 0 && csvRow[arrayCols[29]].match(/^[0-9]+$/) == null) {
+            deferred.reject(new Error(`wrongFormat@r:${rowIndex + 1},c:${arrayCols[29]}`));
+            return deferred.promise;
+          }
         }
-        if (csvRow[arrayCols[29]].length !== 0 || csvRow[arrayCols[30]].length !== 0 ||csvRow[arrayCols[31]].length !== 0 ||csvRow[arrayCols[32]].length !== 0 ||csvRow[arrayCols[33]].length !== 0 ||csvRow[arrayCols[34]].length !== 0) {
-          // 29 30 Apellido Paterno Madre
-          if (csvRow[arrayCols[29]].length === 0 && csvRow[arrayCols[30]].length === 0) {
+        if (csvRow[arrayCols[30]].length !== 0 || csvRow[arrayCols[31]].length !== 0 ||csvRow[arrayCols[32]].length !== 0 ||csvRow[arrayCols[33]].length !== 0 ||csvRow[arrayCols[33]].length !== 0 ||csvRow[arrayCols[35]].length !== 0) {
+          // 30 31 Apellido Paterno Madre
+          if (csvRow[arrayCols[30]].length === 0 && csvRow[arrayCols[31]].length === 0) {
             deferred.reject(new Error(`noMotherLastName@r:${rowIndex + 1}`));
             return deferred.promise;
           }
-          // 31 Nombres Madre
-          if (csvRow[arrayCols[31]].length === 0) {
-            deferred.reject(new Error(`emptyValue@r:${rowIndex + 1},c:${arrayCols[31]}`));
+          // 32 Nombres Madre
+          if (csvRow[arrayCols[32]].length === 0) {
+            deferred.reject(new Error(`emptyValue@r:${rowIndex + 1},c:${arrayCols[32]}`));
             return deferred.promise;
           }
-          // 32 Documento identidad madre
-          if (csvRow[arrayCols[32]].length != 0 && csvRow[arrayCols[32]].match(/^[0-9]+$/) == null) {
-            deferred.reject(new Error(`wrongFormat@r:${rowIndex + 1},c:${arrayCols[32]}`));
-            return deferred.promise;
-          }
-          // 33 Expedido madre
-          if ((csvRow[arrayCols[33]] != 'LP' && csvRow[arrayCols[33]] != 'CBBA' && csvRow[arrayCols[33]] != 'SC' &&
-          csvRow[arrayCols[33]] != 'OR' && csvRow[arrayCols[33]] != 'CH' && csvRow[arrayCols[33]] != 'BE' &&
-          csvRow[arrayCols[33]] != 'PT' && csvRow[arrayCols[33]] != 'TA' && csvRow[arrayCols[33]] != 'PA')) {
+          // 33 Documento identidad madre
+          if (csvRow[arrayCols[33]].length != 0 && csvRow[arrayCols[33]].match(/^[0-9]+$/) == null) {
             deferred.reject(new Error(`wrongFormat@r:${rowIndex + 1},c:${arrayCols[33]}`));
             return deferred.promise;
           }
-          // 34 Teléfono madre
-          if (csvRow[arrayCols[34]].length != 0 && csvRow[arrayCols[34]].match(/^[0-9]+$/) == null) {
+          // 34 Expedido madre
+          if ((csvRow[arrayCols[34]] != 'LP' && csvRow[arrayCols[34]] != 'CBBA' && csvRow[arrayCols[34]] != 'SC' &&
+          csvRow[arrayCols[34]] != 'OR' && csvRow[arrayCols[34]] != 'CH' && csvRow[arrayCols[34]] != 'BE' &&
+          csvRow[arrayCols[34]] != 'PT' && csvRow[arrayCols[34]] != 'TA' && csvRow[arrayCols[34]] != 'PA')) {
             deferred.reject(new Error(`wrongFormat@r:${rowIndex + 1},c:${arrayCols[34]}`));
             return deferred.promise;
           }
+          // 35 Teléfono madre
+          if (csvRow[arrayCols[35]].length != 0 && csvRow[arrayCols[35]].match(/^[0-9]+$/) == null) {
+            deferred.reject(new Error(`wrongFormat@r:${rowIndex + 1},c:${arrayCols[35]}`));
+            return deferred.promise;
+          }
         }
-        // 35 Curso nombre
-        if (csvRow[arrayCols[35]].length != 0 && !(csvRow[arrayCols[35]] === 'AT' || csvRow[arrayCols[35]] === 'INI 1' || csvRow[arrayCols[35]] === 'INI 2' || csvRow[arrayCols[35]] === 'PRI 1' || csvRow[arrayCols[35]] === 'PRI 2' || csvRow[arrayCols[35]] === 'PRI 3' || csvRow[arrayCols[35]] === 'PRI SOC')) {
-          deferred.reject(new Error(`wrongFormat@r:${rowIndex + 1},c:${arrayCols[35]}`));
-          return deferred.promise;
-        }
-        // 36 Curso paralelo
-        if (csvRow[arrayCols[36]].length != 0 && (csvRow[arrayCols[36]].length != 1 || csvRow[arrayCols[36]].replace(/[^A-Z]/g, "").length != 1)) {
+        // 36 Curso nombre
+        if (csvRow[arrayCols[36]].length != 0 && !(csvRow[arrayCols[36]] === 'AT' || csvRow[arrayCols[36]] === 'INI 1' || csvRow[arrayCols[36]] === 'INI 2' || csvRow[arrayCols[36]] === 'PRI 1' || csvRow[arrayCols[36]] === 'PRI 2' || csvRow[arrayCols[36]] === 'PRI 3' || csvRow[arrayCols[36]] === 'PRI SOC')) {
           deferred.reject(new Error(`wrongFormat@r:${rowIndex + 1},c:${arrayCols[36]}`));
           return deferred.promise;
         }
-        // 37 Curso gestion
-        if (csvRow[arrayCols[37]].length != 0 && (isNaN(csvRow[arrayCols[37]]) || Number(csvRow[arrayCols[37]]) > (new Date()).getFullYear())) {
+        // 37 Curso paralelo
+        if (csvRow[arrayCols[37]].length != 0 && (csvRow[arrayCols[37]].length != 1 || csvRow[arrayCols[37]].replace(/[^A-Z]/g, "").length != 1)) {
           deferred.reject(new Error(`wrongFormat@r:${rowIndex + 1},c:${arrayCols[37]}`));
+          return deferred.promise;
+        }
+        // 38 Curso gestion
+        if (csvRow[arrayCols[38]].length != 0 && (isNaN(csvRow[arrayCols[38]]) || Number(csvRow[arrayCols[38]]) > (new Date()).getFullYear())) {
+          deferred.reject(new Error(`wrongFormat@r:${rowIndex + 1},c:${arrayCols[38]}`));
           return deferred.promise;
         }
         // VALIDA CURSO
         let cursoValido = false;
         let cursoKey;
-        if(csvRow[arrayCols[35]] != '' && csvRow[arrayCols[36]] != '' && csvRow[arrayCols[37]] != ''){
+        if(csvRow[arrayCols[36]] != '' && csvRow[arrayCols[37]] != '' && csvRow[arrayCols[38]] != ''){
           cursos.forEach(function(element) {
-            if (element.nombre == csvRow[arrayCols[35]] && element.paralelo == csvRow[arrayCols[36]] && element.gestion == csvRow[arrayCols[37]]) {
+            if (element.nombre == csvRow[arrayCols[36]] && element.paralelo == csvRow[arrayCols[37]] && element.gestion == csvRow[arrayCols[38]]) {
               cursoValido = true;
               cursoKey = element.id
             }
@@ -513,23 +516,23 @@ module.exports = app => {
         const datosCrear = {
           padre: {
             // nombre_completo: csvRow[arrayCols[10]].toLowerCase(),
-            primer_apellido: csvRow[arrayCols[23]].toLowerCase(),
-            segundo_apellido: csvRow[arrayCols[24]].toLowerCase(),
-            nombres: csvRow[arrayCols[25]].toLowerCase(),
+            primer_apellido: csvRow[arrayCols[24]].toLowerCase(),
+            segundo_apellido: csvRow[arrayCols[25]].toLowerCase(),
+            nombres: csvRow[arrayCols[26]].toLowerCase(),
             tipo_documento: 'CARNET_IDENTIDAD',
-            lugar_documento_identidad: csvRow[arrayCols[27]],
-            documento_identidad: csvRow[arrayCols[26]],
-            telefono: csvRow[arrayCols[28]]
+            lugar_documento_identidad: csvRow[arrayCols[28]],
+            documento_identidad: csvRow[arrayCols[27]],
+            telefono: csvRow[arrayCols[29]]
           },
           madre: {
             // nombre_completo: csvRow[arrayCols[13]].toLowerCase(),
-            primer_apellido: csvRow[arrayCols[29]].toLowerCase(),
-            segundo_apellido: csvRow[arrayCols[30]].toLowerCase(),
-            nombres: csvRow[arrayCols[31]].toLowerCase(),
+            primer_apellido: csvRow[arrayCols[30]].toLowerCase(),
+            segundo_apellido: csvRow[arrayCols[31]].toLowerCase(),
+            nombres: csvRow[arrayCols[32]].toLowerCase(),
             tipo_documento: 'CARNET_IDENTIDAD',
-            lugar_documento_identidad: csvRow[arrayCols[33]],
-            documento_identidad: csvRow[arrayCols[32]],
-            telefono: csvRow[arrayCols[34]]
+            lugar_documento_identidad: csvRow[arrayCols[34]],
+            documento_identidad: csvRow[arrayCols[33]],
+            telefono: csvRow[arrayCols[35]]
           },
           estudiante: {
             codigo: csvRow[arrayCols[0]],
@@ -547,12 +550,10 @@ module.exports = app => {
             segundo_apellido: csvRow[arrayCols[2]].toLowerCase(),
             nombres: csvRow[arrayCols[3]].toLowerCase(),
             fecha_nacimiento: csvRow[arrayCols[4]],
-            tipo_documento: csvRow[arrayCols[5]] == 'CI' ? 'CARNET_IDENTIDAD' : csvRow[arrayCols[5]],
-            documento_identidad: csvRow[arrayCols[6]],
-            lugar_documento_identidad: csvRow[arrayCols[7]],
             genero: csvRow[arrayCols[12]],
             carnet_discapacidad: csvRow[arrayCols[14]],
             grado_discapacidad: csvRow[arrayCols[16]],
+            telefono: csvRow[arrayCols[23]],
             fid_tipo_discapacidad: foraignKey != ''? foraignKey : null
           },
           ubicacion: {
@@ -564,9 +565,14 @@ module.exports = app => {
             referencias: csvRow[arrayCols[22]]
           }
         }
+        if (csvRow[arrayCols[5]].length !== 0 || csvRow[arrayCols[6]].length !== 0 || csvRow[arrayCols[7]].length !== 0) {
+          datosCrear.persona.tipo_documento= csvRow[arrayCols[5]] == 'CI' ? 'CARNET_IDENTIDAD' : csvRow[arrayCols[5]];
+          datosCrear.persona.documento_identidad= csvRow[arrayCols[6]];
+          datosCrear.persona.lugar_documento_identidad= csvRow[arrayCols[7]];
+        }
         arrayCrear.push(datosCrear);
       } else {
-        deferred.reject(new Error(`wrongFormat`));
+        deferred.reject(new Error(`incorrectNumberOfColumns`));
         return deferred.promise;
       }
     })
