@@ -472,6 +472,23 @@ module.exports = {
       },
       {
         // 27
+        nombre: 'ESTADISTICAS',
+        descripcion: 'ESTADISTICAS',
+        orden: 1,
+        ruta: 'stats',
+        icono: 'filter_vintage',
+        method_get: false,
+        method_post: false,
+        method_put: false,
+        method_delete: false,
+        estado: 'ACTIVO',
+        _usuario_creacion:1,
+        _fecha_creacion: new Date(),
+        _fecha_modificacion: new Date(),
+        visible: true,
+      },
+      {
+        // 28
         nombre: 'REGISTROS POR AREA',
         descripcion: 'REGISTROS POR AREA',
         orden: 1,
@@ -485,11 +502,11 @@ module.exports = {
         _usuario_creacion:1,
         _fecha_creacion: new Date(),
         _fecha_modificacion: new Date(),
-        fid_menu_padre: 11,
+        fid_menu_padre: 27,
         visible: true,
       },
       {
-        // 28
+        // 29
         nombre: 'REGISTROS',
         descripcion: 'REGISTROS',
         orden: 1,
@@ -503,7 +520,7 @@ module.exports = {
         _usuario_creacion:1,
         _fecha_creacion: new Date(),
         _fecha_modificacion: new Date(),
-        fid_menu_padre: 11,
+        fid_menu_padre: 27,
         visible: true,
       }
     ], {});
