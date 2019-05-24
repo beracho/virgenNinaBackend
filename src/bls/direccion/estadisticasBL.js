@@ -124,6 +124,95 @@ module.exports = app => {
     return deferred.promise;
   };
 
+  const informesEstudiantes = (body) => {
+    const deferred = Q.defer();
+    let busqueda = {};
+    if (body.discapacidad == 'withDisability') {
+      busqueda.carnet_discapacidad = {
+        $notLike: ''
+      }
+    }
+    if (body.discapacidad == 'withoutDisability') {
+      busqueda.carnet_discapacidad = {
+        $like: ''
+      }
+    }
+    if (body.genero == 'male') {
+      busqueda.genero = {
+        $like: 'M'
+      }
+    }
+    if (body.genero == 'female') {
+      busqueda.genero = {
+        $like: 'F'
+      }
+    }
+    params = {
+      where: busqueda,
+      include: [{
+        where: {
+          fid_curso: body.curso
+        },
+        include: [{
+          model: models.curso,
+          as: 'curso'
+        }],
+        model: models.estudiante,
+        as: 'estudiante',
+      }],
+      order: 'fecha_nacimiento'
+    };
+    dao.listarRegistros(models.persona, params)
+    .then(respuestaEstudiantes => {
+      let dataset = [];
+      let labels = [];
+      for (let index = body.minimalAge; index <= body.maximalAge; index++) {
+        labels.push(index);
+      }
+      // body.curso.forEach(element => {
+        let datos = {
+          label: body.curso,
+          data: []
+        }
+        for (let index = body.minimalAge; index <= body.maximalAge; index++) {
+          datos.data.push(0);
+        }
+        dataset.push(datos)
+      // });
+      respuestaEstudiantes.forEach(student => {
+        const studentAge = getAge(student.fecha_nacimiento)
+        let posicion = 0;
+        labels.forEach(lab => {
+          if (lab === studentAge) {
+            dataset.forEach(element => {
+              if (element.label == student.estudiante.fid_curso) {
+                element.data[posicion] ++;
+              }
+            });
+          }
+          posicion++;
+        });
+      });
+      deferred.resolve({labels, dataset});
+    })
+    .catch(error => {
+      console.log(error);
+      deferred.reject(error)
+    });
+    return deferred.promise;
+  };
+
+  let getAge = (dateString) => {
+    var today = new Date();
+    var birthDate = new Date(dateString);
+    var age = today.getFullYear() - birthDate.getFullYear();
+    var m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+      age--;
+    }
+    return age;
+  }
+
   const getNextDay = (fecha) => {
     if (!fecha) {
       fecha = new Date();
@@ -180,7 +269,8 @@ module.exports = app => {
   }
 
   const estadisticasBL = {
-    informesPorArea
+    informesPorArea,
+    informesEstudiantes
   };
 
   return estadisticasBL;

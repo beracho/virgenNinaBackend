@@ -382,6 +382,18 @@ module.exports = {
         _usuario_creacion: 1,
         _fecha_creacion: new Date(),
         _fecha_modificacion: new Date(),
+      }, {
+        //32
+        ruta: '/api/v1/informesEstudiantes',
+        descripcion: 'Estadisticas de estudiantes.',
+        method_get: true,
+        method_post: false,
+        method_put: false,
+        method_delete: false,
+        estado: 'ACTIVO',
+        _usuario_creacion: 1,
+        _fecha_creacion: new Date(),
+        _fecha_modificacion: new Date(),
       }
     ], {});
   },

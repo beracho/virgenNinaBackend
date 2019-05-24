@@ -12,13 +12,12 @@ module.exports = app => {
     estadisticasBL.informesPorArea(req.body)
     .then(respuesta => Util.mensajeExito(res, "Obtención de datos exitosa.", 200, respuesta))
     .catch(error => Util.mensajeError(res, error.message));
-//   }).put((req, res) => {
-//     estadisticasBL.editaRegistroEvalTrabajoSocial(req.body)
-//     .then(respuesta => Util.mensajeExito(res, "Edición de datos exitosa.", 200, respuesta))
-//     .catch(error => Util.mensajeError(res, error.message));
-//   }).delete((req, res) => {
-//     estadisticasBL.eliminaRegistroEvalTrabajoSocial(req.body)
-//     .then(respuesta => Util.mensajeExito(res, "eliminación de datos exitosa.", 200, respuesta))
-//     .catch(error => Util.mensajeError(res, error.message));
+  });
+
+  app.route("/api/v1/informesEstudiantes/")
+  .post((req, res) => {
+    estadisticasBL.informesEstudiantes(req.body)
+    .then(respuesta => Util.mensajeExito(res, "Obtención de datos exitosa.", 200, respuesta))
+    .catch(error => Util.mensajeError(res, error.message));
   });
 };
