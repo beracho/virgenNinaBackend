@@ -489,8 +489,8 @@ module.exports = {
       },
       {
         // 28
-        nombre: 'REGISTROS POR AREA',
-        descripcion: 'REGISTROS POR AREA',
+        nombre: 'ESTADISTICAS DE REGISTRO',
+        descripcion: 'ESTADISTICAS DE REGISTRO',
         orden: 1,
         ruta: 'registrosPorArea',
         icono: 'assessment',
@@ -507,6 +507,24 @@ module.exports = {
       },
       {
         // 29
+        nombre: 'ESTADISTICAS DE ESTUDIANTES',
+        descripcion: 'ESTADISTICAS DE ESTUDIANTES',
+        orden: 1,
+        ruta: 'estadisticasPorEstudiante',
+        icono: 'folder_shared',
+        method_get: true,
+        method_post: true,
+        method_put: true,
+        method_delete: false,
+        estado: 'ACTIVO',
+        _usuario_creacion:1,
+        _fecha_creacion: new Date(),
+        _fecha_modificacion: new Date(),
+        fid_menu_padre: 27,
+        visible: true,
+      },
+      {
+        // 30
         nombre: 'REGISTROS',
         descripcion: 'REGISTROS',
         orden: 1,

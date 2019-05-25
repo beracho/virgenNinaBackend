@@ -16,6 +16,7 @@ module.exports = {
     obj = [
       { fid_menu: 28, fid_rol: 2, method_get: true, method_post: true, method_put: true, method_delete: true, estado: 'ACTIVO', _usuario_creacion:1, _fecha_creacion: new Date(), _fecha_modificacion: new Date() },
       { fid_menu: 29, fid_rol: 2, method_get: true, method_post: true, method_put: true, method_delete: true, estado: 'ACTIVO', _usuario_creacion:1, _fecha_creacion: new Date(), _fecha_modificacion: new Date() },
+      { fid_menu: 30, fid_rol: 2, method_get: true, method_post: true, method_put: true, method_delete: true, estado: 'ACTIVO', _usuario_creacion:1, _fecha_creacion: new Date(), _fecha_modificacion: new Date() },
     ];
     roles_menus_array = roles_menus_array.concat(obj);
 
