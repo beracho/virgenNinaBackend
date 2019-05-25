@@ -442,7 +442,7 @@ module.exports = app => {
           }
         }
         // 36 Curso nombre
-        if (csvRow[arrayCols[36]].length != 0 && !(csvRow[arrayCols[36]] === 'AT' || csvRow[arrayCols[36]] === 'INI 1' || csvRow[arrayCols[36]] === 'INI 2' || csvRow[arrayCols[36]] === 'PRI 1' || csvRow[arrayCols[36]] === 'PRI 2' || csvRow[arrayCols[36]] === 'PRI 3' || csvRow[arrayCols[36]] === 'PRI SOC')) {
+        if (csvRow[arrayCols[36]].length != 0 && !(csvRow[arrayCols[36]] === 'AT' || csvRow[arrayCols[36]] === 'INI 1' || csvRow[arrayCols[36]] === 'INI 2' || csvRow[arrayCols[36]] === 'PRI 1' || csvRow[arrayCols[36]] === 'PRI 2' || csvRow[arrayCols[36]] === 'PRI 3' || csvRow[arrayCols[36]] === 'PRI SOC' || csvRow[arrayCols[36]] === 'GUARDERIA' || csvRow[arrayCols[36]] === 'GUARDERIA 1' || csvRow[arrayCols[36]] === 'GUARDERIA 2')) {
           deferred.reject(new Error(`wrongFormat@r:${rowIndex + 1},c:${arrayCols[36]}`));
           return deferred.promise;
         }

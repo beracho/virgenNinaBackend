@@ -26,9 +26,14 @@ module.exports = function (sequelize, DataTypes) {
       xlabel: 'Tipo de discapacidad',
       allowNull: true
     },
-    criterio_edad: {
-      type: DataTypes.STRING(50),
-      xlabel: 'Criterio de edad',
+    edad_minima: {
+      type: DataTypes.INTEGER,
+      xlabel: 'Edad mínima en meses',
+      allowNull: true
+    },
+    edad_maxima: {
+      type: DataTypes.INTEGER,
+      xlabel: 'Edad máxima en meses',
       allowNull: true
     },
     estado: {
@@ -86,6 +91,11 @@ module.exports = function (sequelize, DataTypes) {
     hora_salida: {
       type: DataTypes.TIME,
       xlabel: 'Hora de salida',
+      allowNull: true,
+    },
+    fecha_limite: {
+      type: DataTypes.DATE,
+      xlabel: 'Fecha límite de edad máxima',
       allowNull: true,
     },
     _usuario_creacion: {
