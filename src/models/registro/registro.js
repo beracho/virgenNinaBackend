@@ -10,9 +10,9 @@ module.exports = function (sequelize, DataTypes) {
         type: DataTypes.STRING(20),
         xlabel: 'Área',
         allowNull: false,
-        values: ['psicomotricidad', 'psicologia', 'trabajo social', 'fisioterapia', 'fonoaudiologia', 'nutricion', 'odontologia', 'psicopedagogia', 'medicina general', 'educacion', 'direccion'],
+        values: ['psicomotricidad', 'psicologia', 'trabajo social', 'fisioterapia', 'fonoaudiologia', 'nutricion', 'odontologia', 'psicopedagogia', 'medicina general', 'educacion', 'direccion', 'terapia ocupacional'],
         validate: {
-          isIn: {args: [['psicomotricidad', 'psicologia', 'trabajo social', 'fisioterapia', 'fonoaudiologia', 'nutricion', 'odontologia', 'psicopedagogia', 'medicina general', 'educacion', 'direccion']], msg: "El campo área sólo permite valores: 'psicomotricidad', 'psicologia', 'trabajo social', 'fisioterapia', 'fonoaudiologia', 'nutricion', 'odontologia', 'psicopedagogia', 'medicina general', 'educacion' o 'direccion'"},
+          isIn: {args: [['psicomotricidad', 'psicologia', 'trabajo social', 'fisioterapia', 'fonoaudiologia', 'nutricion', 'odontologia', 'psicopedagogia', 'medicina general', 'educacion', 'direccion', 'terapia ocupacional']], msg: "El campo área sólo permite valores: 'psicomotricidad', 'psicologia', 'trabajo social', 'fisioterapia', 'fonoaudiologia', 'nutricion', 'odontologia', 'psicopedagogia', 'medicina general', 'educacion' o 'direccion'"},
         },
       },
       tipo: {
@@ -41,7 +41,8 @@ module.exports = function (sequelize, DataTypes) {
         classMethods: {
           associate: (models) => {
             registro.belongsTo(models.registro_simple, { as: 'registros_simple', foreignKey: { name: 'fid_registro_simple', allowNull: true } });
-            registro.belongsTo(models.registro_eval_trabajo_social, { as: 'registro_eval_trabajo_social', foreignKey: { name: 'fid_registro_eval_trabajo_social', allowNull: true } });
+            registro.belongsTo(models.reg_tb, { as: 'reg_tb', foreignKey: { name: 'fid_reg_tb', allowNull: true } });
+            registro.belongsTo(models.reg_to, { as: 'reg_to', foreignKey: { name: 'fid_reg_to', allowNull: true } });
             registro.belongsTo(models.estudiante, { as: 'estudiantes', foreignKey: { name: 'fid_estudiante', allowNull: false } });
           },
         },

@@ -20,8 +20,12 @@ module.exports = app => {
         as: 'registros_simple',
         required: false
       }, {
-        model: models.registro_eval_trabajo_social,
-        as: 'registro_eval_trabajo_social',
+        model: models.reg_tb,
+        as: 'reg_tb',
+        required: false
+      }, {
+        model: models.reg_to,
+        as: 'reg_to',
         required: false
       }]
     };
@@ -234,6 +238,9 @@ module.exports = app => {
           case 'PROF_MEDICINA_GENERAL':
             parametrosRegistro.area = 'medicina general';
             break;
+          case 'PROF_TERAPIA_OCUPACIONAL':
+            parametrosRegistro.area = 'terapia ocupacional';
+            break;
         
           default:
             // error, out of boundary
@@ -267,8 +274,8 @@ module.exports = app => {
         as: 'registros_simple',
         required: false
       }, {
-        model: models.registro_eval_trabajo_social,
-        as: 'registro_eval_trabajo_social',
+        model: models.reg_tb,
+        as: 'reg_tb',
         required: false
       }]
     };
@@ -371,13 +378,13 @@ module.exports = app => {
     if (registro[0].tipo === 'especialidad') {
       switch (registro[0].area) {
         case 'trabajo social':
-        datosOrdenados.registro.tipoFamilia= registro[0].registro_eval_trabajo_social.tipo_de_familia;
-        datosOrdenados.registro.observacionGrupoFamiliar= registro[0].registro_eval_trabajo_social.observacion_grupo_familiar;
-        datosOrdenados.registro.dinamicaFamiliar= registro[0].registro_eval_trabajo_social.dinamica_familiar;
-        datosOrdenados.registro.procesoSocial= registro[0].registro_eval_trabajo_social.proceso_social;
-        datosOrdenados.registro.relatoDiscapacidad= registro[0].registro_eval_trabajo_social.relato_discapacidad;
-        datosOrdenados.registro.diagnosticoSocial= registro[0].registro_eval_trabajo_social.diagnostico_social;
-        datosOrdenados.registro.conclusiones= registro[0].registro_eval_trabajo_social.conclusion_sugerencia;
+        datosOrdenados.registro.tipoFamilia= registro[0].reg_tb.tipo_de_familia;
+        datosOrdenados.registro.observacionGrupoFamiliar= registro[0].reg_tb.observacion_grupo_familiar;
+        datosOrdenados.registro.dinamicaFamiliar= registro[0].reg_tb.dinamica_familiar;
+        datosOrdenados.registro.procesoSocial= registro[0].reg_tb.proceso_social;
+        datosOrdenados.registro.relatoDiscapacidad= registro[0].reg_tb.relato_discapacidad;
+        datosOrdenados.registro.diagnosticoSocial= registro[0].reg_tb.diagnostico_social;
+        datosOrdenados.registro.conclusiones= registro[0].reg_tb.conclusion_sugerencia;
         estudiante[0].dataValues.persona_de.forEach(pariente => {
           const aux = {
             nombreCompleto: pariente.persona_es.nombre_completo,

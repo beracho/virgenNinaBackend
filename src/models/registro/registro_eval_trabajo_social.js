@@ -1,6 +1,6 @@
 module.exports = function (sequelize, DataTypes) {
-    const registro_eval_trabajo_social =  sequelize.define('registro_eval_trabajo_social', {
-        id_registro_eval_trabajo_social: {
+    const reg_tb =  sequelize.define('reg_tb', {
+        id_reg_tb: {
           type: DataTypes.INTEGER,
           primaryKey: true,
           allowNull: false,
@@ -57,11 +57,11 @@ module.exports = function (sequelize, DataTypes) {
           freezeTableName: true,
           classMethods: {
             associate: (models) => {
-              registro_eval_trabajo_social.hasOne(models.registro, {as: 'registro_eval_trabajo_social', foreignKey: {name: 'fid_registro_eval_trabajo_social', allowNull: true}});
+              reg_tb.hasOne(models.registro, {as: 'reg_tb', foreignKey: {name: 'fid_reg_tb', allowNull: true}});
             },
           },
         });
   
-        return registro_eval_trabajo_social;
+        return reg_tb;
     };
     

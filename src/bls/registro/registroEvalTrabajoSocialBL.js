@@ -28,9 +28,9 @@ module.exports = app => {
       _usuario_modificacion: body.audit_usuario.id_usuario
     }
     models.sequelize.transaction().then((transaccion) => {
-      dao.crearRegistro(models.registro_eval_trabajo_social, parametrosRegistroEvalTrabajoSocial, false, transaccion)
+      dao.crearRegistro(models.reg_tb, parametrosRegistroEvalTrabajoSocial, false, transaccion)
       .then(respuestaCreacionRegistroEvalTrabajoSocial => {
-        parametrosRegistro.fid_registro_eval_trabajo_social = respuestaCreacionRegistroEvalTrabajoSocial.id_registro_eval_trabajo_social;
+        parametrosRegistro.fid_reg_tb = respuestaCreacionRegistroEvalTrabajoSocial.id_reg_tb;
         return rolBL.listarRoles({},{}, models);
       })
       .then(respuestaRoles => {
@@ -106,9 +106,9 @@ module.exports = app => {
       _usuario_modificacion: body.audit_usuario.id_usuario
     }
     models.sequelize.transaction().then((transaccion) => {
-      dao.modificarRegistro(models.registro_eval_trabajo_social, body.idRegistroTrabajoSocial, parametrosRegistroEvalTrabajoSocial, transaccion)
+      dao.modificarRegistro(models.reg_tb, body.idRegistroTrabajoSocial, parametrosRegistroEvalTrabajoSocial, transaccion)
       .then(respuestaCreacionRegistroEvalTrabajoSocial => {
-        parametrosRegistro.fid_registro_eval_trabajo_social = respuestaCreacionRegistroEvalTrabajoSocial.id_registro_eval_trabajo_social;
+        parametrosRegistro.fid_reg_tb = respuestaCreacionRegistroEvalTrabajoSocial.id_reg_tb;
         return dao.modificarRegistro(models.registro, body.idRegistro, parametrosRegistro, transaccion)
       })
       .then(respuestaCreacion => {
@@ -125,7 +125,7 @@ module.exports = app => {
   const eliminaRegistroEvalTrabajoSocial = (body) => {
     const deferred = Q.defer();
     models.sequelize.transaction().then((transaccion) => {
-      dao.eliminarRegistro(models.registro_eval_trabajo_social, body.registro_eval_trabajo_social.id_registro_eval_trabajo_social, transaccion)
+      dao.eliminarRegistro(models.reg_tb, body.reg_tb.id_reg_tb, transaccion)
       .then(() => {
         return dao.eliminarRegistro(models.registro, body.id_registro, transaccion)
       })

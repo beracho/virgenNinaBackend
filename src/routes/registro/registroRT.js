@@ -6,6 +6,7 @@ module.exports = app => {
   const models = app.src.db.models;
   const registroBL = app.src.bls.registro.registroBL;
   const registroEvalTrabajoSocialBL = app.src.bls.registro.registroEvalTrabajoSocialBL;
+  const registroEvalTerapiaOcupacionalBL = app.src.bls.registro.registroEvalTerapiaOcupacionalBL;
   models.notificaciones = app.src.libs.notificaciones;
   
   app.route("/api/v1/registros/")
@@ -53,6 +54,21 @@ module.exports = app => {
     .catch(error => Util.mensajeError(res, error.message));
   }).delete((req, res) => {
     registroEvalTrabajoSocialBL.eliminaRegistroEvalTrabajoSocial(req.body)
+    .then(respuesta => Util.mensajeExito(res, "eliminación de datos exitosa.", 200, respuesta))
+    .catch(error => Util.mensajeError(res, error.message));
+  });
+
+  app.route("/api/v1/registroEvalTerapiaOcupacional/")
+  .post((req, res) => {
+    registroEvalTerapiaOcupacionalBL.creaRegistroEvalTerapiaOcupacional(req.body)
+    .then(respuesta => Util.mensajeExito(res, "Creación de datos exitosa.", 200, respuesta))
+    .catch(error => Util.mensajeError(res, error.message));
+  }).put((req, res) => {
+    registroEvalTerapiaOcupacionalBL.editaRegistroEvalTerapiaOcupacional(req.body)
+    .then(respuesta => Util.mensajeExito(res, "Edición de datos exitosa.", 200, respuesta))
+    .catch(error => Util.mensajeError(res, error.message));
+  }).delete((req, res) => {
+    registroEvalTerapiaOcupacionalBL.eliminaRegistroEvalTerapiaOcupacional(req.body)
     .then(respuesta => Util.mensajeExito(res, "eliminación de datos exitosa.", 200, respuesta))
     .catch(error => Util.mensajeError(res, error.message));
   });

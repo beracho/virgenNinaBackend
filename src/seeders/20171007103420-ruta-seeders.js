@@ -394,6 +394,18 @@ module.exports = {
         _usuario_creacion: 1,
         _fecha_creacion: new Date(),
         _fecha_modificacion: new Date(),
+      }, {
+        //33
+        ruta: '/api/v1/registroEvalTerapiaOcupacional',
+        descripcion: 'Acciones sobre registros de evaluación de terapia ocupacional.',
+        method_get: true,
+        method_post: true,
+        method_put: true,
+        method_delete: true,
+        estado: 'ACTIVO',
+        _usuario_creacion: 1,
+        _fecha_creacion: new Date(),
+        _fecha_modificacion: new Date(),
       }
     ], {});
   },
