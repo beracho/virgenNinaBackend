@@ -192,28 +192,25 @@ const crearPersona = (personaObj, body, models, transaccion) => {
 //   return deferred.promise;
 // };
 
-// const modificarPersona = (id, personaObj, models, body, transaccion) => {
-//   const deferred = Q.defer();
-//   let modificarObj = {};
-//   if (id) {
-//     if (personaObj.tipo_documento === PERSONA_TIPO_PASAPORTTE) {
-//       modificarObj = personaObj;
-//     } else {
-//       if (personaObj.direccion) modificarObj.direccion = personaObj.direccion;
-//       if (personaObj.genero) modificarObj.genero = personaObj.genero;
-//       modificarObj.telefono = personaObj.telefono ? personaObj.telefono : null;
-//       if (personaObj.fecha_nacimiento) modificarObj.fecha_nacimiento = personaObj.fecha_nacimiento;
-//       if (personaObj.discapacidad === true || personaObj.discapacidad === false) modificarObj.discapacidad = personaObj.discapacidad;
-//     }
-//     personaObj._usuario_modificacion = body.audit_usuario.id_usuario;
-//     dao.modificarRegistro(models.persona, id, modificarObj, transaccion)
-//     .then(respuestaMod => deferred.resolve(respuestaMod))
-//     .catch(error => deferred.reject(error));
-//   } else {
-//     deferred.resolve({});
-//   }
-//   return deferred.promise;
-// };
+const modificarPersona = (id, personaObj, models, body, transaccion) => {
+  const deferred = Q.defer();
+  if (id) {
+    let modificarObj = {
+      tipo_documento: 'CARNET_IDENTIDAD',
+      documento_identidad: personaObj.documento_identidad,
+      lugar_documento_identidad: personaObj.lugar_documento_identidad,
+      _usuario_modificacion: body.audit_usuario.id_usuario,
+    }
+    dao.modificarRegistro(models.persona, id, modificarObj, transaccion)
+    .then(respuestaMod => {
+      deferred.resolve(respuestaMod)
+    })
+    .catch(error => deferred.reject(error));
+  } else {
+    deferred.reject('Id de persona no recibido');
+  }
+  return deferred.promise;
+};
 
 // const obtenerPersonaPorId = (id, models) => {
 //   const deferred = Q.defer();
@@ -267,6 +264,6 @@ const crearPersona = (personaObj, body, models, transaccion) => {
 module.exports = {
   crearPersona,
   // guardarPersonaSegip,
-  // modificarPersona,
+  modificarPersona,
   // obtenerPersonaPorId,
 }

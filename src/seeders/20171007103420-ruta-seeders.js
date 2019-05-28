@@ -406,6 +406,18 @@ module.exports = {
         _usuario_creacion: 1,
         _fecha_creacion: new Date(),
         _fecha_modificacion: new Date(),
+      }, {
+        //34
+        ruta: '/api/v1/actualizaPersona',
+        descripcion: 'Actualiza CI de persona.',
+        method_get: false,
+        method_post: false,
+        method_put: true,
+        method_delete: false,
+        estado: 'ACTIVO',
+        _usuario_creacion: 1,
+        _fecha_creacion: new Date(),
+        _fecha_modificacion: new Date(),
       }
     ], {});
   },
