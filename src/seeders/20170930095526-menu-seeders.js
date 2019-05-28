@@ -529,7 +529,7 @@ module.exports = {
         descripcion: 'REGISTROS',
         orden: 1,
         ruta: 'registrosDireccion',
-        icono: 'folder_shared',
+        icono: 'assignment_ind',
         method_get: true,
         method_post: true,
         method_put: true,

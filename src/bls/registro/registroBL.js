@@ -12,9 +12,7 @@ module.exports = app => {
   const listaRegistroPorArea = (query, body) => {
     const deferred = Q.defer();
     const params = {
-      where: {
-        area: query.area
-      },
+      where: {},
       include: [{
         model: models.registro_simple,
         as: 'registros_simple',
@@ -29,6 +27,19 @@ module.exports = app => {
         required: false
       }]
     };
+    if (query.area) {
+      params.where.area = {
+        $like: '%' + query.area + '%'
+      }
+    }
+    if (query.tipo) {
+      params.where.tipo = query.tipo;
+    }
+    if (query.fechaInicial && query.fechaFinal) {
+      params.where._fecha_creacion = {
+        $between: [new Date(query.fechaInicial), new Date(query.fechaFinal)]
+      }
+    }
     let usuarios = {};
     if (query.limit && query.page) {
       params.limit = query.limit,
@@ -37,30 +48,35 @@ module.exports = app => {
     if (query.order) {
       params.order = query.order;
     };
-    estudianteBL.estudiantePorCodigo(query.estudiante, models)
-    .then(respuestaEstudiante => {
-      if (respuestaEstudiante && respuestaEstudiante.id_estudiante)
-        params.where.fid_estudiante = respuestaEstudiante.id_estudiante;
-      return dao.listarRegistros(models.usuario, {
+    const paramsUsuario = {
+      include: [{
+        model: models.persona,
+        as: 'persona',
+        required: true
+      },{
+        attributes: ['fid_rol'],
+        model: models.usuario_rol,
+        as: 'usuarios_roles',
+        required: true,
         include: [{
-          model: models.persona,
-          as: 'persona',
-          required: true
-        },{
-          attributes: ['fid_rol'],
-          model: models.usuario_rol,
-          as: 'usuarios_roles',
-          required: true,
-          include: [{
-            attributes: ['area'],
-            model: models.rol,
-            as: 'rol',
-          }],
-        }]
-      });
-    })
+          attributes: ['area'],
+          model: models.rol,
+          as: 'rol',
+        }],
+      }]
+    };
+    dao.listarRegistros(models.usuario, paramsUsuario)
     .then(respuestaUsuarios => {
       usuarios = respuestaUsuarios;
+      if (query.estudiante) {
+        return estudianteBL.estudiantePorCodigo(query.estudiante, models);
+      } else {
+        return {}
+      }
+    })
+    .then(respuestaEstudiante => {
+      if (query.estudiante && respuestaEstudiante && respuestaEstudiante.id_estudiante)
+        params.where.fid_estudiante = respuestaEstudiante.id_estudiante;
       return dao.listarRegistros(models.registro, params);
     })
     .then(respuestaRegistro => {

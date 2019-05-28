@@ -34,41 +34,39 @@ module.exports = app => {
         }
       };
     };
+    if (req.nombres) {
+      busqueda = {
+        $or: [
+          {
+            nombres: {
+              $like: '%' + req.nombres + '%'
+            }
+          }, 
+          {
+            primer_apellido: {
+              $like: '%' + req.nombres + '%'
+            }
+          }, 
+          {
+            segundo_apellido: {
+              $like: '%' + req.nombres + '%'
+            }
+          }
+        ]
+      }
+    }
     if (req.tipobusqueda && req.buscar) {
       switch (req.tipobusqueda) {
-        case '0':
+        case 'codigo':
           busquedaEstudiante = {
             codigo: {
               $like: '%' + req.buscar + '%'
             }
           }
           break;
-        case '1':
-          busqueda = {
-            documento_identidad: {
-              $like: '%' + req.buscar + '%'
-            }
-          }
-          break;
-        case '2':
-          busqueda = {
-            $or: [
-              {
-                nombres: {
-                  $like: '%' + req.buscar + '%'
-                }
-              }, 
-              {
-                primer_apellido: {
-                  $like: '%' + req.buscar + '%'
-                }
-              }, 
-              {
-                segundo_apellido: {
-                  $like: '%' + req.buscar + '%'
-                }
-              }
-            ]
+        case 'ci':
+          busqueda.documento_identidad = {
+            $like: '%' + req.buscar + '%'
           }
           break;
         default:
@@ -111,7 +109,7 @@ module.exports = app => {
     dao.listarRegistros(models.persona, params)
     .then(respuesta => {
       respuestaTotal = respuesta;
-      if (respuestaTotal.length === 1) {
+      if (respuestaTotal.length === 1 && req.list === undefined) {
         if (respuestaTotal[0].direccion) {
           return dpaBL.obtenerELemento(respuestaTotal[0].direccion.fid_dpa, models);
         } else {
