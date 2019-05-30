@@ -36,6 +36,7 @@ module.exports = (sequelize, DataType) => {
       type: DataType.STRING(4),
       xlabel: 'Gestión',
       allowNull: true,
+      unique: 'uniqueCurso'
     },
     paralelo: {
       type: DataType.CHAR(1),
@@ -71,8 +72,8 @@ module.exports = (sequelize, DataType) => {
       paranoid: true,
       classMethods: {
         associate: (models) => {
-          unidad_educativa_estudiante.belongsTo(models.estudiante, { as: 'estudiantes', foreignKey: { name: 'fid_estudiante', allowNull: true } });
-          unidad_educativa_estudiante.belongsTo(models.unidad_educativa, {as: 'unidad_educativa', foreignKey: {name: 'fid_unidad_educativa', allowNull: true}});
+          unidad_educativa_estudiante.belongsTo(models.estudiante, { as: 'estudiantes', foreignKey: { name: 'fid_estudiante', allowNull: true, unique: 'uniqueCurso' } });
+          unidad_educativa_estudiante.belongsTo(models.unidad_educativa, {as: 'unidad_educativa', foreignKey: {name: 'fid_unidad_educativa', allowNull: true, unique: 'uniqueCurso'}});
         },
         tableName: 'unidad_educativa_estudiante',
         comment: 'Tabla para almacenar las asociaciones de unidad_educativa_estudiantees por departamento de una API.',

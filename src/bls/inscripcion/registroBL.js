@@ -39,13 +39,7 @@ module.exports = app => {
       deferred.resolve(valida);
       return deferred.promise;
     }
-    if (!body.persona.primer_apellido || body.persona.primer_apellido == "") {
-      valida.value = false;
-      valida.error = `noLastNameValue`;
-      deferred.resolve(valida);
-      return deferred.promise;
-    }
-    if (!body.persona.segundo_apellido || body.persona.segundo_apellido == "") {
+    if ((!body.persona.primer_apellido || body.persona.primer_apellido == "") && (!body.persona.segundo_apellido || body.persona.segundo_apellido == "")) {
       valida.value = false;
       valida.error = `noLastNameValue`;
       deferred.resolve(valida);
@@ -54,18 +48,6 @@ module.exports = app => {
     if (!body.persona.tipo_documento || body.persona.tipo_documento == "") {
       valida.value = false;
       valida.error = `noDocumentTipeValue`;
-      deferred.resolve(valida);
-      return deferred.promise;
-    }
-    if (!body.persona.documento_identidad || body.persona.documento_identidad == "") {
-      valida.value = false;
-      valida.error = `nodocumentNumberValue`;
-      deferred.resolve(valida);
-      return deferred.promise;
-    }
-    if (body.persona.tipo_documento == 'CARNET_IDENTIDAD' && (!body.persona.lugar_documento_identidad || body.persona.lugar_documento_identidad == "")) {
-      valida.value = false;
-      valida.error = `noDocumentPlaceValue`;
       deferred.resolve(valida);
       return deferred.promise;
     }
@@ -142,10 +124,20 @@ module.exports = app => {
               return personResponse;
             } else {
               // devuelve objeto
-              const params = {
-                tipo_documento: body.persona.tipo_documento == 'CODIGO' ? 'CARNET_IDENTIDAD' : body.persona.tipo_documento,
-                documento_identidad: body.persona.documento_identidad,
-                lugar_documento_identidad: body.persona.lugar_documento_identidad
+              let params = {};
+              if (body.persona && body.persona.codigo) {
+                params = {
+                  codigo: body.persona.codigo
+                }
+              }
+              if (body.persona && body.persona.tipo_documento &&
+                body.persona && body.persona.documento_identidad &&
+                body.persona && body.persona.lugar_documento_identidad) {
+                params = {
+                  tipo_documento: body.persona.tipo_documento == 'CODIGO' ? 'CARNET_IDENTIDAD' : body.persona.tipo_documento,
+                  documento_identidad: body.persona.documento_identidad,
+                  lugar_documento_identidad: body.persona.lugar_documento_identidad
+                }
               }
               return estudianteBL.obtenerRegistros(params, body);
             }
@@ -248,7 +240,13 @@ module.exports = app => {
             if (!personaModificar.fid_lugar_nacimiento) {
               clavesForaneas.fid_lugar_nacimiento = respuesta.id_ubicacion;
             }
-            if (personaCreada) {
+            var existeUnidadEducativaEstudiante = false;
+            personaModificar.dataValues.unidades_educativas.forEach(element => {
+              if (element.gestion == parametrosUniEduEstu.gestion && element.fid_unidad_educativa === parametrosUniEduEstu.fid_unidad_educativa) {
+                existeUnidadEducativaEstudiante = true;
+              }
+            });
+            if (personaCreada || !existeUnidadEducativaEstudiante) {
               // Crea unidad educativa en la gestion actual
               parametrosUniEduEstu._usuario_creacion = body.audit_usuario.id_usuario;
               clavesForaneas.fid_lugar_nacimiento = respuesta.id_ubicacion;
@@ -257,7 +255,8 @@ module.exports = app => {
               // Modifica unidad educativa en la gestion actual
               parametrosUniEduEstu._usuario_modificacion = body.audit_usuario.id_usuario;
               personaModificar.dataValues.unidades_educativas.forEach(function (element) {
-                if (element.gestion == '2018') {
+                const year = new Date();
+                if (element.gestion == year.getFullYear()) {
                   idUniEduEstu = element.id_unidad_educativa_estudiante;
                 }
               }, this);
@@ -282,7 +281,7 @@ module.exports = app => {
               // Modifica unidad educativa en la gestion pasada
               parametrosUniEduEstu._usuario_modificacion = body.audit_usuario.id_usuario;
               personaModificar.dataValues.unidades_educativas.forEach(function (element) {
-                if (element.gestion == '2017') {
+                if (element.gestion != (new Date()).getFullYear()) {
                   idUniEduEstu = element.id_unidad_educativa_estudiante;
                 }
               }, this);

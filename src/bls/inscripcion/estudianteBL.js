@@ -848,7 +848,6 @@ module.exports = app => {
   
   const existeCurso = (idCurso) => {
     const deferred = Q.defer();
-    console.log('----------------entra---------------');
     dao.obtenerRegistroPorId(models.curso, idCurso, {})
     .then(respuesta => deferred.resolve(respuesta))
     .catch(error => {
