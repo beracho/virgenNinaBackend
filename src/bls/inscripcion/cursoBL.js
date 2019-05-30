@@ -14,8 +14,13 @@ module.exports = app => {
         estado: 'ACTIVO'
       }
     };
-    if (query.gestion == 'actual')
-      params.where.gestion = (new Date()).getFullYear() + '';
+    if (query.gestion && query.gestion != '') {
+      if (query.gestion == 'actual') {
+        params.where.gestion = (new Date()).getFullYear() + '';
+      } else {
+        params.where.gestion = query.gestion;
+      }
+    }
     if (query.limit && query.page) {
       params.limit = query.limit,
       params.page = query.page
