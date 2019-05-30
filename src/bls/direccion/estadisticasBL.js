@@ -147,52 +147,100 @@ module.exports = app => {
         $like: 'F'
       }
     }
+    const studentModel = {
+      model: models.estudiante,
+      as: 'estudiante',
+      required: true
+    };
+    if (body.curso != 'none') {
+      studentModel.where = {
+        fid_curso: body.curso
+      }
+      studentModel.include = [{
+        model: models.curso,
+        as: 'curso'
+      }]
+    }
     params = {
       where: busqueda,
-      include: [{
-        where: {
-          fid_curso: body.curso
-        },
-        include: [{
-          model: models.curso,
-          as: 'curso'
-        }],
-        model: models.estudiante,
-        as: 'estudiante',
-      }],
+      include: [studentModel],
       order: 'fecha_nacimiento'
     };
+    let estudiantes
+    let dataset = [];
+    let labels = [];
+    for (let index = body.minimalAge; index <= body.maximalAge; index++) {
+      labels.push(index);
+    }
     dao.listarRegistros(models.persona, params)
     .then(respuestaEstudiantes => {
-      let dataset = [];
-      let labels = [];
-      for (let index = body.minimalAge; index <= body.maximalAge; index++) {
-        labels.push(index);
-      }
-      // body.curso.forEach(element => {
-        let datos = {
-          label: body.curso,
-          data: []
-        }
-        for (let index = body.minimalAge; index <= body.maximalAge; index++) {
-          datos.data.push(0);
-        }
-        dataset.push(datos)
-      // });
-      respuestaEstudiantes.forEach(student => {
-        const studentAge = getAge(student.fecha_nacimiento)
-        let posicion = 0;
-        labels.forEach(lab => {
-          if (lab === studentAge) {
-            dataset.forEach(element => {
-              if (element.label == student.estudiante.fid_curso) {
-                element.data[posicion] ++;
-              }
-            });
+      if (body.curso != 'none') {
+        // body.curso.forEach(element => {
+          let datos = {
+            label: body.curso,
+            data: []
           }
-          posicion++;
+          for (let index = body.minimalAge; index <= body.maximalAge; index++) {
+            datos.data.push(0);
+          }
+          dataset.push(datos)
+        // });
+        respuestaEstudiantes.forEach(student => {
+          const studentAge = getAge(student.fecha_nacimiento)
+          let posicion = 0;
+          labels.forEach(lab => {
+            if (lab === studentAge) {
+              dataset.forEach(element => {
+                if (element.label == student.estudiante.fid_curso) {
+                  element.data[posicion] ++;
+                }
+              });
+            }
+            posicion++;
+          });
         });
-      });
+        return;
+      } else {
+        estudiantes = respuestaEstudiantes;
+        paramsUniEduEst = {
+          where: {
+            gestion: body.gestion
+          }
+        };
+        return dao.listarRegistros(models.unidad_educativa_estudiante, paramsUniEduEst);
+      }
+    })
+    .then(respuestaUnidadEducativaEstudiante => {
+      if (body.curso == 'none') {
+        // body.gestion.forEach(element => {
+          let datos = {
+            label: body.gestion,
+            data: []
+          }
+          for (let index = body.minimalAge; index <= body.maximalAge; index++) {
+            datos.data.push(0);
+          }
+          dataset.push(datos)
+        // });
+        estudiantes.forEach(student => {
+          respuestaUnidadEducativaEstudiante.forEach(unidEdu => {
+            if (student.fid_estudiante == unidEdu.fid_estudiante) {
+              const studentAge = getAge(student.fecha_nacimiento)
+              let posicion = 0;
+              labels.forEach(lab => {
+                if (lab === studentAge) {
+                  dataset.forEach(element => {
+                    if (element.label == unidEdu.gestion) {
+                      element.data[posicion] ++;
+                    }
+                  });
+                }
+                posicion++;
+              });
+            }
+          })
+        });
+      }
       deferred.resolve({labels, dataset});
     })
     .catch(error => {
