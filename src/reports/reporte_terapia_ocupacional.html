@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Registro Terapia Ocupacional</title>
+    <meta content="text/html" charset="utf-8" http-equiv="Content-Type">    
+  </head>
+  <style>
+    /* colors */
+    /* #470101; Bulgarian Rose*/
+    /* #3f3d3a; Black olive*/
+    /* #e2e2e2; Light Yellow*/
+    /* #ffffff; White*/
+    /* #16140b; Licorice*/
+    body {
+    font-family: "Liberation Sans";
+    }
+    span {
+    font-size: 11px;
+    }
+    #encabezado {
+    text-align: center;
+    padding-top: 30px;
+    color: rgb(7, 60, 85);
+    }
+    .dev-encabezado {
+    font-family: "Lucida Console", Monaco, monospace;
+    margin-top: -15px;
+    }
+    table {
+      font-size: 8px;
+    }
+    p {
+      font-size: 8px;
+      text-align: center;
+    }
+    .table-data {
+    font-size: 8px;
+    border-radius: 5px;
+    border: 1px solid #470101;
+    }
+    .td-header-name {
+    color: #470101;
+    font-size: 10px;
+    border-radius: 5px;
+    padding-left: 10px;
+    padding-right: 7px;
+    }
+    .td-header {
+    /* color: rgb(7, 60, 85); */
+    border-radius: 5px;
+    padding-left: 10px;
+    padding-right: 7px;
+    }
+    .dividers {
+      border-bottom: 1px solid #16140b;
+    }
+    .contenido-seccion {
+      page-break-inside: avoid;
+      margin-top:5px;
+      margin-bottom:5px;
+    }
+    .contenido-unico {
+      border-radius: 8px;
+      border: 1px solid #470101;
+    }
+    .contenido {
+    margin: 0 auto;
+    }
+    .align-logo {
+      text-align: middle;
+      vertical-align: top;
+    padding-top: 10px;
+    }
+    .seccion {
+    background-color: #470101;
+    color: white;
+    border-radius: 5px;
+    text-align: left;
+    font-size: 12px;
+    font-family: "Lucida Console", Monaco, monospace;
+    padding-left: 5px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    }
+    .firmas {
+      text-align: center;
+      color: #16140b;
+      font-size: 9pt;
+    }
+    .titulo-nombre {
+      color: #470101;
+      font-family: "Comic Sans MS", cursive, sans-serif;
+      font-size: 10pt;
+    }
+    .subtitulo-nombre {
+      color: #470101;
+      font-family: "Comic Sans MS", cursive, sans-serif;
+      font-size: 10pt;
+    }
+    h4 {
+      color: white;
+    }
+    .dato {
+      padding: 5px;
+      border-radius: 5px;
+      background-color: #e2e2e2;
+      border-bottom: 1px solid #16140b;
+      text-align: justify;
+      padding-left: 15px;
+      padding-right: 12px;
+      color: #16140b;
+    }
+    .dato-unico {
+      padding-left: 10px;
+      padding-right: 7px;
+    }
+    .dato-centro {
+      background-color: #e2e2e2;
+      border-bottom: 1px solid #16140b;
+      text-align: center;
+      border-radius: 5px;
+      padding-left: 15px;
+      padding-right: 12px;
+      margin-left: 20px;
+    }
+    .nombre-dato {
+      background-color: #3f3d3a;
+      border-bottom: 1px solid #16140b;
+      color: #e2e2e2;
+      border-radius: 5px;
+      padding-left: 10px;
+      padding-right: 7px;
+    }
+    .altura-td {
+      height: 7px;
+    }
+    .altura-td-middle {
+      height: 7px;
+      text-align: center;
+    }
+    .espacio {
+      padding-left: 5px;
+    }
+    @media all {
+      div.saltopagina{
+        display: none;
+      }
+    }
+    @media print{
+      div.saltopagina{
+      display:block;
+      page-break-before:always;
+      }
+    }
+  </style>
+  <body>
+    <div class="dev-encabezado">
+      <table style="width:100%">
+        <tr>
+          <td class="align-logo" align="left">
+            <img src="http://localhost:4000/assets/vn_logo.jpg" width="80">
+          </td>
+          <td>
+            <div id="encabezado">
+              <h4 class="titulo-nombre" style="margin-top:-10px;">Asociación Centro "Virgen Niña - epdb" </h4>
+              <h5 class="subtitulo-nombre">AREA: "TERAPIA OCUPACIONAL"</h5>
+              <!-- <h5 class="subtitulo-nombre">FICHA SOCIAL</h5> -->
+            </div>
+          </td>
+          <td class="align-logo" align="right">
+            <img src="http://localhost:4000/assets/epdb_logo.jpg" width="80">
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class="contenido">
+      <div class="contenido-seccion">
+        <table width="510" style="margin-top:5px;margin-bottom:5px;">
+          <tr>
+            <td class="td-header-name" width="90">Creado por:<span class="espacio"></span></td>
+            <td class="td-header" width="165"><%=registro.doctor%></td>
+            <td class="td-header-name" width="90">Nro Registro:<span class="espacio"></span></td>
+            <td class="td-header" width="165"><%=registro.nroRegistro%></td>
+          </tr>
+          <tr>
+            <td class="td-header-name" width="90">Fecha de creación:<span class="espacio"></span></td>
+            <td class="td-header" width="165"><%=registro.fechaCreacion%></td>
+            <td class="td-header-name" width="90">Fecha de impresión:<span class="espacio"></span></td>
+            <td class="td-header" width="165"><%=registro.fechaImpresion%></td>
+          </tr>
+        </table>
+      </div>
+      <div class="contenido-seccion">
+        <div class="seccion">1. Antecedentes personales</div>
+        <table style="margin-top:5px;margin-bottom:5px;">
+          <tr>
+            <td width="125"></td>
+            <td class="nombre-dato" width="40">Código Estudiante:<span class="espacio"></span></td>
+            <td class="dato-centro altura-td" width="120"><%=estudiante.codigo%></td>
+            <td width="125"></td>
+          </tr>
+        </table>
+        <table class="table-data" width="510" style="margin-top:5px;margin-bottom:5px;">
+          <tr>
+            <td class="nombre-dato" width="200">Nombres y apellidos:<span class="espacio"></span></td>
+            <td class="dato altura-td" colspan="3" width="460"><%=nombreCompleto%></td>
+          </tr>
+          <tr>
+            <td class="nombre-dato" width="200">Lugar y fecha de nacimiento:<span class="espacio"></span></td>
+            <td class="dato altura-td" width="200"><%=fechaNacimiento%></td>
+            <td class="nombre-dato" width="70">Edad:<span class="espacio"></span></td>
+            <td class="dato altura-td" width="190"><%=edad%></td>
+          </tr>
+          <tr>
+            <td class="nombre-dato" width="200">Domicilio<span class="espacio"></span></td>
+            <td class="dato altura-td" width="100"><%=domicilio%></td>
+            <td class="nombre-dato" width="70">Zona:<span class="espacio"></span></td>
+            <td class="dato altura-td" width="190"><%=zona%></td>
+          </tr>
+          <tr>
+            <td class="nombre-dato" width="200">Fecha de ingreso:<span class="espacio"></span></td>
+            <td class="dato altura-td" width="100"><%=estudiante.fechaIngreso%></td>
+            <td class="nombre-dato" width="70">Sexo:<span class="espacio"></span></td>
+            <td class="dato altura-td" width="190"><%=sexo%></td>
+          </tr>
+          <tr>
+              <td class="nombre-dato" width="200">Fecha de reingreso:<span class="espacio"></span></td>
+              <td class="dato altura-td" width="100"><%=estudiante.fechaReingreso%></td>
+              <td class="nombre-dato" width="70">Telf/Celular:<span class="espacio"></span></td>
+              <td class="dato altura-td" width="190"><%=telefono%></td>
+          </tr>
+        </table>
+      </div>
+      <div class="contenido-seccion">
+        <div class="seccion">2. Actividades de la vida diaria (AVD)</div>
+        <table class="table-data" width="510" style="margin-top:5px;margin-bottom:5px;">
+          <tr>
+            <th class="nombre-dato">Actividad</th>
+            <th class="nombre-dato">Realiza</th>
+            <th class="nombre-dato">Observaciones</th>
+          </tr>
+          <tr>
+            <td class="nombre-dato" width="100">Ducha</td>
+            <td class="dato altura-td-middle" width="50"><%=registro.ducha_realiza%></td>
+            <td class="dato altura-td"><%=registro.ducha_observacion%></td>
+          </tr>
+          <tr>
+            <td class="nombre-dato" width="100">Control de esfinter</td>
+            <td class="dato altura-td-middle" width="50"><%=registro.controlEsfinter_realiza%></td>
+            <td class="dato altura-td"><%=registro.controlEsfinter_observacion%></td>
+          </tr>
+          <tr>
+            <td class="nombre-dato" width="100">Vestido y desvestido</td>
+            <td class="dato altura-td-middle" width="50"><%=registro.vestidoDesvestido_realiza%></td>
+            <td class="dato altura-td"><%=registro.vestidoDesvestido_observacion%></td>
+          </tr>
+          <tr>
+            <td class="nombre-dato" width="100">Masticar y tragar</td>
+            <td class="dato altura-td-middle" width="50"><%=registro.masticarTragar_realiza%></td>
+            <td class="dato altura-td"><%=registro.masticarTragar_observacion%></td>
+          </tr>
+          <tr>
+            <td class="nombre-dato" width="100">Comer solo</td>
+            <td class="dato altura-td-middle" width="50"><%=registro.comerSolo_realiza%></td>
+            <td class="dato altura-td"><%=registro.comerSolo_observacion%></td>
+          </tr>
+          <tr>
+            <td class="nombre-dato" width="100">Movilidad funcional</td>
+            <td class="dato altura-td-middle" width="50"><%=registro.movilidadFuncional_realiza%></td>
+            <td class="dato altura-td"><%=registro.movilidadFuncional_observacion%></td>
+          </tr>
+          <tr>
+            <td class="nombre-dato" width="100">Higiene personal y aseo</td>
+            <td class="dato altura-td-middle" width="50"><%=registro.higienePersonalAseo_realiza%></td>
+            <td class="dato altura-td"><%=registro.higienePersonalAseo_observacion%></td>
+          </tr>
+          <tr>
+            <td class="nombre-dato" width="100">Higiene en inodoro</td>
+            <td class="dato altura-td-middle" width="50"><%=registro.higieneInodoro_realiza%></td>
+            <td class="dato altura-td"><%=registro.higieneInodoro_observacion%></td>
+          </tr>
+        </table>
+      </div>
+      <div class="contenido-seccion">
+        <div class="seccion">3. Comunicación - Destreza social - Cognitivo</div>
+        <table class="table-data" width="510" style="margin-top:5px;margin-bottom:5px;">
+          <tr>
+            <th class="nombre-dato">Actividad</th>
+            <th class="nombre-dato">Realiza</th>
+            <th class="nombre-dato">Observaciones</th>
+          </tr>
+          <tr>
+            <td class="nombre-dato" width="100">Comprensión</td>
+            <td class="dato altura-td-middle" width="50"><%=registro.comprension_realiza%></td>
+            <td class="dato altura-td"><%=registro.comprension_observacion%></td>
+          </tr>
+          <tr>
+            <td class="nombre-dato" width="100">Orientación</td>
+            <td class="dato altura-td-middle" width="50"><%=registro.expresion_realiza%></td>
+            <td class="dato altura-td"><%=registro.expresion_observacion%></td>
+          </tr>
+          <tr>
+            <td class="nombre-dato" width="100">Expresión</td>
+            <td class="dato altura-td-middle" width="50"><%=registro.interaccionSocial_realiza%></td>
+            <td class="dato altura-td"><%=registro.interaccionSocial_observacion%></td>
+          </tr>
+          <tr>
+            <td class="nombre-dato" width="100">Reconocimiento</td>
+            <td class="dato altura-td-middle" width="50"><%=registro.solProblemas_realiza%></td>
+            <td class="dato altura-td"><%=registro.solProblemas_observacion%></td>
+          </tr>
+          <tr>
+            <td class="nombre-dato" width="100">Interacción social</td>
+            <td class="dato altura-td-middle" width="50"><%=registro.memoria_realiza%></td>
+            <td class="dato altura-td"><%=registro.memoria_observacion%></td>
+          </tr>
+          <tr>
+            <td class="nombre-dato" width="100">Secuenciación</td>
+            <td class="dato altura-td-middle" width="50"><%=registro.atencion_realiza%></td>
+            <td class="dato altura-td"><%=registro.atencion_observacion%></td>
+          </tr>
+          <tr>
+            <td class="nombre-dato" width="100">Solución de problemas</td>
+            <td class="dato altura-td-middle" width="50"><%=registro.orientacion_realiza%></td>
+            <td class="dato altura-td"><%=registro.orientacion_observacion%></td>
+          </tr>
+          <tr>
+            <td class="nombre-dato" width="100">Calculo</td>
+            <td class="dato altura-td-middle" width="50"><%=registro.reconocimiento_realiza%></td>
+            <td class="dato altura-td"><%=registro.reconocimiento_observacion%></td>
+          </tr>
+          <tr>
+            <td class="nombre-dato" width="100">Memoria</td>
+            <td class="dato altura-td-middle" width="50"><%=registro.secuenciacion_realiza%></td>
+            <td class="dato altura-td"><%=registro.secuenciacion_observacion%></td>
+          </tr>
+          <tr>
+            <td class="nombre-dato" width="100">Lenguaje</td>
+            <td class="dato altura-td-middle" width="50"><%=registro.calculo_realiza%></td>
+            <td class="dato altura-td"><%=registro.calculo_observacion%></td>
+          </tr>
+          <tr>
+            <td class="nombre-dato" width="100">Atención</td>
+            <td class="dato altura-td-middle" width="50"><%=registro.lenguaje_realiza%></td>
+            <td class="dato altura-td"><%=registro.lenguaje_observacion%></td>
+          </tr>
+          <tr>
+            <td class="nombre-dato" width="100">Escritura</td>
+            <td class="dato altura-td-middle" width="50"><%=registro.escritura_realiza%></td>
+            <td class="dato altura-td"><%=registro.escritura_observacion%></td>
+          </tr>
+        </table>
+      </div>
+      <div class="contenido-seccion">
+        <div class="seccion">4. Examen físico</div>
+        <div class="subtitulo-nombre">Movilidad Funcional</div>
+        <table class="table-data" width="510" style="margin-top:5px;margin-bottom:5px;">
+          <tr>
+            <th class="nombre-dato" colspan="2">Sedestación</th>
+            <th class="nombre-dato" colspan="2">Bipedestación</th>
+            <th class="nombre-dato" colspan="2">Marcha</th>
+          </tr>
+          <tr>
+            <td class="nombre-dato" width="50">Equilibrio</td>
+            <td class="dato altura-td-middle" width="50"><%=registro.sedestacion_equilibrio%></td>
+            <td class="nombre-dato" width="50">Equilibrio</td>
+            <td class="dato altura-td-middle" width="50"><%=registro.bipedestacion_equilibrio%></td>
+            <td class="nombre-dato" width="50">Realiza</td>
+            <td class="dato altura-td-middle" width="50"><%=registro.marcha_dinamico%></td>
+          </tr>
+          <tr>
+            <td class="nombre-dato" width="50">Estático</td>
+            <td class="dato altura-td-middle" width="50"><%=registro.sedestacion_estatico%></td>
+            <td class="nombre-dato" width="50">Estático</td>
+            <td class="dato altura-td-middle" width="50"><%=registro.bipedestacion_estatico%></td>
+            <td class="dato altura-td-middle" width="50" colspan="2" rowspan="2"><%=registro.marcha_observacion%></td>
+          </tr>
+          <tr>
+            <td class="nombre-dato" width="50">Dinámico</td>
+            <td class="dato altura-td-middle" width="50"><%=registro.sedestacion_dinamico%></td>
+            <td class="nombre-dato" width="50">Dinámico</td>
+            <td class="dato altura-td-middle" width="50"><%=registro.bipedestacion_dinamico%></td>
+          </tr>
+        </table>
+        <table class="table-data" width="510" style="margin-top:5px;margin-bottom:5px;">
+          <tr>
+            <td class="nombre-dato" width="50">Observaciones</td>
+            <td class="dato altura-td" width="50" colspan="5"><%=registro.observacionesMovilidadFuncional%></td>
+          </tr>
+        </table>
+      </div>
+      <div class="contenido-seccion">
+        <div class="seccion">5. Función manual</div>
+        <div class="subtitulo-nombre">Pinza gruesa</div>
+        <table class="table-data" width="510" style="margin-top:5px;margin-bottom:5px;">
+          <tr>
+            <th class="nombre-dato" colspan="2">Cilíndrica</th>
+            <th class="nombre-dato" colspan="2">Esférica</th>
+            <th class="nombre-dato" colspan="2">Enganche</th>
+          </tr>
+          <tr>
+            <td class="nombre-dato" width="50">Derecha</td>
+            <td class="dato altura-td-middle" width="50"><%=registro.pinzaGruesa_cilindricaDerecha%></td>
+            <td class="nombre-dato" width="50">Derecha</td>
+            <td class="dato altura-td-middle" width="50"><%=registro.pinzaGruesa_esfericaDerecha%></td>
+            <td class="nombre-dato" width="50">Derecha</td>
+            <td class="dato altura-td-middle" width="50"><%=registro.pinzaGruesa_engancheDerecha%></td>
+          </tr>
+          <tr>
+            <td class="nombre-dato" width="50">Izquierda</td>
+            <td class="dato altura-td-middle" width="50"><%=registro.pinzaGruesa_cilindricaIzquierda%></td>
+            <td class="nombre-dato" width="50">Izquierda</td>
+            <td class="dato altura-td-middle" width="50"><%=registro.pinzaGruesa_esfericaIzquierda%></td>
+            <td class="nombre-dato" width="50">Izquierda</td>
+            <td class="dato altura-td-middle" width="50"><%=registro.pinzaGruesa_engancheIzquierda%></td>
+          </tr>
+        </table>
+        <table class="table-data" width="510" style="margin-top:5px;margin-bottom:5px;">
+          <tr>
+            <td class="nombre-dato" width="50">Observaciones</td>
+            <td class="dato altura-td" width="50" colspan="5"><%=registro.pinzaGruesa_observaciones%></td>
+          </tr>
+        </table>
+        <div class="subtitulo-nombre">Pinza fina</div>
+        <table class="table-data" width="510" style="margin-top:5px;margin-bottom:5px;">
+          <tr>
+            <th class="nombre-dato" colspan="2">Sub-terminal</th>
+            <th class="nombre-dato" colspan="2">Termino-terminal</th>
+            <th class="nombre-dato" colspan="2">Lateral</th>
+          </tr>
+          <tr>
+            <td class="nombre-dato" width="50">Derecha</td>
+            <td class="dato altura-td-middle" width="50"><%=registro.pinzaFina_subTerminalDerecha%></td>
+            <td class="nombre-dato" width="50">Derecha</td>
+            <td class="dato altura-td-middle" width="50"><%=registro.pinzaFina_terminoTerminalDerecha%></td>
+            <td class="nombre-dato" width="50">Derecha</td>
+            <td class="dato altura-td-middle" width="50"><%=registro.pinzaFina_lateralDerecha%></td>
+          </tr>
+          <tr>
+            <td class="nombre-dato" width="50">Izquierda</td>
+            <td class="dato altura-td-middle" width="50"><%=registro.pinzaFina_subTerminalIzquierda%></td>
+            <td class="nombre-dato" width="50">Izquierda</td>
+            <td class="dato altura-td-middle" width="50"><%=registro.pinzaFina_terminoTerminalIzquierda%></td>
+            <td class="nombre-dato" width="50">Izquierda</td>
+            <td class="dato altura-td-middle" width="50"><%=registro.pinzaFina_lateralIzquierda%></td>
+          </tr>
+          <tr>
+            <th class="nombre-dato" colspan="2">Tripode</th>
+            <th class="nombre-dato" colspan="2">Interdigital</th>
+            <th class="nombre-dato" colspan="2">Latero-lateral</th>
+          </tr>
+          <tr>
+            <td class="nombre-dato" width="50">Derecha</td>
+            <td class="dato altura-td-middle" width="50"><%=registro.pinzaFina_tripodeDerecha%></td>
+            <td class="nombre-dato" width="50">Derecha</td>
+            <td class="dato altura-td-middle" width="50"><%=registro.pinzaFina_interdigitalDerecha%></td>
+            <td class="nombre-dato" width="50">Derecha</td>
+            <td class="dato altura-td-middle" width="50"><%=registro.pinzaFina_lateroLateralDerecha%></td>
+          </tr>
+          <tr>
+            <td class="nombre-dato" width="50">Izquierda</td>
+            <td class="dato altura-td-middle" width="50"><%=registro.pinzaFina_tripodeIzquierda%></td>
+            <td class="nombre-dato" width="50">Izquierda</td>
+            <td class="dato altura-td-middle" width="50"><%=registro.pinzaFina_interdigitalIzquierda%></td>
+            <td class="nombre-dato" width="50">Izquierda</td>
+            <td class="dato altura-td-middle" width="50"><%=registro.pinzaFina_lateroLateralIzquierda%></td>
+          </tr>
+          <tr>
+            <th colspan="2"></th>
+            <th class="nombre-dato" colspan="2">Multipulpal</th>
+            <th colspan="2"></th>
+          </tr>
+          <tr>
+            <td colspan="2"></td>
+            <!-- <td class="dato altura-td-middle" width="50"><%=registro.pinzaGruesa_cilindricaDerecha%></td> -->
+            <td class="nombre-dato" width="50">Derecha</td>
+            <td class="dato altura-td-middle" width="50"><%=registro.pinzaFina_multipulparDerecha%></td>
+            <td colspan="2"></td>
+            <!-- <td class="nombre-dato" width="50">Derecha</td>
+              <td class="dato altura-td-middle" width="50"><%=registro.pinzaGruesa_engancheDerecha%></td> -->
+          </tr>
+          <tr>
+            <td colspan="2"></td>
+            <!-- <td class="nombre-dato" width="50">Izquierda</td>
+            <td class="dato altura-td-middle" width="50"><%=registro.pinzaGruesa_cilindricaIzquierda%></td> -->
+            <td class="nombre-dato" width="50">Izquierda</td>
+            <td class="dato altura-td-middle" width="50"><%=registro.pinzaFina_multipulparIzquierda%></td>
+            <td colspan="2"></td>
+            <!-- <td class="nombre-dato" width="50">Izquierda</td>
+            <td class="dato altura-td-middle" width="50"><%=registro.pinzaGruesa_engancheIzquierda%></td> -->
+          </tr>
+        </table>
+        <table class="table-data" width="510" style="margin-top:5px;margin-bottom:5px;">
+          <tr>
+            <td class="nombre-dato" width="50">Observaciones</td>
+            <td class="dato altura-td" width="50" colspan="5"><%=registro.pinzaFina_observaciones%></td>
+          </tr>
+        </table>
+      </div>
+      <div class="contenido-seccion contenido-unico">
+        <div class="seccion">6. Barreras arquitectónicas</div>
+        <div class="dato-unico">
+          <p class="dato"><%=registro.barrerasArquitectonicas%></p>
+        </div>
+      </div>
+      <div class="contenido-seccion">
+        <div class="contenido-unico">
+          <div class="seccion">7. Objetivos de intervención</div>
+          <div class="dato-unico">
+            <p class="dato"><%=registro.objetivosIntervención_objetivos%></p>
+          </div>
+          <div class="subtitulo-nombre">Observaciones</div>
+          <div class="dato-unico">
+            <p class="dato"><%=registro.objetivosIntervención_observaciones%></p>
+          </div>
+        </div>
+        <br>
+        <div class="firmas">
+          __________________________<br>
+          <%=registro.doctorActual%>
+        </div>
+      </div>
+  </body>
+</html>
