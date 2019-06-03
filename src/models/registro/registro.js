@@ -43,6 +43,8 @@ module.exports = function (sequelize, DataTypes) {
             registro.belongsTo(models.registro_simple, { as: 'registros_simple', foreignKey: { name: 'fid_registro_simple', allowNull: true } });
             registro.belongsTo(models.reg_tb, { as: 'reg_tb', foreignKey: { name: 'fid_reg_tb', allowNull: true } });
             registro.belongsTo(models.reg_to, { as: 'reg_to', foreignKey: { name: 'fid_reg_to', allowNull: true } });
+            registro.belongsTo(models.reg_pm, { as: 'reg_pm', foreignKey: { name: 'fid_reg_pm', allowNull: true } });
+            registro.belongsTo(models.reg_ft, { as: 'reg_ft', foreignKey: { name: 'fid_reg_ft', allowNull: true } });
             registro.belongsTo(models.estudiante, { as: 'estudiantes', foreignKey: { name: 'fid_estudiante', allowNull: false } });
           },
         },

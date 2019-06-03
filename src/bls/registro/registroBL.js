@@ -25,6 +25,14 @@ module.exports = app => {
         model: models.reg_to,
         as: 'reg_to',
         required: false
+      }, {
+        model: models.reg_pm,
+        as: 'reg_pm',
+        required: false
+      }, {
+        model: models.reg_ft,
+        as: 'reg_ft',
+        required: false
       }]
     };
     if (query.area) {

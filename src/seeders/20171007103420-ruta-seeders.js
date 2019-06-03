@@ -418,6 +418,30 @@ module.exports = {
         _usuario_creacion: 1,
         _fecha_creacion: new Date(),
         _fecha_modificacion: new Date(),
+      }, {
+        //35
+        ruta: '/api/v1/registroEvalPsicomotricidad',
+        descripcion: 'Acciones sobre registros de evaluación de psicomotricidad.',
+        method_get: true,
+        method_post: true,
+        method_put: true,
+        method_delete: true,
+        estado: 'ACTIVO',
+        _usuario_creacion: 1,
+        _fecha_creacion: new Date(),
+        _fecha_modificacion: new Date(),
+      }, {
+        //36
+        ruta: '/api/v1/registroEvalFisioterapia',
+        descripcion: 'Acciones sobre registros de evaluación de fisioterapia.',
+        method_get: true,
+        method_post: true,
+        method_put: true,
+        method_delete: true,
+        estado: 'ACTIVO',
+        _usuario_creacion: 1,
+        _fecha_creacion: new Date(),
+        _fecha_modificacion: new Date(),
       }
     ], {});
   },

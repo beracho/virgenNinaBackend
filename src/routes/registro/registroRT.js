@@ -7,6 +7,8 @@ module.exports = app => {
   const registroBL = app.src.bls.registro.registroBL;
   const registroEvalTrabajoSocialBL = app.src.bls.registro.registroEvalTrabajoSocialBL;
   const registroEvalTerapiaOcupacionalBL = app.src.bls.registro.registroEvalTerapiaOcupacionalBL;
+  const registroEvalPsicomotricidadBL = app.src.bls.registro.registroEvalPsicomotricidadBL;
+  const registroEvalFisioterapiaBL = app.src.bls.registro.registroEvalFisioterapiaBL;
   models.notificaciones = app.src.libs.notificaciones;
   
   app.route("/api/v1/registros/")
@@ -69,6 +71,36 @@ module.exports = app => {
     .catch(error => Util.mensajeError(res, error.message));
   }).delete((req, res) => {
     registroEvalTerapiaOcupacionalBL.eliminaRegistroEvalTerapiaOcupacional(req.body)
+    .then(respuesta => Util.mensajeExito(res, "eliminación de datos exitosa.", 200, respuesta))
+    .catch(error => Util.mensajeError(res, error.message));
+  });
+
+  app.route("/api/v1/registroEvalPsicomotricidad/")
+  .post((req, res) => {
+    registroEvalPsicomotricidadBL.creaRegistroEvalPsicomotricidad(req.body)
+    .then(respuesta => Util.mensajeExito(res, "Creación de datos exitosa.", 200, respuesta))
+    .catch(error => Util.mensajeError(res, error.message));
+  }).put((req, res) => {
+    registroEvalPsicomotricidadBL.editaRegistroEvalPsicomotricidad(req.body)
+    .then(respuesta => Util.mensajeExito(res, "Edición de datos exitosa.", 200, respuesta))
+    .catch(error => Util.mensajeError(res, error.message));
+  }).delete((req, res) => {
+    registroEvalPsicomotricidadBL.eliminaRegistroEvalPsicomotricidad(req.body)
+    .then(respuesta => Util.mensajeExito(res, "eliminación de datos exitosa.", 200, respuesta))
+    .catch(error => Util.mensajeError(res, error.message));
+  });
+
+  app.route("/api/v1/registroEvalFisioterapia/")
+  .post((req, res) => {
+    registroEvalFisioterapiaBL.creaRegistroEvalFisioterapia(req.body)
+    .then(respuesta => Util.mensajeExito(res, "Creación de datos exitosa.", 200, respuesta))
+    .catch(error => Util.mensajeError(res, error.message));
+  }).put((req, res) => {
+    registroEvalFisioterapiaBL.editaRegistroEvalFisioterapia(req.body)
+    .then(respuesta => Util.mensajeExito(res, "Edición de datos exitosa.", 200, respuesta))
+    .catch(error => Util.mensajeError(res, error.message));
+  }).delete((req, res) => {
+    registroEvalFisioterapiaBL.eliminaRegistroEvalFisioterapia(req.body)
     .then(respuesta => Util.mensajeExito(res, "eliminación de datos exitosa.", 200, respuesta))
     .catch(error => Util.mensajeError(res, error.message));
   });

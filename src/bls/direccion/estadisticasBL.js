@@ -204,7 +204,7 @@ module.exports = app => {
         estudiantes = respuestaEstudiantes;
         paramsUniEduEst = {
           where: {
-            gestion: body.gestion
+            gestion: body.gestion + ''
           }
         };
         return dao.listarRegistros(models.unidad_educativa_estudiante, paramsUniEduEst);

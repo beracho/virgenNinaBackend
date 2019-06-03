@@ -12,7 +12,7 @@ module.exports = function (sequelize, DataTypes) {
         allowNull: true
       },
       ducha_observacion: {
-        type: DataTypes.STRING(150),
+        type: DataTypes.STRING(300),
         xlabel: 'Observacion de ducha',
         allowNull: true
       },
@@ -22,7 +22,7 @@ module.exports = function (sequelize, DataTypes) {
         allowNull: true
       },
       controlEsfinter_observacion: {
-        type: DataTypes.STRING(150),
+        type: DataTypes.STRING(300),
         xlabel: 'Observacion de ducha',
         allowNull: true
       },
@@ -32,7 +32,7 @@ module.exports = function (sequelize, DataTypes) {
         allowNull: true
       },
       vestidoDesvestido_observacion: {
-        type: DataTypes.STRING(150),
+        type: DataTypes.STRING(300),
         xlabel: 'Observacion de ducha',
         allowNull: true
       },
@@ -42,7 +42,7 @@ module.exports = function (sequelize, DataTypes) {
         allowNull: true
       },
       masticarTragar_observacion: {
-        type: DataTypes.STRING(150),
+        type: DataTypes.STRING(300),
         xlabel: 'Observacion de ducha',
         allowNull: true
       },
@@ -52,7 +52,7 @@ module.exports = function (sequelize, DataTypes) {
         allowNull: true
       },
       comerSolo_observacion: {
-        type: DataTypes.STRING(150),
+        type: DataTypes.STRING(300),
         xlabel: 'Observacion de ducha',
         allowNull: true
       },
@@ -62,7 +62,7 @@ module.exports = function (sequelize, DataTypes) {
         allowNull: true
       },
       movilidadFuncional_observacion: {
-        type: DataTypes.STRING(150),
+        type: DataTypes.STRING(300),
         xlabel: 'Observacion de ducha',
         allowNull: true
       },
@@ -72,7 +72,7 @@ module.exports = function (sequelize, DataTypes) {
         allowNull: true
       },
       higienePersonalAseo_observacion: {
-        type: DataTypes.STRING(150),
+        type: DataTypes.STRING(300),
         xlabel: 'Observacion de ducha',
         allowNull: true
       },
@@ -82,7 +82,7 @@ module.exports = function (sequelize, DataTypes) {
         allowNull: true
       },
       higieneInodoro_observacion: {
-        type: DataTypes.STRING(150),
+        type: DataTypes.STRING(300),
         xlabel: 'Observacion de ducha',
         allowNull: true
       },
@@ -92,7 +92,7 @@ module.exports = function (sequelize, DataTypes) {
         allowNull: true
       },
       comprension_observacion: {
-        type: DataTypes.STRING(150),
+        type: DataTypes.STRING(300),
         xlabel: 'Observacion de ducha',
         allowNull: true
       },
@@ -102,7 +102,7 @@ module.exports = function (sequelize, DataTypes) {
         allowNull: true
       },
       expresion_observacion: {
-        type: DataTypes.STRING(150),
+        type: DataTypes.STRING(300),
         xlabel: 'Observacion de ducha',
         allowNull: true
       },
@@ -112,7 +112,7 @@ module.exports = function (sequelize, DataTypes) {
         allowNull: true
       },
       interaccionSocial_observacion: {
-        type: DataTypes.STRING(150),
+        type: DataTypes.STRING(300),
         xlabel: 'Observacion de ducha',
         allowNull: true
       },
@@ -122,7 +122,7 @@ module.exports = function (sequelize, DataTypes) {
         allowNull: true
       },
       solProblemas_observacion: {
-        type: DataTypes.STRING(150),
+        type: DataTypes.STRING(300),
         xlabel: 'Observacion de ducha',
         allowNull: true
       },
@@ -132,7 +132,7 @@ module.exports = function (sequelize, DataTypes) {
         allowNull: true
       },
       memoria_observacion: {
-        type: DataTypes.STRING(150),
+        type: DataTypes.STRING(300),
         xlabel: 'Observacion de ducha',
         allowNull: true
       },
@@ -142,7 +142,7 @@ module.exports = function (sequelize, DataTypes) {
         allowNull: true
       },
       atencion_observacion: {
-        type: DataTypes.STRING(150),
+        type: DataTypes.STRING(300),
         xlabel: 'Observacion de ducha',
         allowNull: true
       },
@@ -152,7 +152,7 @@ module.exports = function (sequelize, DataTypes) {
         allowNull: true
       },
       orientacion_observacion: {
-        type: DataTypes.STRING(150),
+        type: DataTypes.STRING(300),
         xlabel: 'Observacion de ducha',
         allowNull: true
       },
@@ -162,7 +162,7 @@ module.exports = function (sequelize, DataTypes) {
         allowNull: true
       },
       reconocimiento_observacion: {
-        type: DataTypes.STRING(150),
+        type: DataTypes.STRING(300),
         xlabel: 'Observacion de ducha',
         allowNull: true
       },
@@ -172,7 +172,7 @@ module.exports = function (sequelize, DataTypes) {
         allowNull: true
       },
       secuenciacion_observacion: {
-        type: DataTypes.STRING(150),
+        type: DataTypes.STRING(300),
         xlabel: 'Observacion de ducha',
         allowNull: true
       },
@@ -182,7 +182,7 @@ module.exports = function (sequelize, DataTypes) {
         allowNull: true
       },
       calculo_observacion: {
-        type: DataTypes.STRING(150),
+        type: DataTypes.STRING(300),
         xlabel: 'Observacion de ducha',
         allowNull: true
       },
@@ -192,7 +192,7 @@ module.exports = function (sequelize, DataTypes) {
         allowNull: true
       },
       lenguaje_observacion: {
-        type: DataTypes.STRING(150),
+        type: DataTypes.STRING(300),
         xlabel: 'Observacion de ducha',
         allowNull: true
       },
@@ -202,7 +202,7 @@ module.exports = function (sequelize, DataTypes) {
         allowNull: true
       },
       escritura_observacion: {
-        type: DataTypes.STRING(150),
+        type: DataTypes.STRING(300),
         xlabel: 'Observacion de ducha',
         allowNull: true
       },
@@ -252,7 +252,7 @@ module.exports = function (sequelize, DataTypes) {
         allowNull: true
       },
       marcha_observacion: {
-        type: DataTypes.STRING(150),
+        type: DataTypes.STRING(300),
         xlabel: 'marcha_observacion',
         allowNull: true
       },
@@ -262,7 +262,7 @@ module.exports = function (sequelize, DataTypes) {
         allowNull: true
       },
       observacionesMovilidadFuncional: {
-        type: DataTypes.STRING(150),
+        type: DataTypes.STRING(300),
         xlabel: 'observacionesMovilidadFuncional',
         allowNull: true
       },
@@ -297,7 +297,7 @@ module.exports = function (sequelize, DataTypes) {
         allowNull: true
       },
       pinzaGruesa_observaciones: {
-        type: DataTypes.STRING(150),
+        type: DataTypes.STRING(300),
         xlabel: 'pinzaGruesa_observaciones',
         allowNull: true
       },
@@ -372,22 +372,22 @@ module.exports = function (sequelize, DataTypes) {
         allowNull: true
       },
       pinzaFina_observaciones: {
-        type: DataTypes.STRING(150),
+        type: DataTypes.STRING(300),
         xlabel: 'pinzaFina_observaciones',
         allowNull: true
       },
       barrerasArquitectonicas: {
-        type: DataTypes.STRING(150),
+        type: DataTypes.STRING(300),
         xlabel: 'barrerasArquitectonicas',
         allowNull: true
       },
       objetivosIntervención_objetivos: {
-        type: DataTypes.STRING(150),
+        type: DataTypes.STRING(300),
         xlabel: 'objetivosIntervención_objetivos',
         allowNull: true
       },
       objetivosIntervención_observaciones: {
-        type: DataTypes.STRING(150),
+        type: DataTypes.STRING(300),
         xlabel: 'objetivosIntervención_observaciones',
         allowNull: true
       },
