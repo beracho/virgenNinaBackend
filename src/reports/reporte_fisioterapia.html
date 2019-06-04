@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Registro Fisioterapia</title>
+    <meta content="text/html" charset="utf-8" http-equiv="Content-Type">    
+  </head>
+  <style>
+    /* colors */
+    /* #470101; Bulgarian Rose*/
+    /* #3f3d3a; Black olive*/
+    /* #e2e2e2; Light Yellow*/
+    /* #ffffff; White*/
+    /* #16140b; Licorice*/
+    body {
+    font-family: "Liberation Sans";
+    }
+    span {
+    font-size: 11px;
+    }
+    #encabezado {
+    text-align: center;
+    padding-top: 30px;
+    color: rgb(7, 60, 85);
+    }
+    .dev-encabezado {
+    font-family: "Lucida Console", Monaco, monospace;
+    margin-top: -15px;
+    }
+    table {
+      font-size: 8px;
+    }
+    p {
+      font-size: 8px;
+      text-align: center;
+    }
+    .table-data {
+    font-size: 8px;
+    border-radius: 5px;
+    border: 1px solid #470101;
+    }
+    .td-header-name {
+    color: #470101;
+    font-size: 10px;
+    border-radius: 5px;
+    padding-left: 10px;
+    padding-right: 7px;
+    }
+    .td-header {
+    /* color: rgb(7, 60, 85); */
+    border-radius: 5px;
+    padding-left: 10px;
+    padding-right: 7px;
+    }
+    .dividers {
+      border-bottom: 1px solid #16140b;
+    }
+    .contenido-seccion {
+      page-break-inside: avoid;
+      margin-top:5px;
+      margin-bottom:5px;
+    }
+    .contenido-unico {
+      border-radius: 8px;
+      border: 1px solid #470101;
+    }
+    .contenido {
+    margin: 0 auto;
+    }
+    .align-logo {
+      text-align: middle;
+      vertical-align: top;
+    padding-top: 10px;
+    }
+    .seccion {
+    background-color: #470101;
+    color: white;
+    border-radius: 5px;
+    text-align: left;
+    font-size: 12px;
+    font-family: "Lucida Console", Monaco, monospace;
+    padding-left: 5px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    }
+    .firmas {
+      text-align: center;
+      color: #16140b;
+      font-size: 9pt;
+    }
+    .titulo-nombre {
+      color: #470101;
+      font-family: "Comic Sans MS", cursive, sans-serif;
+      font-size: 10pt;
+    }
+    .subtitulo-nombre {
+      color: #470101;
+      font-family: "Comic Sans MS", cursive, sans-serif;
+      font-size: 10pt;
+    }
+    h4 {
+      color: white;
+    }
+    .dato {
+      padding: 5px;
+      border-radius: 5px;
+      background-color: #e2e2e2;
+      border-bottom: 1px solid #16140b;
+      text-align: justify;
+      padding-left: 15px;
+      padding-right: 12px;
+      color: #16140b;
+    }
+    .dato-unico {
+      padding-left: 10px;
+      padding-right: 7px;
+    }
+    .dato-centro {
+      background-color: #e2e2e2;
+      border-bottom: 1px solid #16140b;
+      text-align: center;
+      border-radius: 5px;
+      padding-left: 15px;
+      padding-right: 12px;
+      margin-left: 20px;
+    }
+    .nombre-dato {
+      background-color: #3f3d3a;
+      border-bottom: 1px solid #16140b;
+      color: #e2e2e2;
+      border-radius: 5px;
+      padding-left: 10px;
+      padding-right: 7px;
+    }
+    .altura-td {
+      height: 7px;
+    }
+    .espacio {
+      padding-left: 5px;
+    }
+    @media all {
+      div.saltopagina{
+        display: none;
+      }
+    }
+    @media print{
+      div.saltopagina{
+      display:block;
+      page-break-before:always;
+      }
+    }
+  </style>
+  <body>
+    <div class="dev-encabezado">
+      <table style="width:100%">
+        <tr>
+          <td class="align-logo" align="left">
+            <img src="http://localhost:4000/assets/vn_logo.jpg" width="80">
+          </td>
+          <td>
+            <div id="encabezado">
+              <h4 class="titulo-nombre" style="margin-top:-10px;">Asociación Centro "Virgen Niña - epdb" </h4>
+              <h5 class="subtitulo-nombre">AREA: "FISIOTERAPIA"</h5>
+              <!-- <h5 class="subtitulo-nombre">FICHA SOCIAL</h5> -->
+            </div>
+          </td>
+          <td class="align-logo" align="right">
+            <img src="http://localhost:4000/assets/epdb_logo.jpg" width="80">
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class="contenido">
+      <div class="contenido-seccion">
+        <table width="510" style="margin-top:5px;margin-bottom:5px;">
+          <tr>
+            <td class="td-header-name" width="90">Creado por:<span class="espacio"></span></td>
+            <td class="td-header" width="165"><%=registro.doctor%></td>
+            <td class="td-header-name" width="90">Nro Registro:<span class="espacio"></span></td>
+            <td class="td-header" width="165"><%=registro.nroRegistro%></td>
+          </tr>
+          <tr>
+            <td class="td-header-name" width="90">Fecha de creación:<span class="espacio"></span></td>
+            <td class="td-header" width="165"><%=registro.fechaCreacion%></td>
+            <td class="td-header-name" width="90">Fecha de impresión:<span class="espacio"></span></td>
+            <td class="td-header" width="165"><%=registro.fechaImpresion%></td>
+          </tr>
+        </table>
+      </div>
+      <div class="contenido-seccion">
+        <div class="seccion">1. Datos Generales</div>
+        <table style="margin-top:5px;margin-bottom:5px;">
+          <tr>
+            <td width="125"></td>
+            <td class="nombre-dato" width="40">Código Estudiante:<span class="espacio"></span></td>
+            <td class="dato-centro altura-td" width="120"><%=estudiante.codigo%></td>
+            <td width="125"></td>
+          </tr>
+        </table>
+        <table class="table-data" width="510" style="margin-top:5px;margin-bottom:5px;">
+          <tr>
+            <td class="nombre-dato" width="200">Nombres y apellidos:<span class="espacio"></span></td>
+            <td class="dato altura-td" colspan="3" width="460"><%=nombreCompleto%></td>
+          </tr>
+          <tr>
+            <td class="nombre-dato" width="200">Lugar y fecha de nacimiento:<span class="espacio"></span></td>
+            <td class="dato altura-td" width="200"><%=fechaNacimiento%></td>
+            <td class="nombre-dato" width="70">Edad:<span class="espacio"></span></td>
+            <td class="dato altura-td" width="190"><%=edad%></td>
+          </tr>
+          <tr>
+            <td class="nombre-dato" width="200">Domicilio<span class="espacio"></span></td>
+            <td class="dato altura-td" width="100"><%=domicilio%></td>
+            <td class="nombre-dato" width="70">Zona:<span class="espacio"></span></td>
+            <td class="dato altura-td" width="190"><%=zona%></td>
+          </tr>
+          <tr>
+            <td class="nombre-dato" width="200">Fecha de ingreso:<span class="espacio"></span></td>
+            <td class="dato altura-td" width="100"><%=estudiante.fechaIngreso%></td>
+            <td class="nombre-dato" width="70">Sexo:<span class="espacio"></span></td>
+            <td class="dato altura-td" width="190"><%=sexo%></td>
+          </tr>
+          <tr>
+              <td class="nombre-dato" width="200">Fecha de reingreso:<span class="espacio"></span></td>
+              <td class="dato altura-td" width="100"><%=estudiante.fechaReingreso%></td>
+              <td class="nombre-dato" width="70">Telf/Celular:<span class="espacio"></span></td>
+              <td class="dato altura-td" width="190"><%=telefono%></td>
+          </tr>
+        </table>
+      </div>
+      <div class="contenido-seccion">
+        <div class="seccion">2. Grupo Familiar</div>
+        <table class="table-data" width="510" style="margin-top:5px;margin-bottom:5px;">
+          <tr>
+            <th class="dividers">Nombres y Apellidos</th>
+            <th class="dividers">Relación</th>
+            <th class="dividers">Edad</th>
+            <th class="dividers">Estado Civil</th>
+            <th class="dividers">Grado de instrucción</th>
+            <th class="dividers">Ocupación</th>
+            <th class="dividers">Ingreso</th>
+          </tr>
+          <% for(var i = 0; i < parientes.length; i++) { %>
+          <tr>
+            <td class="dividers"><%=parientes[i].nombreCompleto%></td>
+            <td class="dividers"><%=parientes[i].relacion%></td>
+            <td class="dividers"><%=parientes[i].edad%></td>
+            <td class="dividers"><%=parientes[i].estadoCivil%></td>
+            <td class="dividers"><%=parientes[i].gradoInstuccion%></td>
+            <td class="dividers"><%=parientes[i].ocupacion%></td>
+            <td class="dividers"><%=parientes[i].ingreso%></td>
+          </tr>
+          <% } %>
+        </table>
+        <table class="table-data" width="510" style="margin-top:5px;margin-bottom:5px;">
+          <tr>
+            <td class="nombre-dato" width="200">Tipo de familia:<span class="espacio"></span></td>
+            <td class="dato altura-td" width="460"><%=registro.tipoFamilia%></td>
+          </tr>
+          <tr>
+            <td class="nombre-dato" width="200">Observaciones al grupo familiar:<span class="espacio"></span></td>
+            <td class="dato altura-td" width="460"><%=registro.observacionGrupoFamiliar%></td>
+          </tr>
+        </table>
+      </div>
+      <div class="contenido-seccion contenido-unico">
+        <div class="seccion">3. Dinámica familiar</div>
+        <div class="dato-unico">
+          <p class="dato"><%=registro.dinamicaFamiliar%></p>
+        </div>
+      </div>
+      <div class="contenido-seccion contenido-unico">
+        <div class="seccion">4. Proceso social</div>
+        <div class="dato-unico">
+          <p class="dato"><%=registro.procesoSocial%></p>
+        </div>
+      </div>
+      <div class="contenido-seccion contenido-unico">
+        <div class="seccion">5. Relato de la discapacidad</div>
+        <div class="dato-unico">
+          <p class="dato"><%=registro.relatoDiscapacidad%></p>
+        </div>
+      </div>
+      <div class="contenido-seccion contenido-unico">
+        <div class="seccion">6. Diagnóstico social</div>
+        <div class="dato-unico">
+          <p class="dato"><%=registro.diagnosticoSocial%></p>
+        </div>
+      </div>
+      <div class="contenido-seccion">
+        <div class="contenido-unico">
+          <div class="seccion">7. Conclusiones y sugerencias</div>
+          <div class="dato-unico">
+            <p class="dato"><%=registro.conclusiones%></p>
+          </div>
+        </div>
+        <br>
+        <div class="firmas">
+          __________________________<br>
+          <%=registro.doctorActual%>
+        </div>
+      </div>
+  </body>
+</html>

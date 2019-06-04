@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Registro Psicomotricidad</title>
+    <meta content="text/html" charset="utf-8" http-equiv="Content-Type">    
+  </head>
+  <style>
+    /* colors */
+    /* #470101; Bulgarian Rose*/
+    /* #3f3d3a; Black olive*/
+    /* #e2e2e2; Light Yellow*/
+    /* #ffffff; White*/
+    /* #16140b; Licorice*/
+    body {
+    font-family: "Liberation Sans";
+    }
+    span {
+    font-size: 11px;
+    }
+    #encabezado {
+    text-align: center;
+    padding-top: 30px;
+    color: rgb(7, 60, 85);
+    }
+    .dev-encabezado {
+    font-family: "Lucida Console", Monaco, monospace;
+    margin-top: -15px;
+    }
+    table {
+      font-size: 8px;
+    }
+    p {
+      font-size: 8px;
+      text-align: center;
+    }
+    .table-data {
+    font-size: 8px;
+    border-radius: 5px;
+    border: 1px solid #470101;
+    }
+    .td-header-name {
+    color: #470101;
+    font-size: 10px;
+    border-radius: 5px;
+    padding-left: 10px;
+    padding-right: 7px;
+    }
+    .td-header {
+    /* color: rgb(7, 60, 85); */
+    border-radius: 5px;
+    padding-left: 10px;
+    padding-right: 7px;
+    }
+    .dividers {
+      border-bottom: 1px solid #16140b;
+    }
+    .contenido-seccion {
+      page-break-inside: avoid;
+      margin-top:5px;
+      margin-bottom:5px;
+    }
+    .contenido-unico {
+      border-radius: 8px;
+      border: 1px solid #470101;
+    }
+    .contenido {
+    margin: 0 auto;
+    }
+    .align-logo {
+      text-align: middle;
+      vertical-align: top;
+    padding-top: 10px;
+    }
+    .seccion {
+    background-color: #470101;
+    color: white;
+    border-radius: 5px;
+    text-align: left;
+    font-size: 12px;
+    font-family: "Lucida Console", Monaco, monospace;
+    padding-left: 5px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    }
+    .firmas {
+      text-align: center;
+      color: #16140b;
+      font-size: 9pt;
+    }
+    .titulo-nombre {
+      color: #470101;
+      font-family: "Comic Sans MS", cursive, sans-serif;
+      font-size: 10pt;
+    }
+    .subtitulo-nombre {
+      color: #470101;
+      font-family: "Comic Sans MS", cursive, sans-serif;
+      font-size: 10pt;
+      padding-left: 5px;
+    }
+    h4 {
+      color: white;
+    }
+    .dato {
+      padding: 5px;
+      border-radius: 5px;
+      background-color: #e2e2e2;
+      border-bottom: 1px solid #16140b;
+      text-align: justify;
+      padding-left: 15px;
+      padding-right: 12px;
+      color: #16140b;
+    }
+    .dato-unico {
+      padding-left: 10px;
+      padding-right: 7px;
+    }
+    .dato-centro {
+      background-color: #e2e2e2;
+      border-bottom: 1px solid #16140b;
+      text-align: center;
+      border-radius: 5px;
+      padding-left: 15px;
+      padding-right: 12px;
+      margin-left: 20px;
+    }
+    .nombre-dato {
+      background-color: #3f3d3a;
+      border-bottom: 1px solid #16140b;
+      color: #e2e2e2;
+      border-radius: 5px;
+      padding-left: 10px;
+      padding-right: 7px;
+    }
+    .altura-td {
+      height: 7px;
+    }
+    .espacio {
+      padding-left: 5px;
+    }
+    @media all {
+      div.saltopagina{
+        display: none;
+      }
+    }
+    @media print{
+      div.saltopagina{
+      display:block;
+      page-break-before:always;
+      }
+    }
+  </style>
+  <body>
+    <div class="dev-encabezado">
+      <table style="width:100%">
+        <tr>
+          <td class="align-logo" align="left">
+            <img src="http://localhost:4000/assets/vn_logo.jpg" width="80">
+          </td>
+          <td>
+            <div id="encabezado">
+              <h4 class="titulo-nombre" style="margin-top:-10px;">Asociación Centro "Virgen Niña - epdb" </h4>
+              <h5 class="subtitulo-nombre">AREA: "PSICOMOTRICIDAD"</h5>
+              <h5 class="subtitulo-nombre">EXPRESIVIDAD PSICOMOTRIZ Y TRASTORNOS PSICOMOTORES</h5>
+            </div>
+          </td>
+          <td class="align-logo" align="right">
+            <img src="http://localhost:4000/assets/epdb_logo.jpg" width="80">
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class="contenido">
+      <div class="contenido-seccion">
+        <table width="510" style="margin-top:5px;margin-bottom:5px;">
+          <tr>
+            <td class="td-header-name" width="90">Creado por:<span class="espacio"></span></td>
+            <td class="td-header" width="165"><%=registro.doctor%></td>
+            <td class="td-header-name" width="90">Nro Registro:<span class="espacio"></span></td>
+            <td class="td-header" width="165"><%=registro.nroRegistro%></td>
+          </tr>
+          <tr>
+            <td class="td-header-name" width="90">Fecha de creación:<span class="espacio"></span></td>
+            <td class="td-header" width="165"><%=registro.fechaCreacion%></td>
+            <td class="td-header-name" width="90">Fecha de impresión:<span class="espacio"></span></td>
+            <td class="td-header" width="165"><%=registro.fechaImpresion%></td>
+          </tr>
+        </table>
+      </div>
+      <div class="contenido-seccion">
+        <div class="seccion">1. Datos Generales</div>
+        <table style="margin-top:5px;margin-bottom:5px;">
+          <tr>
+            <td width="125"></td>
+            <td class="nombre-dato" width="40">Código Estudiante:<span class="espacio"></span></td>
+            <td class="dato-centro altura-td" width="120"><%=estudiante.codigo%></td>
+            <td width="125"></td>
+          </tr>
+        </table>
+        <table class="table-data" width="510" style="margin-top:5px;margin-bottom:5px;">
+          <tr>
+            <td class="nombre-dato" width="200">Nombres y apellidos:<span class="espacio"></span></td>
+            <td class="dato altura-td" colspan="3" width="460"><%=nombreCompleto%></td>
+          </tr>
+          <tr>
+            <td class="nombre-dato" width="200">Lugar y fecha de nacimiento:<span class="espacio"></span></td>
+            <td class="dato altura-td" width="200"><%=fechaNacimiento%></td>
+            <td class="nombre-dato" width="70">Edad:<span class="espacio"></span></td>
+            <td class="dato altura-td" width="190"><%=edad%></td>
+          </tr>
+          <tr>
+            <td class="nombre-dato" width="200">Domicilio<span class="espacio"></span></td>
+            <td class="dato altura-td" width="100"><%=domicilio%></td>
+            <td class="nombre-dato" width="70">Zona:<span class="espacio"></span></td>
+            <td class="dato altura-td" width="190"><%=zona%></td>
+          </tr>
+          <tr>
+            <td class="nombre-dato" width="200">Fecha de ingreso:<span class="espacio"></span></td>
+            <td class="dato altura-td" width="100"><%=estudiante.fechaIngreso%></td>
+            <td class="nombre-dato" width="70">Sexo:<span class="espacio"></span></td>
+            <td class="dato altura-td" width="190"><%=sexo%></td>
+          </tr>
+          <tr>
+              <td class="nombre-dato" width="200">Fecha de reingreso:<span class="espacio"></span></td>
+              <td class="dato altura-td" width="100"><%=estudiante.fechaReingreso%></td>
+              <td class="nombre-dato" width="70">Telf/Celular:<span class="espacio"></span></td>
+              <td class="dato altura-td" width="190"><%=telefono%></td>
+          </tr>
+        </table>
+      </div>
+      <div class="contenido-seccion">
+        <div class="seccion">2. Datos de los familiares</div>
+        <table class="table-data" width="510" style="margin-top:5px;margin-bottom:5px;">
+          <tr>
+            <th class="dividers">Nombres y Apellidos</th>
+            <th class="dividers">Relación</th>
+            <th class="dividers">Edad</th>
+            <th class="dividers">Estado Civil</th>
+            <th class="dividers">Grado de instrucción</th>
+            <th class="dividers">Ocupación</th>
+            <th class="dividers">Ingreso</th>
+          </tr>
+          <% for(var i = 0; i < parientes.length; i++) { %>
+          <tr>
+            <td class="dividers"><%=parientes[i].nombreCompleto%></td>
+            <td class="dividers"><%=parientes[i].relacion%></td>
+            <td class="dividers"><%=parientes[i].edad%></td>
+            <td class="dividers"><%=parientes[i].estadoCivil%></td>
+            <td class="dividers"><%=parientes[i].gradoInstuccion%></td>
+            <td class="dividers"><%=parientes[i].ocupacion%></td>
+            <td class="dividers"><%=parientes[i].ingreso%></td>
+          </tr>
+          <% } %>
+        </table>
+      </div>
+      <div class="contenido-seccion contenido-unico">
+        <div class="subtitulo-nombre">Antecedentes familiares</div>
+        <div class="dato-unico">
+          <p class="dato"><%=registro.anam_antecedentesFamiliares%></p>
+        </div>
+      </div>
+      <div class="contenido-seccion contenido-unico">
+        <div class="subtitulo-nombre">Antecedentes patológicos</div>
+        <div class="dato-unico">
+          <p class="dato"><%=registro.anam_antecedentesPatologicos%></p>
+        </div>
+      </div>
+      <div class="contenido-seccion contenido-unico">
+        <div class="subtitulo-nombre">Antecedentes ginecológicos</div>
+        <table width="510" style="margin-top:5px;margin-bottom:5px;">
+          <tr>
+            <td class="nombre-dato" width="200">Peri natal:<span class="espacio"></span></td>
+            <td class="dato altura-td" width="460"><%=registro.anam_perinatal%></td>
+          </tr>
+          <tr>
+            <td class="nombre-dato" width="200">Pre natal:<span class="espacio"></span></td>
+            <td class="dato altura-td" width="460"><%=registro.anam_prenatal%></td>
+          </tr>
+          <tr>
+            <td class="nombre-dato" width="200">Post natal:<span class="espacio"></span></td>
+            <td class="dato altura-td" width="460"><%=registro.anam_postnatal%></td>
+          </tr>
+        </table>
+      </div>
+      <div class="contenido-seccion contenido-unico">
+        <div class="subtitulo-nombre">Antecedentes de desarrollo</div>
+        <table width="510" style="margin-top:5px;margin-bottom:5px;">
+          <tr>
+            <td class="nombre-dato" width="100">Control cefálico:<span class="espacio"></span></td>
+            <td class="dato altura-td" width="150"><%=registro.anam_controlCefálico%></td>
+            <td class="nombre-dato" width="100">Sedestación:<span class="espacio"></span></td>
+            <td class="dato altura-td" width="150"><%=registro.anam_Sedestación%></td>
+          </tr>
+          <tr>
+            <td class="nombre-dato" width="100">Arrastre:<span class="espacio"></span></td>
+            <td class="dato altura-td" width="150"><%=registro.anam_Arrastre%></td>
+            <td class="nombre-dato" width="100">Gateo:<span class="espacio"></span></td>
+            <td class="dato altura-td" width="150"><%=registro.anam_Gateo%></td>
+          </tr>
+          <tr>
+            <td class="nombre-dato" width="100">Bipedestación:<span class="espacio"></span></td>
+            <td class="dato altura-td" width="150"><%=registro.anam_Bipedestación%></td>
+            <td class="nombre-dato" width="100">Marcha:<span class="espacio"></span></td>
+            <td class="dato altura-td" width="150"><%=registro.anam_Marcha%></td>
+          </tr>
+        </table>
+      </div>
+      <div class="contenido-seccion contenido-unico">
+        <div class="subtitulo-nombre">Motivo de consulta</div>
+        <div class="dato-unico">
+          <p class="dato"><%=registro.anam_razonConsulta%></p>
+        </div>
+      </div>
+      <div class="contenido-seccion">
+        <div class="seccion">3. Evaluación psicomotriz</div>
+        <table class="table-data" width="510" style="margin-top:5px;margin-bottom:5px;">
+          <tr>
+            <th class="dividers">Edad</th>
+            <th class="dividers">Motor</th>
+            <th class="dividers">Cognitivo</th>
+            <th class="dividers">Socio-afectivo</th>
+          </tr>
+          <tr>
+            <td class="dividers" rowspan="4">0-3 meses</td>
+            <td><%=registro.psico_headUpright%>Cabeza erguida</td>
+            <td><%=registro.psico_locateSounds%>Localiza sonidos</td>
+            <td><%=registro.psico_stimulusSmile%>Sonríe a un estimulo</td>
+          </tr>
+          <tr>
+            <td><%=registro.psico_movesHead%>Mueve la cabeza</td>
+            <td><%=registro.psico_babbles%>Balbucea</td>
+            <td><%=registro.psico_recognicesMother%>Reconoce a la madre</td>
+          </tr>
+          <tr>
+            <td><%=registro.psico_holdsObjects%>Sostiene objetos</td>
+            <td><%=registro.psico_gutturalSounds%>Realiza sonidos guturales</td>
+            <td><%=registro.psico_mouthSounds%>Emite sonidos bucales</td>
+          </tr>
+          <tr>
+            <td class="dividers"><%=registro.psico_playsFeetAndHands%>Juega con pies y manos</td>
+            <td class="dividers"></td>
+            <td class="dividers"></td>
+          </tr>
+          <tr>
+            <td class="dividers" rowspan="3">3-6 meses</td>
+            <td><%=registro.psico_liftHead%>Levanta la cabeza</td>
+            <td><%=registro.psico_makesSounds%>Emite sonidos </td>
+            <td><%=registro.psico_smilesToExtrangers%>Sonríe a conocidos</td>
+          </tr>
+          <tr>
+            <td><%=registro.psico_ulnaChange%>Cambia de decúbitos</td>
+            <td><%=registro.psico_callsForAttention%>Llama la atención</td>
+            <td><%=registro.psico_recognicesCaretaker%>Reconoce a quien lo cuida</td>
+          </tr>
+          <tr>
+            <td class="dividers"><%=registro.psico_picksCloseObjects%>Coge objetos cercanos</td>
+            <td class="dividers"><%=registro.psico_repeatsSyllables%>Repite silabas</td>
+            <td class="dividers"></td>
+          </tr>
+          <tr>
+            <td class="dividers" rowspan="4">6-9 meses</td>
+            <td><%=registro.psico_sitsWithoutSupport%>Se sienta sin apoyo</td>
+            <td><%=registro.psico_likesSongs%>Muestra agrado a canciones</td>
+            <td><%=registro.psico_recognicesObjects%>Reconoce objetos</td>
+          </tr>
+          <tr>
+            <td><%=registro.psico_drags%>Se arrastra</td>
+            <td><%=registro.psico_searchsSounds%>Busca sonidos</td>
+            <td><%=registro.psico_criesBeforeExtrangers%>Llora ante extraños</td>
+          </tr>
+          <tr>
+            <td><%=registro.psico_picksAndHitsObjects%>Coge objetos y los golpea</td>
+            <td></td>
+            <td><%=registro.psico_imitatesMovements%>Imita movimientos</td>
+          </tr>
+          <tr>
+            <td class="dividers"><%=registro.psico_takesFoodToMouth%>Se lleva alimentos a la boca</td>
+            <td class="dividers"></td>
+            <td class="dividers"></td>
+          </tr>
+          <tr>
+            <td class="dividers" rowspan="4">9-12 meses</td>
+            <td><%=registro.psico_sitsWithSupport%>Se sienta  con apoyo</td>
+            <td><%=registro.psico_wordsWithMeaning%>Emite palabras con significado</td>
+            <td><%=registro.psico_embraceAdultChild%>Abraza al adulto o niño</td>
+          </tr>
+          <tr>
+            <td><%=registro.psico_crawl%>Gatea</td>
+            <td></td>
+            <td><%=registro.psico_answersToName%>Responde a su nombre</td>
+          </tr>
+          <tr>
+            <td><%=registro.psico_discoversObjects%>Descubre objetos</td>
+            <td></td>
+            <td><%=registro.psico_meetsSimpleOrders%>Cumple órdenes simples</td>
+          </tr>
+          <tr>
+            <td class="dividers"><%=registro.psico_walksWithSupport%>Camina con apoyo</td>
+            <td class="dividers"></td>
+            <td class="dividers"></td>
+          </tr>
+          <tr>
+            <td class="dividers" rowspan="5">12-30 meses</td>
+            <td><%=registro.psico_jumpsWithBothFeet%>Salta con ambos pies</td>
+            <td><%=registro.psico_makesNounVerbPhrases%>Hace frases sustantivo  +verbo</td>
+            <td><%=registro.psico_exploreEnvironment%>Explora el entorno</td>
+          </tr>
+          <tr>
+            <td><%=registro.psico_throwsBall%>Lanza la pelota</td>
+            <td><%=registro.psico_useNegatives%>Usa negaciones</td>
+            <td><%=registro.psico_recognicesPhotographs%>Reconoce fotografías – personas</td>
+          </tr>
+          <tr>
+            <td><%=registro.psico_UndressHimself%>Se quita la ropa solo</td>
+            <td><%=registro.psico_answerQuestions%>Responde preguntas</td>
+            <td><%=registro.psico_playsSmallGroups%>Juega en pequeños grupos</td>
+          </tr>
+          <tr>
+            <td><%=registro.psico_useForkCup%>Usa el tenedor o taza</td>
+            <td><%=registro.psico_bigAndSmallDifferences%>Diferencia grande o pequeño</td>
+            <td><%=registro.psico_greetsOnCommand%>Saluda al indicarle</td>
+          </tr>
+          <tr>
+            <td class="dividers"></td>
+            <td class="dividers"><%=registro.psico_singChildrenSongs%>Entona canciones infantiles</td>
+            <td class="dividers"></td>
+          </tr>
+          <tr>
+            <td rowspan="6">30-36 meses</td>
+            <td><%=registro.psico_performManualActivities%>Realiza actividades manuales</td>
+            <td><%=registro.psico_acknowledgeHisSex%>Dice su sexo</td>
+            <td><%=registro.psico_showsPersonalPreferences%>Tiene preferencias personales</td>
+          </tr>
+          <tr>
+            <td><%=registro.psico_runsJumps%>Corre y salta</td>
+            <td><%=registro.psico_gerundPluralArticleDifference%>Diferencia gerundio, plural y articulo</td>
+            <td><%=registro.psico_likesChildAndAnimals%>Muestra afecto a niños o animales</td>
+          </tr>
+          <tr>
+            <td><%=registro.psico_copyLinesAndCircles%>Copia líneas o círculos</td>
+            <td><%=registro.psico_articlePhonemes%>Articula fonemas</td>
+            <td><%=registro.psico_joinsSmallTeams%>Integra pequeños grupos </td>
+          </tr>
+          <tr>
+            <td><%=registro.psico_identifiesEspatialConcepts%>Identifica conceptos espaciales</td>
+            <td><%=registro.psico_gestureCommunication%>Usa gestos para comunicarse</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td><%=registro.psico_talksFirstPerson%>Habla en primera persona – YO</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td><%=registro.psico_useOralLanguage%>Utiliza lenguaje oral</td>
+            <td></td>
+          </tr>
+        </table>
+      </div>
+      <div class="contenido-seccion">
+        <div class="seccion">4. Área motora</div>
+        <div class="subtitulo-nombre">Patrones de movimiento</div>
+      </div>
+      <div class="contenido-seccion">
+        <div class="subtitulo-nombre">Motricidad gruesa</div>
+      </div>
+      <div class="contenido-seccion">
+        <div class="subtitulo-nombre">Lateralidad</div>
+      </div>
+      <div class="contenido-seccion">
+        <div class="subtitulo-nombre">Motricidad fina</div>
+      </div>
+      <div class="contenido-seccion">
+        <div class="subtitulo-nombre">Observaciones</div>
+      </div>
+      <div class="contenido-seccion contenido-unico">
+        <div class="seccion">5. Área cognitiva</div>
+      </div>
+      <div class="contenido-seccion">
+        <div class="subtitulo-nombre">Esquema corporal</div>
+      </div>
+      <div class="contenido-seccion">
+        <div class="subtitulo-nombre">Nociones espaciales</div>
+      </div>
+      <div class="contenido-seccion">
+        <div class="subtitulo-nombre">Nociones espacio-temporales</div>
+      </div>
+      <div class="contenido-seccion">
+        <div class="subtitulo-nombre">Comunicación</div>
+      </div>
+      <div class="contenido-seccion">
+        <div class="subtitulo-nombre">Observaciones</div>
+      </div>
+      <div class="contenido-seccion contenido-unico">
+        <div class="seccion">6. Área socio-afectiva</div>
+      </div>
+      <div class="contenido-seccion">
+        <div class="subtitulo-nombre">Actitud ante el juego</div>
+      </div>
+      <div class="contenido-seccion">
+        <div class="subtitulo-nombre">El sujeto en relación con el adulto</div>
+      </div>
+      <div class="contenido-seccion">
+        <div class="subtitulo-nombre">Observaciones</div>
+      </div>
+      <div class="contenido-seccion contenido-unico">
+        <div class="seccion">7. Diagnóstico psicomotor</div>
+        <div class="dato-unico">
+          <p class="dato"><%=registro.diagnosticoSocial%></p>
+        </div>
+      </div>
+      <div class="contenido-seccion">
+        <div class="contenido-unico">
+          <div class="seccion">8. Recomendaciones</div>
+          <div class="dato-unico">
+            <p class="dato"><%=registro.conclusiones%></p>
+          </div>
+        </div>
+        <br>
+        <div class="firmas">
+          __________________________<br>
+          <%=registro.doctorActual%>
+        </div>
+      </div>
+  </body>
+</html>

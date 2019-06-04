@@ -421,6 +421,18 @@ module.exports = app => {
       }
     }
     if (registro[0].tipo === 'especialidad') {
+      estudiante[0].dataValues.persona_de.forEach(pariente => {
+        const aux = {
+          nombreCompleto: pariente.persona_es.nombre_completo,
+          relacion: pariente.relacion,
+          edad: pariente.persona_es.edad,
+          estadoCivil: pariente.persona_es.estado_civil,
+          gradoInstuccion: pariente.persona_es.grado_instruccion,
+          ocupacion: pariente.persona_es.ocupacion_actual,
+          ingreso: pariente.persona_es.salario_mensual
+        }
+        datosOrdenados.parientes.push(aux);
+      });
       switch (registro[0].area) {
         case 'trabajo social':
         datosOrdenados.registro.tipoFamilia= registro[0].reg_tb.tipo_de_familia;
@@ -430,18 +442,6 @@ module.exports = app => {
         datosOrdenados.registro.relatoDiscapacidad= registro[0].reg_tb.relato_discapacidad;
         datosOrdenados.registro.diagnosticoSocial= registro[0].reg_tb.diagnostico_social;
         datosOrdenados.registro.conclusiones= registro[0].reg_tb.conclusion_sugerencia;
-        estudiante[0].dataValues.persona_de.forEach(pariente => {
-          const aux = {
-            nombreCompleto: pariente.persona_es.nombre_completo,
-            relacion: pariente.relacion,
-            edad: pariente.persona_es.edad,
-            estadoCivil: pariente.persona_es.estado_civil,
-            gradoInstuccion: pariente.persona_es.grado_instruccion,
-            ocupacion: pariente.persona_es.ocupacion_actual,
-            ingreso: pariente.persona_es.salario_mensual
-          }
-          datosOrdenados.parientes.push(aux);
-        });
         break;
         case 'terapia ocupacional':
         datosOrdenados.registro.ducha_realiza = registro[0].reg_to.ducha_realiza ? 'SÍ' : 'NO';
@@ -535,67 +535,67 @@ module.exports = app => {
         datosOrdenados.registro.anam_Bipedestación = registro[0].reg_pm.anam_Bipedestación;
         datosOrdenados.registro.anam_Marcha = registro[0].reg_pm.anam_Marcha;
         datosOrdenados.registro.anam_razonConsulta = registro[0].reg_pm.anam_razonConsulta;
-        datosOrdenados.registro.psico_headUpright = registro[0].reg_pm.psico_headUpright;
-        datosOrdenados.registro.psico_movesHead = registro[0].reg_pm.psico_movesHead;
-        datosOrdenados.registro.psico_holdsObjects = registro[0].reg_pm.psico_holdsObjects;
-        datosOrdenados.registro.psico_playsFeetAndHands = registro[0].reg_pm.psico_playsFeetAndHands;
-        datosOrdenados.registro.psico_locateSounds = registro[0].reg_pm.psico_locateSounds;
-        datosOrdenados.registro.psico_babbles = registro[0].reg_pm.psico_babbles;
-        datosOrdenados.registro.psico_gutturalSounds = registro[0].reg_pm.psico_gutturalSounds;
-        datosOrdenados.registro.psico_stimulusSmile = registro[0].reg_pm.psico_stimulusSmile;
-        datosOrdenados.registro.psico_recognicesMother = registro[0].reg_pm.psico_recognicesMother;
-        datosOrdenados.registro.psico_mouthSounds = registro[0].reg_pm.psico_mouthSounds;
-        datosOrdenados.registro.psico_liftHead = registro[0].reg_pm.psico_liftHead;
-        datosOrdenados.registro.psico_ulnaChange = registro[0].reg_pm.psico_ulnaChange;
-        datosOrdenados.registro.psico_picksCloseObjects = registro[0].reg_pm.psico_picksCloseObjects;
-        datosOrdenados.registro.psico_makesSounds = registro[0].reg_pm.psico_makesSounds;
-        datosOrdenados.registro.psico_callsForAttention = registro[0].reg_pm.psico_callsForAttention;
-        datosOrdenados.registro.psico_repeatsSyllables = registro[0].reg_pm.psico_repeatsSyllables;
-        datosOrdenados.registro.psico_smilesToExtrangers = registro[0].reg_pm.psico_smilesToExtrangers;
-        datosOrdenados.registro.psico_recognicesCaretaker = registro[0].reg_pm.psico_recognicesCaretaker;
-        datosOrdenados.registro.psico_sitsWithoutSupport = registro[0].reg_pm.psico_sitsWithoutSupport;
-        datosOrdenados.registro.psico_drags = registro[0].reg_pm.psico_drags;
-        datosOrdenados.registro.psico_picksAndHitsObjects = registro[0].reg_pm.psico_picksAndHitsObjects;
-        datosOrdenados.registro.psico_takesFoodToMouth = registro[0].reg_pm.psico_takesFoodToMouth;
-        datosOrdenados.registro.psico_likesSongs = registro[0].reg_pm.psico_likesSongs;
-        datosOrdenados.registro.psico_searchsSounds = registro[0].reg_pm.psico_searchsSounds;
-        datosOrdenados.registro.psico_recognicesObjects = registro[0].reg_pm.psico_recognicesObjects;
-        datosOrdenados.registro.psico_criesBeforeExtrangers = registro[0].reg_pm.psico_criesBeforeExtrangers;
-        datosOrdenados.registro.psico_imitatesMovements = registro[0].reg_pm.psico_imitatesMovements;
-        datosOrdenados.registro.psico_sitsWithSupport = registro[0].reg_pm.psico_sitsWithSupport;
-        datosOrdenados.registro.psico_crawl = registro[0].reg_pm.psico_crawl;
-        datosOrdenados.registro.psico_discoversObjects = registro[0].reg_pm.psico_discoversObjects;
-        datosOrdenados.registro.psico_walksWithSupport = registro[0].reg_pm.psico_walksWithSupport;
-        datosOrdenados.registro.psico_wordsWithMeaning = registro[0].reg_pm.psico_wordsWithMeaning;
-        datosOrdenados.registro.psico_embraceAdultChild = registro[0].reg_pm.psico_embraceAdultChild;
-        datosOrdenados.registro.psico_answersToName = registro[0].reg_pm.psico_answersToName;
-        datosOrdenados.registro.psico_meetsSimpleOrders = registro[0].reg_pm.psico_meetsSimpleOrders;
-        datosOrdenados.registro.psico_jumpsWithBothFeet = registro[0].reg_pm.psico_jumpsWithBothFeet;
-        datosOrdenados.registro.psico_throwsBall = registro[0].reg_pm.psico_throwsBall;
-        datosOrdenados.registro.psico_UndressHimself = registro[0].reg_pm.psico_UndressHimself;
-        datosOrdenados.registro.psico_useForkCup = registro[0].reg_pm.psico_useForkCup;
-        datosOrdenados.registro.psico_makesNounVerbPhrases = registro[0].reg_pm.psico_makesNounVerbPhrases;
-        datosOrdenados.registro.psico_useNegatives = registro[0].reg_pm.psico_useNegatives;
-        datosOrdenados.registro.psico_answerQuestions = registro[0].reg_pm.psico_answerQuestions;
-        datosOrdenados.registro.psico_bigAndSmallDifferences = registro[0].reg_pm.psico_bigAndSmallDifferences;
-        datosOrdenados.registro.psico_singChildrenSongs = registro[0].reg_pm.psico_singChildrenSongs;
-        datosOrdenados.registro.psico_exploreEnvironment = registro[0].reg_pm.psico_exploreEnvironment;
-        datosOrdenados.registro.psico_recognicesPhotographs = registro[0].reg_pm.psico_recognicesPhotographs;
-        datosOrdenados.registro.psico_playsSmallGroups = registro[0].reg_pm.psico_playsSmallGroups;
-        datosOrdenados.registro.psico_greetsOnCommand = registro[0].reg_pm.psico_greetsOnCommand;
-        datosOrdenados.registro.psico_performManualActivities = registro[0].reg_pm.psico_performManualActivities;
-        datosOrdenados.registro.psico_runsJumps = registro[0].reg_pm.psico_runsJumps;
-        datosOrdenados.registro.psico_copyLinesAndCircles = registro[0].reg_pm.psico_copyLinesAndCircles;
-        datosOrdenados.registro.psico_identifiesEspatialConcepts = registro[0].reg_pm.psico_identifiesEspatialConcepts;
-        datosOrdenados.registro.psico_acknowledgeHisSex = registro[0].reg_pm.psico_acknowledgeHisSex;
-        datosOrdenados.registro.psico_gerundPluralArticleDifference = registro[0].reg_pm.psico_gerundPluralArticleDifference;
-        datosOrdenados.registro.psico_articlePhonemes = registro[0].reg_pm.psico_articlePhonemes;
-        datosOrdenados.registro.psico_gestureCommunication = registro[0].reg_pm.psico_gestureCommunication;
-        datosOrdenados.registro.psico_talksFirstPerson = registro[0].reg_pm.psico_talksFirstPerson;
-        datosOrdenados.registro.psico_useOralLanguage = registro[0].reg_pm.psico_useOralLanguage;
-        datosOrdenados.registro.psico_showsPersonalPreferences = registro[0].reg_pm.psico_showsPersonalPreferences;
-        datosOrdenados.registro.psico_likesChildAndAnimals = registro[0].reg_pm.psico_likesChildAndAnimals;
-        datosOrdenados.registro.psico_joinsSmallTeams = registro[0].reg_pm.psico_joinsSmallTeams;
+        datosOrdenados.registro.psico_headUpright = registro[0].reg_pm.psico_headUpright ? '✓ ' : 'x ';
+        datosOrdenados.registro.psico_movesHead = registro[0].reg_pm.psico_movesHead ? '✓ ' : 'x ';
+        datosOrdenados.registro.psico_holdsObjects = registro[0].reg_pm.psico_holdsObjects ? '✓ ' : 'x ';
+        datosOrdenados.registro.psico_playsFeetAndHands = registro[0].reg_pm.psico_playsFeetAndHands ? '✓ ' : 'x ';
+        datosOrdenados.registro.psico_locateSounds = registro[0].reg_pm.psico_locateSounds ? '✓ ' : 'x ';
+        datosOrdenados.registro.psico_babbles = registro[0].reg_pm.psico_babbles ? '✓ ' : 'x ';
+        datosOrdenados.registro.psico_gutturalSounds = registro[0].reg_pm.psico_gutturalSounds ? '✓ ' : 'x ';
+        datosOrdenados.registro.psico_stimulusSmile = registro[0].reg_pm.psico_stimulusSmile ? '✓ ' : 'x ';
+        datosOrdenados.registro.psico_recognicesMother = registro[0].reg_pm.psico_recognicesMother ? '✓ ' : 'x ';
+        datosOrdenados.registro.psico_mouthSounds = registro[0].reg_pm.psico_mouthSounds ? '✓ ' : 'x ';
+        datosOrdenados.registro.psico_liftHead = registro[0].reg_pm.psico_liftHead ? '✓ ' : 'x ';
+        datosOrdenados.registro.psico_ulnaChange = registro[0].reg_pm.psico_ulnaChange ? '✓ ' : 'x ';
+        datosOrdenados.registro.psico_picksCloseObjects = registro[0].reg_pm.psico_picksCloseObjects ? '✓ ' : 'x ';
+        datosOrdenados.registro.psico_makesSounds = registro[0].reg_pm.psico_makesSounds ? '✓ ' : 'x ';
+        datosOrdenados.registro.psico_callsForAttention = registro[0].reg_pm.psico_callsForAttention ? '✓ ' : 'x ';
+        datosOrdenados.registro.psico_repeatsSyllables = registro[0].reg_pm.psico_repeatsSyllables ? '✓ ' : 'x ';
+        datosOrdenados.registro.psico_smilesToExtrangers = registro[0].reg_pm.psico_smilesToExtrangers ? '✓ ' : 'x ';
+        datosOrdenados.registro.psico_recognicesCaretaker = registro[0].reg_pm.psico_recognicesCaretaker ? '✓ ' : 'x ';
+        datosOrdenados.registro.psico_sitsWithoutSupport = registro[0].reg_pm.psico_sitsWithoutSupport ? '✓ ' : 'x ';
+        datosOrdenados.registro.psico_drags = registro[0].reg_pm.psico_drags ? '✓ ' : 'x ';
+        datosOrdenados.registro.psico_picksAndHitsObjects = registro[0].reg_pm.psico_picksAndHitsObjects ? '✓ ' : 'x ';
+        datosOrdenados.registro.psico_takesFoodToMouth = registro[0].reg_pm.psico_takesFoodToMouth ? '✓ ' : 'x ';
+        datosOrdenados.registro.psico_likesSongs = registro[0].reg_pm.psico_likesSongs ? '✓ ' : 'x ';
+        datosOrdenados.registro.psico_searchsSounds = registro[0].reg_pm.psico_searchsSounds ? '✓ ' : 'x ';
+        datosOrdenados.registro.psico_recognicesObjects = registro[0].reg_pm.psico_recognicesObjects ? '✓ ' : 'x ';
+        datosOrdenados.registro.psico_criesBeforeExtrangers = registro[0].reg_pm.psico_criesBeforeExtrangers ? '✓ ' : 'x ';
+        datosOrdenados.registro.psico_imitatesMovements = registro[0].reg_pm.psico_imitatesMovements ? '✓ ' : 'x ';
+        datosOrdenados.registro.psico_sitsWithSupport = registro[0].reg_pm.psico_sitsWithSupport ? '✓ ' : 'x ';
+        datosOrdenados.registro.psico_crawl = registro[0].reg_pm.psico_crawl ? '✓ ' : 'x ';
+        datosOrdenados.registro.psico_discoversObjects = registro[0].reg_pm.psico_discoversObjects ? '✓ ' : 'x ';
+        datosOrdenados.registro.psico_walksWithSupport = registro[0].reg_pm.psico_walksWithSupport ? '✓ ' : 'x ';
+        datosOrdenados.registro.psico_wordsWithMeaning = registro[0].reg_pm.psico_wordsWithMeaning ? '✓ ' : 'x ';
+        datosOrdenados.registro.psico_embraceAdultChild = registro[0].reg_pm.psico_embraceAdultChild ? '✓ ' : 'x ';
+        datosOrdenados.registro.psico_answersToName = registro[0].reg_pm.psico_answersToName ? '✓ ' : 'x ';
+        datosOrdenados.registro.psico_meetsSimpleOrders = registro[0].reg_pm.psico_meetsSimpleOrders ? '✓ ' : 'x ';
+        datosOrdenados.registro.psico_jumpsWithBothFeet = registro[0].reg_pm.psico_jumpsWithBothFeet ? '✓ ' : 'x ';
+        datosOrdenados.registro.psico_throwsBall = registro[0].reg_pm.psico_throwsBall ? '✓ ' : 'x ';
+        datosOrdenados.registro.psico_UndressHimself = registro[0].reg_pm.psico_UndressHimself ? '✓ ' : 'x ';
+        datosOrdenados.registro.psico_useForkCup = registro[0].reg_pm.psico_useForkCup ? '✓ ' : 'x ';
+        datosOrdenados.registro.psico_makesNounVerbPhrases = registro[0].reg_pm.psico_makesNounVerbPhrases ? '✓ ' : 'x ';
+        datosOrdenados.registro.psico_useNegatives = registro[0].reg_pm.psico_useNegatives ? '✓ ' : 'x ';
+        datosOrdenados.registro.psico_answerQuestions = registro[0].reg_pm.psico_answerQuestions ? '✓ ' : 'x ';
+        datosOrdenados.registro.psico_bigAndSmallDifferences = registro[0].reg_pm.psico_bigAndSmallDifferences ? '✓ ' : 'x ';
+        datosOrdenados.registro.psico_singChildrenSongs = registro[0].reg_pm.psico_singChildrenSongs ? '✓ ' : 'x ';
+        datosOrdenados.registro.psico_exploreEnvironment = registro[0].reg_pm.psico_exploreEnvironment ? '✓ ' : 'x ';
+        datosOrdenados.registro.psico_recognicesPhotographs = registro[0].reg_pm.psico_recognicesPhotographs ? '✓ ' : 'x ';
+        datosOrdenados.registro.psico_playsSmallGroups = registro[0].reg_pm.psico_playsSmallGroups ? '✓ ' : 'x ';
+        datosOrdenados.registro.psico_greetsOnCommand = registro[0].reg_pm.psico_greetsOnCommand ? '✓ ' : 'x ';
+        datosOrdenados.registro.psico_performManualActivities = registro[0].reg_pm.psico_performManualActivities ? '✓ ' : 'x ';
+        datosOrdenados.registro.psico_runsJumps = registro[0].reg_pm.psico_runsJumps ? '✓ ' : 'x ';
+        datosOrdenados.registro.psico_copyLinesAndCircles = registro[0].reg_pm.psico_copyLinesAndCircles ? '✓ ' : 'x ';
+        datosOrdenados.registro.psico_identifiesEspatialConcepts = registro[0].reg_pm.psico_identifiesEspatialConcepts ? '✓ ' : 'x ';
+        datosOrdenados.registro.psico_acknowledgeHisSex = registro[0].reg_pm.psico_acknowledgeHisSex ? '✓ ' : 'x ';
+        datosOrdenados.registro.psico_gerundPluralArticleDifference = registro[0].reg_pm.psico_gerundPluralArticleDifference ? '✓ ' : 'x ';
+        datosOrdenados.registro.psico_articlePhonemes = registro[0].reg_pm.psico_articlePhonemes ? '✓ ' : 'x ';
+        datosOrdenados.registro.psico_gestureCommunication = registro[0].reg_pm.psico_gestureCommunication ? '✓ ' : 'x ';
+        datosOrdenados.registro.psico_talksFirstPerson = registro[0].reg_pm.psico_talksFirstPerson ? '✓ ' : 'x ';
+        datosOrdenados.registro.psico_useOralLanguage = registro[0].reg_pm.psico_useOralLanguage ? '✓ ' : 'x ';
+        datosOrdenados.registro.psico_showsPersonalPreferences = registro[0].reg_pm.psico_showsPersonalPreferences ? '✓ ' : 'x ';
+        datosOrdenados.registro.psico_likesChildAndAnimals = registro[0].reg_pm.psico_likesChildAndAnimals ? '✓ ' : 'x ';
+        datosOrdenados.registro.psico_joinsSmallTeams = registro[0].reg_pm.psico_joinsSmallTeams ? '✓ ' : 'x ';
         datosOrdenados.registro.motor_run = registro[0].reg_pm.motor_run;
         datosOrdenados.registro.motor_jump = registro[0].reg_pm.motor_jump;
         datosOrdenados.registro.motor_throw = registro[0].reg_pm.motor_throw;
