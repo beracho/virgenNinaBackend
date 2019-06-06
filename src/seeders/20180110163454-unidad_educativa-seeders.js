@@ -5,10 +5,10 @@ module.exports = {
     return queryInterface.bulkInsert('unidad_educativa', [
       // 1
       {
-        sie: '111',
-        nombre: 'Centro Virgen Niña',
+        sie: '40730493',
+        nombre: 'Centro de Educación Especial Virgen Niña - EPDB',
         dependencia: 'public',
-        distrito: 'el alto',
+        distrito: 'El Alto 1 Distrito 6',
         _usuario_creacion: 1,
         _fecha_creacion: new Date(),
         _fecha_modificacion: new Date(),
@@ -17,17 +17,17 @@ module.exports = {
       {
         nombre: 'Manitos',
         dependencia: 'public',
-        distrito: 'el alto',
+        distrito: 'El Alto 1 Distrito 6',
         _usuario_creacion: 1,
         _fecha_creacion: new Date(),
         _fecha_modificacion: new Date(),
       },
       // 3
       {
-        sie: '245',
-        nombre: 'Escuela',
+        sie: '40730644',
+        nombre: 'Unidad Educativa Inicial en Familia Comunitaria',
         dependencia: 'public',
-        distrito: 'el alto',
+        distrito: 'El Alto 1 Distrito 6',
         _usuario_creacion: 1,
         _fecha_creacion: new Date(),
         _fecha_modificacion: new Date(),
