@@ -135,6 +135,10 @@
     .altura-td {
       height: 7px;
     }
+    .altura-td-middle {
+      height: 7px;
+      text-align: center;
+    }
     .espacio {
       padding-left: 5px;
     }
@@ -460,61 +464,286 @@
       </div>
       <div class="contenido-seccion">
         <div class="seccion">4. Área motora</div>
-        <div class="subtitulo-nombre">Patrones de movimiento</div>
+        <div class="contenido-seccion contenido-unico">
+          <div class="subtitulo-nombre">Patrones de movimiento</div>
+          <table width="510" style="margin-top:5px;margin-bottom:5px;">
+            <tr>
+              <td class="nombre-dato" width="100">Carrera:<span class="espacio"></span></td>
+              <td class="dato altura-td" width="150"><%=registro.motor_run%></td>
+              <td class="nombre-dato" width="100">Salto:<span class="espacio"></span></td>
+              <td class="dato altura-td" width="150"><%=registro.motor_jump%></td>
+            </tr>
+            <tr>
+              <td class="nombre-dato" width="100">Lanzar:<span class="espacio"></span></td>
+              <td class="dato altura-td" width="150"><%=registro.motor_throw%></td>
+              <td class="nombre-dato" width="100">Patear:<span class="espacio"></span></td>
+              <td class="dato altura-td" width="150"><%=registro.motor_kick%></td>
+            </tr>
+          </table>
+        </div>
+        <div class="contenido-seccion contenido-unico">
+            <div class="subtitulo-nombre">Motricidad gruesa</div>
+          <table width="510" style="margin-top:5px;margin-bottom:5px;">
+            <tr>
+              <td class="nombre-dato" width="100">Equilibrio dinámico  y estático:<span class="espacio"></span></td>
+              <td class="dato altura-td" width="150"><%=registro.motor_staticDinamicBalance%></td>
+              <td class="nombre-dato" width="100">Equilibrio estático:<span class="espacio"></span></td>
+              <td class="dato altura-td" width="150"><%=registro.motor_staticBalance%></td>
+            </tr>
+            <tr>
+              <td class="nombre-dato" width="100">Disociación segmentaria:<span class="espacio"></span></td>
+              <td class="dato altura-td" width="150"><%=registro.motor_partialDisociation%></td>
+              <td class="nombre-dato" width="100">Coordinación dinámica general:<span class="espacio"></span></td>
+              <td class="dato altura-td" width="150"><%=registro.motor_generalCoordination%></td>
+            </tr>
+          </table>
+        </div>
+        <div class="contenido-seccion contenido-unico">
+            <div class="subtitulo-nombre">Lateralidad</div>
+          <table width="510" style="margin-top:5px;margin-bottom:5px;">
+            <tr>
+              <th></th>
+              <th class="nombre-dato">Derecha</th>
+              <th class="nombre-dato">Izquierda</th>
+              <th></th>
+              <th class="nombre-dato">Derecha</th>
+              <th class="nombre-dato">Izquierda</th>
+            </tr>
+            <tr>
+              <td class="nombre-dato" width="100">Ojo:<span class="espacio"></span></td>
+              <td class="dato altura-td-middle" width="150"><%=registro.motor_eye_right%></td>
+              <td class="dato altura-td-middle" width="150"><%=registro.motor_eye_left%></td>
+              <td class="nombre-dato" width="100">Oído:<span class="espacio"></span></td>
+              <td class="dato altura-td-middle" width="150"><%=registro.motor_ear_right%></td>
+              <td class="dato altura-td-middle" width="150"><%=registro.motor_ear_left%></td>
+            </tr>
+            <tr>
+              <td class="nombre-dato" width="100">Mano:<span class="espacio"></span></td>
+              <td class="dato altura-td-middle" width="150"><%=registro.motor_hand_right%></td>
+              <td class="dato altura-td-middle" width="150"><%=registro.motor_hand_left%></td>
+              <td class="nombre-dato" width="100">Pie:<span class="espacio"></span></td>
+              <td class="dato altura-td-middle" width="150"><%=registro.motor_feet_right%></td>
+              <td class="dato altura-td-middle" width="150"><%=registro.motor_feet_left%></td>
+            </tr>
+          </table>
+        </div>
       </div>
-      <div class="contenido-seccion">
-        <div class="subtitulo-nombre">Motricidad gruesa</div>
-      </div>
-      <div class="contenido-seccion">
-        <div class="subtitulo-nombre">Lateralidad</div>
-      </div>
-      <div class="contenido-seccion">
+      <div class="contenido-seccion contenido-unico">
         <div class="subtitulo-nombre">Motricidad fina</div>
+        <table width="510" style="margin-top:5px;margin-bottom:5px;">
+          <tr>
+            <td class="nombre-dato" width="100">Rasgar:<span class="espacio"></span></td>
+            <td class="dato altura-td" width="150"><%=registro.motor_scrash%></td>
+            <td class="nombre-dato" width="100">Abotonar:<span class="espacio"></span></td>
+            <td class="dato altura-td" width="150"><%=registro.motor_button%></td>
+          </tr>
+          <tr>
+            <td class="nombre-dato" width="100">Cortar:<span class="espacio"></span></td>
+            <td class="dato altura-td" width="150"><%=registro.motor_cut%></td>
+            <td class="nombre-dato" width="100">Hacer una torre:<span class="espacio"></span></td>
+            <td class="dato altura-td" width="150"><%=registro.motor_makeTower%></td>
+          </tr>
+          <tr>
+            <td class="nombre-dato" width="100">Enhebrar una aguja :<span class="espacio"></span></td>
+            <td class="dato altura-td" width="150"><%=registro.motor_threadingNeedle%></td>
+          </tr>
+        </table>
       </div>
-      <div class="contenido-seccion">
+      <div class="contenido-seccion contenido-unico">
         <div class="subtitulo-nombre">Observaciones</div>
+        <div class="dato-unico">
+          <p class="dato"><%=registro.motor_observaciones%></p>
+        </div>
       </div>
       <div class="contenido-seccion contenido-unico">
         <div class="seccion">5. Área cognitiva</div>
       </div>
-      <div class="contenido-seccion">
+      <div class="contenido-seccion contenido-unico">
         <div class="subtitulo-nombre">Esquema corporal</div>
+        <table width="510" style="margin-top:5px;margin-bottom:5px;">
+          <tr>
+            <td class="nombre-dato" width="100">Dibuja la figura humana:<span class="espacio"></span></td>
+            <td class="dato altura-td" width="150"><%=registro.cogni_drawsHumanFigure%></td>
+            <td class="nombre-dato" width="100">Nombra partes del cuerpo:<span class="espacio"></span></td>
+            <td class="dato altura-td" width="150"><%=registro.cogni_nameHumanParts%></td>
+          </tr>
+          <tr>
+            <td class="nombre-dato" width="100">Completa la figura humana:<span class="espacio"></span></td>
+            <td class="dato altura-td" width="150"><%=registro.cogni_compleateHumanFigure%></td>
+            <td class="nombre-dato" width="100">Imagen corporal:<span class="espacio"></span></td>
+            <td class="dato altura-td" width="150"><%=registro.cogni_bodyImage%></td>
+          </tr>
+        </table>
       </div>
-      <div class="contenido-seccion">
+      <!-- <div class="contenido-seccion">
+        <div class="subtitulo-nombre">Foto</div>
+      </div> -->
+      <div class="contenido-seccion contenido-unico">
         <div class="subtitulo-nombre">Nociones espaciales</div>
+        <table width="510" style="margin-top:5px;margin-bottom:5px;">
+          <tr>
+            <td class="nombre-dato" width="100">Arriba:<span class="espacio"></span></td>
+            <td class="dato altura-td" width="150"><%=registro.cogni_arriba%></td>
+            <td class="nombre-dato" width="100">Abajo:<span class="espacio"></span></td>
+            <td class="dato altura-td" width="150"><%=registro.cogni_abajo%></td>
+            <td class="nombre-dato" width="100">Delante:<span class="espacio"></span></td>
+            <td class="dato altura-td" width="150"><%=registro.cogni_delante%></td>
+            <td class="nombre-dato" width="100">Detrás:<span class="espacio"></span></td>
+            <td class="dato altura-td" width="150"><%=registro.cogni_detras%></td>
+          </tr>
+          <tr>
+            <td class="nombre-dato" width="100">Dentro:<span class="espacio"></span></td>
+            <td class="dato altura-td" width="150"><%=registro.cogni_dentro%></td>
+            <td class="nombre-dato" width="100">Fuera:<span class="espacio"></span></td>
+            <td class="dato altura-td" width="150"><%=registro.cogni_fuera%></td>
+            <td class="nombre-dato" width="100">Izquierda:<span class="espacio"></span></td>
+            <td class="dato altura-td" width="150"><%=registro.cogni_izquierda%></td>
+            <td class="nombre-dato" width="100">Derecha:<span class="espacio"></span></td>
+            <td class="dato altura-td" width="150"><%=registro.cogni_derecha%></td>
+          </tr>
+        </table>
       </div>
-      <div class="contenido-seccion">
+      <!-- <div class="contenido-seccion">
         <div class="subtitulo-nombre">Nociones espacio-temporales</div>
-      </div>
-      <div class="contenido-seccion">
+        registro.cogni_inflaGlobo
+        registro.cogni_encubaHuevos
+        registro.cogni_plantaFlores
+      </div> -->
+      <div class="contenido-seccion contenido-unico">
         <div class="subtitulo-nombre">Comunicación</div>
+        <table width="510" style="margin-top:5px;margin-bottom:5px;">
+          <tr>
+            <th class="nombre-dato">NIVEL PRE – LINGÜÍSTICO <br>0 – 1 año</th>
+            <th class="nombre-dato">PRIMER NIVEL LINGÜÍSTICO <br>1 – 5 años</th>
+            <th class="nombre-dato">PRIMERA SUB-ETAPA <br>5 – 7 años</th>
+            <th class="nombre-dato">SEGUNDA SUB-ETAPA <br>7 – 12  años</th>
+          </tr>
+          <tr>
+            <td class="dividers"><%=registro.cogni_undifferentiatedCrying%>Llanto Indiferenciado</td>
+            <td class="dividers"><%=registro.cogni_intentionalSyllable%>Monosílabo Intencional</td>
+            <td class="dividers"><%=registro.cogni_gramaticalElemmentUse%>Uso de elementos gramaticales</td>
+            <td class="dividers"><%=registro.cogni_gramaticalElemmentUse%>Uso de elementos gramaticales</td>
+          </tr>
+          <tr>
+            <td class="dividers"><%=registro.cogni_socialSmile%>Sonrisa Social</td>
+            <td class="dividers"><%=registro.cogni_juxtaposedWord%>Palabra Yuxtapuesta</td>
+            <td class="dividers"><%=registro.cogni_makeComplexeSentences%>Realiza oraciones complejas</td>
+            <td class="dividers"><%=registro.cogni_slangLanguage%>Uso de jergas</td>
+          </tr>
+          <tr>
+            <td class="dividers"><%=registro.cogni_vocalGame%>Juego Vocal</td>
+            <td class="dividers"><%=registro.cogni_simplePhrase%>Frase Simple</td>
+            <td class="dividers"><%=registro.cogni_fullfillComplexOrder%>Cumple ordenes complejas</td>
+            <td class="dividers"><%=registro.cogni_useAdjectivesAdverbs%>Uso de adjetivos y adverbios</td>
+          </tr>
+          <tr>
+            <td class="dividers"><%=registro.cogni_babbleReflection%>Balbuceo Reflejo</td>
+            <td class="dividers"><%=registro.cogni_phraseWord%>Palabra-Frase</td>
+            <td class="dividers"><%=registro.cogni_beginReadingWriting%>Inicio de la lectoescritura</td>
+            <td class="dividers"><%=registro.cogni_fullfillComplexOrder%>Cumple ordenes complejas</td>
+          </tr>
+          <tr>
+            <td class="dividers"><%=registro.cogni_gutturalSound%>Sonidos Guturales</td>
+            <td class="dividers"><%=registro.cogni_languageInteriorization%>Interiorización Del Lenguaje</td>
+            <td class="dividers"><%=registro.cogni_usePreposition%>Uso de preposiciones</td>
+            <td class="dividers"><%=registro.cogni_verbUse%>Uso de verbos</td>
+          </tr>
+          <tr>
+            <td class="dividers"><%=registro.cogni_gestures%>Gestos</td>
+            <td class="dividers"><%=registro.cogni_verbUse%>Uso Se Verbos</td>
+            <td class="dividers"><%=registro.cogni_useAdjectives%>Uso de adjetivos</td>
+            <td class="dividers"><%=registro.cogni_fluidCommunication%>Comunicación fluida</td>
+          </tr>
+          <tr>
+            <td class="dividers"><%=registro.cogni_phraseWord%>Palabra frase</td>
+            <td class="dividers"><%=registro.cogni_waitTurn%>Espera Turnos</td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td class="dividers"><%=registro.cogni_completePhrase%>Frase Compleja</td>
+            <td></td>
+            <td></td>
+          </tr>
+        </table>
       </div>
-      <div class="contenido-seccion">
+      <div class="contenido-seccion contenido-unico">
         <div class="subtitulo-nombre">Observaciones</div>
+        <div class="dato-unico">
+          <p class="dato"><%=registro.cogni_observaciones%></p>
+        </div>
       </div>
       <div class="contenido-seccion contenido-unico">
         <div class="seccion">6. Área socio-afectiva</div>
       </div>
-      <div class="contenido-seccion">
+      <div class="contenido-seccion contenido-unico">
         <div class="subtitulo-nombre">Actitud ante el juego</div>
+        <table width="510" style="margin-top:5px;margin-bottom:5px;">
+          <tr>
+            <td class="nombre-dato" width="100">Juega:<span class="espacio"></span></td>
+            <td class="dato altura-td" width="150"><%=registro.socio_plays%></td>
+            <td class="nombre-dato" width="100">Propone juegos:<span class="espacio"></span></td>
+            <td class="dato altura-td" width="150"><%=registro.socio_proposeGame%></td>
+          </tr>
+          <tr>
+            <td class="nombre-dato" width="100">Líder en los juegos:<span class="espacio"></span></td>
+            <td class="dato altura-td" width="150"><%=registro.socio_leaderInGames%></td>
+            <td class="nombre-dato" width="100">Acepta el juego de otro:<span class="espacio"></span></td>
+            <td class="dato altura-td" width="150"><%=registro.socio_acceptAnothersGame%></td>
+          </tr>
+          <tr>
+            <td class="nombre-dato" width="100">Otros:<span class="espacio"></span></td>
+            <td class="dato altura-td" width="150"><%=registro.socio_otherGame%></td>
+          </tr>
+        </table>
       </div>
-      <div class="contenido-seccion">
+      <div class="contenido-seccion contenido-unico">
         <div class="subtitulo-nombre">El sujeto en relación con el adulto</div>
+        <table width="510" style="margin-top:5px;margin-bottom:5px;">
+          <tr>
+            <td class="nombre-dato" width="100">Lo acepta:<span class="espacio"></span></td>
+            <td class="dato altura-td" width="150"><%=registro.socio_acceptIt%></td>
+            <td class="nombre-dato" width="100">Lo busca:<span class="espacio"></span></td>
+            <td class="dato altura-td" width="150"><%=registro.socio_searchIt%></td>
+          </tr>
+          <tr>
+            <td class="nombre-dato" width="100">Lo provoca:<span class="espacio"></span></td>
+            <td class="dato altura-td" width="150"><%=registro.socio_provokesIt%></td>
+            <td class="nombre-dato" width="100">Le agradece:<span class="espacio"></span></td>
+            <td class="dato altura-td" width="150"><%=registro.socio_thanksHim%></td>
+          </tr>
+          <tr>
+            <td class="nombre-dato" width="100">Espera aprobación de adulto:<span class="espacio"></span></td>
+            <td class="dato altura-td" width="150"><%=registro.socio_waitGrownUpApprovation%></td>
+            <td class="nombre-dato" width="100">Espera órdenes-consignas:<span class="espacio"></span></td>
+            <td class="dato altura-td" width="150"><%=registro.socio_waitOrders%></td>
+          </tr>
+          <tr>
+            <td class="nombre-dato" width="100">Colabora con adulto:<span class="espacio"></span></td>
+            <td class="dato altura-td" width="150"><%=registro.socio_collaborateWithAdult%></td>
+            <td class="nombre-dato" width="100">Otros:<span class="espacio"></span></td>
+            <td class="dato altura-td" width="150"><%=registro.socio_otherAdult%></td>
+          </tr>
+        </table>
       </div>
-      <div class="contenido-seccion">
+      <div class="contenido-seccion contenido-unico">
         <div class="subtitulo-nombre">Observaciones</div>
+        <div class="dato-unico">
+          <p class="dato"><%=registro.socio_observaciones%></p>
+        </div>
       </div>
       <div class="contenido-seccion contenido-unico">
         <div class="seccion">7. Diagnóstico psicomotor</div>
         <div class="dato-unico">
-          <p class="dato"><%=registro.diagnosticoSocial%></p>
+          <p class="dato"><%=registro.diagnosticoPsicomotriz%></p>
         </div>
       </div>
       <div class="contenido-seccion">
         <div class="contenido-unico">
           <div class="seccion">8. Recomendaciones</div>
           <div class="dato-unico">
-            <p class="dato"><%=registro.conclusiones%></p>
+            <p class="dato"><%=registro.recomendaciones%></p>
           </div>
         </div>
         <br>
