@@ -265,12 +265,12 @@ module.exports = {
         method_post: true,
         method_put: true,
         method_delete: false,
-        estado: 'ACTIVO',
+        estado: 'INACTIVO',
         _usuario_creacion:1,
         _fecha_creacion: new Date(),
         _fecha_modificacion: new Date(),
         fid_menu_padre: 11,
-        visible: true,
+        visible: false,
       },
       {
         // 16
@@ -301,12 +301,12 @@ module.exports = {
         method_post: true,
         method_put: true,
         method_delete: false,
-        estado: 'ACTIVO',
+        estado: 'INACTIVO',
         _usuario_creacion:1,
         _fecha_creacion: new Date(),
         _fecha_modificacion: new Date(),
         fid_menu_padre: 11,
-        visible: true,
+        visible: false,
       },
       {
         // 18
@@ -319,12 +319,12 @@ module.exports = {
         method_post: true,
         method_put: true,
         method_delete: false,
-        estado: 'ACTIVO',
+        estado: 'INACTIVO',
         _usuario_creacion:1,
         _fecha_creacion: new Date(),
         _fecha_modificacion: new Date(),
         fid_menu_padre: 11,
-        visible: true,
+        visible: false,
       },
       {
         // 19
@@ -337,12 +337,12 @@ module.exports = {
         method_post: true,
         method_put: true,
         method_delete: false,
-        estado: 'ACTIVO',
+        estado: 'INACTIVO',
         _usuario_creacion:1,
         _fecha_creacion: new Date(),
         _fecha_modificacion: new Date(),
         fid_menu_padre: 11,
-        visible: true,
+        visible: false,
       },
       {
         // 20
@@ -355,12 +355,12 @@ module.exports = {
         method_post: true,
         method_put: true,
         method_delete: false,
-        estado: 'ACTIVO',
+        estado: 'INACTIVO',
         _usuario_creacion:1,
         _fecha_creacion: new Date(),
         _fecha_modificacion: new Date(),
         fid_menu_padre: 11,
-        visible: true,
+        visible: false,
       },
       {
         // 21
@@ -373,12 +373,12 @@ module.exports = {
         method_post: true,
         method_put: true,
         method_delete: false,
-        estado: 'ACTIVO',
+        estado: 'INACTIVO',
         _usuario_creacion:1,
         _fecha_creacion: new Date(),
         _fecha_modificacion: new Date(),
         fid_menu_padre: 11,
-        visible: true,
+        visible: false,
       },
       {
         // 22
@@ -409,12 +409,12 @@ module.exports = {
         method_post: true,
         method_put: true,
         method_delete: false,
-        estado: 'ACTIVO',
+        estado: 'INACTIVO',
         _usuario_creacion:1,
         _fecha_creacion: new Date(),
         _fecha_modificacion: new Date(),
         fid_menu_padre: 11,
-        visible: true,
+        visible: false,
       },
       {
         // 24

@@ -296,6 +296,7 @@ module.exports = {
       { fid_ruta: 28, fid_rol: 12, method_get: true, method_post: false, method_put: false, method_delete: false, estado: 'ACTIVO', _usuario_creacion: 'SISTEMA', _fecha_creacion: new Date(), _fecha_modificacion: new Date() },
       { fid_ruta: 29, fid_rol: 12, method_get: true, method_post: false, method_put: false, method_delete: false, estado: 'ACTIVO', _usuario_creacion: 'SISTEMA', _fecha_creacion: new Date(), _fecha_modificacion: new Date() },
     ];
+    roles_rutas_array = roles_rutas_array.concat(obj);
     
     // TERAPIA OCUPACIONAL
     obj = [
