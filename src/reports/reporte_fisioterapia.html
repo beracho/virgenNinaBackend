@@ -225,72 +225,490 @@
               <td class="nombre-dato" width="70">Telf/Celular:<span class="espacio"></span></td>
               <td class="dato altura-td" width="190"><%=telefono%></td>
           </tr>
+          <tr>
+            <td class="nombre-dato" width="200">Diagnóstico médico:<span class="espacio"></span></td>
+            <td class="dato altura-td" colspan="3" width="460"><%=registro.diagnosticoMedico%></td>
+          </tr>
+        </table>
+      </div>
+      <div class="contenido-seccion contenido-unico">
+        <div class="seccion">2. Motivo de consulta</div>
+        <div class="dato-unico">
+          <p class="dato"><%=registro.motivoConsulta%></p>
+        </div>
+      </div>
+      <div class="contenido-seccion contenido-unico">
+        <div class="seccion">3. Antecedentes de la enfermedad actual</div>
+        <div class="dato-unico">
+          <p class="dato"><%=registro.antecedentesEnfermedadActual%></p>
+        </div>
+      </div>
+      <div class="contenido-seccion">
+        <div class="seccion">4. Antecedentes gestionales</div>
+        <table class="table-data" width="510" style="margin-top:5px;margin-bottom:5px;">
+          <tr>
+            <td class="nombre-dato" width="200">Número de embarazo:<span class="espacio"></span></td>
+            <td class="dato altura-td" width="200"><%=registro.ag_numeroEmbarazo%></td>
+            <td class="nombre-dato" width="70">Número de hijos:<span class="espacio"></span></td>
+            <td class="dato altura-td" width="190"><%=registro.ag_numeroHijos%></td>
+          </tr>
+          <tr>
+            <td class="nombre-dato" width="200">Control prenatal<span class="espacio"></span></td>
+            <td class="dato altura-td" width="100"><%=registro.ag_controlPrenatal%></td>
+            <td class="nombre-dato" width="70">Hospital:<span class="espacio"></span></td>
+            <td class="dato altura-td" width="190"><%=registro.ag_hospital%></td>
+          </tr>
+          <tr>
+            <td class="nombre-dato" width="200">Problemas durante el embarazo<span class="espacio"></span></td>
+            <td class="dato altura-td" width="100"><%=registro.ag_problemasDuranteEmbarazo%></td>
+            <td class="nombre-dato" width="70">Tiempo gestacional:<span class="espacio"></span></td>
+            <td class="dato altura-td" width="190"><%=registro.ag_tiempoGestacional%></td>
+          </tr>
+          <tr>
+            <td class="nombre-dato" width="200">Parto<span class="espacio"></span></td>
+            <td class="dato altura-td" width="100"><%=registro.ag_parto%></td>
+            <td class="nombre-dato" width="70">Tipo de parto:<span class="espacio"></span></td>
+            <td class="dato altura-td" width="190"><%=registro.ag_tipoParto%></td>
+          </tr>
+          <tr>
+            <td class="nombre-dato" width="200">Posición<span class="espacio"></span></td>
+            <td class="dato altura-td" width="100"><%=registro.ag_posicion%></td>
+            <td class="nombre-dato" width="70">Llanto:<span class="espacio"></span></td>
+            <td class="dato altura-td" width="190"><%=registro.ag_llanto%></td>
+          </tr>
+          <tr>
+            <td class="nombre-dato" width="200">Movimientos<span class="espacio"></span></td>
+            <td class="dato altura-td" width="100"><%=registro.ag_movimientos%></td>
+            <td class="nombre-dato" width="70">Cianosis:<span class="espacio"></span></td>
+            <td class="dato altura-td" width="190"><%=registro.ag_cianosis%></td>
+          </tr>
+          <tr>
+            <td class="nombre-dato" width="200">Oxígeno<span class="espacio"></span></td>
+            <td class="dato altura-td" width="100"><%=registro.ag_oxigeno%></td>
+            <td class="nombre-dato" width="70">Incubadora:<span class="espacio"></span></td>
+            <td class="dato altura-td" width="190"><%=registro.ag_incubadora%></td>
+          </tr>
+          <tr>
+            <td class="nombre-dato" width="200">Tiempo en incubadora<span class="espacio"></span></td>
+            <td class="dato altura-td" width="100"><%=registro.ag_tiempoIncubadora%></td>
+            <td class="nombre-dato" width="200">Otros<span class="espacio"></span></td>
+            <td class="dato altura-td" width="100"><%=registro.ag_otros%></td>
+          </tr>
+        </table>
+      </div>
+      <!-- <div class="contenido-seccion contenido-unico">
+        <div class="seccion">5. Antecedentes patológicos y familiares</div>
+        <div class="dato-unico">
+          <p class="dato"><%=registro%></p>
+        </div>
+      </div> -->
+      <div class="contenido-seccion">
+        <div class="seccion">5. Exploración postural y física</div>
+        <table class="table-data" width="510" style="margin-top:5px;margin-bottom:5px;">
+          <tr>
+            <td class="nombre-dato" width="200">Plano anterior:<span class="espacio"></span></td>
+            <td class="dato altura-td" width="200"><%=registro.epf_planoAnterior%></td>
+            <td class="nombre-dato" width="70">Plano posterior:<span class="espacio"></span></td>
+            <td class="dato altura-td" width="190"><%=registro.epf_planoPosterior%></td>
+          </tr>
+          <tr>
+            <td class="nombre-dato" width="200">Plano lateral<span class="espacio"></span></td>
+            <td class="dato altura-td" width="100"><%=registro.epf_planoLateral%></td>
+            <td class="nombre-dato" width="70">Otros:<span class="espacio"></span></td>
+            <td class="dato altura-td" width="190"><%=registro.epf_otros%></td>
+          </tr>
         </table>
       </div>
       <div class="contenido-seccion">
-        <div class="seccion">2. Grupo Familiar</div>
+        <div class="subtitulo-nombre">5.1 Respiración</div>
         <table class="table-data" width="510" style="margin-top:5px;margin-bottom:5px;">
           <tr>
-            <th class="dividers">Nombres y Apellidos</th>
-            <th class="dividers">Relación</th>
-            <th class="dividers">Edad</th>
-            <th class="dividers">Estado Civil</th>
-            <th class="dividers">Grado de instrucción</th>
-            <th class="dividers">Ocupación</th>
-            <th class="dividers">Ingreso</th>
-          </tr>
-          <% for(var i = 0; i < parientes.length; i++) { %>
-          <tr>
-            <td class="dividers"><%=parientes[i].nombreCompleto%></td>
-            <td class="dividers"><%=parientes[i].relacion%></td>
-            <td class="dividers"><%=parientes[i].edad%></td>
-            <td class="dividers"><%=parientes[i].estadoCivil%></td>
-            <td class="dividers"><%=parientes[i].gradoInstuccion%></td>
-            <td class="dividers"><%=parientes[i].ocupacion%></td>
-            <td class="dividers"><%=parientes[i].ingreso%></td>
-          </tr>
-          <% } %>
-        </table>
-        <table class="table-data" width="510" style="margin-top:5px;margin-bottom:5px;">
-          <tr>
-            <td class="nombre-dato" width="200">Tipo de familia:<span class="espacio"></span></td>
-            <td class="dato altura-td" width="460"><%=registro.tipoFamilia%></td>
-          </tr>
-          <tr>
-            <td class="nombre-dato" width="200">Observaciones al grupo familiar:<span class="espacio"></span></td>
-            <td class="dato altura-td" width="460"><%=registro.observacionGrupoFamiliar%></td>
+            <td class="nombre-dato" width="200">Tipo<span class="espacio"></span></td>
+            <td class="dato altura-td" width="100"><%=registro.epf_tipoRespiracion%></td>
+            <td class="nombre-dato" width="70">Patron:<span class="espacio"></span></td>
+            <td class="dato altura-td" width="190"><%=registro.epf_patronRespiracion%></td>
           </tr>
         </table>
       </div>
       <div class="contenido-seccion contenido-unico">
-        <div class="seccion">3. Dinámica familiar</div>
+        <div class="subtitulo-nombre">5.2 Marcha</div>
         <div class="dato-unico">
-          <p class="dato"><%=registro.dinamicaFamiliar%></p>
+          <p class="dato"><%=registro.epf_marcha%></p>
+        </div>
+      </div>
+      <div class="contenido-seccion">
+        <div class="subtitulo-nombre">5.3 Pruebas ortopédicas</div>
+        <table class="table-data" width="510" style="margin-top:5px;margin-bottom:5px;">
+          <tr>
+            <td class="nombre-dato" width="200">Thomas:<span class="espacio"></span></td>
+            <td class="dato altura-td" width="200"><%=registro.epf_Po_thomas%></td>
+            <td class="nombre-dato" width="70">Galeazi:<span class="espacio"></span></td>
+            <td class="dato altura-td" width="190"><%=registro.epf_Po_galeazi%></td>
+          </tr>
+          <tr>
+            <td class="nombre-dato" width="200">Ober<span class="espacio"></span></td>
+            <td class="dato altura-td" width="100"><%=registro.epf_Po_ober%></td>
+            <td class="nombre-dato" width="70">Ortolani:<span class="espacio"></span></td>
+            <td class="dato altura-td" width="190"><%=registro.epf_Po_ortolani%></td>
+          </tr>
+          <tr>
+            <td class="nombre-dato" width="200">Barlow<span class="espacio"></span></td>
+            <td class="dato altura-td" width="100"><%=registro.epf_Po_barlow%></td>
+            <td class="nombre-dato" width="70">Asimetría de pliegues:<span class="espacio"></span></td>
+            <td class="dato altura-td" width="190"><%=registro.epf_Po_asimetriaPliegues%></td>
+          </tr>
+          <tr>
+            <td class="nombre-dato" width="200">Otros<span class="espacio"></span></td>
+            <td class="dato altura-td" width="100"><%=registro.epf_Po_otros%></td>
+          </tr>
+        </table>
+      </div>
+      <div class="contenido-seccion contenido-unico">
+        <div class="subtitulo-nombre">5.4 Tono</div>
+        <div class="dato-unico">
+          <p class="dato"><%=registro.epf_tono%></p>
         </div>
       </div>
       <div class="contenido-seccion contenido-unico">
-        <div class="seccion">4. Proceso social</div>
+        <div class="subtitulo-nombre">5.5 Trofismo</div>
         <div class="dato-unico">
-          <p class="dato"><%=registro.procesoSocial%></p>
+          <p class="dato"><%=registro.epf_trofismo%></p>
         </div>
       </div>
       <div class="contenido-seccion contenido-unico">
-        <div class="seccion">5. Relato de la discapacidad</div>
+        <div class="seccion">6. Escala de Ashworth modificada</div>
         <div class="dato-unico">
-          <p class="dato"><%=registro.relatoDiscapacidad%></p>
+          <p class="dato"><%=registro.escalaAshworth%></p>
+        </div>
+      </div>
+      <div class="contenido-seccion">
+        <div class="seccion">7. Reflejos</div>
+        <table class="table-data" width="510" style="margin-top:5px;margin-bottom:5px;">
+          <tr>
+            <td class="nombre-dato" width="200">Reflejo succión:</td>
+            <td class="dato altura-td" width="200"><%=registro.ref_suctionReflection%></td>
+            <td class="dato altura-td" width="190"><%=registro.ref_suctionReflectionText%></td>
+          </tr>
+          <tr>
+            <td class="nombre-dato" width="200">Triple ext/flx:</td>
+            <td class="dato altura-td" width="200"><%=registro.ref_TRIPLEEXTFLX%></td>
+            <td class="dato altura-td" width="190"><%=registro.ref_TRIPLEEXTFLXText%></td>
+          </tr>
+          <tr>
+            <td class="nombre-dato" width="200">Rtca:</td>
+            <td class="dato altura-td" width="200"><%=registro.ref_RTCA%></td>
+            <td class="dato altura-td" width="190"><%=registro.ref_RTCAText%></td>
+          </tr>
+          <tr>
+            <td class="nombre-dato" width="200">Rtcs:</td>
+            <td class="dato altura-td" width="200"><%=registro.ref_RTCS%></td>
+            <td class="dato altura-td" width="190"><%=registro.ref_RTCSText%></td>
+          </tr>
+          <tr>
+            <td class="nombre-dato" width="200">Rtl:</td>
+            <td class="dato altura-td" width="200"><%=registro.ref_RTL%></td>
+            <td class="dato altura-td" width="190"><%=registro.ref_RTLText%></td>
+          </tr>
+          <tr>
+            <td class="nombre-dato" width="200">Moro:</td>
+            <td class="dato altura-td" width="200"><%=registro.ref_RMORO%></td>
+            <td class="dato altura-td" width="190"><%=registro.ref_RMOROText%></td>
+          </tr>
+          <tr>
+            <td class="nombre-dato" width="200">Ext cruzada:</td>
+            <td class="dato altura-td" width="200"><%=registro.ref_RBABINSKI%></td>
+            <td class="dato altura-td" width="190"><%=registro.ref_RBABINSKIText%></td>
+          </tr>
+          <tr>
+            <td class="nombre-dato" width="200">Galant:</td>
+            <td class="dato altura-td" width="200"><%=registro.ref_REXTCRUZADA%></td>
+            <td class="dato altura-td" width="190"><%=registro.ref_REXTCRUZADAText%></td>
+          </tr>
+          <tr>
+            <td class="nombre-dato" width="200">Landau:</td>
+            <td class="dato altura-td" width="200"><%=registro.ref_GALANT%></td>
+            <td class="dato altura-td" width="190"><%=registro.ref_GALANTText%></td>
+          </tr>
+          <tr>
+            <td class="nombre-dato" width="200">Defensa:</td>
+            <td class="dato altura-td" width="200"><%=registro.ref_LANDAU%></td>
+            <td class="dato altura-td" width="190"><%=registro.ref_LANDAUText%></td>
+          </tr>
+          <tr>
+            <td class="nombre-dato" width="200">Reflejo palmar:</td>
+            <td class="dato altura-td" width="200"><%=registro.ref_DEFENSA%></td>
+            <td class="dato altura-td" width="190"><%=registro.ref_DEFENSAText%></td>
+          </tr>
+          <tr>
+            <td class="nombre-dato" width="200">Reflejo plantar:</td>
+            <td class="dato altura-td" width="200"><%=registro.ref_RPALMAR%></td>
+            <td class="dato altura-td" width="190"><%=registro.ref_RPALMARText%></td>
+          </tr>
+          <tr>
+            <td class="nombre-dato" width="200">Reflejo positivo de apoyo:</td>
+            <td class="dato altura-td" width="200"><%=registro.ref_RPLANTAR%></td>
+            <td class="dato altura-td" width="190"><%=registro.ref_RPLANTARText%></td>
+          </tr>
+          <tr>
+            <td class="nombre-dato" width="200">Reflejo paracaidas:</td>
+            <td class="dato altura-td" width="200"><%=registro.ref_RPOSITIVODEAPOYO%></td>
+            <td class="dato altura-td" width="190"><%=registro.ref_RPOSITIVODEAPOYOText%></td>
+          </tr>
+          <tr>
+            <td class="nombre-dato" width="200">Reflejo succión:</td>
+            <td class="dato altura-td" width="200"><%=registro.ref_RPARACAIDAS%></td>
+            <td class="dato altura-td" width="190"><%=registro.ref_RPARACAIDASText%></td>
+          </tr>
+        </table>
+      </div>
+      <div class="contenido-seccion">
+        <div class="seccion">8. Reacciones de enderezamiento</div>
+        <table class="table-data" width="510" style="margin-top:5px;margin-bottom:5px;">
+          <tr>
+            <td class="nombre-dato" width="200">Reacción de enderezamiento laberíntico:</td>
+            <td class="dato altura-td" width="200"><%=registro.re_laberintico%></td>
+            <td class="dato altura-td" width="190"><%=registro.re_laberinticoText%></td>
+          </tr>
+          <tr>
+            <td class="nombre-dato" width="200">Reacción de enderezamiento sobre los ojos:</td>
+            <td class="dato altura-td" width="200"><%=registro.re_sobreOjos%></td>
+            <td class="dato altura-td" width="190"><%=registro.re_sobreOjosText%></td>
+          </tr>
+        </table>
+      </div>
+      <div class="contenido-seccion">
+        <div class="seccion">9. Actividad motora espontánea</div>
+        <table class="table-data" width="510" style="margin-top:5px;margin-bottom:5px;">
+          <tr>
+            <td class="nombre-dato" width="200">Decúbito dorsal:<span class="espacio"></span></td>
+            <td class="dato altura-td" width="200"><%=registro.ame_decubitoDorsal%></td>
+            <td class="nombre-dato" width="70">Decúbito ventral:<span class="espacio"></span></td>
+            <td class="dato altura-td" width="190"><%=registro.ame_decubitoVentral%></td>
+          </tr>
+          <tr>
+            <td class="nombre-dato" width="200">Cambios de posición<span class="espacio"></span></td>
+            <td class="dato altura-td" width="100"><%=registro.ame_cambioPosicion%></td>
+            <td class="nombre-dato" width="70">Rolido:<span class="espacio"></span></td>
+            <td class="dato altura-td" width="190"><%=registro.ame_rolido%></td>
+          </tr>
+          <tr>
+            <td class="nombre-dato" width="200">Arrastre<span class="espacio"></span></td>
+            <td class="dato altura-td" width="100"><%=registro.ame_arrastre%></td>
+            <td class="nombre-dato" width="70">Sedente:<span class="espacio"></span></td>
+            <td class="dato altura-td" width="190"><%=registro.ame_sedente%></td>
+          </tr>
+          <tr>
+            <td class="nombre-dato" width="200">Gateo<span class="espacio"></span></td>
+            <td class="dato altura-td" width="100"><%=registro.ame_gateo%></td>
+            <td class="nombre-dato" width="70">Arrodillado:<span class="espacio"></span></td>
+            <td class="dato altura-td" width="190"><%=registro.ame_arrodillado%></td>
+          </tr>
+          <tr>
+            <td class="nombre-dato" width="200">Bípedo<span class="espacio"></span></td>
+            <td class="dato altura-td" width="100"><%=registro.ame_bipedo%></td>
+          </tr>
+        </table>
+      </div>
+      <div class="contenido-seccion">
+        <div class="seccion">10. Evaluación psicomotriz</div>
+        <table class="table-data" width="510" style="margin-top:5px;margin-bottom:5px;">
+          <tr>
+            <td class="nombre-dato" width="100">Esquema corporal:</td>
+            <td class="dato altura-td" width="100"><%=registro.ep_esquemaCorporal%></td>
+            <td class="dato altura-td" width="190"><%=registro.ep_esquemaCorporalText%></td>
+          </tr>
+          <tr>
+            <td class="nombre-dato" width="100">Imagen corporal:</td>
+            <td class="dato altura-td" width="100"><%=registro.ep_imagenCorporal%></td>
+            <td class="dato altura-td" width="190"><%=registro.ep_imagenCorporalText%></td>
+          </tr>
+          <tr>
+            <td class="nombre-dato" width="100">Concepto corporal:</td>
+            <td class="dato altura-td" width="100"><%=registro.ep_conceptoCorporal%></td>
+            <td class="dato altura-td" width="190"><%=registro.ep_conceptoCorporalText%></td>
+          </tr>
+          <tr>
+            <td class="nombre-dato" width="100">Estructuración espacial:</td>
+            <td class="dato altura-td" width="100"><%=registro.ep_estructuracionEspacial%></td>
+            <td class="dato altura-td" width="190"><%=registro.ep_estructuracionEspacialText%></td>
+          </tr>
+          <tr>
+            <td class="nombre-dato" width="100">Estructuración temporal:</td>
+            <td class="dato altura-td" width="100"><%=registro.ep_estructuracionTemporal%></td>
+            <td class="dato altura-td" width="190"><%=registro.ep_estructuracionTemporalText%></td>
+          </tr>
+          <tr>
+            <td class="nombre-dato" width="100">Equilibrio estático:</td>
+            <td class="dato altura-td" width="100"><%=registro.ep_equilibrioEstatico%></td>
+            <td class="dato altura-td" width="190"><%=registro.ep_equilibrioEstaticoText%></td>
+          </tr>
+          <tr>
+            <td class="nombre-dato" width="100">Equilibrio dinámico:</td>
+            <td class="dato altura-td" width="100"><%=registro.ep_equilibrioDinamico%></td>
+            <td class="dato altura-td" width="190"><%=registro.ep_equilibrioDinamicoText%></td>
+          </tr>
+          <tr>
+            <td class="nombre-dato" width="100">Coordinación gruesa:</td>
+            <td class="dato altura-td" width="100"><%=registro.ep_coordinacionGruesa%></td>
+            <td class="dato altura-td" width="190"><%=registro.ep_coordinacionGruesaText%></td>
+          </tr>
+          <tr>
+            <td class="nombre-dato" width="100">Coordinación fina:</td>
+            <td class="dato altura-td" width="100"><%=registro.ep_coordinacionFina%></td>
+            <td class="dato altura-td" width="190"><%=registro.ep_coordinacionFinaText%></td>
+          </tr>
+          <tr>
+            <td class="nombre-dato" width="100">Coordinación ojo-mano:</td>
+            <td class="dato altura-td" width="100"><%=registro.ep_coordinacionOjoMano%></td>
+            <td class="dato altura-td" width="190"><%=registro.ep_coordinacionOjoManoText%></td>
+          </tr>
+          <tr>
+            <td class="nombre-dato" width="100">Coordinación ojo-pie:</td>
+            <td class="dato altura-td" width="100"><%=registro.ep_coordinacionOjoPie%></td>
+            <td class="dato altura-td" width="190"><%=registro.ep_coordinacionOjoPieText%></td>
+          </tr>
+          <tr>
+            <td class="nombre-dato" width="100">Lateralidad:</td>
+            <td class="dato altura-td" width="100" colspan="2"><%=registro.ep_lateralidad%></td>
+          </tr>
+          <tr>
+            <td class="nombre-dato" width="100">Observaciones:</td>
+            <td class="dato altura-td" width="100" colspan="2"><%=registro.ep_observacion%></td>
+          </tr>
+        </table>
+      </div>
+      <div class="contenido-seccion">
+        <div class="seccion">11. Actividades de la vida diaria</div>
+        <table class="table-data" width="510" style="margin-top:5px;margin-bottom:5px;">
+          <tr>
+            <td class="nombre-dato" width="100">Higiene:</td>
+            <td class="dato altura-td" width="100"><%=registro.avd_higiene%></td>
+            <td class="dato altura-td" width="190"><%=registro.avd_higieneText%></td>
+          </tr>
+          <tr>
+            <td class="nombre-dato" width="100">Alimentación:</td>
+            <td class="dato altura-td" width="100"><%=registro.avd_alimentacion%></td>
+            <td class="dato altura-td" width="190"><%=registro.avd_alimentacionText%></td>
+          </tr>
+          <tr>
+            <td class="nombre-dato" width="100">Vestimenta:</td>
+            <td class="dato altura-td" width="100"><%=registro.avd_vestimenta%></td>
+            <td class="dato altura-td" width="190"><%=registro.avd_vestimentaText%></td>
+          </tr>
+        </table>
+      </div>
+      <div class="contenido-seccion">
+        <div class="seccion">12. Área Socio-Afectiva</div>
+        <table class="table-data" width="510" style="margin-top:5px;margin-bottom:5px;">
+          <tr>
+            <td class="nombre-dato" width="100">Muestras afectivas:</td>
+            <td class="dato altura-td" width="100"><%=registro.asa_muestrasAfectivas%></td>
+            <td class="dato altura-td" width="190"><%=registro.asa_muestrasAfectivasText%></td>
+          </tr>
+          <tr>
+            <td class="nombre-dato" width="100">Comunicación oral:</td>
+            <td class="dato altura-td" width="100"><%=registro.asa_comunicacionOral%></td>
+            <td class="dato altura-td" width="190"><%=registro.asa_comunicacionOralText%></td>
+          </tr>
+          <tr>
+            <td class="nombre-dato" width="100">Comunicación alternativa:</td>
+            <td class="dato altura-td" width="100"><%=registro.asa_comunicacionAlternativa%></td>
+            <td class="dato altura-td" width="190"><%=registro.asa_comunicacionAlternativaText%></td>
+          </tr>
+          <tr>
+            <td class="nombre-dato" width="100">Relacionamiento social:</td>
+            <td class="dato altura-td" width="100"><%=registro.asa_relacionamientoSocial%></td>
+            <td class="dato altura-td" width="190"><%=registro.asa_relacionamientoSocialText%></td>
+          </tr>
+        </table>
+      </div>
+      <div class="contenido-seccion">
+        <div class="seccion">13. Área Cognitiva</div>
+        <table class="table-data" width="510" style="margin-top:5px;margin-bottom:5px;">
+          <tr>
+            <td class="nombre-dato" width="100">Colaboración:</td>
+            <td class="dato altura-td" width="100"><%=registro.areaCognitiva%></td>
+            <td class="dato altura-td" width="190"><%=registro.areaCognitivaText%></td>
+          </tr>
+        </table>
+      </div>
+      <div class="contenido-seccion">
+        <div class="seccion">14. Alteraciones asociadas</div>
+        <table class="table-data" width="510" style="margin-top:5px;margin-bottom:5px;">
+          <tr>
+            <td class="nombre-dato" width="100">Visión:</td>
+            <td class="dato altura-td" width="100"><%=registro.aa_vision%></td>
+            <td class="dato altura-td" width="190"><%=registro.aa_visionText%></td>
+          </tr>
+          <tr>
+            <td class="nombre-dato" width="100">Audición:</td>
+            <td class="dato altura-td" width="100"><%=registro.aa_audicion%></td>
+            <td class="dato altura-td" width="190"><%=registro.aa_audicionText%></td>
+          </tr>
+          <tr>
+            <td class="nombre-dato" width="100">Lenguaje:</td>
+            <td class="dato altura-td" width="100"><%=registro.aa_lenguaje%></td>
+            <td class="dato altura-td" width="190"><%=registro.aa_lenguajeText%></td>
+          </tr>
+          <tr>
+            <td class="nombre-dato" width="100">Sindrome Convulsivo:</td>
+            <td class="dato altura-td" width="100"><%=registro.aa_sindromeConvulsivo%></td>
+            <td class="dato altura-td" width="190"><%=registro.aa_sindromeConvulsivoText%></td>
+          </tr>
+          <tr>
+            <td class="nombre-dato" width="100">Memoria Largo Plazo:</td>
+            <td class="dato altura-td" width="100"><%=registro.aa_memoriaLargoPlazo%></td>
+            <td class="dato altura-td" width="190"><%=registro.aa_memoriaLargoPlazoText%></td>
+          </tr>
+          <tr>
+            <td class="nombre-dato" width="100">Memoria Corto Plazo:</td>
+            <td class="dato altura-td" width="100"><%=registro.aa_memoriaCortoPlazo%></td>
+            <td class="dato altura-td" width="190"><%=registro.aa_memoriaCortoPlazoText%></td>
+          </tr>
+          <tr>
+            <td class="nombre-dato" width="100">Estado Emocional:</td>
+            <td class="dato altura-td" width="100"><%=registro.aa_estadoEmocional%></td>
+            <td class="dato altura-td" width="190"><%=registro.aa_estadoEmocionalText%></td>
+          </tr>
+          <tr>
+            <td class="nombre-dato" width="100">Estado Nutricional:</td>
+            <td class="dato altura-td" width="100"><%=registro.aa_estadoNutricional%></td>
+            <td class="dato altura-td" width="190"><%=registro.aa_estadoNutricionalText%></td>
+          </tr>
+          <tr>
+            <td class="nombre-dato" width="100">Sensibilidad:</td>
+            <td class="dato altura-td" width="100"><%=registro.aa_sensibilidad%></td>
+            <td class="dato altura-td" width="190"><%=registro.aa_sensibilidadText%></td>
+          </tr>
+          <tr>
+            <td class="nombre-dato" width="100">Estereotipos:</td>
+            <td class="dato altura-td" width="100" colspan="2"><%=registro.aa_estereotipos%></td>
+          </tr>
+        </table>
+      </div>
+      <div class="contenido-seccion contenido-unico">
+        <div class="seccion">Conclusiones</div>
+        <div class="dato-unico">
+          <p class="dato"><%=registro.conclusiones%></p>
         </div>
       </div>
       <div class="contenido-seccion contenido-unico">
-        <div class="seccion">6. Diagnóstico social</div>
+        <div class="seccion">Diagnóstico</div>
         <div class="dato-unico">
-          <p class="dato"><%=registro.diagnosticoSocial%></p>
+          <p class="dato"><%=registro.diagnostico%></p>
+        </div>
+      </div>
+      <div class="contenido-seccion contenido-unico">
+        <div class="seccion">Objetivos</div>
+        <div class="dato-unico">
+          <p class="dato"><%=registro.objetivos%></p>
         </div>
       </div>
       <div class="contenido-seccion">
         <div class="contenido-unico">
-          <div class="seccion">7. Conclusiones y sugerencias</div>
+          <div class="seccion">Plan de tratamiento</div>
           <div class="dato-unico">
-            <p class="dato"><%=registro.conclusiones%></p>
+            <p class="dato"><%=registro.planTratamiento%></p>
           </div>
         </div>
         <br>

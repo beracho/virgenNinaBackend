@@ -711,40 +711,48 @@ module.exports = app => {
         datosOrdenados.registro.epf_Po_otros = registro[0].reg_ft.epf_Po_otros;
         datosOrdenados.registro.epf_tono = registro[0].reg_ft.epf_tono;
         datosOrdenados.registro.epf_trofismo = registro[0].reg_ft.epf_trofismo;
-        datosOrdenados.registro.escalaAshworth = registro[0].reg_ft.escalaAshworth;
-        datosOrdenados.registro.ref_suctionReflection = registro[0].reg_ft.ref_suctionReflection;
+        const escalaAshworth = {
+          '00': 'Tono muscular normal. No hay espasticidad.',
+          '10': 'Leve incremento del tono muscular. Resistencia mínima al final del arco articular al estirar pasivamente el grupo muscular considerado',
+          '11': 'Leve incremento del tono muscular. Resistencia a la elongación en menos de la  mitad del arco.',
+          '20': 'Incremento del tono mayor. Resistencia a la elongación en casi todo el arco articular. Extremidad movilizable fácilmente.',
+          '30': 'Considerable incremento del tono. Es difícil la movilización pasiva de la extremidad.',
+          '40': 'Hipertonía de las extremidades en flexión  o en extensión.(aducción, abducción etc.)'
+        }
+        datosOrdenados.registro.escalaAshworth = escalaAshworth[registro[0].reg_ft.escalaAshworth];
+        datosOrdenados.registro.ref_suctionReflection = registro[0].reg_ft.ref_suctionReflection ? 'Presente': 'Ausente';
         datosOrdenados.registro.ref_suctionReflectionText = registro[0].reg_ft.ref_suctionReflectionText;
-        datosOrdenados.registro.ref_TRIPLEEXTFLX = registro[0].reg_ft.ref_TRIPLEEXTFLX;
+        datosOrdenados.registro.ref_TRIPLEEXTFLX = registro[0].reg_ft.ref_TRIPLEEXTFLX ? 'Presente': 'Ausente';
         datosOrdenados.registro.ref_TRIPLEEXTFLXText = registro[0].reg_ft.ref_TRIPLEEXTFLXText;
-        datosOrdenados.registro.ref_RTCA = registro[0].reg_ft.ref_RTCA;
+        datosOrdenados.registro.ref_RTCA = registro[0].reg_ft.ref_RTCA ? 'Presente': 'Ausente';
         datosOrdenados.registro.ref_RTCAText = registro[0].reg_ft.ref_RTCAText;
-        datosOrdenados.registro.ref_RTCS = registro[0].reg_ft.ref_RTCS;
+        datosOrdenados.registro.ref_RTCS = registro[0].reg_ft.ref_RTCS ? 'Presente': 'Ausente';
         datosOrdenados.registro.ref_RTCSText = registro[0].reg_ft.ref_RTCSText;
-        datosOrdenados.registro.ref_RTL = registro[0].reg_ft.ref_RTL;
+        datosOrdenados.registro.ref_RTL = registro[0].reg_ft.ref_RTL ? 'Presente': 'Ausente';
         datosOrdenados.registro.ref_RTLText = registro[0].reg_ft.ref_RTLText;
-        datosOrdenados.registro.ref_RMORO = registro[0].reg_ft.ref_RMORO;
+        datosOrdenados.registro.ref_RMORO = registro[0].reg_ft.ref_RMORO ? 'Presente': 'Ausente';
         datosOrdenados.registro.ref_RMOROText = registro[0].reg_ft.ref_RMOROText;
-        datosOrdenados.registro.ref_RBABINSKI = registro[0].reg_ft.ref_RBABINSKI;
+        datosOrdenados.registro.ref_RBABINSKI = registro[0].reg_ft.ref_RBABINSKI ? 'Presente': 'Ausente';
         datosOrdenados.registro.ref_RBABINSKIText = registro[0].reg_ft.ref_RBABINSKIText;
-        datosOrdenados.registro.ref_REXTCRUZADA = registro[0].reg_ft.ref_REXTCRUZADA;
+        datosOrdenados.registro.ref_REXTCRUZADA = registro[0].reg_ft.ref_REXTCRUZADA ? 'Presente': 'Ausente';
         datosOrdenados.registro.ref_REXTCRUZADAText = registro[0].reg_ft.ref_REXTCRUZADAText;
-        datosOrdenados.registro.ref_GALANT = registro[0].reg_ft.ref_GALANT;
+        datosOrdenados.registro.ref_GALANT = registro[0].reg_ft.ref_GALANT ? 'Presente': 'Ausente';
         datosOrdenados.registro.ref_GALANTText = registro[0].reg_ft.ref_GALANTText;
-        datosOrdenados.registro.ref_LANDAU = registro[0].reg_ft.ref_LANDAU;
+        datosOrdenados.registro.ref_LANDAU = registro[0].reg_ft.ref_LANDAU ? 'Presente': 'Ausente';
         datosOrdenados.registro.ref_LANDAUText = registro[0].reg_ft.ref_LANDAUText;
-        datosOrdenados.registro.ref_DEFENSA = registro[0].reg_ft.ref_DEFENSA;
+        datosOrdenados.registro.ref_DEFENSA = registro[0].reg_ft.ref_DEFENSA ? 'Presente': 'Ausente';
         datosOrdenados.registro.ref_DEFENSAText = registro[0].reg_ft.ref_DEFENSAText;
-        datosOrdenados.registro.ref_RPALMAR = registro[0].reg_ft.ref_RPALMAR;
+        datosOrdenados.registro.ref_RPALMAR = registro[0].reg_ft.ref_RPALMAR ? 'Presente': 'Ausente';
         datosOrdenados.registro.ref_RPALMARText = registro[0].reg_ft.ref_RPALMARText;
-        datosOrdenados.registro.ref_RPLANTAR = registro[0].reg_ft.ref_RPLANTAR;
+        datosOrdenados.registro.ref_RPLANTAR = registro[0].reg_ft.ref_RPLANTAR ? 'Presente': 'Ausente';
         datosOrdenados.registro.ref_RPLANTARText = registro[0].reg_ft.ref_RPLANTARText;
-        datosOrdenados.registro.ref_RPOSITIVODEAPOYO = registro[0].reg_ft.ref_RPOSITIVODEAPOYO;
+        datosOrdenados.registro.ref_RPOSITIVODEAPOYO = registro[0].reg_ft.ref_RPOSITIVODEAPOYO ? 'Presente': 'Ausente';
         datosOrdenados.registro.ref_RPOSITIVODEAPOYOText = registro[0].reg_ft.ref_RPOSITIVODEAPOYOText;
-        datosOrdenados.registro.ref_RPARACAIDAS = registro[0].reg_ft.ref_RPARACAIDAS;
+        datosOrdenados.registro.ref_RPARACAIDAS = registro[0].reg_ft.ref_RPARACAIDAS ? 'Presente': 'Ausente';
         datosOrdenados.registro.ref_RPARACAIDASText = registro[0].reg_ft.ref_RPARACAIDASText;
-        datosOrdenados.registro.re_laberintico = registro[0].reg_ft.re_laberintico;
+        datosOrdenados.registro.re_laberintico = registro[0].reg_ft.re_laberintico ? 'Presente': 'Ausente';
         datosOrdenados.registro.re_laberinticoText = registro[0].reg_ft.re_laberinticoText;
-        datosOrdenados.registro.re_sobreOjos = registro[0].reg_ft.re_sobreOjos;
+        datosOrdenados.registro.re_sobreOjos = registro[0].reg_ft.re_sobreOjos ? 'Presente': 'Ausente';
         datosOrdenados.registro.re_sobreOjosText = registro[0].reg_ft.re_sobreOjosText;
         datosOrdenados.registro.ame_decubitoDorsal = registro[0].reg_ft.ame_decubitoDorsal;
         datosOrdenados.registro.ame_decubitoVentral = registro[0].reg_ft.ame_decubitoVentral;
@@ -755,63 +763,90 @@ module.exports = app => {
         datosOrdenados.registro.ame_gateo = registro[0].reg_ft.ame_gateo;
         datosOrdenados.registro.ame_arrodillado = registro[0].reg_ft.ame_arrodillado;
         datosOrdenados.registro.ame_bipedo = registro[0].reg_ft.ame_bipedo;
-        datosOrdenados.registro.ep_esquemaCorporal = registro[0].reg_ft.ep_esquemaCorporal;
+        datosOrdenados.registro.ep_esquemaCorporal = convertProgresLevelData(registro[0].reg_ft.ep_esquemaCorporal);
         datosOrdenados.registro.ep_esquemaCorporalText = registro[0].reg_ft.ep_esquemaCorporalText;
-        datosOrdenados.registro.ep_imagenCorporal = registro[0].reg_ft.ep_imagenCorporal;
+        datosOrdenados.registro.ep_imagenCorporal = convertProgresLevelData(registro[0].reg_ft.ep_imagenCorporal);
         datosOrdenados.registro.ep_imagenCorporalText = registro[0].reg_ft.ep_imagenCorporalText;
-        datosOrdenados.registro.ep_conceptoCorporal = registro[0].reg_ft.ep_conceptoCorporal;
+        datosOrdenados.registro.ep_conceptoCorporal = convertProgresLevelData(registro[0].reg_ft.ep_conceptoCorporal);
         datosOrdenados.registro.ep_conceptoCorporalText = registro[0].reg_ft.ep_conceptoCorporalText;
-        datosOrdenados.registro.ep_estructuracionEspacial = registro[0].reg_ft.ep_estructuracionEspacial;
+        datosOrdenados.registro.ep_estructuracionEspacial = convertProgresLevelData(registro[0].reg_ft.ep_estructuracionEspacial);
         datosOrdenados.registro.ep_estructuracionEspacialText = registro[0].reg_ft.ep_estructuracionEspacialText;
-        datosOrdenados.registro.ep_estructuracionTemporal = registro[0].reg_ft.ep_estructuracionTemporal;
+        datosOrdenados.registro.ep_estructuracionTemporal = convertProgresLevelData(registro[0].reg_ft.ep_estructuracionTemporal);
         datosOrdenados.registro.ep_estructuracionTemporalText = registro[0].reg_ft.ep_estructuracionTemporalText;
-        datosOrdenados.registro.ep_equilibrioEstatico = registro[0].reg_ft.ep_equilibrioEstatico;
+        datosOrdenados.registro.ep_equilibrioEstatico = convertProgresLevelData(registro[0].reg_ft.ep_equilibrioEstatico);
         datosOrdenados.registro.ep_equilibrioEstaticoText = registro[0].reg_ft.ep_equilibrioEstaticoText;
-        datosOrdenados.registro.ep_equilibrioDinamico = registro[0].reg_ft.ep_equilibrioDinamico;
+        datosOrdenados.registro.ep_equilibrioDinamico = convertProgresLevelData(registro[0].reg_ft.ep_equilibrioDinamico);
         datosOrdenados.registro.ep_equilibrioDinamicoText = registro[0].reg_ft.ep_equilibrioDinamicoText;
-        datosOrdenados.registro.ep_coordinacionGruesa = registro[0].reg_ft.ep_coordinacionGruesa;
+        datosOrdenados.registro.ep_coordinacionGruesa = convertProgresLevelData(registro[0].reg_ft.ep_coordinacionGruesa);
         datosOrdenados.registro.ep_coordinacionGruesaText = registro[0].reg_ft.ep_coordinacionGruesaText;
-        datosOrdenados.registro.ep_coordinacionFina = registro[0].reg_ft.ep_coordinacionFina;
+        datosOrdenados.registro.ep_coordinacionFina = convertProgresLevelData(registro[0].reg_ft.ep_coordinacionFina);
         datosOrdenados.registro.ep_coordinacionFinaText = registro[0].reg_ft.ep_coordinacionFinaText;
-        datosOrdenados.registro.ep_coordinacionOjoMano = registro[0].reg_ft.ep_coordinacionOjoMano;
+        datosOrdenados.registro.ep_coordinacionOjoMano = convertProgresLevelData(registro[0].reg_ft.ep_coordinacionOjoMano);
         datosOrdenados.registro.ep_coordinacionOjoManoText = registro[0].reg_ft.ep_coordinacionOjoManoText;
-        datosOrdenados.registro.ep_coordinacionOjoPie = registro[0].reg_ft.ep_coordinacionOjoPie;
+        datosOrdenados.registro.ep_coordinacionOjoPie = convertProgresLevelData(registro[0].reg_ft.ep_coordinacionOjoPie);
         datosOrdenados.registro.ep_coordinacionOjoPieText = registro[0].reg_ft.ep_coordinacionOjoPieText;
         datosOrdenados.registro.ep_lateralidad = registro[0].reg_ft.ep_lateralidad;
         datosOrdenados.registro.ep_observacion = registro[0].reg_ft.ep_observacion;
-        datosOrdenados.registro.avd_higiene = registro[0].reg_ft.avd_higiene;
+        datosOrdenados.registro.avd_higiene = convertProgresLevelData(registro[0].reg_ft.avd_higiene);
         datosOrdenados.registro.avd_higieneText = registro[0].reg_ft.avd_higieneText;
-        datosOrdenados.registro.avd_alimentacion = registro[0].reg_ft.avd_alimentacion;
+        datosOrdenados.registro.avd_alimentacion = convertProgresLevelData(registro[0].reg_ft.avd_alimentacion);
         datosOrdenados.registro.avd_alimentacionText = registro[0].reg_ft.avd_alimentacionText;
-        datosOrdenados.registro.avd_vestimenta = registro[0].reg_ft.avd_vestimenta;
+        datosOrdenados.registro.avd_vestimenta = convertProgresLevelData(registro[0].reg_ft.avd_vestimenta);
         datosOrdenados.registro.avd_vestimentaText = registro[0].reg_ft.avd_vestimentaText;
-        datosOrdenados.registro.asa_muestrasAfectivas = registro[0].reg_ft.asa_muestrasAfectivas;
+        datosOrdenados.registro.asa_muestrasAfectivas = convertProgresLevelData(registro[0].reg_ft.asa_muestrasAfectivas);
         datosOrdenados.registro.asa_muestrasAfectivasText = registro[0].reg_ft.asa_muestrasAfectivasText;
-        datosOrdenados.registro.asa_comunicacionOral = registro[0].reg_ft.asa_comunicacionOral;
+        datosOrdenados.registro.asa_comunicacionOral = convertProgresLevelData(registro[0].reg_ft.asa_comunicacionOral);
         datosOrdenados.registro.asa_comunicacionOralText = registro[0].reg_ft.asa_comunicacionOralText;
-        datosOrdenados.registro.asa_comunicacionAlternativa = registro[0].reg_ft.asa_comunicacionAlternativa;
+        datosOrdenados.registro.asa_comunicacionAlternativa = convertProgresLevelData(registro[0].reg_ft.asa_comunicacionAlternativa);
         datosOrdenados.registro.asa_comunicacionAlternativaText = registro[0].reg_ft.asa_comunicacionAlternativaText;
-        datosOrdenados.registro.asa_relacionamientoSocial = registro[0].reg_ft.asa_relacionamientoSocial;
+        datosOrdenados.registro.asa_relacionamientoSocial = convertProgresLevelData(registro[0].reg_ft.asa_relacionamientoSocial);
         datosOrdenados.registro.asa_relacionamientoSocialText = registro[0].reg_ft.asa_relacionamientoSocialText;
-        datosOrdenados.registro.areaCognitiva = registro[0].reg_ft.areaCognitiva;
+        datosOrdenados.registro.areaCognitiva = registro[0].reg_ft.areaCognitiva == 'collaborate' ? 'Colabora' :
+        registro[0].reg_ft.areaCognitiva == 'doesntCollaborate' ? 'No colabora' :
+        registro[0].reg_ft.areaCognitiva == 'understand' ? 'Entiende' :
+        registro[0].reg_ft.areaCognitiva == 'doesntUnderstand' ? 'No entiende' : 'No definido';
         datosOrdenados.registro.areaCognitivaText = registro[0].reg_ft.areaCognitivaText;
-        datosOrdenados.registro.aa_vision = registro[0].reg_ft.aa_vision;
+        datosOrdenados.registro.aa_vision = registro[0].reg_ft.aa_vision == 'normal' ? 'Normal' :
+        registro[0].reg_ft.aa_vision == 'altered' ? 'Alterado' :
+        registro[0].reg_ft.aa_vision == 'absent' ? 'Ausente' : 'No definido';
         datosOrdenados.registro.aa_visionText = registro[0].reg_ft.aa_visionText;
-        datosOrdenados.registro.aa_audicion = registro[0].reg_ft.aa_audicion;
+        datosOrdenados.registro.aa_audicion = registro[0].reg_ft.aa_audicion == 'normal' ? 'Normal' :
+        registro[0].reg_ft.aa_audicion == 'hearingLoss' ? 'Hipoacusia' :
+        registro[0].reg_ft.aa_audicion == 'deafness' ? 'Sordera' : 'No definido';
         datosOrdenados.registro.aa_audicionText = registro[0].reg_ft.aa_audicionText;
-        datosOrdenados.registro.aa_lenguaje = registro[0].reg_ft.aa_lenguaje;
+        datosOrdenados.registro.aa_lenguaje = registro[0].reg_ft.aa_lenguaje == 'normal' ? 'Normal' :
+        registro[0].reg_ft.aa_lenguaje == 'understandable' ? 'Comprensible' :
+        registro[0].reg_ft.aa_lenguaje == 'notUnderstandable' ? 'No comprensible' :
+        registro[0].reg_ft.aa_lenguaje == 'absent' ? 'Ausente' :
+        registro[0].reg_ft.aa_lenguaje == 'alternative' ? 'Alternativo' : 'No definido';
         datosOrdenados.registro.aa_lenguajeText = registro[0].reg_ft.aa_lenguajeText;
-        datosOrdenados.registro.aa_sindromeConvulsivo = registro[0].reg_ft.aa_sindromeConvulsivo;
+        datosOrdenados.registro.aa_sindromeConvulsivo = registro[0].reg_ft.aa_sindromeConvulsivo == 'absent' ? 'Ausente' :
+        registro[0].reg_ft.aa_sindromeConvulsivo == 'present' ? 'Presente' :
+        registro[0].reg_ft.aa_sindromeConvulsivo == 'withTreatment' ? 'Con tratamiento' :
+        registro[0].reg_ft.aa_sindromeConvulsivo == 'withoutTreatment' ? 'Sin tratamiento' :
+        registro[0].reg_ft.aa_sindromeConvulsivo == 'type' ? 'Sordera' : 'Tipo';
         datosOrdenados.registro.aa_sindromeConvulsivoText = registro[0].reg_ft.aa_sindromeConvulsivoText;
-        datosOrdenados.registro.aa_memoriaLargoPlazo = registro[0].reg_ft.aa_memoriaLargoPlazo;
+        datosOrdenados.registro.aa_memoriaLargoPlazo = registro[0].reg_ft.aa_memoriaLargoPlazo == 'good' ? 'Buena' :
+        registro[0].reg_ft.aa_memoriaLargoPlazo == 'regular' ? 'Regular' :
+        registro[0].reg_ft.aa_memoriaLargoPlazo == 'bad' ? 'Mala' : 'No definido';
         datosOrdenados.registro.aa_memoriaLargoPlazoText = registro[0].reg_ft.aa_memoriaLargoPlazoText;
-        datosOrdenados.registro.aa_memoriaCortoPlazo = registro[0].reg_ft.aa_memoriaCortoPlazo;
+        datosOrdenados.registro.aa_memoriaCortoPlazo = registro[0].reg_ft.aa_memoriaCortoPlazo == 'good' ? 'Buena' :
+        registro[0].reg_ft.aa_memoriaCortoPlazo == 'regular' ? 'Regular' :
+        registro[0].reg_ft.aa_memoriaCortoPlazo == 'bad' ? 'Mala' : 'No definido';
         datosOrdenados.registro.aa_memoriaCortoPlazoText = registro[0].reg_ft.aa_memoriaCortoPlazoText;
-        datosOrdenados.registro.aa_estadoEmocional = registro[0].reg_ft.aa_estadoEmocional;
+        datosOrdenados.registro.aa_estadoEmocional = registro[0].reg_ft.aa_estadoEmocional == 'stable' ? 'Estable' :
+        registro[0].reg_ft.aa_estadoEmocional == 'quiet' ? 'Tranquilo' :
+        registro[0].reg_ft.aa_estadoEmocional == 'changing' ? 'Cambiante' :
+        registro[0].reg_ft.aa_estadoEmocional == 'aggressive' ? 'Agresivo' : 'No definido';
         datosOrdenados.registro.aa_estadoEmocionalText = registro[0].reg_ft.aa_estadoEmocionalText;
-        datosOrdenados.registro.aa_estadoNutricional = registro[0].reg_ft.aa_estadoNutricional;
+        datosOrdenados.registro.aa_estadoNutricional = registro[0].reg_ft.aa_estadoNutricional == 'normal' ? 'Normal' :
+        registro[0].reg_ft.aa_estadoNutricional == 'overweight' ? 'Sobrepeso' :
+        registro[0].reg_ft.aa_estadoNutricional == 'obesity' ? 'Obesidad' :
+        registro[0].reg_ft.aa_estadoNutricional == 'undernourished' ? 'Desnutrido' : 'No definido';
         datosOrdenados.registro.aa_estadoNutricionalText = registro[0].reg_ft.aa_estadoNutricionalText;
-        datosOrdenados.registro.aa_sensibilidad = registro[0].reg_ft.aa_sensibilidad;
+        datosOrdenados.registro.aa_sensibilidad = registro[0].reg_ft.aa_sensibilidad == 'normal' ? 'Normal' :
+        registro[0].reg_ft.aa_sensibilidad == 'hyposensitive' ? 'Hiposensible' :
+        registro[0].reg_ft.aa_sensibilidad == 'hypersensitive' ? 'Hipersensible' : 'No definido';
         datosOrdenados.registro.aa_sensibilidadText = registro[0].reg_ft.aa_sensibilidadText;
         datosOrdenados.registro.aa_estereotipos = registro[0].reg_ft.aa_estereotipos;
         datosOrdenados.registro.conclusiones = registro[0].reg_ft.conclusiones;
@@ -834,6 +869,42 @@ module.exports = app => {
   let getDate = (dateString) => {
     let date = dateString ? new Date(dateString) : new Date();
     return (date.getDate() + ' - ' + meses[date.getMonth()] + ' - ' + date.getFullYear());
+  }
+
+  let convertProgresLevelData = (frecuencia, tipo) => {
+    let nuevoDato = 'No definido';
+    switch (frecuencia) {
+      case 'structured':
+        nuevoDato = 'Estructurado';
+        break;
+      case 'inProgress':
+        nuevoDato = 'En progreso';
+        break;
+      case 'absent':
+        nuevoDato = 'Ausente';
+        break;
+      case 'good':
+        nuevoDato = 'Bueno';
+        break;
+      case 'deficient':
+        nuevoDato = 'Deficiente';
+        break;
+      case 'present':
+        nuevoDato = 'Presente';
+        break;
+      case 'independent':
+        nuevoDato = 'Independiente';
+        break;
+      case 'withHelp':
+        nuevoDato = 'Con ayuda';
+        break;
+      case 'dependent':
+        nuevoDato = 'Dependiente';
+        break;
+      default:
+        break;
+    }
+    return nuevoDato;
   }
 
   let convertFrecuencyData = (frecuencia) => {
