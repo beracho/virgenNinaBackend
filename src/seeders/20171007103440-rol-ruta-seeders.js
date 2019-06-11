@@ -310,7 +310,17 @@ module.exports = {
       { fid_ruta: 33, fid_rol: 13, method_get: true, method_post: true, method_put: true, method_delete: true, estado: 'ACTIVO', _usuario_creacion: 'SISTEMA', _fecha_creacion: new Date(), _fecha_modificacion: new Date() },
     ];
     roles_rutas_array = roles_rutas_array.concat(obj);
-
+    
+    // Profesor
+    obj = [
+      { fid_ruta: 14, fid_rol: 14, method_get: true, method_post: false, method_put: false, method_delete: false, estado: 'ACTIVO', _usuario_creacion: 'SISTEMA', _fecha_creacion: new Date(), _fecha_modificacion: new Date() },
+      { fid_ruta: 19, fid_rol: 14, method_get: true, method_post: false, method_put: false, method_delete: false, estado: 'ACTIVO', _usuario_creacion: 'SISTEMA', _fecha_creacion: new Date(), _fecha_modificacion: new Date() },
+      { fid_ruta: 23, fid_rol: 14, method_get: true, method_post: true, method_put: true, method_delete: true, estado: 'ACTIVO', _usuario_creacion: 'SISTEMA', _fecha_creacion: new Date(), _fecha_modificacion: new Date() },
+      { fid_ruta: 25, fid_rol: 14, method_get: true, method_post: true, method_put: true, method_delete: true, estado: 'ACTIVO', _usuario_creacion: 'SISTEMA', _fecha_creacion: new Date(), _fecha_modificacion: new Date() },
+      { fid_ruta: 26, fid_rol: 14, method_get: true, method_post: false, method_put: false, method_delete: false, estado: 'ACTIVO', _usuario_creacion: 'SISTEMA', _fecha_creacion: new Date(), _fecha_modificacion: new Date() },
+      { fid_ruta: 29, fid_rol: 14, method_get: true, method_post: false, method_put: false, method_delete: false, estado: 'ACTIVO', _usuario_creacion: 'SISTEMA', _fecha_creacion: new Date(), _fecha_modificacion: new Date() },
+    ];
+    roles_rutas_array = roles_rutas_array.concat(obj);
     
     return queryInterface.bulkInsert('rol_ruta', roles_rutas_array, {});
   },

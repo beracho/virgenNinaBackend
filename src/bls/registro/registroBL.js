@@ -274,6 +274,9 @@ module.exports = app => {
           case 'PROF_TERAPIA_OCUPACIONAL':
             parametrosRegistro.area = 'terapia ocupacional';
             break;
+          case 'PROF_EDUCACION':
+            parametrosRegistro.area = 'educacion';
+            break;
         
           default:
             // error, out of boundary
