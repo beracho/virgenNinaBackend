@@ -133,6 +133,7 @@ module.exports = app => {
             nombres: student.nombres,
             primer_apellido: student.primer_apellido,
             segundo_apellido: student.segundo_apellido,
+            nombre_completo: student.nombre_completo,
             estado: student.estudiante.estado,
             fid_curso: student.estudiante.fid_curso
           };
