@@ -9,27 +9,41 @@ module.exports = app => {
 
   const informesPorArea = (body) => {
     const deferred = Q.defer();
-    const area = [];
-    body.area.forEach(element => {
-      const aux = {
-        area: {
-          $like: element.toLowerCase()
-        }
-      }
-      area.push(aux);
-    });
     let maxDate = new Date(body.fechaFinal);
     maxDate.setDate(maxDate.getDate() + 1);
     maxDate = maxDate -1;
     const params = {
       where: {
         tipo: body.tipoInforme == 'evaluation' ? 'especialidad': 'simple',
-        $or: area,
         _fecha_creacion: {
           $between: [new Date(body.fechaInicial), new Date(maxDate)]
         }
       },
       order: '_fecha_creacion'
+    }
+    if (body.area) {
+      const area = [];
+      body.area.forEach(element => {
+        const aux = {
+          area: {
+            $like: element.toLowerCase()
+          }
+        }
+        area.push(aux);
+      });
+      params.where.$or = area;
+    }
+    if (body.usuario) {
+      const usuario = [];
+      body.usuario.forEach(element => {
+        const aux = {
+          _usuario_creacion: {
+            $eq: element
+          }
+        }
+        usuario.push(aux);
+      });
+      params.where.$or = usuario;
     }
     dao.listarRegistros(models.registro, params)
     .then(respuestaRegistros => {
@@ -37,13 +51,24 @@ module.exports = app => {
       let labels = [];
       let posicion = 0;
       labels[posicion] = new Date(body.fechaInicial);
-      body.area.forEach(element => {
-        let datos = {
-          label: element,
-          data: [0]
-        }
-        dataset.push(datos)
-      });
+      if (body.area) {
+        body.area.forEach(element => {
+          let datos = {
+            label: element,
+            data: [0]
+          }
+          dataset.push(datos)
+        });
+      }
+      if (body.usuario) {
+        body.usuario.forEach(element => {
+          let datos = {
+            label: element,
+            data: [0]
+          }
+          dataset.push(datos)
+        });
+      }
       respuestaRegistros.forEach(registro => {
         let fecha = new Date(registro._fecha_creacion);
         switch (body.frecuencia) {
@@ -57,8 +82,20 @@ module.exports = app => {
             }
             if (getDayNumber(fecha)[1] == getDayNumber(labels[posicion])[1] && getDayNumber(fecha)[0] == getDayNumber(labels[posicion])[0]) {
               dataset.forEach(element => {
-                if (element.label.toLowerCase() == registro.area) {
-                  element.data[posicion] ++;
+                if (body.area) {
+                  if (element.label.toLowerCase() == registro.area) {
+                    element.data[posicion] ++;
+                  }
+                }
+                if (body.usuario) {
+                  if (element.label == registro._usuario_creacion) {
+                    element.data[posicion] ++;
+                  }
+                }
+                if (body.usuario) {
+                  if (element.label == registro._usuario_creacion) {
+                    element.data[posicion] ++;
+                  }
                 }
               });
             }
@@ -73,8 +110,15 @@ module.exports = app => {
             }
             if (getWeekNumber(fecha)[1] == getWeekNumber(labels[posicion])[1] && getWeekNumber(fecha)[0] == getWeekNumber(labels[posicion])[0]) {
               dataset.forEach(element => {
-                if (element.label.toLowerCase() == registro.area) {
-                  element.data[posicion] ++;
+                if (body.area) {
+                  if (element.label.toLowerCase() == registro.area) {
+                    element.data[posicion] ++;
+                  }
+                }
+                if (body.usuario) {
+                  if (element.label == registro._usuario_creacion) {
+                    element.data[posicion] ++;
+                  }
                 }
               });
             }
@@ -89,8 +133,15 @@ module.exports = app => {
             }
             if (fecha.getMonth() == labels[posicion].getMonth() && fecha.getMonth() == labels[posicion].getMonth()) {
               dataset.forEach(element => {
-                if (element.label.toLowerCase() == registro.area) {
-                  element.data[posicion] ++;
+                if (body.area) {
+                  if (element.label.toLowerCase() == registro.area) {
+                    element.data[posicion] ++;
+                  }
+                }
+                if (body.usuario) {
+                  if (element.label == registro._usuario_creacion) {
+                    element.data[posicion] ++;
+                  }
                 }
               });
             }
@@ -105,8 +156,15 @@ module.exports = app => {
             }
             if (fecha.getFullYear() == labels[posicion].getFullYear() && fecha.getFullYear() == labels[posicion].getFullYear()) {
               dataset.forEach(element => {
-                if (element.label.toLowerCase() == registro.area) {
-                  element.data[posicion] ++;
+                if (body.area) {
+                  if (element.label.toLowerCase() == registro.area) {
+                    element.data[posicion] ++;
+                  }
+                }
+                if (body.usuario) {
+                  if (element.label == registro._usuario_creacion) {
+                    element.data[posicion] ++;
+                  }
                 }
               });
             }

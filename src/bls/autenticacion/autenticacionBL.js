@@ -232,6 +232,7 @@ const formarPayload = (usuario, roles_menus, app) => {
     id_usuario: usuario.id_usuario,
     nombres:  util.isUndefined(usuario.persona) ? '' : usuario.persona.nombres,
     apellidos: util.isUndefined(usuario.persona) ? '' : `${usuario.persona.primer_apellido} ${usuario.persona.segundo_apellido}`,
+    nombre_completo: usuario.persona.nombre_completo,
     email: usuario.email,
     usuario: usuario.usuario,
     nit: usuario.nit,
