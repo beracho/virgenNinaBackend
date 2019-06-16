@@ -286,6 +286,16 @@ module.exports = app => {
       })
       .then(respuestaEstudiante => {
         parametrosRegistro.fid_estudiante = respuestaEstudiante.id_estudiante;
+        parametrosRegistroSimpleCategoria = [];
+        body.trabajo.forEach(element => {
+          parametrosRegistroSimpleCategoria.push({
+            fid_categoria: element,
+            fid_registro_simple: parametrosRegistro.fid_registro_simple,
+          })
+        });
+        return dao.crearRegistro(models.categoria_registro_simple, parametrosRegistroSimpleCategoria, true, transaccion)
+      })
+      .then(() => {
         return dao.crearRegistro(models.registro, parametrosRegistro, false, transaccion)
       })
       .then(respuestaCreacion => {

@@ -442,6 +442,30 @@ module.exports = {
         _usuario_creacion: 1,
         _fecha_creacion: new Date(),
         _fecha_modificacion: new Date(),
+      }, {
+        //37
+        ruta: '/api/v1/categoria',
+        descripcion: 'Acciones sobre categorias de formularios de seguimiento.',
+        method_get: true,
+        method_post: true,
+        method_put: true,
+        method_delete: true,
+        estado: 'ACTIVO',
+        _usuario_creacion: 1,
+        _fecha_creacion: new Date(),
+        _fecha_modificacion: new Date(),
+      }, {
+        //38
+        ruta: '/api/v1/categoriaRegistroSimple',
+        descripcion: 'Acciones sobre las relaciones entre registro simple y categorias de formularios de seguimiento.',
+        method_get: true,
+        method_post: true,
+        method_put: false,
+        method_delete: true,
+        estado: 'ACTIVO',
+        _usuario_creacion: 1,
+        _fecha_creacion: new Date(),
+        _fecha_modificacion: new Date(),
       }
     ], {});
   },

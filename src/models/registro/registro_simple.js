@@ -33,6 +33,14 @@ module.exports = function (sequelize, DataTypes) {
           classMethods: {
             associate: (models) => {
               registro_simple.hasOne(models.registro, {as: 'registros_simple', foreignKey: {name: 'fid_registro_simple', allowNull: true}});
+              registro_simple.belongsToMany(models.categoria, {
+                through: {
+                  model: models.categoria_registro_simple,
+                  unique: false
+                },
+                foreignKey: 'fid_registro_simple',
+                constraints: false
+              });
             },
           },
         });
