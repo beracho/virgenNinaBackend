@@ -142,6 +142,7 @@ const modificarUsuario = (id, body, models) => {
           id_usuario: respuesta.id_usuario,
           email: body.usuario.email ? body.usuario.email : respuesta.dataValues.email,
           fid_rol: body.usuario.fid_rol,
+          estado: body.usuario.estado ? 'ACTIVO' : 'INACTIVO',
           _usuario_modificacion: body.audit_usuario.id_usuario,
         }
         return validarUsuarioCrear(usuarioObj, body, models)
