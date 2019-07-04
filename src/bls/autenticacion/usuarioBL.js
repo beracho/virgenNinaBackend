@@ -295,7 +295,6 @@ const listarUsuarios = (query, body, models) => {
       as: 'rol',
       attributes: ['id_rol', 'nombre'],
     }],
-    where: {fid_rol: {$ne: ROL_INSCRIPCION}},
   }];
   dao.listarRegistros(models.usuario, parametros, paginado)
   .then(respuesta => {

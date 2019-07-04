@@ -8,10 +8,7 @@ const Q = require('q');
 const listarRoles = (query, body, models) => {
   const deferred = Q.defer();
   const parametros = {};
-  parametros.where = {
-    id_rol: {$ne: ROL_INSCRIPCION},
-  };
-  parametros.attributes = ["id_rol", "nombre", "peso"];
+  parametros.attributes = ["id_rol", "descripcion", "nombre", "peso"];
   parametros.order = 'peso';
   dao.listarRegistros(models.rol, parametros)
   .then(respuesta => deferred.resolve(respuesta))
