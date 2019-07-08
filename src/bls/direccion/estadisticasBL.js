@@ -325,7 +325,7 @@ module.exports = app => {
     } else {
       fecha = new Date(fecha);
     }
-    let nuevaFecha = new Date(Date.UTC(fecha.getFullYear(), fecha.getMonth(), fecha.getUTCDate() +1 ));
+    let nuevaFecha = new Date(Date.UTC(fecha.getFullYear(), fecha.getUTCMonth(), fecha.getUTCDate() +1));
     return nuevaFecha;
   }
 
@@ -335,7 +335,7 @@ module.exports = app => {
     } else {
       fecha = new Date(fecha);
     }
-    let nuevaFecha = new Date(Date.UTC(fecha.getFullYear(), fecha.getMonth(), fecha.getUTCDate() +7 ));
+    let nuevaFecha = new Date(Date.UTC(fecha.getFullYear(), fecha.getUTCMonth(), fecha.getUTCDate() +7 ));
     return nuevaFecha;
   }
 
@@ -345,7 +345,7 @@ module.exports = app => {
     } else {
       fecha = new Date(fecha);
     }
-    let nuevaFecha = new Date(Date.UTC(fecha.getFullYear(), fecha.getMonth() + 1, fecha.getUTCDate()));
+    let nuevaFecha = new Date(Date.UTC(fecha.getFullYear(), fecha.getUTCMonth() + 1, fecha.getUTCDate()));
     return nuevaFecha;
   }
 
@@ -355,7 +355,7 @@ module.exports = app => {
     } else {
       fecha = new Date(fecha);
     }
-    let nuevaFecha = new Date(Date.UTC(fecha.getFullYear() + 1, fecha.getMonth(), fecha.getUTCDate()));
+    let nuevaFecha = new Date(Date.UTC(fecha.getFullYear() + 1, fecha.getUTCMonth(), fecha.getUTCDate()));
     return nuevaFecha;
   }
 
@@ -368,7 +368,7 @@ module.exports = app => {
   }
 
   const getDayNumber = (d) => {
-    d = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getUTCDate() ));
+    d = new Date(Date.UTC(d.getFullYear(), d.getUTCMonth(), d.getUTCDate() ));
     var yearStart = new Date(Date.UTC(d.getUTCFullYear(),0,1));
     var dayNo = Math.ceil( ( (d - yearStart) / 86400000) + 1);
     return [d.getUTCFullYear(), dayNo];

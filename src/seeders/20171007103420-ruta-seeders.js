@@ -314,7 +314,7 @@ module.exports = {
         //26
         ruta: '/api/v1/registros',
         descripcion: 'Acciones sobre registros.',
-        method_get: false,
+        method_get: true,
         method_post: false,
         method_put: true,
         method_delete: false,
