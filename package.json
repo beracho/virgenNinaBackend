@@ -7,9 +7,12 @@
     "start": "node index.js",
     "startdev": "nodemon index.js",
     "test": "NODE_ENV=test FORCE=true node index.js && sequelize db:seed:all --env test --seeders-path src/seeders/ && sequelize db:migrate:undo:all --env test --migrations-path src/migrations && sequelize db:migrate --env test --migrations-path src/migrations && NODE_ENV=test mocha --timeout 30000 test/**/**/*.js",
-    "setup": "sequelize db:seed:all --seeders-path src/seeders",
-    "setup_fake": "sequelize db:seed:all --seeders-path src/fake_seeders",
-    "migrate": "sequelize db:migrate:undo:all --migrations-path src/migrations && sequelize db:migrate --migrations-path src/migrations"
+    "setup": "FORCE=true node index.js && sequelize db:seed:all --seeders-path src/seeders",
+    "migrate": "sequelize db:migrate:undo:all --migrations-path src/migrations && sequelize db:migrate --migrations-path src/migrations",
+    "setup_fake": "FORCE=true node index.js && sequelize db:seed:all --seeders-path src/fake_seeders && sequelize db:migrate:undo:all --migrations-path src/fake_migrations && sequelize db:migrate --migrations-path src/fake_migrations",
+    "migrate_fake": "sequelize db:migrate:undo:all --migrations-path src/migrations && sequelize db:migrate --migrations-path src/migrations",
+    "wsetup": "sequelize db:seed:all --seeders-path src/seeders",
+    "wsetup_fake": "sequelize db:seed:all --seeders-path src/fake_seeders && sequelize db:migrate:undo:all --migrations-path src/fake_migrations && sequelize db:migrate --migrations-path src/fake_migrations"
   },
   "keywords": [
     "node",
