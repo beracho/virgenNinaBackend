@@ -44,8 +44,10 @@ module.exports = app => {
       params.where.tipo = query.tipo;
     }
     if (query.fechaInicial && query.fechaFinal) {
+      let finalDate = new Date(query.fechaFinal)
+      finalDate.setDate(finalDate.getDate()+1)
       params.where._fecha_creacion = {
-        $between: [new Date(query.fechaInicial), new Date(query.fechaFinal)]
+        $between: [new Date(query.fechaInicial), finalDate]
       }
     }
     let usuarios = {};
