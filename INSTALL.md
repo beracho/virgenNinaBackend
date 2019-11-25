@@ -8,16 +8,21 @@ Pasos para la instalación del backend del sistema de gestion documental "viniap
 
 * Descarga del repositorio
 
+git clone git@github.com:beracho/virgenNinaBackend.git
+
 Este repositorio almacena el sistema de control y seguimiento documental virgen niña
 
 ### Instalación del sistema ###
 
 * npm install
+
+* crear base de datos
+
 * npm run setup
 * npm install -g nodemon
-* crear base de datos
+* npm install -g sequelize-cli
 sudo su - postgres
-psql postgres 
+psql postgres
 
 CREATE ROLE usuario_ninia WITH LOGIN PASSWORD 'micontraseñamuysegura';
 CREATE DATABASE viniadobodb WITH OWNER usuario_ninia;
