@@ -28,8 +28,8 @@
         "ruta_rest_backend":"http://[host rest backend]"
     },
     "directorios": {
-      "ruta_probolivia": "[ruta_raiz]/uploads/probolivia/",
-      "ruta_csv": "[ruta_raiz]/uploads/probolivia/csv/"
+      "ruta_csv": "[ruta_raiz]/viniepodo-backend/uploads/csvEstudiante"
+      "csv_cursos": "[ruta_raiz]/viniepodo-backend/src/uploads/csvCurso"
     }
   },
 
@@ -62,9 +62,7 @@
         "ruta_rest_backend":"http://[host rest backend]"
     },
     "directorios": {
-      "ruta_probolivia": "[ruta_raiz]/uploads/probolivia/",
       "ruta_csv": "[ruta_raiz]/uploads/probolivia/csv/"
-
     }
   },
 
@@ -91,9 +89,7 @@
         "ruta_rest_backend":"http://[host rest backend]"
     },
     "directorios": {
-      "ruta_probolivia": "[ruta_raiz]/uploads/probolivia/",
       "ruta_csv": "[ruta_raiz]/uploads/probolivia/csv/"
-
     }
   }
 }

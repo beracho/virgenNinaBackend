@@ -26,5 +26,12 @@ module.exports = app => {
     .catch(error => Util.mensajeError(res, error.message));
   });
 
+  app.route("/api/v1/importarCursoCSV")
+  .post((req, res) => {
+    cursoBL.importarCsvDatos(req)
+    .then(respuesta => Util.mensajeExito(res, "Creación de datos exitosa.", 200, respuesta))
+    .catch(error => Util.mensajeError(res, error.message));
+  });
+
   app.route("/api/v1/cursos/id_curso")
 };
