@@ -577,6 +577,24 @@ module.exports = {
         fid_menu_padre: 9,
         visible: true,
       },
+      {
+        // 33
+        nombre: 'MAESTROS',
+        descripcion: 'Ver listado de profesores y crear nuevos profesores.',
+        orden: 1,
+        ruta: 'bandejaProfesores',
+        icono: 'class',
+        method_get: true,
+        method_post: true,
+        method_put: true,
+        method_delete: false,
+        estado: 'ACTIVO',
+        _usuario_creacion:1,
+        _fecha_creacion: new Date(),
+        _fecha_modificacion: new Date(),
+        fid_menu_padre: 5,
+        visible: true,
+      },
     ], {});
   },
 
