@@ -341,7 +341,7 @@ const listarMaestros = (query, body, models) => {
   parametros.include = [{
     model: models.persona,
     as: 'persona',
-    attributes: ['id_persona', 'documento_identidad', 'nombres', 'primer_apellido', 'segundo_apellido', 'nombre_completo', 'genero'],
+    attributes: ['id_persona', 'documento_identidad', 'nombres', 'primer_apellido', 'segundo_apellido', 'nombre_completo', 'telefono', 'genero'],
     include: [{
       model: models.ubicacion,
       as: 'direccion',
@@ -355,7 +355,6 @@ const listarMaestros = (query, body, models) => {
   },{
     model: models.usuario_rol,
     as: 'usuarios_roles',
-    // attributes: ['fid_rol', 'fid_usuario'],
     required: true,
     include: [{
       model: models.rol,
@@ -364,7 +363,6 @@ const listarMaestros = (query, body, models) => {
       where: {
         nombre: 'PROF_EDUCACION'
       }
-      // attributes: ['id_rol', 'nombre'],
     }],
   }];
   dao.listarRegistros(models.usuario, parametros, paginado)
@@ -380,7 +378,28 @@ const listarMaestros = (query, body, models) => {
     } else {
       respuesta = usuarios;
     }
-    deferred.resolve(respuesta)
+    const respuestaOrdenada = [];
+    usuarios.forEach(usuario => {
+      let item = {
+        usuario: usuario.usuario,
+        nombres: usuario.persona.nombres,
+        primer_apellido: usuario.persona.primer_apellido,
+        segundo_apellido: usuario.persona.segundo_apellido,
+        documento_identidad: usuario.persona.documento_identidad,
+        estado: usuario.estado,
+        genero: usuario.persona.genero,
+        email: usuario.email,
+        telefono: usuario.persona.telefono,
+        direccion: usuario.persona.direccion !== null ? {
+          ciudad: usuario.persona.direccion.dpa.nombre,
+          zona: usuario.persona.direccion.zona,
+          calle: usuario.persona.direccion.calle,
+          numero: usuario.persona.direccion.numero
+        } : null
+      }
+      respuestaOrdenada.push(item);
+    })
+    deferred.resolve(respuestaOrdenada)
   })
   .catch(error => deferred.reject(error));
   return deferred.promise;
