@@ -315,6 +315,96 @@ const listarUsuarios = (query, body, models) => {
   return deferred.promise;
 };
 
+const listarMaestros = (query, body, models) => {
+  const deferred = Q.defer();
+  let parametros = {};
+  let paginado = false;
+  query.where = [];
+  if (Object.keys(query).length != 0) {
+    if (query.filter) {
+      query.where.push({
+        $or: [
+          models.sequelize.literal(`"usuario" ILIKE '%${query.filter}%'`),
+          // models.sequelize.literal(`"persona"."documento_identidad" ILIKE '${query.filter}%'`),
+          models.sequelize.literal(`"persona"."nombres" ILIKE '${query.filter}%'`),
+          models.sequelize.literal(`"persona"."primer_apellido" ILIKE '${query.filter}%'`),
+          models.sequelize.literal(`"persona"."segundo_apellido" ILIKE '${query.filter}%'`),
+        ],
+      });
+    }
+    parametros = query;
+    paginado = true;
+  }
+  parametros.attributes = ["id_usuario", "usuario", "email", "estado"];
+  parametros.order = 'usuario';
+  parametros.distinct = true; // agrega la opción DISTINCT a count
+  parametros.include = [{
+    model: models.persona,
+    as: 'persona',
+    attributes: ['id_persona', 'documento_identidad', 'nombres', 'primer_apellido', 'segundo_apellido', 'nombre_completo', 'telefono', 'genero'],
+    include: [{
+      model: models.ubicacion,
+      as: 'direccion',
+      attributes: ['zona', 'calle', 'numero'],
+      include: [{
+        model: models.dpa,
+        as: 'dpa',
+        attributes: ['nombre']
+      }]
+    }]
+  },{
+    model: models.usuario_rol,
+    as: 'usuarios_roles',
+    required: true,
+    include: [{
+      model: models.rol,
+      as: 'rol',
+      required: true,
+      where: {
+        nombre: 'PROF_EDUCACION'
+      }
+    }],
+  }];
+  dao.listarRegistros(models.usuario, parametros, paginado)
+  .then(respuesta => {
+    const usuarios = respuesta.rows ? respuesta.rows : respuesta;
+    usuarios.forEach(usuario => {
+      if (usuario && usuario.usuarios_roles && usuario.usuarios_roles.length > 0) {
+        usuario.dataValues.fid_rol = usuario.usuarios_roles[0].fid_rol;
+      }
+    });
+    if (respuesta && respuesta.rows) {
+      respuesta.rows = usuarios;
+    } else {
+      respuesta = usuarios;
+    }
+    const respuestaOrdenada = [];
+    usuarios.forEach(usuario => {
+      let item = {
+        usuario: usuario.usuario,
+        nombres: usuario.persona.nombres,
+        primer_apellido: usuario.persona.primer_apellido,
+        segundo_apellido: usuario.persona.segundo_apellido,
+        documento_identidad: usuario.persona.documento_identidad,
+        estado: usuario.estado,
+        genero: usuario.persona.genero,
+        email: usuario.email,
+        telefono: usuario.persona.telefono,
+        direccion: usuario.persona.direccion !== null ? {
+          ciudad: usuario.persona.direccion.dpa.nombre,
+          zona: usuario.persona.direccion.zona,
+          calle: usuario.persona.direccion.calle,
+          numero: usuario.persona.direccion.numero
+        } : null
+      }
+      respuestaOrdenada.push(item);
+    })
+    deferred.resolve(respuestaOrdenada)
+  })
+  .catch(error => deferred.reject(error));
+  return deferred.promise;
+};
+
 const obtenerUsuarioPorId = (id, models, parametros, body) => {
   const deferred = Q.defer();
   if (!parametros) {
@@ -809,5 +899,6 @@ module.exports = {
   // obtenerEmpresas,
   verificarExistencia,
   crearCargo,
-  recuperarCuenta
+  recuperarCuenta,
+  listarMaestros
 }
