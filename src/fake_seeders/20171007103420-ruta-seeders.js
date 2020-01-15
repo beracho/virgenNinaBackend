@@ -466,6 +466,30 @@ module.exports = {
         _usuario_creacion: 1,
         _fecha_creacion: new Date(),
         _fecha_modificacion: new Date(),
+      }, {
+        //39
+        ruta: '/api/v1/importarCursoCSV',
+        descripcion: 'Creación de cursos a partir de CSV.',
+        method_get: false,
+        method_post: true,
+        method_put: false,
+        method_delete: false,
+        estado: 'ACTIVO',
+        _usuario_creacion: 1,
+        _fecha_creacion: new Date(),
+        _fecha_modificacion: new Date(),
+      }, {
+        //40
+        ruta: '/api/v1/profesor',
+        descripcion: 'Gestión de profesores.',
+        method_get: true,
+        method_post: true,
+        method_put: true,
+        method_delete: false,
+        estado: 'ACTIVO',
+        _usuario_creacion: 1,
+        _fecha_creacion: new Date(),
+        _fecha_modificacion: new Date(),
       }
     ], {});
   },
