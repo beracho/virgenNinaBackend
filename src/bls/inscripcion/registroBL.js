@@ -297,7 +297,7 @@ module.exports = app => {
             apoderadosNuevosPersona = [];
             apoderadosNuevosRelacion = [];
             body.apoderados.forEach(function (element) {
-              if (!element.cargado && element.cargado !== undefined) {
+              if (element.estadoApoderado !== undefined && element.estadoApoderado == 'nuevo') {
                 if (element.nombres && (element.primer_apellido || element.segundo_apellido || element.casada_apellido)) {
                   element.nombre_completo = `${element.primer_apellido ? element.primer_apellido : ''}`;
                   element.nombre_completo = `${element.nombre_completo} ${element.segundo_apellido ? element.segundo_apellido : ''}`;
@@ -307,21 +307,23 @@ module.exports = app => {
                   element.nombre_completo = element.nombre_completo.trim();
                 }
                 const objPersona = {
-                  tipo_documento: element.persona_es.tipo_documento,
-                  documento_identidad: element.persona_es.documento_identidad,
-                  lugar_documento_identidad: element.persona_es.lugar_documento_identidad,
-                  complemento_documento: element.persona_es.complemento_documento ? element.persona_es.complemento_documento : '00',
-                  fecha_nacimiento: element.persona_es.fecha_nacimiento,
-                  nombres: element.persona_es.nombres,
-                  primer_apellido: element.persona_es.primer_apellido,
-                  segundo_apellido: element.persona_es.segundo_apellido,
-                  genero: element.persona_es.genero,
-                  idioma_materno: element.persona_es.idioma_materno,
-                  ocupacion_actual: element.persona_es.ocupacion_actual,
-                  grado_instruccion: element.persona_es.grado_instruccion,
+                  tipo_documento: element.tipo_documento,
+                  documento_identidad: element.documento_identidad,
+                  lugar_documento_identidad: element.lugar_documento_identidad,
+                  complemento_documento: element.complemento_documento ? element.complemento_documento : '00',
+                  fecha_nacimiento: element.fecha_nacimiento,
+                  nombres: element.nombres,
+                  primer_apellido: element.primer_apellido,
+                  segundo_apellido: element.segundo_apellido,
+                  genero: element.genero,
+                  idioma_materno: element.idioma_materno,
+                  ocupacion_actual: element.ocupacion_actual,
+                  grado_instruccion: element.grado_instruccion,
+                  telefono: element.telefono,
                   _usuario_creacion: body.audit_usuario.id_usuario
                 };
                 const objRelacion = {
+                  fid_persona_de: personaModificar.id_persona,
                   relacion: element.relation,
                   _usuario_creacion: body.audit_usuario.id_usuario
                 };
@@ -330,6 +332,12 @@ module.exports = app => {
               }
             }, this);
             return dao.crearRegistro(models.persona, apoderadosNuevosPersona, true, transaccion)
+          })
+          .then(respuestaPersonas => {
+            for (let index = 0; index < respuestaPersonas.length; index++) {
+              apoderadosNuevosRelacion[index].fid_persona_es = respuestaPersonas[index].id_persona;
+            }
+            return dao.crearRegistro(models.parentezco, apoderadosNuevosRelacion, true, transaccion)
           })
           .then(() => {
             return dao.modificarRegistro(models.persona, personaModificar.id_persona, clavesForaneas, transaccion);
