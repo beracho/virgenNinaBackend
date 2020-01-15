@@ -180,7 +180,7 @@ module.exports = app => {
           .then(respuesta => {
             const parametrosEstudiante = {};
             if (body.persona.codrude !== '') { parametrosEstudiante.rude = body.persona.codrude };
-            if (body.persona.codigo !== '') { parametrosEstudiante.codigo = body.persona.codigo };
+            parametrosEstudiante.codigo = generaCodigo(body.persona.nombres, body.persona.primer_apellido, body.persona.segundo_apellido, body.persona.genero, body.nacimiento.fecha_nacimiento);
             if (personaCreada) {
               // Crea estudiante
               parametrosEstudiante.fid_registro = respuesta.id_registro_inscripcion;
@@ -242,11 +242,13 @@ module.exports = app => {
               clavesForaneas.fid_lugar_nacimiento = respuesta.id_ubicacion;
             }
             var existeUnidadEducativaEstudiante = false;
-            personaModificar.dataValues.unidades_educativas.forEach(element => {
-              if (element.gestion == parametrosUniEduEstu.gestion && element.fid_unidad_educativa === parametrosUniEduEstu.fid_unidad_educativa) {
-                existeUnidadEducativaEstudiante = true;
-              }
-            });
+            if (personaModificar.dataValues.unidades_educativas){
+              personaModificar.dataValues.unidades_educativas.forEach(element => {
+                if (element.gestion == parametrosUniEduEstu.gestion && element.fid_unidad_educativa === parametrosUniEduEstu.fid_unidad_educativa) {
+                  existeUnidadEducativaEstudiante = true;
+                }
+              });
+            }
             if (personaCreada || !existeUnidadEducativaEstudiante) {
               // Crea unidad educativa en la gestion actual
               parametrosUniEduEstu._usuario_creacion = body.audit_usuario.id_usuario;
@@ -379,6 +381,23 @@ module.exports = app => {
       .catch(error => deferred.reject(error));
     return deferred.promise;
   };
+
+  const generaCodigo = (nombre, paterno, materno, sexo, fecha_nacimiento) => {
+    let codigo = '';
+    codigo += fecha_nacimiento.substring(2, 4);
+    codigo += '-';
+    if(sexo === 'M') {
+      codigo += fecha_nacimiento.substring(5, 7);
+    } else {
+      codigo += (50 + parseInt(fecha_nacimiento.substring(5, 7)));
+    }
+    codigo += fecha_nacimiento.substring(8);
+    codigo += '-';
+    codigo += nombre.charAt(0).toUpperCase();
+    codigo += paterno.charAt(0).toUpperCase();
+    codigo += materno.charAt(0).toUpperCase();
+    return codigo;
+  }
 
   const registroBL = {
     listarRegistros,
