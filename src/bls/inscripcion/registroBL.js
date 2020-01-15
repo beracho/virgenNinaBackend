@@ -106,7 +106,8 @@ module.exports = app => {
           lugar_documento_identidad: body.persona.lugar_documento_identidad
         }
         if (body.salud.discapacidad_origen !== '') { personaObj.discapacidad_origen = body.salud.discapacidad_origen };
-        if (body.persona.carnet_discapacidad !== '') { personaObj.carnet_discapacidad = body.persona.carnet_discapacidad };
+        if (body.salud.carnet_discapacidad !== '') { personaObj.carnet_discapacidad = body.salud.carnet_discapacidad };
+        if (body.salud.tiene_discapacidad !== '') { personaObj.tiene_discapacidad = body.salud.tiene_discapacidad };
         if (body.persona.pioc !== '') { personaObj.pioc = body.persona.pioc };
         if (body.persona.discapacidad !== '') { personaObj.discapacidad = body.persona.discapacidad };
         if (body.registroInscripcion.idioma !== '') { personaObj.idioma_materno = body.registroInscripcion.idioma };
