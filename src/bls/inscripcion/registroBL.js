@@ -323,6 +323,7 @@ module.exports = app => {
                   ocupacion_actual: element.ocupacion_actual,
                   grado_instruccion: element.grado_instruccion,
                   telefono: element.telefono,
+                  vive_con_ninio: element.vive_con_ninio,
                   _usuario_creacion: body.audit_usuario.id_usuario
                 };
                 const objRelacion = {

@@ -31,6 +31,11 @@ module.exports = (sequelize, DataType) => {
         len: {args: [0, 200], msg: "El campo 'Descripción' permite un máximo de 200 caracteres"},
       },
     },
+    vive_con_ninio: {
+      type: DataType.BOOLEAN,
+      xlabel: 'Vive con el niño',
+      defaultValue: false,
+    },
     _usuario_creacion: {
       type: DataType.STRING(50),
       field: '_usuario_creacion',
