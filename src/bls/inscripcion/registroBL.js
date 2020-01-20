@@ -63,12 +63,12 @@ module.exports = app => {
       deferred.resolve(valida);
       return deferred.promise;
     }
-    if (!body.persona.codrude || body.persona.codrude == "") {
-      valida.value = false;
-      valida.error = `noRudeValue`;
-      deferred.resolve(valida);
-      return deferred.promise;
-    }
+    // if (!body.persona.codrude || body.persona.codrude == "") {
+    //   valida.value = false;
+    //   valida.error = `noRudeValue`;
+    //   deferred.resolve(valida);
+    //   return deferred.promise;
+    // }
     if (!body.nacimiento.municipio || body.nacimiento.municipio == "") {
       valida.value = false;
       valida.error = `noCityValue`;
@@ -179,7 +179,8 @@ module.exports = app => {
           })
           .then(respuesta => {
             const parametrosEstudiante = {};
-            if (body.persona.codrude !== '') { parametrosEstudiante.rude = body.persona.codrude };
+            if (body.persona.codrude !== '') { parametrosEstudiante.rude = body.persona.codrude }
+            else {parametrosEstudiante.rude = body.persona.documento_identidad};
             parametrosEstudiante.codigo = generaCodigo(body.persona.nombres, body.persona.primer_apellido, body.persona.segundo_apellido, body.persona.genero, body.nacimiento.fecha_nacimiento);
             if (personaCreada) {
               // Crea estudiante
