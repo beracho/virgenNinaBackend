@@ -86,6 +86,7 @@ module.exports = app => {
     let clavesForaneas = {};
     var personaObj = {};
     var whereObj = {};
+    var datosRespuesta = {};
     validaFormulario(body, models)
       .then(respuesta => {
         const deferred = Q.defer();
@@ -120,10 +121,15 @@ module.exports = app => {
         models.persona.findOrCreate({ where: whereObj, defaults: personaObj, transaction: transaccion })
           .spread((personResponse, created) => {
             personaCreada = created;
+            datosRespuesta.nombre = personResponse.nombres;
+            datosRespuesta.primerApellido = personResponse.primer_apellido;
+            datosRespuesta.segundoApellido = personResponse.segundo_apellido;
             if (personaCreada) {
+              datosRespuesta.creado = true;
               // devuelve creado
               return personResponse;
             } else {
+              datosRespuesta.creado = false;
               // devuelve objeto
               let params = {};
               if (body.persona && body.persona.codigo) {
@@ -194,6 +200,7 @@ module.exports = app => {
             }
           })
           .then(respuesta => {
+            datosRespuesta.codigo = respuesta.codigo;
             const parametrosDireccion = {};
             if (body.direccion.localidad !== '') { parametrosDireccion.comunidad = body.direccion.localidad };
             if (body.direccion.zona !== '') { parametrosDireccion.zona = body.direccion.zona };
@@ -348,7 +355,7 @@ module.exports = app => {
             return dao.modificarRegistro(models.persona, personaModificar.id_persona, clavesForaneas, transaccion);
           })
           .then(respuesta => {
-            deferred.resolve('Creado exitosamente');
+            deferred.resolve(datosRespuesta);
             transaccion.commit()
           })
           .catch(error => {
