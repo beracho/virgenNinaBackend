@@ -35,6 +35,14 @@ module.exports = (sequelize, DataType) => {
         is: {args: /^[A-Z|Á|É|Í|Ó|Ú|À|È|Ì|Ò|Ù|Ä|Ë|Ï|Ö|Ü|Â|Ê|Î|Ô|Û|Ñ|'|´| ]+$/i, msg: "El campo 'Nombre' permite sólo letras"},
       },
     },
+    codigo: {
+      type: DataType.STRING(25),
+      xlabel: 'Código',
+      validate: {
+        len: {args: [1, 25], msg: "El campo 'Código' permite un mínimo de 1 caracter y un máximo de 25 caracteres"},
+        notEmpty: {args: [true], msg: 'El campo Código es obligatorio.'}
+      },
+    },
     dependencia: {
       type: DataType.STRING(25),
       xlabel: 'Dependencia',

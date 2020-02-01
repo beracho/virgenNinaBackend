@@ -63,12 +63,12 @@ module.exports = app => {
       deferred.resolve(valida);
       return deferred.promise;
     }
-    if (!body.persona.codrude || body.persona.codrude == "") {
-      valida.value = false;
-      valida.error = `noRudeValue`;
-      deferred.resolve(valida);
-      return deferred.promise;
-    }
+    // if (!body.persona.codrude || body.persona.codrude == "") {
+    //   valida.value = false;
+    //   valida.error = `noRudeValue`;
+    //   deferred.resolve(valida);
+    //   return deferred.promise;
+    // }
     if (!body.nacimiento.municipio || body.nacimiento.municipio == "") {
       valida.value = false;
       valida.error = `noCityValue`;
@@ -86,6 +86,7 @@ module.exports = app => {
     let clavesForaneas = {};
     var personaObj = {};
     var whereObj = {};
+    var datosRespuesta = {};
     validaFormulario(body, models)
       .then(respuesta => {
         const deferred = Q.defer();
@@ -106,7 +107,8 @@ module.exports = app => {
           lugar_documento_identidad: body.persona.lugar_documento_identidad
         }
         if (body.salud.discapacidad_origen !== '') { personaObj.discapacidad_origen = body.salud.discapacidad_origen };
-        if (body.persona.carnet_discapacidad !== '') { personaObj.carnet_discapacidad = body.persona.carnet_discapacidad };
+        if (body.salud.carnet_discapacidad !== '') { personaObj.carnet_discapacidad = body.salud.carnet_discapacidad };
+        if (body.salud.tiene_discapacidad !== '') { personaObj.tiene_discapacidad = body.salud.tiene_discapacidad };
         if (body.persona.pioc !== '') { personaObj.pioc = body.persona.pioc };
         if (body.persona.discapacidad !== '') { personaObj.discapacidad = body.persona.discapacidad };
         if (body.registroInscripcion.idioma !== '') { personaObj.idioma_materno = body.registroInscripcion.idioma };
@@ -119,10 +121,15 @@ module.exports = app => {
         models.persona.findOrCreate({ where: whereObj, defaults: personaObj, transaction: transaccion })
           .spread((personResponse, created) => {
             personaCreada = created;
+            datosRespuesta.nombre = personResponse.nombres;
+            datosRespuesta.primerApellido = personResponse.primer_apellido;
+            datosRespuesta.segundoApellido = personResponse.segundo_apellido;
             if (personaCreada) {
+              datosRespuesta.creado = true;
               // devuelve creado
               return personResponse;
             } else {
+              datosRespuesta.creado = false;
               // devuelve objeto
               let params = {};
               if (body.persona && body.persona.codigo) {
@@ -178,8 +185,9 @@ module.exports = app => {
           })
           .then(respuesta => {
             const parametrosEstudiante = {};
-            if (body.persona.codrude !== '') { parametrosEstudiante.rude = body.persona.codrude };
-            if (body.persona.codigo !== '') { parametrosEstudiante.codigo = body.persona.codigo };
+            if (body.persona.codrude !== '') { parametrosEstudiante.rude = body.persona.codrude }
+            else {parametrosEstudiante.rude = body.persona.documento_identidad};
+            parametrosEstudiante.codigo = generaCodigo(body.persona.nombres, body.persona.primer_apellido, body.persona.segundo_apellido, body.persona.genero, body.nacimiento.fecha_nacimiento);
             if (personaCreada) {
               // Crea estudiante
               parametrosEstudiante.fid_registro = respuesta.id_registro_inscripcion;
@@ -192,6 +200,7 @@ module.exports = app => {
             }
           })
           .then(respuesta => {
+            datosRespuesta.codigo = respuesta.codigo;
             const parametrosDireccion = {};
             if (body.direccion.localidad !== '') { parametrosDireccion.comunidad = body.direccion.localidad };
             if (body.direccion.zona !== '') { parametrosDireccion.zona = body.direccion.zona };
@@ -241,11 +250,13 @@ module.exports = app => {
               clavesForaneas.fid_lugar_nacimiento = respuesta.id_ubicacion;
             }
             var existeUnidadEducativaEstudiante = false;
-            personaModificar.dataValues.unidades_educativas.forEach(element => {
-              if (element.gestion == parametrosUniEduEstu.gestion && element.fid_unidad_educativa === parametrosUniEduEstu.fid_unidad_educativa) {
-                existeUnidadEducativaEstudiante = true;
-              }
-            });
+            if (personaModificar.dataValues.unidades_educativas){
+              personaModificar.dataValues.unidades_educativas.forEach(element => {
+                if (element.gestion == parametrosUniEduEstu.gestion && element.fid_unidad_educativa === parametrosUniEduEstu.fid_unidad_educativa) {
+                  existeUnidadEducativaEstudiante = true;
+                }
+              });
+            }
             if (personaCreada || !existeUnidadEducativaEstudiante) {
               // Crea unidad educativa en la gestion actual
               parametrosUniEduEstu._usuario_creacion = body.audit_usuario.id_usuario;
@@ -297,7 +308,7 @@ module.exports = app => {
             apoderadosNuevosPersona = [];
             apoderadosNuevosRelacion = [];
             body.apoderados.forEach(function (element) {
-              if (!element.cargado && element.cargado !== undefined) {
+              if (element.estadoApoderado !== undefined && element.estadoApoderado == 'nuevo') {
                 if (element.nombres && (element.primer_apellido || element.segundo_apellido || element.casada_apellido)) {
                   element.nombre_completo = `${element.primer_apellido ? element.primer_apellido : ''}`;
                   element.nombre_completo = `${element.nombre_completo} ${element.segundo_apellido ? element.segundo_apellido : ''}`;
@@ -307,21 +318,24 @@ module.exports = app => {
                   element.nombre_completo = element.nombre_completo.trim();
                 }
                 const objPersona = {
-                  tipo_documento: element.persona_es.tipo_documento,
-                  documento_identidad: element.persona_es.documento_identidad,
-                  lugar_documento_identidad: element.persona_es.lugar_documento_identidad,
-                  complemento_documento: element.persona_es.complemento_documento ? element.persona_es.complemento_documento : '00',
-                  fecha_nacimiento: element.persona_es.fecha_nacimiento,
-                  nombres: element.persona_es.nombres,
-                  primer_apellido: element.persona_es.primer_apellido,
-                  segundo_apellido: element.persona_es.segundo_apellido,
-                  genero: element.persona_es.genero,
-                  idioma_materno: element.persona_es.idioma_materno,
-                  ocupacion_actual: element.persona_es.ocupacion_actual,
-                  grado_instruccion: element.persona_es.grado_instruccion,
+                  tipo_documento: element.tipo_documento,
+                  documento_identidad: element.documento_identidad,
+                  lugar_documento_identidad: element.lugar_documento_identidad,
+                  complemento_documento: element.complemento_documento ? element.complemento_documento : '00',
+                  fecha_nacimiento: element.fecha_nacimiento,
+                  nombres: element.nombres,
+                  primer_apellido: element.primer_apellido,
+                  segundo_apellido: element.segundo_apellido,
+                  genero: element.genero,
+                  idioma_materno: element.idioma_materno,
+                  ocupacion_actual: element.ocupacion_actual,
+                  grado_instruccion: element.grado_instruccion,
+                  telefono: element.telefono,
+                  vive_con_ninio: element.vive_con_ninio,
                   _usuario_creacion: body.audit_usuario.id_usuario
                 };
                 const objRelacion = {
+                  fid_persona_de: personaModificar.id_persona,
                   relacion: element.relation,
                   _usuario_creacion: body.audit_usuario.id_usuario
                 };
@@ -331,11 +345,17 @@ module.exports = app => {
             }, this);
             return dao.crearRegistro(models.persona, apoderadosNuevosPersona, true, transaccion)
           })
+          .then(respuestaPersonas => {
+            for (let index = 0; index < respuestaPersonas.length; index++) {
+              apoderadosNuevosRelacion[index].fid_persona_es = respuestaPersonas[index].id_persona;
+            }
+            return dao.crearRegistro(models.parentezco, apoderadosNuevosRelacion, true, transaccion)
+          })
           .then(() => {
             return dao.modificarRegistro(models.persona, personaModificar.id_persona, clavesForaneas, transaccion);
           })
           .then(respuesta => {
-            deferred.resolve('Creado exitosamente');
+            deferred.resolve(datosRespuesta);
             transaccion.commit()
           })
           .catch(error => {
@@ -370,6 +390,23 @@ module.exports = app => {
       .catch(error => deferred.reject(error));
     return deferred.promise;
   };
+
+  const generaCodigo = (nombre, paterno, materno, sexo, fecha_nacimiento) => {
+    let codigo = '';
+    codigo += fecha_nacimiento.substring(2, 4);
+    codigo += '-';
+    if(sexo === 'M') {
+      codigo += fecha_nacimiento.substring(5, 7);
+    } else {
+      codigo += (50 + parseInt(fecha_nacimiento.substring(5, 7)));
+    }
+    codigo += fecha_nacimiento.substring(8);
+    codigo += '-';
+    codigo += nombre.charAt(0).toUpperCase();
+    codigo += paterno.charAt(0).toUpperCase();
+    codigo += materno.charAt(0).toUpperCase();
+    return codigo;
+  }
 
   const registroBL = {
     listarRegistros,

@@ -57,6 +57,22 @@ const crearPersona = (personaObj, body, models, transaccion) => {
   return deferred.promise;
 }
 
+const buscaPersona = (query, body, models) => {
+  const deferred = Q.defer();
+  let datosPersona = {
+    where: {
+      documento_identidad: query.ci,
+      lugar_documento_identidad: query.lugarCi
+    },
+  }
+  dao.obtenerRegistro(models.persona, datosPersona)
+  .then(respuestaMod => {
+    deferred.resolve(respuestaMod)
+  })
+  .catch(error => deferred.reject(error));
+  return deferred.promise;
+}
+
 // const guardarPersonaSegip = (datos, body, models) => {
 //   const deferred = Q.defer();
 //   datos.fecha_nacimiento = datos.fecha_nacimiento.split('/');
@@ -263,6 +279,7 @@ const modificarPersona = (id, personaObj, models, body, transaccion) => {
 
 module.exports = {
   crearPersona,
+  buscaPersona,
   // guardarPersonaSegip,
   modificarPersona,
   // obtenerPersonaPorId,
