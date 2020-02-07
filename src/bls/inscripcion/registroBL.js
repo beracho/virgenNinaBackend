@@ -15,6 +15,8 @@ module.exports = app => {
   const models = app.src.db.models;
   const sequelize = app.src.db.sequelize;
   const estudianteBL = app.src.bls.inscripcion.estudianteBL;
+  const GBL = app.src.bls.globalBL;
+
   const validaFormulario = (body, models) => {
     const deferred = Q.defer();
     let valida = {
@@ -187,7 +189,7 @@ module.exports = app => {
             const parametrosEstudiante = {};
             if (body.persona.codrude !== '') { parametrosEstudiante.rude = body.persona.codrude }
             else {parametrosEstudiante.rude = body.persona.documento_identidad};
-            parametrosEstudiante.codigo = generaCodigo(body.persona.nombres, body.persona.primer_apellido, body.persona.segundo_apellido, body.persona.genero, body.nacimiento.fecha_nacimiento);
+            parametrosEstudiante.codigo = GBL.generaCodigo(body.persona.nombres, body.persona.primer_apellido, body.persona.segundo_apellido, body.persona.genero, body.nacimiento.fecha_nacimiento);
             if (personaCreada) {
               // Crea estudiante
               parametrosEstudiante.fid_registro = respuesta.id_registro_inscripcion;
@@ -391,22 +393,22 @@ module.exports = app => {
     return deferred.promise;
   };
 
-  const generaCodigo = (nombre, paterno, materno, sexo, fecha_nacimiento) => {
-    let codigo = '';
-    codigo += fecha_nacimiento.substring(2, 4);
-    codigo += '-';
-    if(sexo === 'M') {
-      codigo += fecha_nacimiento.substring(5, 7);
-    } else {
-      codigo += (50 + parseInt(fecha_nacimiento.substring(5, 7)));
-    }
-    codigo += fecha_nacimiento.substring(8);
-    codigo += '-';
-    codigo += nombre.charAt(0).toUpperCase();
-    codigo += paterno.charAt(0).toUpperCase();
-    codigo += materno.charAt(0).toUpperCase();
-    return codigo;
-  }
+  // const generaCodigo = (nombre, paterno, materno, sexo, fecha_nacimiento) => {
+  //   let codigo = '';
+  //   codigo += fecha_nacimiento.substring(2, 4);
+  //   codigo += '-';
+  //   if(sexo === 'M') {
+  //     codigo += fecha_nacimiento.substring(5, 7);
+  //   } else {
+  //     codigo += (50 + parseInt(fecha_nacimiento.substring(5, 7)));
+  //   }
+  //   codigo += fecha_nacimiento.substring(8);
+  //   codigo += '-';
+  //   codigo += nombre.charAt(0).toUpperCase();
+  //   codigo += paterno.charAt(0).toUpperCase();
+  //   codigo += materno.charAt(0).toUpperCase();
+  //   return codigo;
+  // }
 
   const registroBL = {
     listarRegistros,

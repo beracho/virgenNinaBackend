@@ -15,6 +15,7 @@ const csv=require('csvtojson')
 module.exports = app => {
   const models = app.src.db.models;
   const sequelize = app.src.db.sequelize;
+  const GBL = app.src.bls.globalBL;
 
   const obtenerRegistros = (req, body) => {
     let respuestaTotal = {};
@@ -284,10 +285,6 @@ module.exports = app => {
       if(Object.keys(csvRow).length == arrayCols.length) {
         // VALIDA CAMPOS INDIVIDUALES
         // 0 Código
-        if (csvRow[arrayCols[0]].length === 0) {
-          deferred.reject(new Error(`emptyValue@r:${rowIndex + 1},c:${arrayCols[0]}`));
-          return deferred.promise;
-        }
         // 1 2 Apellido paterno y apellido materno
         if (csvRow[arrayCols[1]].length === 0 && csvRow[arrayCols[2]].length === 0) {
           deferred.reject(new Error(`noLastName@r:${rowIndex + 1}`));
@@ -299,7 +296,7 @@ module.exports = app => {
           return deferred.promise;
         }
         // 4 Fecha de nacimiento
-        if (csvRow[arrayCols[4]].length != 0 && csvRow[arrayCols[4]].match(/^\d{1,2}(\/|-)\d{1,2}(\/|-)\d{4}$/) == null) {
+        if (csvRow[arrayCols[4]].length === 0 || csvRow[arrayCols[4]].match(/^\d{1,2}(\/|-)\d{1,2}(\/|-)\d{4}$/) == null) {
           deferred.reject(new Error(`wrongFormat@r:${rowIndex + 1},c:${arrayCols[4]}`));
           return deferred.promise;
         }
@@ -323,10 +320,6 @@ module.exports = app => {
           }
         }
         // 8 Oficialía
-        if (csvRow[arrayCols[8]].length != 0 && csvRow[arrayCols[8]].match(/^[0-9]+$/) == null) {
-          deferred.reject(new Error(`wrongFormat@r:${rowIndex + 1},c:${arrayCols[8]}`));
-          return deferred.promise;
-        }
         // 9 Libro
         if (csvRow[arrayCols[9]].length != 0 && csvRow[arrayCols[9]].match(/^[0-9]+$/) == null) {
           deferred.reject(new Error(`wrongFormat@r:${rowIndex + 1},c:${arrayCols[9]}`));
@@ -455,6 +448,8 @@ module.exports = app => {
           deferred.reject(new Error(`wrongFormat@r:${rowIndex + 1},c:${arrayCols[38]}`));
           return deferred.promise;
         }
+        let fechaCod = csvRow[arrayCols[4]].substring(6) + '-' + csvRow[arrayCols[4]].substring(3, 5) + '-' + csvRow[arrayCols[4]].substring(0, 2)
+        csvRow[arrayCols[0]] = GBL.generaCodigo(csvRow[arrayCols[3]], csvRow[arrayCols[1]], csvRow[arrayCols[2]], csvRow[arrayCols[12]], fechaCod);
         // VALIDA CURSO
         let cursoValido = false;
         let cursoKey;
@@ -471,16 +466,19 @@ module.exports = app => {
           }
         }
         // VALIDA ESTUDIANTE
+        let codeCounter = 0;
         estudiantes.forEach(function(element) {
-          if (element.codigo == csvRow[arrayCols[0]]) {
-            deferred.reject(new Error(`codeRepeated@r:${rowIndex + 1}`));
-            return deferred.promise;
+          if (element.codigo.substring(0, 11) == csvRow[arrayCols[0]]) {
+            codeCounter++;
           }
           if (element.rude == csvRow[arrayCols[6]]) {
             deferred.reject(new Error(`rudeRepeated@r:${rowIndex + 1}`));
             return deferred.promise;
           }
         }, this);
+        if (codeCounter != 0) {
+          csvRow[arrayCols[0]] += codeCounter;
+        }
         // ENCUENTRA CLAVE FORANEA DE DISCAPACIDAD
         let foraignKey = '';
         switch (csvRow[arrayCols[15]]) {
@@ -723,8 +721,9 @@ module.exports = app => {
           for(let i = 0; i<estudianteObjeto.length-1;i++){
             for(let j = i+1;j<estudianteObjeto.length;j++){
               if(estudianteObjeto[i].codigo == estudianteObjeto[j].codigo) {
-                deferred.reject(new Error(`codeSentTwice:${estudianteObjeto[i].codigo}`));
-                return deferred.promise;
+                estudianteObjeto[j].codigo = GBL.siguienteCodigo(estudianteObjeto[j].codigo);
+                // deferred.reject(new Error(`codeSentTwice:${estudianteObjeto[i].codigo}`));
+                // return deferred.promise;
               }
               if(estudianteObjeto[i].rude == estudianteObjeto[j].rude && estudianteObjeto[j].rude != undefined) {
                 deferred.reject(new Error(`rudeSentTwice:${estudianteObjeto[i].rude}`));
