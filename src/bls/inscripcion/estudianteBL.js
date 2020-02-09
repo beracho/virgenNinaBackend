@@ -911,12 +911,37 @@ module.exports = app => {
     return deferred.promise;
   };
 
+  const obtenerCodigo = (body) => {
+    const deferred = Q.defer();
+    let codigoGenerado = GBL.generaCodigo(body.nombres, body.primer_apellido, body.segundo_apellido, body.genero, body.fecha_nacimiento);
+    parametrosEstudiante = {
+      where:{
+        codigo: {
+          $iLike: codigoGenerado + '%'
+        }
+      }
+    };
+    dao.listarRegistros(models.estudiante, parametrosEstudiante)
+      .then(respuesta => {
+        if (respuesta.length != 0) {
+          codigoGenerado += respuesta.length;
+        }
+        deferred.resolve(codigoGenerado);
+      })
+      .catch(error => {
+        console.log(error);
+        deferred.reject(error)
+      });
+    return deferred.promise;
+  };
+
   const estudianteBL = {
     obtenerRegistros,
     editaEstudiante,
     importarCsvDatos,
     estudiantesPorCurso,
-    estudiantePorCodigo
+    estudiantePorCodigo,
+    obtenerCodigo
   };
 
   return estudianteBL;
