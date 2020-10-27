@@ -28,33 +28,34 @@ module.exports = {
         _fecha_creacion: new Date(),
         _fecha_modificacion: new Date(),
       }
-    ]),
-    queryInterface.bulkInsert('rol_ruta', [
-      {
-        fid_ruta: 41,
-        fid_rol: 3,
-        method_get: true,
-        method_post: false,
-        method_put: false,
-        method_delete: false,
-        estado: 'ACTIVO',
-        _usuario_creacion: 1,
-        _fecha_creacion: new Date(),
-        _fecha_modificacion: new Date(),
-      },
-      {
-        fid_ruta: 42,
-        fid_rol: 3,
-        method_get: false,
-        method_post: false,
-        method_put: true,
-        method_delete: false,
-        estado: 'ACTIVO',
-        _usuario_creacion: 1,
-        _fecha_creacion: new Date(),
-        _fecha_modificacion: new Date(),
-      }
-    ])
+    ]).then(response => {
+      queryInterface.bulkInsert('rol_ruta', [
+        {
+          fid_ruta: 41,
+          fid_rol: 3,
+          method_get: true,
+          method_post: false,
+          method_put: false,
+          method_delete: false,
+          estado: 'ACTIVO',
+          _usuario_creacion: 1,
+          _fecha_creacion: new Date(),
+          _fecha_modificacion: new Date(),
+        },
+        {
+          fid_ruta: 42,
+          fid_rol: 3,
+          method_get: false,
+          method_post: false,
+          method_put: true,
+          method_delete: false,
+          estado: 'ACTIVO',
+          _usuario_creacion: 1,
+          _fecha_creacion: new Date(),
+          _fecha_modificacion: new Date(),
+        }
+      ])
+    })
   ])
   },
   down: (queryInterface, Sequelize) => {
