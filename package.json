@@ -10,7 +10,7 @@
     "setup": "FORCE=true node index.js && sequelize db:seed:all --seeders-path src/seeders",
     "migrate": "sequelize db:migrate:undo:all --migrations-path src/migrations && sequelize db:migrate --migrations-path src/migrations",
     "setup_fake": "FORCE=true node index.js && sequelize db:seed:all --seeders-path src/fake_seeders && sequelize db:migrate:undo:all --migrations-path src/fake_migrations && sequelize db:migrate --migrations-path src/fake_migrations",
-    "migrate_fake": "sequelize db:migrate:undo:all --migrations-path src/migrations && sequelize db:migrate --migrations-path src/migrations",
+    "migrate_fake": "sequelize db:migrate:undo:all --migrations-path src/fake_migrations && sequelize db:migrate --migrations-path src/fake_migrations",
     "wsetup": "sequelize db:seed:all --seeders-path src/seeders",
     "wsetup_fake": "sequelize db:seed:all --seeders-path src/fake_seeders && sequelize db:migrate:undo:all --migrations-path src/fake_migrations && sequelize db:migrate --migrations-path src/fake_migrations"
   },
